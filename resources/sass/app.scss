@@ -5,8 +5,8 @@
 @import 'variables';
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// AdminLTE
+@import '~admin-lte/dist/css/adminlte.css';
 
 // FontAwesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
@@ -14,4 +14,10 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
-@import '~admin-lte/dist/css/adminlte.css';
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.router-link-exact-active{
+    color: #ffffff !important;
+    background-color: #184b89;
+}
