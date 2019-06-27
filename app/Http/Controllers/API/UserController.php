@@ -26,7 +26,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::paginate(10);
+        if(\Gate::allows('isSuperAdmin')){
+            return User::paginate(10);
+        }
+        
     }
 
     /**
@@ -89,6 +92,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
         $user->delete();
         return ['message' => 'Đã xóa người dùng'];
     }

@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -22,7 +23,7 @@
                     <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" :src="getUserPhoto()" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle" :src="getProfilePhoto" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">{{ form.name }}</h3>
                         <p class="text-muted text-center">{{ form.type | upText }}</p>
@@ -34,10 +35,12 @@
                 <!-- /.col -->
                 <div class="col-md-9">
                     <div class="card">
-                    <div class="card-header p-2">
-                        <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Cài đặt</a></li>
-                        </ul>
+                    <div class="card-header">
+                        <h3 class="card-title m-0">
+                            <i class="fas fa-edit"></i>
+                            Sửa thông tin cá nhân
+                        </h3>
+                        
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
@@ -97,7 +100,7 @@
         </section>
         <!-- /.content -->
     </div>
-
+</div>
 </template>
 
 <script>
@@ -119,6 +122,9 @@
             console.log('Component mounted.')
         },
         methods: {
+            loadProfile () {
+                axios.get('api/profile').then( ({ data }) => {this.form.fill(data)} );
+            },
             changePhoto (e) {
                 let file = e.target.files[0];
                 let reader = new FileReader();
@@ -149,14 +155,18 @@
                 .catch( () => {
                     this.$Progress.fail();
                 });
-            },
-            getUserPhoto () {
-                let photo = (this.form.photo.length > 200) ? this.form.photo : 'images/profile/'+this.form.photo;
-                return photo;
             }
         },
+        computed:{
+            getProfilePhoto(){
+                return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "images/profile/"+this.form.photo ;
+           },
+        },
         created () {
-            axios.get('api/profile').then( ({ data }) => {this.form.fill(data)} );
+            this.loadProfile();
+            Fire.$on('AfterCreate', () => {
+                this.loadProfile()
+            })
         }
     }
 </script>
