@@ -19,5 +19,25 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .router-link-exact-active{
     color: #ffffff !important;
-    background-color: #184b89;
+    background-color: #0e4d9a;
+}
+
+.user-menu .nav-link{
+    padding: 0px 10px !important;
+}
+.user-menu .nav-link img{
+    width: 40px;
+}
+.user-menu .nav-link span{
+    font-size: 14px;
+    font-weight: 600;
+}
+.user-menu .dropdown-menu{
+    top: 47px;
+    right: -15px;
+    width: 185px !important;
+}
+.user-menu .dropdown-menu .dropdown-item:hover{
+    background: #0e4d9a;
+    color: #ffffff;
 }

@@ -5,13 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Quản lý người dùng</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item">Quản lý người dùng</li>
-                    <!-- <li class="breadcrumb-item active">Starter Page</li> -->
-                    </ol>
+                    <h1 class="m-0 text-dark">Quản lý người dùng
+                        <button class="btn btn-md btn-primary" @click="newModal()">
+                        Thêm mới <i class="fas fa-user-plus fa-fw"></i>
+                        </button>
+                    </h1>
+                    
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -26,11 +25,6 @@
                         <div class="card">
                         <div class="card-header">
                             <h3 class="card-title m-0">Danh sách người dùng</h3>
-                            <div class="card-tools">
-                                <button class="btn btn-sm btn-primary" @click="newModal()">
-                                    Thêm mới <i class="fas fa-user-plus fa-fw"></i>
-                                </button>
-                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -95,7 +89,7 @@
                                 <has-error :form="form" field="email"></has-error>
                             </div>
                             <div class="form-group">
-                                <textarea v-model="form.bio" name="bio" id="bio" rows="3"
+                                <textarea v-model="form.bio" name="bio" id="bio" rows="2"
                                 placeholder="Mô tả ngắn về người dùng (Không bắt buộc)"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
                                 <has-error :form="form" field="bio"></has-error>
@@ -103,6 +97,7 @@
                             <div class="form-group">
                                 <select name="type" id="type" v-model="form.type" class="form-control" :class="{ 'is-invalid' : form.errors.has('type') }">
                                     <option value="">Chọn nhóm phân quyền</option>
+                                    <option value="superadmin">Super Admin</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>

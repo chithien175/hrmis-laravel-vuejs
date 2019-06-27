@@ -18,7 +18,9 @@ const routes = [
     { path: '/home', redirect: '/dashboard' },
     { path: '/dashboard', component: require('./components/DashboardComponent.vue').default },
     { path: '/company', component: require('./components/CompanyComponent.vue').default },
-    { path: '/user', component: require('./components/UserComponent.vue').default }
+    { path: '/user', component: require('./components/UserComponent.vue').default },
+    { path: '/profile', component: require('./components/ProfileComponent.vue').default },
+    { path: '/developer', component: require('./components/DeveloperComponent.vue').default },
 ];
 
 const router = new VueRouter({
@@ -82,6 +84,24 @@ window.Toast = Toast;
  * Fire
  */
 window.Fire = new Vue();
+
+/**
+ * Laravel Passport
+ */
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 /**
  * The following block of code may be used to automatically register your

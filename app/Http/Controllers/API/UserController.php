@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('api');
+        $this->middleware('auth:api');
     }
 
     /**
@@ -49,20 +49,9 @@ class UserController extends Controller
             'email' => $request['email'],
             'type' => $request['type'],
             'bio' => $request['bio'],
-            'photo' => $request['photo'],
+            'photo' => ($request['photo'] == '') ? 'profile.png' : $request['photo'],
             'password' => Hash::make($request['password']),
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -79,12 +68,16 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:6|max:191',
+            'password' => 'sometimes|min:8|max:191',
             'type' => 'required'
         ]);
 
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+
         $user->update($request->all());
-        return $id;
+        return ['message' => 'Đã cập nhật người dùng'];
     }
 
     /**
@@ -97,6 +90,43 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return ['message' => 'đã xóa người dùng'];
+        return ['message' => 'Đã xóa người dùng'];
+    }
+
+    public function getProfile()
+    {
+        return auth('api')->user();
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth('api')->user();
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'sometimes|min:8|max:191'
+        ]);
+
+        if($request->photo != $user->photo){
+            $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+
+            \Image::make($request->photo)->save(public_path('images/profile/').$name);
+
+            $request->merge(['photo' => $name]);
+
+            $user_photo = public_path('images/profile/').$user->photo;
+            if(file_exists($user_photo) && $user->photo != 'profile.png'){
+                @unlink($user_photo);
+            }
+        }
+
+        if(!empty($request->password)){
+            $request->merge(['password' => Hash::make($request['password'])]);
+        }
+
+        $user->update($request->all());
+
+        return ['message' => 'Đã cập nhật thông tin cá nhân'];
     }
 }
