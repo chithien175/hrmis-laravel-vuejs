@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
             'name' => 'Thiện Phạm',
             'email' => 'it@thinhphongme.vn',
             'bio' => 'Đây là mô tả của Thiện',
-            'type' => 'admin',
+            'type' => 'superadmin',
             'photo' => 'profile.png',
-            'password' => bcrypt('admin@123'),
+            'password' => bcrypt('123456789'),
             'created_at' => Carbon::now()
         ]);
     }
