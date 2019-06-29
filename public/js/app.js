@@ -3191,7 +3191,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this5 = this;
 
     Fire.$on('Searching', function () {
-      var query = _this5.$parent.search;
+      var query = _this5.search;
 
       if (query) {
         axios.get('api/findUser?q=' + query).then(function (data) {

@@ -238,7 +238,7 @@
         },
         created() {
             Fire.$on('Searching',() => {
-                let query = this.$parent.search;
+                let query = this.search;
                 if(query){
                     axios.get('api/findUser?q='+query)
                     .then( (data) => {
@@ -250,7 +250,6 @@
                 }else{
                     this.loadUsers();
                 }
-                
             });
 
             this.loadUsers();
