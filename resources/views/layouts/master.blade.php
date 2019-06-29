@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		</ul>
 
 		<!-- SEARCH FORM -->
-		<div class="form-inline ml-3">
+		<!-- <div class="form-inline ml-3">
 			<div class="input-group input-group-sm">
 				<input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
 				<div class="input-group-append">
@@ -38,7 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<ul class="navbar-nav ml-auto">
 			<!-- Profile Dropdown Menu -->

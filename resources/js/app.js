@@ -128,12 +128,12 @@ Vue.component(
 const app = new Vue({
     el: '#app',
     router,
-    data: {
-        search: ''
-    },
-    methods: {
-        searchit: _.debounce( () => {
-            Fire.$emit('Searching');
-        }, 1000)
-    }
+    // data: {
+    //     search: ''
+    // },
+    // methods: {
+    //     searchit: _.debounce( () => {
+    //         Fire.$emit('Searching');
+    //     }, 500)
+    // }
 });

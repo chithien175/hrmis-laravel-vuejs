@@ -3067,6 +3067,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3080,7 +3095,8 @@ __webpack_require__.r(__webpack_exports__);
         type: '',
         bio: '',
         photo: ''
-      })
+      }),
+      search: ''
     };
   },
   methods: {
@@ -3166,7 +3182,10 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
-    }
+    },
+    searchit: _.debounce(function () {
+      Fire.$emit('Searching');
+    }, 500)
   },
   created: function created() {
     var _this5 = this;
@@ -62562,21 +62581,62 @@ var render = function() {
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "card" }, [
                     _c("div", { staticClass: "card-header" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-md btn-primary",
-                          on: {
-                            click: function($event) {
-                              return _vm.newModal()
-                            }
-                          }
-                        },
-                        [
-                          _vm._v("\n                                Thêm mới "),
-                          _c("i", { staticClass: "fas fa-user-plus fa-fw" })
-                        ]
-                      )
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-3" }, [
+                          _c(
+                            "div",
+                            { staticClass: "input-group input-group-sm" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.search,
+                                    expression: "search"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-navbar",
+                                attrs: {
+                                  type: "search",
+                                  placeholder: "Tìm kiếm",
+                                  "aria-label": "Search"
+                                },
+                                domProps: { value: _vm.search },
+                                on: {
+                                  keyup: _vm.searchit,
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.search = $event.target.value
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-9 text-right" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              on: {
+                                click: function($event) {
+                                  return _vm.newModal()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        Thêm mới "
+                              ),
+                              _c("i", { staticClass: "fas fa-user-plus fa-fw" })
+                            ]
+                          )
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
                     _c(
@@ -63011,6 +63071,20 @@ var staticRenderFns = [
           _c("div", { staticClass: "col-sm-6" }, [
             _c("h1", { staticClass: "m-0 text-dark" }, [
               _vm._v("Quản lý người dùng")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c("li", { staticClass: "breadcrumb-item" }, [
+                _c("a", { attrs: { href: "void:javascript(0)" } }, [
+                  _vm._v("Cấu hình ứng dụng")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Quản lý người dùng")
+              ])
             ])
           ])
         ])
@@ -78097,15 +78171,15 @@ Vue.component('not-found', __webpack_require__(/*! ./components/NotFoundComponen
 
 var app = new Vue({
   el: '#app',
-  router: router,
-  data: {
-    search: ''
-  },
-  methods: {
-    searchit: _.debounce(function () {
-      Fire.$emit('Searching');
-    }, 1000)
-  }
+  router: router // data: {
+  //     search: ''
+  // },
+  // methods: {
+  //     searchit: _.debounce( () => {
+  //         Fire.$emit('Searching');
+  //     }, 500)
+  // }
+
 });
 
 /***/ }),

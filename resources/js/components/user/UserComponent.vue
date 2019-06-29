@@ -7,8 +7,13 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">Quản lý người dùng</h1>
-                            
                         </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
+                            <li class="breadcrumb-item active">Quản lý người dùng</li>
+                            </ol>
+                        </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -21,9 +26,19 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <button class="btn btn-md btn-primary" @click="newModal()">
-                                    Thêm mới <i class="fas fa-user-plus fa-fw"></i>
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="input-group input-group-sm">
+                                                <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 text-right">
+                                            <button class="btn btn-sm btn-primary" @click="newModal()">
+                                            Thêm mới <i class="fas fa-user-plus fa-fw"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
@@ -134,7 +149,8 @@
                 users: {},
                 form: new Form({
                     id: '', name: '', email: '', password: '', type: '', bio: '', photo: ''
-                })
+                }),
+                search: ''
             }
         },
         methods: {
@@ -215,7 +231,10 @@
                             });
                         }
                 });
-            }
+            },
+            searchit: _.debounce( () => {
+                Fire.$emit('Searching');
+            }, 500)
         },
         created() {
             Fire.$on('Searching',() => {
