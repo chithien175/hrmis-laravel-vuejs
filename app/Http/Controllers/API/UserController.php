@@ -26,9 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(\Gate::allows('isSuperAdmin')){
-            return User::paginate(10);
-        }
+        return User::with('roles')->paginate(10);
         
     }
 
@@ -132,5 +130,16 @@ class UserController extends Controller
         $user->update($request->all());
 
         return ['message' => 'Đã cập nhật thông tin cá nhân'];
+    }
+
+    public function search()
+    {
+        if($search = \Request::get('q')){
+            $users = User::where('name', 'like', "%$search%")
+                        ->orWhere('email', 'like', "%$search%")
+                        ->get();
+        }
+
+        return $users;
     }
 }

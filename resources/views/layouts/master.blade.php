@@ -29,16 +29,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		</ul>
 
 		<!-- SEARCH FORM -->
-		<form class="form-inline ml-3">
+		<div class="form-inline ml-3">
 			<div class="input-group input-group-sm">
-			<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-			<div class="input-group-append">
-				<button class="btn btn-navbar" type="submit">
-				<i class="fas fa-search"></i>
-				</button>
+				<input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
+				<div class="input-group-append">
+					<button class="btn btn-navbar" @click="searchit">
+					<i class="fas fa-search"></i>
+					</button>
+				</div>
 			</div>
-			</div>
-		</form>
+		</div>
 
 		<ul class="navbar-nav ml-auto">
 			<!-- Profile Dropdown Menu -->
@@ -49,7 +49,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			</a>
 			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 				<router-link to="/profile" class="dropdown-item blue">
-				<i class="fas fa-user mr-2"></i> Thông tin cá nhân
+				<i class="fas fa-user mr-2"></i> Trang cá nhân
 				</router-link>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item dropdown-footer blue" href="{{ route('logout') }}"
@@ -91,29 +91,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</li>
 				<!-- Quản trị nhân sự -->
 				<li class="nav-item has-treeview">
-				<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-box"></i>
-					<p>
-					Quản trị nhân sự
-					<i class="right fas fa-angle-left"></i>
-					</p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>Nhân sự công ty</p>
+						<i class="nav-icon fas fa-box"></i>
+						<p>
+						Quản trị nhân sự
+						<i class="right fas fa-angle-left"></i>
+						</p>
 					</a>
-					</li>
-					<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="far fa-circle nav-icon"></i>
-						<p>Thống kê nhân sự</p>
-					</a>
-					</li>
-				</ul>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Nhân sự công ty</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Thống kê nhân sự</p>
+							</a>
+						</li>
+					</ul>
 				</li>
-				@can('isSuperAdmin')
 				<!-- Cấu hình ứng dụng -->
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
@@ -125,26 +124,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-						<router-link to="/user" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>Quản lý người dùng</p>
-						</router-link>
+							<router-link to="/user" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Quản lý người dùng</p>
+							</router-link>
 						</li>
 						<li class="nav-item">
-						<router-link to="/company" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>Thông tin công ty</p>
-						</router-link>
+							<router-link to="/role" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Nhóm quyền sử dụng</p>
+							</router-link>
 						</li>
 						<li class="nav-item">
-						<router-link to="/developer" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>Developer</p>
-						</router-link>
+							<router-link to="/company" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Thông tin công ty</p>
+							</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link to="/developer" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Developer</p>
+							</router-link>
 						</li>
 					</ul>
 				</li>
-				@endcan
 			</ul>
 			</nav>
 			<!-- /.sidebar-menu -->

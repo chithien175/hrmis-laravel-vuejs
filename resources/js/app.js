@@ -18,9 +18,11 @@ const routes = [
     { path: '/home', redirect: '/dashboard' },
     { path: '/dashboard', component: require('./components/DashboardComponent.vue').default },
     { path: '/company', component: require('./components/CompanyComponent.vue').default },
-    { path: '/user', component: require('./components/UserComponent.vue').default },
+    { path: '/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/profile', component: require('./components/ProfileComponent.vue').default },
     { path: '/developer', component: require('./components/DeveloperComponent.vue').default },
+    { path: '/role', component: require('./components/RoleComponent.vue').default },
+    { path: '*', component: require('./components/NotFoundComponent.vue').default },
 ];
 
 const router = new VueRouter({
@@ -125,5 +127,13 @@ Vue.component(
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+        search: ''
+    },
+    methods: {
+        searchit: _.debounce( () => {
+            Fire.$emit('Searching');
+        }, 1000)
+    }
 });

@@ -12,14 +12,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Thiện Phạm',
-            'email' => 'it@thinhphongme.vn',
-            'bio' => 'Đây là mô tả của Thiện',
-            'type' => 'superadmin',
-            'photo' => 'profile.png',
-            'password' => bcrypt('123456789'),
-            'created_at' => Carbon::now()
-        ]);
+        // DB::table('users')->insert([
+        //     'name' => 'Thiện Phạm',
+        //     'email' => 'it@thinhphongme.vn',
+        //     'bio' => 'Đây là mô tả của Thiện',
+        //     'type' => 'superadmin',
+        //     'photo' => 'profile.png',
+        //     'password' => bcrypt('123456789'),
+        //     'created_at' => Carbon::now()
+        // ]);
     }
 }

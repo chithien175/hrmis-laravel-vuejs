@@ -4,8 +4,8 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="text-dark">Không tìm thấy trang</h1>
+                <div class="col-md-12">
+                    <h1 class="blue">Phát sinh lỗi trong quá trình truy cập.<br>Vui lòng liên hệ quản trị viên.</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
