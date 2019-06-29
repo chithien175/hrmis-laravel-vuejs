@@ -6,11 +6,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Quản lý người dùng
-                                <button class="btn btn-md btn-primary" @click="newModal()">
-                                Thêm mới <i class="fas fa-user-plus fa-fw"></i>
-                                </button>
-                            </h1>
+                            <h1 class="m-0 text-dark">Quản lý người dùng</h1>
                             
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -25,7 +21,9 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title m-0">Danh sách người dùng</h3>
+                                    <button class="btn btn-md btn-primary" @click="newModal()">
+                                    Thêm mới <i class="fas fa-user-plus fa-fw"></i>
+                                    </button>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
@@ -135,13 +133,7 @@
                 editmode: false,
                 users: {},
                 form: new Form({
-                    id: '',
-                    name: '',
-                    email: '',
-                    password: '',
-                    type: '',
-                    bio: '',
-                    photo: ''
+                    id: '', name: '', email: '', password: '', type: '', bio: '', photo: ''
                 })
             }
         },

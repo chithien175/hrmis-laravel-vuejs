@@ -3067,8 +3067,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -62556,39 +62554,30 @@ var render = function() {
   return _c("div", [
     _vm.$gate.isSuperAdmin()
       ? _c("div", { staticClass: "content-wrapper" }, [
-          _c("div", { staticClass: "content-header" }, [
-            _c("div", { staticClass: "container-fluid" }, [
-              _c("div", { staticClass: "row mb-2" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("h1", { staticClass: "m-0 text-dark" }, [
-                    _vm._v("Quản lý người dùng\n                            "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-md btn-primary",
-                        on: {
-                          click: function($event) {
-                            return _vm.newModal()
-                          }
-                        }
-                      },
-                      [
-                        _vm._v("\n                            Thêm mới "),
-                        _c("i", { staticClass: "fas fa-user-plus fa-fw" })
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "content" }, [
             _c("div", { staticClass: "container-fluid" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "card" }, [
-                    _vm._m(0),
+                    _c("div", { staticClass: "card-header" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-md btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.newModal()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("\n                                Thêm mới "),
+                          _c("i", { staticClass: "fas fa-user-plus fa-fw" })
+                        ]
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -63016,9 +63005,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title m-0" }, [
-        _vm._v("Danh sách người dùng")
+    return _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("h1", { staticClass: "m-0 text-dark" }, [
+              _vm._v("Quản lý người dùng")
+            ])
+          ])
+        ])
       ])
     ])
   },
