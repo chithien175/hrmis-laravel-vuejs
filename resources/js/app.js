@@ -21,7 +21,7 @@ const routes = [
     { path: '/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/profile', component: require('./components/ProfileComponent.vue').default },
     { path: '/developer', component: require('./components/DeveloperComponent.vue').default },
-    { path: '/role', component: require('./components/RoleComponent.vue').default },
+    { path: '/role', component: require('./components/role/RoleComponent.vue').default },
     { path: '*', component: require('./components/NotFoundComponent.vue').default },
 ];
 
@@ -82,7 +82,7 @@ import Swal from 'sweetalert2';
 window.Swal = Swal;
 const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'bottom',
     showConfirmButton: false,
     timer: 3000
 });

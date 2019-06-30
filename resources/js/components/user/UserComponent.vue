@@ -6,7 +6,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Quản lý người dùng</h1>
+                            <h1 class="m-0 blue">Quản lý người dùng</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -29,12 +29,12 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="input-group input-group-sm">
-                                                <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
+                                                <input class="form-control form-control-navbar" type="search" placeholder="Nhập tên / email tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
                                             </div>
                                         </div>
-                                        <div class="col-md-9 text-right">
+                                        <div class="col-md-9 text-md-right">
                                             <button class="btn btn-sm btn-primary" @click="newModal()">
-                                            Thêm mới <i class="fas fa-user-plus fa-fw"></i>
+                                            <i class="fas fa-user-plus fa-fw"></i> Thêm mới
                                             </button>
                                         </div>
                                     </div>
@@ -43,31 +43,34 @@
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover">
-                                    <tbody><tr>
-                                        <th>ID</th>
-                                        <th>Họ tên</th>
-                                        <th>Email</th>
-                                        <th>Phân quyền</th>
-                                        <th>Tạo lúc</th>
-                                        <th>Tác vụ</th>
-                                    </tr>
-                                    <tr v-for="user in users" :key="user.id">
-                                        <td>{{ user.id }}</td>
-                                        <td>{{ user.name }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.type | upText }}</td>
-                                        <td>{{ user.created_at | formatDate }}</td>
-                                        <td>
-                                            <a href="#" title="Sửa" @click="editModal(user)">
-                                                <i class="fa fa-edit blue"></i>
-                                            </a>
-                                            |
-                                            <a href="#" title="Xóa" @click="deleteUser(user.id)">
-                                                <i class="fa fa-trash red"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody></table>
+                                        <thead>
+                                            <tr class="blue font-weight-bold">
+                                                <th>ID</th>
+                                                <th>Họ tên</th>
+                                                <th>Email</th>
+                                                <th>Phân quyền</th>
+                                                <th>Tạo lúc</th>
+                                                <th>Tác vụ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="user in users" :key="user.id">
+                                                <td>{{ user.id }}</td>
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.type | upText }}</td>
+                                                <td>{{ user.created_at | formatDate }}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary" @click="editModal(user)">
+                                                        <i class="fa fa-edit fa-fw"></i> Sửa
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger" @click="deleteUser(user.id)">
+                                                        <i class="fa fa-trash fa-fw"></i> Xóa
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -156,7 +159,7 @@
         methods: {
             loadUsers () {
                 if(this.$gate.isSuperAdmin()){
-                    axios.get('api/user').then(({ data }) => { this.users = data.data });
+                    axios.get('api/user').then(({ data }) => { this.users = data });
                 } 
             },
             editModal (user) {
@@ -205,7 +208,7 @@
             deleteUser (id) {
                 Swal.fire({
                     title: 'Bạn chắc chứ?',
-                    text: "Bạn muốn xóa người dùng này!",
+                    text: "Bạn muốn xóa người dùng này?",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

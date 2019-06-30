@@ -36,7 +36,18 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255|unique:roles',
+            'display_name' => 'required|string|max:255|unique:roles'
+        ]);
+
+        $role = new Role();
+        $role->name         = $request['name'];
+        $role->display_name = $request['display_name'];
+        $role->description  = $request['description'];
+        if($role->save()){
+            return ['message' => 'Đã thêm quyền mới'];
+        }
     }
 
     /**
@@ -70,7 +81,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255|unique:roles,name,'.$role->id,
+            'display_name' => 'required|string|max:255|unique:roles,display_name,'.$role->id
+        ]);
+
+        $role->update($request->all());
+        return ['message' => 'Đã cập nhật nhóm quyền'];
     }
 
     /**
@@ -81,6 +100,19 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrFail($id);
+
+        $role->delete();
+        return ['message' => 'Đã xóa nhóm quyền'];
+    }
+
+    public function search()
+    {
+        if($search = \Request::get('q')){
+            $roles = Role::where('display_name', 'like', "%$search%")
+                        ->get();
+        }
+
+        return $roles;
     }
 }
