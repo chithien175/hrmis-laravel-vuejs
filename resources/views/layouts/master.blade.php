@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
-
+	@if(Auth::user()->status == 'active')
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom">
 		<ul class="navbar-nav">
@@ -28,39 +28,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			</li>
 		</ul>
 
-		<!-- SEARCH FORM -->
-		<!-- <div class="form-inline ml-3">
-			<div class="input-group input-group-sm">
-				<input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
-				<div class="input-group-append">
-					<button class="btn btn-navbar" @click="searchit">
-					<i class="fas fa-search"></i>
-					</button>
-				</div>
-			</div>
-		</div> -->
-
 		<ul class="navbar-nav ml-auto">
 			<!-- Profile Dropdown Menu -->
 			<li class="nav-item dropdown user-menu">
-			<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-				<img src="images/profile/{{ Auth::user()->photo }}" class="img-circle elevation-2" alt="User Image">
-				<span class="d-none d-sm-inline blue">{{ Auth::user()->name }}</span>
-			</a>
-			<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-				<router-link to="/profile" class="dropdown-item blue">
-				<i class="fas fa-user mr-2"></i> Trang cá nhân
-				</router-link>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item dropdown-footer blue" href="{{ route('logout') }}"
-				onclick="event.preventDefault();
-				document.getElementById('logout-form').submit();">
-				<i class="mr-2 nav-icon fa fa-power-off"></i> Thoát
+				<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+					<img src="images/profile/{{ Auth::user()->photo }}" class="img-circle elevation-2" alt="User Image">
+					<span class="d-none d-sm-inline blue">{{ Auth::user()->name }}</span>
 				</a>
-				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-					@csrf
-				</form>
-			</div>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<router-link to="/profile" class="dropdown-item blue">
+					<i class="fas fa-user mr-2"></i> Trang cá nhân
+					</router-link>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item dropdown-footer blue" href="{{ route('logout') }}"
+					onclick="event.preventDefault();
+					document.getElementById('logout-form').submit();">
+					<i class="mr-2 nav-icon fa fa-power-off"></i> Thoát
+					</a>
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						@csrf
+					</form>
+				</div>
 			</li>
 		</ul>
     </nav>
@@ -123,30 +111,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						@permission('manage-users')
 						<li class="nav-item">
 							<router-link to="/user" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Quản lý người dùng</p>
 							</router-link>
 						</li>
+						@endpermission
+
+						@permission('manage-acl')
 						<li class="nav-item">
 							<router-link to="/role" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Nhóm quyền sử dụng</p>
 							</router-link>
 						</li>
+						@endpermission
 						<li class="nav-item">
 							<router-link to="/company" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Thông tin công ty</p>
 							</router-link>
 						</li>
+
+						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/developer" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Developer</p>
+								<p>Lập trình truy cập</p>
 							</router-link>
 						</li>
+						@endrole
 					</ul>
 				</li>
 			</ul>
@@ -171,12 +167,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- Default to the left -->
 		&copy; 2019 Bản quyền thuộc <strong>Công ty TNHH Thịnh Phong</strong>.
     </footer>
+	@else
+	<h1 class="blue">Tài khoản chưa được kích hoạt. Vui lòng liên hệ quản trị viên!</h1>
+	@endif
 </div>
 <!-- ./wrapper -->
 
 @auth
 <script>
-	window.user = @json(auth()->user())
+	<?php
+		$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
+	?>
+	window.user = @json($user_current)
 </script>
 @endauth
 

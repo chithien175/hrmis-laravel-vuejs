@@ -39,20 +39,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|max:191',
-            'type' => 'required'
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'password'  => 'required|string|min:6|max:191',
+            'type'      => 'required'
         ]);
 
-        return User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'type' => $request['type'],
-            'bio' => $request['bio'],
-            'photo' => ($request['photo'] == '') ? 'profile.png' : $request['photo'],
-            'password' => Hash::make($request['password']),
+        $user = new User;
+        $user = User::create([
+            'name'      => $request['name'],
+            'email'     => $request['email'],
+            'bio'       => $request['bio'],
+            'photo'     => ($request['photo'] == '') ? 'profile.png' : $request['photo'],
+            'password'  => Hash::make($request['password']),
+            'status'    => $request['status'],
         ]);
+
+        $user->attachRole($request->type);
+
+        return ['message' => 'Tạo người dùng thành công'];
     }
 
     /**
@@ -64,18 +69,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
 
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:8|max:191',
-            'type' => 'required'
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password'  => 'sometimes|min:8|max:191',
+            'type'      => 'required'
         ]);
 
         if(!empty($request->password)){
             $request->merge(['password' => Hash::make($request['password'])]);
         }
+
+        $user->detachRole($user['roles'][0]);
+        $user->attachRole($request['type']);
 
         $user->update($request->all());
         return ['message' => 'Đã cập nhật người dùng'];
@@ -105,9 +113,9 @@ class UserController extends Controller
         $user = auth('api')->user();
 
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:8|max:191'
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password'  => 'sometimes|confirmed|min:8|max:191'
         ]);
 
         if($request->photo != $user->photo){
@@ -124,7 +132,10 @@ class UserController extends Controller
         }
 
         if(!empty($request->password)){
-            $request->merge(['password' => Hash::make($request['password'])]);
+            $request->merge([
+                'password' => Hash::make($request['password']),
+                'password_confirmation' => Hash::make($request['password_confirmation'])
+            ]);
         }
 
         $user->update($request->all());
@@ -135,7 +146,7 @@ class UserController extends Controller
     public function search()
     {
         if($search = \Request::get('q')){
-            $users = User::where('name', 'like', "%$search%")
+            $users = User::with('roles')->where('name', 'like', "%$search%")
                         ->orWhere('email', 'like', "%$search%")
                         ->get();
         }

@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-md-12">
-                    <h1 class="blue">Phát sinh lỗi trong quá trình truy cập.<br>Vui lòng liên hệ quản trị viên.</h1>
+                    <h1 class="blue">Không tìm thấy hoặc không có quyền truy cập vào trang này.<br>Vui lòng liên hệ quản trị viên.</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

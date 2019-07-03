@@ -5,26 +5,34 @@ export default class Gate{
     }
 
     isSuperAdmin(){
-        return this.user.type === 'superadmin';
+        return this.user.roles[0].name === 'superadmin';
     }
 
     isAdmin(){
-        return this.user.type === 'admin';
+        return this.user.roles[0].name === 'admin';
     }
 
     isUser(){
-        return this.user.type === 'user';
+        return this.user.roles[0].name === 'user';
     }
 
-    isSuperAdminOrAdmin(){
-        if(this.user.type === 'superadmin' || this.user.type === 'admin'){
-            return true;
-        }
+    isManageUsers(){
+        return this.user.can['manage-users'];
     }
 
-    isAdminOrUser(){
-        if(this.user.type === 'admin' || this.user.type === 'user'){
-            return true;
-        }
+    isManageACL(){
+        return this.user.can['manage-acl'];
     }
+
+    // isSuperAdminOrAdmin(){
+    //     if(this.user.roles[0].name === 'superadmin' || this.user.roles[0].name === 'admin'){
+    //         return true;
+    //     }
+    // }
+
+    // isAdminOrUser(){
+    //     if(this.user.roles[0].name === 'admin' || this.user.roles[0].name === 'user'){
+    //         return true;
+    //     }
+    // }
 }

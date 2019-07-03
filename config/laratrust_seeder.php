@@ -3,20 +3,18 @@
 return [
     'role_structure' => [
         'superadmin' => [
-            'users' => 'c,r,u,d',
-            'acl' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'users' => 'm',
+            'acl' => 'm'
         ],
         'admin' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'users' => 'm'
         ],
         'user' => [
-            'profile' => 'r,u'
         ],
     ],
     'permission_structure' => [],
     'permissions_map' => [
+        'm' => 'manage',
         'c' => 'create',
         'r' => 'read',
         'u' => 'update',

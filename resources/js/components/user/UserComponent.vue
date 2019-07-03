@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="content-wrapper" v-if="$gate.isSuperAdmin()">
+        <div class="content-wrapper" v-if="$gate.isManageUsers()">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
@@ -10,8 +10,8 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
-                            <li class="breadcrumb-item active">Quản lý người dùng</li>
+                                <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
+                                <li class="breadcrumb-item active">Quản lý người dùng</li>
                             </ol>
                         </div>
                     </div><!-- /.row -->
@@ -50,6 +50,7 @@
                                                 <th>Email</th>
                                                 <th>Phân quyền</th>
                                                 <th>Tạo lúc</th>
+                                                <th>Trạng thái</th>
                                                 <th>Tác vụ</th>
                                             </tr>
                                         </thead>
@@ -58,8 +59,12 @@
                                                 <td>{{ user.id }}</td>
                                                 <td>{{ user.name }}</td>
                                                 <td>{{ user.email }}</td>
-                                                <td>{{ user.type | upText }}</td>
+                                                <td>{{ user.roles[0].display_name }}</td>
                                                 <td>{{ user.created_at | formatDate }}</td>
+                                                <td>
+                                                    <span v-if="user.status == 'active'" class="badge badge-success">Kích hoạt</span>
+                                                    <span v-else class="badge badge-danger">Vô hiệu</span>
+                                                </td>
                                                 <td>
                                                     <button class="btn btn-sm btn-primary" @click="editModal(user)">
                                                         <i class="fa fa-edit fa-fw"></i> Sửa
@@ -86,7 +91,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="userModalLabel">{{ editmode ? 'Cập nhật người dùng' : 'Thêm mới người dùng' }}</h5>
+                            <h5 class="modal-title blue" id="userModalLabel">{{ editmode ? 'Cập nhật người dùng' : 'Thêm mới người dùng' }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -111,25 +116,30 @@
                                     class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
                                     <has-error :form="form" field="bio"></has-error>
                                 </div>
-                                <div class="form-group">
-                                    <select name="type" id="type" v-model="form.type" class="form-control" :class="{ 'is-invalid' : form.errors.has('type') }">
-                                        <option value="">Chọn nhóm phân quyền</option>
-                                        <option value="superadmin">Super Admin</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                    </select>
-                                    <has-error :form="form" field="type"></has-error>
-                                </div>
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <input v-model="form.password" type="password" name="password"
                                         placeholder="Mật khẩu"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
                                     <has-error :form="form" field="password"></has-error>
                                 </div>
+                                <div class="form-group">
+                                    <select name="type" id="type" v-model="form.type" class="form-control" :class="{ 'is-invalid' : form.errors.has('type') }">
+                                        <option disabled value="">Chọn nhóm phân quyền</option>
+                                        <option v-for="role in roles" :key="role.id" v-bind:value="role.name">{{ role.display_name }}</option>
+                                    </select>
+                                    <has-error :form="form" field="type"></has-error>
+                                </div>
+                                <div class="form-group">
+                                    <select name="status" id="status" v-model="form.status" class="form-control" :class="{ 'is-invalid' : form.errors.has('status') }">
+                                        <option value="active">Kích hoạt</option>
+                                        <option value="deactive">Vô hiệu</option>
+                                    </select>
+                                    <has-error :form="form" field="type"></has-error>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-                                <button type="submit" class="btn btn-primary">{{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
+                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
                             </div>
                         </form>
                     </div>
@@ -137,7 +147,7 @@
             </div>
             <!-- /. User Modal -->
         </div>
-        <div v-if="!$gate.isSuperAdmin()">
+        <div v-if="!$gate.isManageUsers()">
             <not-found></not-found>
         </div>
     </div>
@@ -151,22 +161,28 @@
                 editmode: false,
                 users: {},
                 form: new Form({
-                    id: '', name: '', email: '', password: '', type: '', bio: '', photo: ''
+                    id: '', name: '', email: '', password: '', type: '', bio: '', photo: '', status: 'active'
                 }),
+                roles: {},
                 search: ''
             }
         },
+        mounted() {
+            console.log('Component mounted.')
+        },
         methods: {
+            loadRoles () {
+                axios.get('api/role').then(({ data }) => { this.roles = data });
+            },
             loadUsers () {
-                if(this.$gate.isSuperAdmin()){
-                    axios.get('api/user').then(({ data }) => { this.users = data });
-                } 
+                axios.get('api/user').then(({ data }) => { this.users = data });
             },
             editModal (user) {
                 this.editmode = true;
                 this.form.reset();
                 $('#userModal').modal('show');
                 this.form.fill(user);
+                this.form.type = user.roles[0].name;
             },
             newModal () {
                 this.editmode = false;
@@ -240,6 +256,9 @@
             }, 500)
         },
         created() {
+            this.loadUsers();
+            this.loadRoles();
+
             Fire.$on('Searching',() => {
                 let query = this.search;
                 if(query){
@@ -254,8 +273,6 @@
                     this.loadUsers();
                 }
             });
-
-            this.loadUsers();
 
             Fire.$on('AfterCreate',() => {
                this.loadUsers();

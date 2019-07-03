@@ -1,5 +1,6 @@
 <template>
-    <div class="content-wrapper">
+<div>
+    <div class="content-wrapper" v-if="$gate.isManageACL()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
@@ -7,6 +8,12 @@
                 <div class="col-sm-6">
                     <h1 class="m-0 blue">Nhóm quyền sử dụng</h1>
                 </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
+                        <li class="breadcrumb-item active">Nhóm quyền sử dụng</li>
+                    </ol>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
@@ -74,10 +81,10 @@
 
         <!-- Role Modal -->
         <div class="modal fade" id="roleModal" tabindex="-1" role="dialog" aria-labelledby="roleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="roleModalLabel">{{ editmode ? 'Cập nhật nhóm quyền' : 'Thêm mới nhóm quyền' }}</h5>
+                        <h5 class="modal-title blue" id="roleModalLabel">{{ editmode ? 'Cập nhật nhóm quyền' : 'Thêm mới nhóm quyền' }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -95,13 +102,18 @@
                                 placeholder="Mô tả ngắn về nhóm quyền (Không bắt buộc)"
                                 class="form-control"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="permissions">Phân quyền:</label>
+                            <div class="row">
+                                <div class="form-group form-inline col-6" v-for="permission in form.checked_permissions" :key="permission.id">
+                                    <toggle-button v-model="permission.checked"
+                                        color="#0e4d9a" :width="40"
+                                    />
+                                    <label :for="permission.display_name" class="ml-2">{{ permission.display_name }}</label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
-                            <button type="submit" class="btn btn-primary">{{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
+                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
                         </div>
                     </form>
                 </div>
@@ -109,6 +121,10 @@
         </div>
         <!-- /. Role Modal -->
     </div>
+    <div v-if="!$gate.isManageACL()">
+        <not-found></not-found>
+    </div>
+</div>
 
 </template>
 
@@ -119,8 +135,9 @@
                 editmode: false,
                 roles: {},
                 form: new Form({
-                    id: '', name: '', display_name: '', description: ''
+                    id: '', name: '', display_name: '', description: '', checked_permissions: []
                 }),
+                permissions: {},
                 search: ''
             }
         },
@@ -128,15 +145,43 @@
             loadRoles () {
                 axios.get('api/role').then(({ data }) => { this.roles = data; });
             },
+            loadPermissions () {
+                axios.get('api/getPermissions').then(({ data }) => { this.permissions = data; });
+            },
             editModal (role) {
                 this.editmode = true;
                 this.form.reset();
-                $('#roleModal').modal('show');
                 this.form.fill(role);
+                this.form.checked_permissions = [];
+                
+                for(let i=0; i<this.permissions.length; i++){
+                    if(_.findIndex(role.permissions, this.permissions[i]) >= 0){
+                        this.form.checked_permissions.push({
+                            id: this.permissions[i].id,
+                            display_name: this.permissions[i].display_name,
+                            checked: true
+                        });
+                    }else{
+                        this.form.checked_permissions.push({
+                            id: this.permissions[i].id,
+                            display_name: this.permissions[i].display_name,
+                            checked: false
+                        });
+                    }
+                }
+
+                $('#roleModal').modal('show');
             },
             newModal () {
                 this.editmode = false;
                 this.form.reset();
+                for(let i=0; i<this.permissions.length; i++){
+                    this.form.checked_permissions.push({
+                        id: this.permissions[i].id,
+                        display_name: this.permissions[i].display_name,
+                        checked: false
+                    });
+                }
                 $('#roleModal').modal('show');
             },
             createRole () {
@@ -245,6 +290,7 @@
             });
 
             this.loadRoles();
+            this.loadPermissions();
             
             Fire.$on('AfterCreate',() => { this.loadRoles(); });
         }

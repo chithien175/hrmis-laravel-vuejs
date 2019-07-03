@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
+use App\Permission;
 
 class RoleController extends Controller
 {
@@ -15,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return Role::all();
+        return Role::with('permissions')->get();
     }
 
     /**
@@ -45,9 +46,17 @@ class RoleController extends Controller
         $role->name         = $request['name'];
         $role->display_name = $request['display_name'];
         $role->description  = $request['description'];
+        
+
         if($role->save()){
-            return ['message' => 'Đã thêm quyền mới'];
+            foreach($request['checked_permissions'] as $key => $permission){
+                if($permission['checked'] == true){
+                    $role->attachPermission($permission['id']);
+                }
+            }
         }
+        
+        return ['message' => 'Đã thêm quyền mới'];
     }
 
     /**
@@ -81,14 +90,23 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::findOrFail($id);
+        $role = Role::with('permissions')->findOrFail($id);
 
         $this->validate($request, [
             'name' => 'required|string|max:255|unique:roles,name,'.$role->id,
             'display_name' => 'required|string|max:255|unique:roles,display_name,'.$role->id
         ]);
 
-        $role->update($request->all());
+        if($role->update($request->all())){
+            $role->detachPermissions($role->permissions);
+
+            foreach($request['checked_permissions'] as $key => $permission){
+                if($permission['checked'] == true){
+                    $role->attachPermission($permission['id']);
+                }
+            }
+        }
+
         return ['message' => 'Đã cập nhật nhóm quyền'];
     }
 
@@ -114,5 +132,11 @@ class RoleController extends Controller
         }
 
         return $roles;
+    }
+
+    public function getPermissions()
+    {
+        $permissions = Permission::all();
+        return $permissions;
     }
 }

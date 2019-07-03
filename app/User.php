@@ -7,11 +7,20 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laratrust\Traits\LaratrustUserTrait;
+use App\Traits\ExposePermissions;
 
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
     use LaratrustUserTrait;
+    use ExposePermissions;
+
+    /**
+    * The accessors to append to the model's array form.
+    *
+    * @var array
+    */
+    protected $appends = ['all_permissions','can'];
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'bio', 'photo', 'type',
+        'name', 'email', 'password', 'bio', 'photo', 'status',
     ];
 
     /**
