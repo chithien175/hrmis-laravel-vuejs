@@ -57,7 +57,7 @@
                                             <td>{{ role.id }}</td>
                                             <td>{{ role.display_name }}</td>
                                             <td>{{ role.description }}</td>
-                                            <td>{{ role.created_at | formatDate }}</td>
+                                            <td><span class="badge bg-info">{{ role.created_at | formatDate }}</span></td>
                                             <td>
                                                 <button class="btn btn-sm btn-primary" @click="editModal(role)">
                                                     <i class="fa fa-edit fa-fw"></i> Sửa

@@ -3350,6 +3350,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -63796,11 +63799,13 @@ var render = function() {
                                 _c("td", [_vm._v(_vm._s(role.description))]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("formatDate")(role.created_at)
+                                  _c("span", { staticClass: "badge bg-info" }, [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm._f("formatDate")(role.created_at)
+                                      )
                                     )
-                                  )
+                                  ])
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
@@ -64257,11 +64262,17 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm._f("formatDate")(user.created_at)
-                                    )
-                                  )
+                                  _c("span", { staticClass: "badge bg-info" }, [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm._f("formatDateTime")(
+                                          user.last_login_at
+                                        )
+                                      )
+                                    ),
+                                    _c("br"),
+                                    _vm._v(_vm._s(user.last_login_ip))
+                                  ])
                                 ]),
                                 _vm._v(" "),
                                 _c("td", [
@@ -64775,7 +64786,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Phân quyền")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tạo lúc")]),
+        _c("th", [_vm._v("Đăng nhập cuối")]),
         _vm._v(" "),
         _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
@@ -79815,6 +79826,11 @@ Vue.filter('formatDate', function (value) {
     return moment__WEBPACK_IMPORTED_MODULE_3___default()(String(value)).format('DD/MM/YYYY');
   }
 });
+Vue.filter('formatDateTime', function (value) {
+  if (value) {
+    return moment__WEBPACK_IMPORTED_MODULE_3___default()(String(value)).format('DD/MM/YYYY HH:mm:ss');
+  }
+});
 /**
  * Vue Progressbar
  * https://github.com/hilongjw/vue-progressbar
@@ -79836,7 +79852,7 @@ Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, options);
 window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a;
 var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.mixin({
   toast: true,
-  position: 'bottom',
+  position: 'bottom-right',
   showConfirmButton: false,
   timer: 3000
 });

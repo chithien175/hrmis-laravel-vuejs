@@ -49,7 +49,7 @@
                                                 <th>Họ tên</th>
                                                 <th>Email</th>
                                                 <th>Phân quyền</th>
-                                                <th>Tạo lúc</th>
+                                                <th>Đăng nhập cuối</th>
                                                 <th>Trạng thái</th>
                                                 <th>Tác vụ</th>
                                             </tr>
@@ -60,7 +60,10 @@
                                                 <td>{{ user.name }}</td>
                                                 <td>{{ user.email }}</td>
                                                 <td>{{ user.roles[0].display_name }}</td>
-                                                <td>{{ user.created_at | formatDate }}</td>
+                                                <td>
+                                                    <span class="badge bg-info">{{ user.last_login_at | formatDateTime }}<br>{{ user.last_login_ip }}</span>
+                                                    
+                                                </td>
                                                 <td>
                                                     <span v-if="user.status == 'active'" class="badge badge-success">Kích hoạt</span>
                                                     <span v-else class="badge badge-danger">Vô hiệu</span>

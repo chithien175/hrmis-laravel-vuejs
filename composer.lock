@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17d7d6f93c986916e67f3805735a3761",
+    "content-hash": "4d4adc81e41c3805973f5d0b464034ec",
     "packages": [
+        {
+            "name": "anlutro/l4-settings",
+            "version": "v0.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anlutro/laravel-settings.git",
+                "reference": "851dd685b5659edc07a34df0a5415217a6595654"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anlutro/laravel-settings/zipball/851dd685b5659edc07a34df0a5415217a6595654",
+                "reference": "851dd685b5659edc07a34df0a5415217a6595654",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=4.1 <6.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/framework": ">=4.1 <6.0",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": ">=4.8, <6"
+            },
+            "suggest": {
+                "illuminate/database": "Save settings to a database table.",
+                "illuminate/filesystem": "Save settings to a JSON file."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Setting": "anlutro\\LaravelSettings\\Facade"
+                    },
+                    "providers": [
+                        "anlutro\\LaravelSettings\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "anlutro\\LaravelSettings\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Lutro",
+                    "email": "anlutro@gmail.com"
+                }
+            ],
+            "description": "Persistent settings in Laravel.",
+            "time": "2019-07-01T13:08:13+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.2.1",

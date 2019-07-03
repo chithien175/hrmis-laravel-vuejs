@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('status')->default('active')->nullable();
             $table->mediumText('bio')->nullable();
             $table->string('photo')->default('profile.png')->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

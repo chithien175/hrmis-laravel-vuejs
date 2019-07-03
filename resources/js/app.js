@@ -61,6 +61,11 @@ Vue.filter('formatDate', function(value) {
         return moment(String(value)).format('DD/MM/YYYY')
     }
 });
+Vue.filter('formatDateTime', function(value) {
+    if (value) {
+        return moment(String(value)).format('DD/MM/YYYY HH:mm:ss')
+    }
+});
 
 /**
  * Vue Progressbar
@@ -82,7 +87,7 @@ import Swal from 'sweetalert2';
 window.Swal = Swal;
 const Toast = Swal.mixin({
     toast: true,
-    position: 'bottom',
+    position: 'bottom-right',
     showConfirmButton: false,
     timer: 3000
 });
