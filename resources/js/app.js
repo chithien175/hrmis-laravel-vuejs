@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/home', redirect: '/dashboard' },
     { path: '/dashboard', component: require('./components/DashboardComponent.vue').default },
-    { path: '/company', component: require('./components/CompanyComponent.vue').default },
+    { path: '/company', component: require('./components/company/CompanyComponent.vue').default },
     { path: '/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/profile', component: require('./components/profile/ProfileComponent.vue').default },
     { path: '/developer', component: require('./components/DeveloperComponent.vue').default },

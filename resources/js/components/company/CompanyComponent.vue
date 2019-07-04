@@ -26,6 +26,31 @@
     export default {
         mounted() {
             console.log('Component mounted.')
+        },
+        data() {
+            return {
+                form: new Form({
+                    name: '',
+                    address: '',
+                    phone: '',
+                    fax: '',
+                    logo: '',
+                    legal_representative: '',
+                    position: '',
+                    nationality: '',
+                    website: '',
+                })
+            }
+        },
+        methods: {
+            loadData () {
+                this.$Progress.start();
+                axios.get('api/company').then( ({ data }) => {this.form.fill(data)} );
+                this.$Progress.finish();
+            },
+        },
+        created () {
+            this.loadData();
         }
     }
 </script>

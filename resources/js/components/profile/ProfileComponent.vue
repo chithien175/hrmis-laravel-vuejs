@@ -133,7 +133,9 @@
         },
         methods: {
             loadProfile () {
+                this.$Progress.start();
                 axios.get('api/profile').then( ({ data }) => {this.form.fill(data)} );
+                this.$Progress.finish();
             },
             changePhoto (e) {
                 let file = e.target.files[0];
