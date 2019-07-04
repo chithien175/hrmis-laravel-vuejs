@@ -73,9 +73,9 @@ Vue.filter('formatDateTime', function(value) {
  */
 import VueProgressBar from 'vue-progressbar';
 const options = {
-    color: '#3490dc',
+    color: '#0e4d9a',
     failedColor: '#e3342f',
-    height: '3px'
+    thickness: '3px'
 };
 Vue.use(VueProgressBar, options);
 
@@ -130,6 +130,12 @@ Vue.component(
  */
 import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);
+
+/**
+ * Vue Loading Overlay
+ * https://www.npmjs.com/package/vue-js-toggle-button
+ */
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -158,128 +158,132 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                editmode: false,
-                users: {},
-                form: new Form({
-                    id: '', name: '', email: '', password: '', type: '', bio: '', photo: '', status: 'active'
-                }),
-                roles: {},
-                search: ''
-            }
+export default {
+    data() {
+        return {
+            editmode: false,
+            users: {},
+            form: new Form({
+                id: '', name: '', email: '', password: '', type: '', bio: '', photo: '', status: 'active'
+            }),
+            roles: {},
+            search: '',
+            isLoading: false
+        }
+    },
+    mounted() {
+        console.log('Component mounted.')
+    },
+    methods: {
+        loadData () {
+            this.$Progress.start();
+            axios.get('api/user').then(({ data }) => { this.users = data });
+            axios.get('api/role').then(({ data }) => { this.roles = data });
+            this.$Progress.finish();
         },
-        mounted() {
-            console.log('Component mounted.')
+        editModal (user) {
+            this.editmode = true;
+            this.form.reset();
+            this.form.clear()
+            $('#userModal').modal('show');
+            this.form.fill(user);
+            this.form.type = user.roles[0].name;
         },
-        methods: {
-            loadRoles () {
-                axios.get('api/role').then(({ data }) => { this.roles = data });
-            },
-            loadUsers () {
-                axios.get('api/user').then(({ data }) => { this.users = data });
-            },
-            editModal (user) {
-                this.editmode = true;
-                this.form.reset();
-                $('#userModal').modal('show');
-                this.form.fill(user);
-                this.form.type = user.roles[0].name;
-            },
-            newModal () {
-                this.editmode = false;
-                this.form.reset();
-                $('#userModal').modal('show');
-            },
-            createUser () {
+        newModal () {
+            this.editmode = false;
+            this.form.reset();
+            this.form.clear()
+            $('#userModal').modal('show');
+        },
+        createUser () {
+            this.$Progress.start();
+            this.form.post('api/user')
+            .then( () => {
+                $('#userModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Thêm người dùng thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () => {
+                this.$Progress.fail();
+            }); 
+        },
+        updateUser () {
+            this.$Progress.start();
+            this.form.put('api/user/'+this.form.id)
+            .then( () =>{
+                $('#userModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Sửa người dùng thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () =>{
+                this.$Progress.fail();
+            });
+        },
+        deleteUser (id) {
+            Swal.fire({
+                title: 'Bạn chắc chứ?',
+                text: "Bạn muốn xóa người dùng này?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xóa ngay!',
+                cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if(result.value){
+                        // Send request to the server
+                        this.$Progress.start();
+                        this.form.delete('api/user/'+id)
+                        .then( () => {
+                            Swal.fire(
+                                'Xóa thành công!',
+                                'Bạn đã xóa người dùng thành công',
+                                'success'
+                            );
+                            Fire.$emit('AfterCreate');
+                            this.$Progress.finish();
+                        })
+                        .catch( () => {
+                            Swal("Lỗi xóa người dùng!", "Vui lòng liên hệ admin xử lý.", "warning");
+                        });
+                    }
+            });
+        },
+        searchit: _.debounce( () => {
+            Fire.$emit('Searching');
+        }, 500)
+    },
+    created() {
+        this.loadData();
+
+        Fire.$on('Searching',() => {
+            let query = this.search;
+            if(query){
                 this.$Progress.start();
-                this.form.post('api/user')
-                .then( () => {
-                    $('#userModal').modal('hide');
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Thêm người dùng thành công'
-                    });
-                    Fire.$emit('AfterCreate');
-                    this.$Progress.finish();
-                })
-                .catch( () => {
-                    this.$Progress.fail();
-                }); 
-            },
-            updateUser () {
-                this.$Progress.start();
-                this.form.put('api/user/'+this.form.id)
-                .then( () =>{
-                    $('#userModal').modal('hide');
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Sửa người dùng thành công'
-                    });
-                    Fire.$emit('AfterCreate');
+                axios.get('api/findUser?q='+query)
+                .then( (data) => {
+                    this.users = data.data;
                     this.$Progress.finish();
                 })
                 .catch( () =>{
                     this.$Progress.fail();
                 });
-            },
-            deleteUser (id) {
-                Swal.fire({
-                    title: 'Bạn chắc chứ?',
-                    text: "Bạn muốn xóa người dùng này?",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Có, xóa ngay!',
-                    cancelButtonText: 'Hủy'
-                    }).then((result) => {
-                        if(result.value){
-                            // Send request to the server
-                            this.$Progress.start();
-                            this.form.delete('api/user/'+id)
-                            .then( () => {
-                                Swal.fire(
-                                    'Xóa thành công!',
-                                    'Bạn đã xóa người dùng thành công',
-                                    'success'
-                                );
-                                Fire.$emit('AfterCreate');
-                                this.$Progress.finish();
-                            })
-                            .catch( () => {
-                                Swal("Lỗi xóa người dùng!", "Vui lòng liên hệ admin xử lý.", "warning");
-                            });
-                        }
-                });
-            },
-            searchit: _.debounce( () => {
-                Fire.$emit('Searching');
-            }, 500)
-        },
-        created() {
-            this.loadUsers();
-            this.loadRoles();
+            }else{
+                this.loadData();
+            }
+        });
 
-            Fire.$on('Searching',() => {
-                let query = this.search;
-                if(query){
-                    axios.get('api/findUser?q='+query)
-                    .then( (data) => {
-                        this.users = data.data;
-                    })
-                    .catch( () =>{
-                        
-                    });
-                }else{
-                    this.loadUsers();
-                }
-            });
-
-            Fire.$on('AfterCreate',() => {
-               this.loadUsers();
-            });
-        }
+        Fire.$on('AfterCreate',() => {
+            this.loadData();
+        });
     }
+}
 </script>

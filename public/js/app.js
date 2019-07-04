@@ -3015,25 +3015,24 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    loadRoles: function loadRoles() {
+    loadData: function loadData() {
       var _this = this;
 
+      this.$Progress.start();
       axios.get('api/role').then(function (_ref) {
         var data = _ref.data;
         _this.roles = data;
       });
-    },
-    loadPermissions: function loadPermissions() {
-      var _this2 = this;
-
       axios.get('api/getPermissions').then(function (_ref2) {
         var data = _ref2.data;
-        _this2.permissions = data;
+        _this.permissions = data;
       });
+      this.$Progress.finish();
     },
     editModal: function editModal(role) {
       this.editmode = true;
       this.form.reset();
+      this.form.clear();
       this.form.fill(role);
       this.form.checked_permissions = [];
 
@@ -3058,6 +3057,7 @@ __webpack_require__.r(__webpack_exports__);
     newModal: function newModal() {
       this.editmode = false;
       this.form.reset();
+      this.form.clear();
 
       for (var i = 0; i < this.permissions.length; i++) {
         this.form.checked_permissions.push({
@@ -3070,7 +3070,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#roleModal').modal('show');
     },
     createRole: function createRole() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$Progress.start();
       this.form.post('api/role').then(function () {
@@ -3081,13 +3081,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreate');
 
-        _this3.$Progress.finish();
+        _this2.$Progress.finish();
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this2.$Progress.fail();
       });
     },
     updateRole: function updateRole() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.$Progress.start();
       this.form.put('api/role/' + this.form.id).then(function () {
@@ -3098,13 +3098,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreate');
 
-        _this4.$Progress.finish();
+        _this3.$Progress.finish();
       })["catch"](function () {
-        _this4.$Progress.fail();
+        _this3.$Progress.fail();
       });
     },
     deleteRole: function deleteRole(id) {
-      var _this5 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Bạn chắc chứ?',
@@ -3118,13 +3118,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // Send request to the server
-          _this5.$Progress.start();
+          _this4.$Progress.start();
 
-          _this5.form["delete"]('api/role/' + id).then(function () {
+          _this4.form["delete"]('api/role/' + id).then(function () {
             Swal.fire('Xóa thành công!', 'Bạn đã xóa nhóm quyền thành công', 'success');
             Fire.$emit('AfterCreate');
 
-            _this5.$Progress.finish();
+            _this4.$Progress.finish();
           })["catch"](function () {
             Swal("Lỗi xóa nhóm quyền!", "Vui lòng liên hệ admin xử lý.", "warning");
           });
@@ -3162,23 +3162,28 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   created: function created() {
-    var _this6 = this;
+    var _this5 = this;
 
     Fire.$on('Searching', function () {
-      var query = _this6.search;
+      var query = _this5.search;
 
       if (query) {
+        _this5.$Progress.start();
+
         axios.get('api/findRole?q=' + query).then(function (data) {
-          _this6.roles = data.data;
-        })["catch"](function () {});
+          _this5.roles = data.data;
+
+          _this5.$Progress.finish();
+        })["catch"](function () {
+          _this5.$Progress.fail();
+        });
       } else {
-        _this6.loadRoles();
+        _this5.loadData();
       }
     });
-    this.loadRoles();
-    this.loadPermissions();
+    this.loadData();
     Fire.$on('AfterCreate', function () {
-      _this6.loadRoles();
+      _this5.loadData();
     });
   }
 });
@@ -3369,32 +3374,32 @@ __webpack_require__.r(__webpack_exports__);
         status: 'active'
       }),
       roles: {},
-      search: ''
+      search: '',
+      isLoading: false
     };
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   methods: {
-    loadRoles: function loadRoles() {
+    loadData: function loadData() {
       var _this = this;
 
-      axios.get('api/role').then(function (_ref) {
+      this.$Progress.start();
+      axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
+        _this.users = data;
+      });
+      axios.get('api/role').then(function (_ref2) {
+        var data = _ref2.data;
         _this.roles = data;
       });
-    },
-    loadUsers: function loadUsers() {
-      var _this2 = this;
-
-      axios.get('api/user').then(function (_ref2) {
-        var data = _ref2.data;
-        _this2.users = data;
-      });
+      this.$Progress.finish();
     },
     editModal: function editModal(user) {
       this.editmode = true;
       this.form.reset();
+      this.form.clear();
       $('#userModal').modal('show');
       this.form.fill(user);
       this.form.type = user.roles[0].name;
@@ -3402,10 +3407,11 @@ __webpack_require__.r(__webpack_exports__);
     newModal: function newModal() {
       this.editmode = false;
       this.form.reset();
+      this.form.clear();
       $('#userModal').modal('show');
     },
     createUser: function createUser() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$Progress.start();
       this.form.post('api/user').then(function () {
@@ -3416,13 +3422,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreate');
 
-        _this3.$Progress.finish();
+        _this2.$Progress.finish();
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this2.$Progress.fail();
       });
     },
     updateUser: function updateUser() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.$Progress.start();
       this.form.put('api/user/' + this.form.id).then(function () {
@@ -3433,13 +3439,13 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreate');
 
-        _this4.$Progress.finish();
+        _this3.$Progress.finish();
       })["catch"](function () {
-        _this4.$Progress.fail();
+        _this3.$Progress.fail();
       });
     },
     deleteUser: function deleteUser(id) {
-      var _this5 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Bạn chắc chứ?',
@@ -3453,13 +3459,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // Send request to the server
-          _this5.$Progress.start();
+          _this4.$Progress.start();
 
-          _this5.form["delete"]('api/user/' + id).then(function () {
+          _this4.form["delete"]('api/user/' + id).then(function () {
             Swal.fire('Xóa thành công!', 'Bạn đã xóa người dùng thành công', 'success');
             Fire.$emit('AfterCreate');
 
-            _this5.$Progress.finish();
+            _this4.$Progress.finish();
           })["catch"](function () {
             Swal("Lỗi xóa người dùng!", "Vui lòng liên hệ admin xử lý.", "warning");
           });
@@ -3471,23 +3477,28 @@ __webpack_require__.r(__webpack_exports__);
     }, 500)
   },
   created: function created() {
-    var _this6 = this;
+    var _this5 = this;
 
-    this.loadUsers();
-    this.loadRoles();
+    this.loadData();
     Fire.$on('Searching', function () {
-      var query = _this6.search;
+      var query = _this5.search;
 
       if (query) {
+        _this5.$Progress.start();
+
         axios.get('api/findUser?q=' + query).then(function (data) {
-          _this6.users = data.data;
-        })["catch"](function () {});
+          _this5.users = data.data;
+
+          _this5.$Progress.finish();
+        })["catch"](function () {
+          _this5.$Progress.fail();
+        });
       } else {
-        _this6.loadUsers();
+        _this5.loadData();
       }
     });
     Fire.$on('AfterCreate', function () {
-      _this6.loadUsers();
+      _this5.loadData();
     });
   }
 });
@@ -79838,9 +79849,9 @@ Vue.filter('formatDateTime', function (value) {
 
 
 var options = {
-  color: '#3490dc',
+  color: '#0e4d9a',
   failedColor: '#e3342f',
-  height: '3px'
+  thickness: '3px'
 };
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, options);
 /**
@@ -79881,6 +79892,11 @@ Vue.component('not-found', __webpack_require__(/*! ./components/NotFoundComponen
 
 
 Vue.use(vue_js_toggle_button__WEBPACK_IMPORTED_MODULE_6___default.a);
+/**
+ * Vue Loading Overlay
+ * https://www.npmjs.com/package/vue-js-toggle-button
+ */
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -142,15 +142,16 @@
             }
         },
         methods: {
-            loadRoles () {
+            loadData () {
+                this.$Progress.start();
                 axios.get('api/role').then(({ data }) => { this.roles = data; });
-            },
-            loadPermissions () {
                 axios.get('api/getPermissions').then(({ data }) => { this.permissions = data; });
+                this.$Progress.finish();
             },
             editModal (role) {
                 this.editmode = true;
                 this.form.reset();
+                this.form.clear()
                 this.form.fill(role);
                 this.form.checked_permissions = [];
                 
@@ -175,6 +176,7 @@
             newModal () {
                 this.editmode = false;
                 this.form.reset();
+                this.form.clear()
                 for(let i=0; i<this.permissions.length; i++){
                     this.form.checked_permissions.push({
                         id: this.permissions[i].id,
@@ -277,22 +279,23 @@
             Fire.$on('Searching',() => {
                 let query = this.search;
                 if(query){
+                    this.$Progress.start();
                     axios.get('api/findRole?q='+query)
                     .then( (data) => {
                         this.roles = data.data;
+                        this.$Progress.finish();
                     })
                     .catch( () =>{
-                        
+                        this.$Progress.fail();
                     });
                 }else{
-                    this.loadRoles();
+                    this.loadData();
                 }
             });
 
-            this.loadRoles();
-            this.loadPermissions();
+            this.loadData();
             
-            Fire.$on('AfterCreate',() => { this.loadRoles(); });
+            Fire.$on('AfterCreate',() => { this.loadData(); });
         }
     }
 </script>
