@@ -17,6 +17,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Pretty Checkbox
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
+
 .router-link-exact-active{
     color: #ffffff !important;
     background-color: #0e4d9a;

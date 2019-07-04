@@ -125,16 +125,13 @@ Vue.component(
 );
 
 /**
- * Vue ToggleButton
- * https://www.npmjs.com/package/vue-js-toggle-button
+ * pretty-checkbox
+ * https://github.com/hamed-ehtesham/pretty-checkbox-vue/blob/master/README.md
  */
-import ToggleButton from 'vue-js-toggle-button';
-Vue.use(ToggleButton);
+import PrettyCheckbox from 'pretty-checkbox-vue';
+Vue.use(PrettyCheckbox);
 
-/**
- * Vue Loading Overlay
- * https://www.npmjs.com/package/vue-js-toggle-button
- */
+
 
 
 /**

@@ -104,10 +104,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group form-inline col-6" v-for="permission in form.checked_permissions" :key="permission.id">
-                                    <toggle-button v-model="permission.checked"
-                                        color="#0e4d9a" :width="40"
-                                    />
-                                    <label :for="permission.display_name" class="ml-2">{{ permission.display_name }}</label>
+                                    <p-input class="p-switch p-fill" type="checkbox" color="primary" v-model="permission.checked">{{ permission.display_name }}</p-input>
                                 </div>
                             </div>
                         </div>
@@ -151,11 +148,12 @@
             editModal (role) {
                 this.editmode = true;
                 this.form.reset();
-                this.form.clear()
+                this.form.clear();
                 this.form.fill(role);
                 this.form.checked_permissions = [];
                 
                 for(let i=0; i<this.permissions.length; i++){
+                    console.log(_.findIndex(role.permissions, this.permissions[i]) >= 0);
                     if(_.findIndex(role.permissions, this.permissions[i]) >= 0){
                         this.form.checked_permissions.push({
                             id: this.permissions[i].id,
@@ -176,7 +174,8 @@
             newModal () {
                 this.editmode = false;
                 this.form.reset();
-                this.form.clear()
+                this.form.clear();
+
                 for(let i=0; i<this.permissions.length; i++){
                     this.form.checked_permissions.push({
                         id: this.permissions[i].id,
