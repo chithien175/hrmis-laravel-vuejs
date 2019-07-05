@@ -1,13 +1,12 @@
 <template>
     <div>
         <div class="content-wrapper" v-if="$gate.isManageUsers()">
-            
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 blue">Quản lý người dùng</h1>
+                            <h1 class="m-0 blue"><i class="fas fa-user"></i> Quản lý người dùng</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -28,8 +27,8 @@
                         <div class="col-12" v-if="isLoading">
                             <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 6" :key="index"></vcl-facebook>
                         </div>
-                        <div class="col-12">
-                            <div class="card" v-if="!isLoading">
+                        <div class="col-12" v-if="!isLoading">
+                            <div class="card">
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -182,8 +181,13 @@ export default {
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('api/user').then(({ data }) => { this.users = data });
-            axios.get('api/role').then(({ data }) => { this.roles = data; this.isLoading = false; });
+            axios.get('api/user').then(({ data }) => { 
+                this.users = data;
+                axios.get('api/role').then(({ data }) => { 
+                    this.roles = data; 
+                    this.isLoading = false; 
+                });
+            });
             this.$Progress.finish();
         },
         editModal (user) {

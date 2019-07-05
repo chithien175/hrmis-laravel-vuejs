@@ -20,7 +20,7 @@ const routes = [
     { path: '/company', component: require('./components/company/CompanyComponent.vue').default },
     { path: '/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/profile', component: require('./components/profile/ProfileComponent.vue').default },
-    { path: '/developer', component: require('./components/DeveloperComponent.vue').default },
+    { path: '/developer', component: require('./components/developer/DeveloperComponent.vue').default },
     { path: '/role', component: require('./components/role/RoleComponent.vue').default },
     { path: '*', component: require('./components/NotFoundComponent.vue').default },
 ];
@@ -133,7 +133,7 @@ Vue.use(PrettyCheckbox);
 
 /**
  * Vue Content Loading
- * 
+ * https://lucasleandro1204.github.io/vue-content-loading
  */
 import { VclFacebook } from 'vue-content-loading';
 Vue.component('vcl-facebook', VclFacebook);

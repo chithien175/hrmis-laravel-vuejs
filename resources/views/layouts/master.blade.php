@@ -128,21 +128,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</router-link>
 						</li>
 						@endpermission
+
+						@permission('manage-company')
 						<li class="nav-item">
 							<router-link to="/company" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Thông tin công ty</p>
 							</router-link>
 						</li>
+						@endpermission
 
-						@role('superadmin')
+						@permission('manage-developer')
 						<li class="nav-item">
 							<router-link to="/developer" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Lập trình truy cập</p>
 							</router-link>
 						</li>
-						@endrole
+						@endpermission
 					</ul>
 				</li>
 			</ul>

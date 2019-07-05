@@ -27,3 +27,4 @@ Route::get('findRole', 'API\RoleController@search');
 Route::get('getPermissions', 'API\RoleController@getPermissions');
 
 Route::get('company', 'API\CompanyController@index');
+Route::put('company', 'API\CompanyController@updateCompany');

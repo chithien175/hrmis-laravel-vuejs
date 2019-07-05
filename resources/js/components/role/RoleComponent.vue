@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 blue">Nhóm quyền sử dụng</h1>
+                    <h1 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -145,8 +145,14 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('api/role').then(({ data }) => { this.roles = data; });
-                axios.get('api/getPermissions').then(({ data }) => { this.permissions = data; this.isLoading = false; });
+                axios.get('api/role').then(({ data }) => { 
+                    this.roles = data; 
+                    axios.get('api/getPermissions').then(({ data }) => { 
+                        this.permissions = data; 
+                        this.isLoading = false; 
+                    });
+                });
+                
                 this.$Progress.finish();
             },
             editModal (role) {

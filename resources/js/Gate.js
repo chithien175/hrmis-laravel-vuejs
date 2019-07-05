@@ -24,15 +24,11 @@ export default class Gate{
         return this.user.can['manage-acl'];
     }
 
-    // isSuperAdminOrAdmin(){
-    //     if(this.user.roles[0].name === 'superadmin' || this.user.roles[0].name === 'admin'){
-    //         return true;
-    //     }
-    // }
+    isManageCompany(){
+        return this.user.can['manage-company'];
+    }
 
-    // isAdminOrUser(){
-    //     if(this.user.roles[0].name === 'admin' || this.user.roles[0].name === 'user'){
-    //         return true;
-    //     }
-    // }
+    isManageDeveloper(){
+        return this.user.can['manage-developer'];
+    }
 }

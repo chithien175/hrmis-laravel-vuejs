@@ -4,10 +4,13 @@ return [
     'role_structure' => [
         'superadmin' => [
             'users' => 'm',
-            'acl' => 'm'
+            'acl' => 'm',
+            'company' => 'm',
+            'developer' => 'm'
         ],
         'admin' => [
-            'users' => 'm'
+            'users' => 'm',
+            'company' => 'm'
         ],
         'user' => [
         ],

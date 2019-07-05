@@ -1,6 +1,6 @@
 <template>
-    
-    <div class="content-wrapper">
+<div>
+    <div class="content-wrapper" v-if="$gate.isManageDeveloper()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
@@ -23,6 +23,11 @@
         </div>
         <!-- /.content -->
     </div>
+    <div v-if="!$gate.isManageDeveloper()">
+        <not-found></not-found>
+    </div>
+</div>
+    
 
 </template>
 
