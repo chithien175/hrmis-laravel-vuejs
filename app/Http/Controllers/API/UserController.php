@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -45,7 +47,7 @@ class UserController extends Controller
             'type'      => 'required'
         ]);
 
-        $user = new User;
+
         $user = User::create([
             'name'      => $request['name'],
             'email'     => $request['email'],
@@ -57,6 +59,7 @@ class UserController extends Controller
 
         $user->attachRole($request->type);
 
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' tạo người dùng #' . $user->id . ' '. $user->name);
         return ['message' => 'Tạo người dùng thành công'];
     }
 
@@ -86,6 +89,8 @@ class UserController extends Controller
         $user->attachRole($request['type']);
 
         $user->update($request->all());
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' sửa người dùng #' . $user->id . ' '. $user->name);
         return ['message' => 'Đã cập nhật người dùng'];
     }
 
@@ -99,7 +104,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $id = $user->id;
+        $name = $user->name;
+
         $user->delete();
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' xóa người dùng #' . $id . ' '. $name);
         return ['message' => 'Đã xóa người dùng'];
     }
 
