@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</ul>
 				</li>
 				<!-- Người dùng & Quyền -->
-				@if($user_current->can('manage-users|manage-acl'))
+				@role('superadmin')
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-users-cog"></i>
@@ -116,28 +116,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</a>
 					
 					<ul class="nav nav-treeview">
-						@permission('manage-users')
+						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/user" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Quản lý người dùng</p>
 							</router-link>
 						</li>
-						@endpermission
+						@endrole
 
-						@permission('manage-acl')
+						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/role" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Nhóm quyền sử dụng</p>
 							</router-link>
 						</li>
-						@endpermission
+						@endrole
 					</ul>
 				</li>
-				@endif
+				@endrole
 				<!-- Cài đặt cơ bản -->
-				@if($user_current->can('company'))
+				@if($user_current->can('manage-company'))
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-sliders-h"></i>

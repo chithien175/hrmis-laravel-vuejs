@@ -63939,7 +63939,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.$gate.isManageACL()
+    _vm.$gate.isSuperAdmin()
       ? _c("div", { staticClass: "content-wrapper" }, [
           _vm._m(0),
           _vm._v(" "),
@@ -64324,7 +64324,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !_vm.$gate.isManageACL() ? _c("div", [_c("not-found")], 1) : _vm._e()
+    !_vm.$gate.isSuperAdmin() ? _c("div", [_c("not-found")], 1) : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -64430,7 +64430,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.$gate.isManageUsers()
+    _vm.$gate.isSuperAdmin()
       ? _c("div", { staticClass: "content-wrapper" }, [
           _vm._m(0),
           _vm._v(" "),
@@ -65028,7 +65028,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    !_vm.$gate.isManageUsers() ? _c("div", [_c("not-found")], 1) : _vm._e()
+    !_vm.$gate.isSuperAdmin() ? _c("div", [_c("not-found")], 1) : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -79988,16 +79988,27 @@ function () {
     key: "isAdmin",
     value: function isAdmin() {
       return this.user.roles[0].name === 'admin';
+    } // Users
+
+  }, {
+    key: "isReadUsers",
+    value: function isReadUsers() {
+      return this.user.can['read-users'];
     }
   }, {
-    key: "isUser",
-    value: function isUser() {
-      return this.user.roles[0].name === 'user';
+    key: "isCreateUsers",
+    value: function isCreateUsers() {
+      return this.user.can['create-users'];
     }
   }, {
-    key: "isManageUsers",
-    value: function isManageUsers() {
-      return this.user.can['manage-users'];
+    key: "isUpdateUsers",
+    value: function isUpdateUsers() {
+      return this.user.can['update-users'];
+    }
+  }, {
+    key: "isDeleteUsers",
+    value: function isDeleteUsers() {
+      return this.user.can['delete-users'];
     }
   }, {
     key: "isManageACL",

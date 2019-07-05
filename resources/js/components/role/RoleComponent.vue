@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content-wrapper" v-if="$gate.isManageACL()">
+    <div class="content-wrapper" v-if="$gate.isSuperAdmin()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
@@ -121,7 +121,7 @@
         </div>
         <!-- /. Role Modal -->
     </div>
-    <div v-if="!$gate.isManageACL()">
+    <div v-if="!$gate.isSuperAdmin()">
         <not-found></not-found>
     </div>
 </div>

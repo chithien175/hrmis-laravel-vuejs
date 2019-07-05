@@ -12,12 +12,18 @@ export default class Gate{
         return this.user.roles[0].name === 'admin';
     }
 
-    isUser(){
-        return this.user.roles[0].name === 'user';
+    // Users
+    isReadUsers(){
+        return this.user.can['read-users'];
     }
-
-    isManageUsers(){
-        return this.user.can['manage-users'];
+    isCreateUsers(){
+        return this.user.can['create-users'];
+    }
+    isUpdateUsers(){
+        return this.user.can['update-users'];
+    }
+    isDeleteUsers(){
+        return this.user.can['delete-users'];
     }
 
     isManageACL(){
