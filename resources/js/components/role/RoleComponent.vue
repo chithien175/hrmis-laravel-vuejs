@@ -23,13 +23,16 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" v-if="isLoading">
+                        <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 6" :key="index"></vcl-facebook>
+                    </div>
+                    <div class="col-12" v-if="!isLoading">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="input-group input-group-sm">
-                                            <input class="form-control form-control-navbar" type="search" placeholder="Nhập nhóm quyền tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
+                                            <input class="form-control form-control-navbar" type="text" placeholder="Nhập nhóm quyền tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
                                         </div>
                                     </div>
                                     <div class="col-md-9 text-md-right">
@@ -135,14 +138,15 @@
                     id: '', name: '', display_name: '', description: '', checked_permissions: []
                 }),
                 permissions: {},
-                search: ''
+                search: '',
+                isLoading: true
             }
         },
         methods: {
             loadData () {
                 this.$Progress.start();
                 axios.get('api/role').then(({ data }) => { this.roles = data; });
-                axios.get('api/getPermissions').then(({ data }) => { this.permissions = data; });
+                axios.get('api/getPermissions').then(({ data }) => { this.permissions = data; this.isLoading = false; });
                 this.$Progress.finish();
             },
             editModal (role) {

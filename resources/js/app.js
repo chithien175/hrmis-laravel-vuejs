@@ -131,8 +131,12 @@ Vue.component(
 import PrettyCheckbox from 'pretty-checkbox-vue';
 Vue.use(PrettyCheckbox);
 
-
-
+/**
+ * Vue Content Loading
+ * 
+ */
+import { VclFacebook } from 'vue-content-loading';
+Vue.component('vcl-facebook', VclFacebook);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
