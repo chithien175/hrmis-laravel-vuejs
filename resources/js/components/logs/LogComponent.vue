@@ -1,12 +1,12 @@
 <template>
 <div>
-    <div class="content-wrapper" v-if="$gate.isManageDeveloper()">
+    <div class="content-wrapper" v-if="$gate.isManageLogs()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 blue">Developer</h1>
+                    <h1 class="m-0 blue"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -23,20 +23,17 @@
                 </div>
                 <div class="row" v-if="!isLoading">
                     <div class="col-12">
-                         <passport-clients></passport-clients>
-                        <passport-authorized-clients></passport-authorized-clients>
-                        <passport-personal-access-tokens></passport-personal-access-tokens>
+                        <iframe class="log-iframe embed-responsive-item" src="http://hrmis.local/log-viewer" allowfullscreen></iframe>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
     </div>
-    <div v-if="!$gate.isManageDeveloper()">
+    <div v-if="!$gate.isManageLogs()">
         <not-found></not-found>
     </div>
 </div>
-    
 
 </template>
 
@@ -64,3 +61,11 @@
         }
     }
 </script>
+
+<style>
+    .log-iframe{
+        border: none;
+        width: 100%;
+        height: 400px;
+    }
+</style>

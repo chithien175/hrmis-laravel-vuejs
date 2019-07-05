@@ -31,4 +31,8 @@ export default class Gate{
     isManageDeveloper(){
         return this.user.can['manage-developer'];
     }
+
+    isManageLogs(){
+        return this.user.can['manage-logs'];
+    }
 }

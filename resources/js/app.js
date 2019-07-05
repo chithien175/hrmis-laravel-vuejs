@@ -22,6 +22,7 @@ const routes = [
     { path: '/profile', component: require('./components/profile/ProfileComponent.vue').default },
     { path: '/developer', component: require('./components/developer/DeveloperComponent.vue').default },
     { path: '/role', component: require('./components/role/RoleComponent.vue').default },
+    { path: '/log', component: require('./components/logs/LogComponent.vue').default },
     { path: '*', component: require('./components/NotFoundComponent.vue').default },
 ];
 

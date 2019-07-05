@@ -19,7 +19,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
-	@if(Auth::user()->status == 'active')
+@php
+	$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
+@endphp
+	@if($user_current->status == 'active')
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom">
 		<ul class="navbar-nav">
@@ -32,8 +35,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- Profile Dropdown Menu -->
 			<li class="nav-item dropdown user-menu">
 				<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-					<img src="images/profile/{{ Auth::user()->photo }}" class="img-circle elevation-2" alt="User Image">
-					<span class="d-none d-sm-inline blue">{{ Auth::user()->name }}</span>
+					<img src="images/profile/{{ $user_current->photo }}" class="img-circle elevation-2" alt="User Image">
+					<span class="d-none d-sm-inline blue">{{ $user_current->name }}</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 					<router-link to="/profile" class="dropdown-item blue">
@@ -101,15 +104,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</li>
 					</ul>
 				</li>
-				<!-- Cấu hình ứng dụng -->
+				<!-- Người dùng & Quyền -->
+				@if($user_current->can('manage-users|manage-acl'))
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-cogs"></i>
+						<i class="nav-icon fas fa-users-cog"></i>
 						<p>
-						Cấu hình ứng dụng
+						Người dùng & Quyền
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
+					
 					<ul class="nav nav-treeview">
 						@permission('manage-users')
 						<li class="nav-item">
@@ -128,7 +133,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</router-link>
 						</li>
 						@endpermission
-
+					</ul>
+				</li>
+				@endif
+				<!-- Cài đặt cơ bản -->
+				@if($user_current->can('company'))
+				<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-sliders-h"></i>
+						<p>
+						Cài đặt ứng dụng
+						<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
 						@permission('manage-company')
 						<li class="nav-item">
 							<router-link to="/company" class="nav-link">
@@ -137,7 +155,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</router-link>
 						</li>
 						@endpermission
+					</ul>
+				</li>
+				@endif
 
+				@if($user_current->can('manage-developer|manage-logs'))
+				<!-- Cài đặt nâng cao -->
+				<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-cogs"></i>
+						<p>
+						Cài đặt nâng cao
+						<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
 						@permission('manage-developer')
 						<li class="nav-item">
 							<router-link to="/developer" class="nav-link">
@@ -146,8 +178,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</router-link>
 						</li>
 						@endpermission
+						@permission('manage-logs')
+						<li class="nav-item">
+							<router-link to="/log" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Nhật ký hệ thống</p>
+							</router-link>
+						</li>
+						@endpermission
 					</ul>
 				</li>
+				@endif
 			</ul>
 			</nav>
 			<!-- /.sidebar-menu -->
@@ -178,9 +219,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 @auth
 <script>
-	<?php
-		$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
-	?>
 	window.user = @json($user_current)
 </script>
 @endauth
