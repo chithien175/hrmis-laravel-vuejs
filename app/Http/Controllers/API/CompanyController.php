@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -39,16 +41,6 @@ class CompanyController extends Controller
             }
         }
 
-        // \Setting::set('company.name', $request->input('name'));
-        // \Setting::set('company.address', $request->input('address'));
-        // \Setting::set('company.phone', $request->input('phone'));
-        // \Setting::set('company.fax', $request->input('fax'));
-        // \Setting::set('company.logo', $request->input('logo'));
-        // \Setting::set('company.legal_representative', $request->input('legal_representative'));
-        // \Setting::set('company.position', $request->input('position'));
-        // \Setting::set('company.nationality', $request->input('nationality'));
-        // \Setting::set('company.website', $request->input('website'));
-
         setting([
             'company.name'                  => $request['name'],
             'company.address'               => $request['address'],
@@ -61,6 +53,7 @@ class CompanyController extends Controller
             'company.website'               => $request['website'],
         ])->save();
 
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa thông tin công ty.');
         return ['message' => 'Đã cập nhật thông tin công ty'];
     }
 }

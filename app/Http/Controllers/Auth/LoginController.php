@@ -47,6 +47,6 @@ class LoginController extends Controller
             'last_login_ip' => $request->getClientIp()
         ]);
 
-        Log::info('#'. $user->id .' '. $user->name .' đăng nhập');
+        Log::info('#'. $user->id .' '. $user->name .': Đăng nhập');
     }
 }

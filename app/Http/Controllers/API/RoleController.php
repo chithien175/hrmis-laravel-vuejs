@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\Permission;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -66,6 +68,7 @@ class RoleController extends Controller
             }
         }
         
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo nhóm quyền #' . $role->id . ' '. $role->display_name . '.');
         return ['message' => 'Đã thêm quyền mới'];
     }
 
@@ -117,6 +120,7 @@ class RoleController extends Controller
             }
         }
 
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa nhóm quyền #' . $role->id . ' '. $role->display_name . '.');
         return ['message' => 'Đã cập nhật nhóm quyền'];
     }
 
@@ -130,7 +134,12 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
 
+        $id = $role->id;
+        $display_name = $role->display_name;
+
         $role->delete();
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa nhóm quyền #' . $id . ' '. $display_name . '.');
         return ['message' => 'Đã xóa nhóm quyền'];
     }
 

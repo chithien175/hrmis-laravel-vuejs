@@ -29,7 +29,6 @@ class UserController extends Controller
     public function index()
     {
         return User::with('roles')->get();
-        
     }
 
     /**
@@ -59,7 +58,7 @@ class UserController extends Controller
 
         $user->attachRole($request->type);
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' tạo người dùng #' . $user->id . ' '. $user->name);
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo người dùng #' . $user->id . ' '. $user->name . '.');
         return ['message' => 'Tạo người dùng thành công'];
     }
 
@@ -90,7 +89,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' sửa người dùng #' . $user->id . ' '. $user->name);
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa người dùng #' . $user->id . ' '. $user->name .'.');
         return ['message' => 'Đã cập nhật người dùng'];
     }
 
@@ -109,7 +108,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .' xóa người dùng #' . $id . ' '. $name);
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa người dùng #' . $id . ' '. $name . '.');
         return ['message' => 'Đã xóa người dùng'];
     }
 
@@ -150,6 +149,7 @@ class UserController extends Controller
 
         $user->update($request->all());
 
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Cập nhật trang cá nhân.');
         return ['message' => 'Đã cập nhật thông tin cá nhân'];
     }
 

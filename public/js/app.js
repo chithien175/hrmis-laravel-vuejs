@@ -64021,7 +64021,7 @@ var render = function() {
                                       staticClass: "fas fa-plus fa-fw"
                                     }),
                                     _vm._v(
-                                      " Thêm mới\r\n                                        "
+                                      " Thêm mới\n                                        "
                                     )
                                   ]
                                 )
@@ -64083,7 +64083,7 @@ var render = function() {
                                             staticClass: "fa fa-edit fa-fw"
                                           }),
                                           _vm._v(
-                                            " Sửa\r\n                                                "
+                                            " Sửa\n                                                "
                                           )
                                         ]
                                       ),
@@ -64103,7 +64103,7 @@ var render = function() {
                                             staticClass: "fa fa-trash fa-fw"
                                           }),
                                           _vm._v(
-                                            " Xóa\r\n                                                "
+                                            " Xóa\n                                                "
                                           )
                                         ]
                                       )
@@ -81122,8 +81122,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\laragon\www\hrmis\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\laragon\www\hrmis\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/hrmis-laravel-vuejs/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/hrmis-laravel-vuejs/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
