@@ -4,9 +4,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
 window.Vue = require('vue');
+
+require('./bootstrap');
+require('../assets/vendor/MediaManager/js/manager');
 
 /**
  * The Vue Router

@@ -34,6 +34,7 @@ return [
     */
 
     'connections' => [
+        'mediamanager' => 'mysql',
 
         'sqlite' => [
             'driver' => 'sqlite',
@@ -90,7 +91,6 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
     ],
 
     /*
@@ -141,5 +141,5 @@ return [
         ],
 
     ],
-
+   
 ];

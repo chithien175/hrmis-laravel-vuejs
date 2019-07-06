@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8664799f45203159e45b089a04d2f13d",
+    "content-hash": "d09b3c39383be3c005e3f1353dc801d3",
     "packages": [
         {
             "name": "anlutro/l4-settings",
@@ -186,6 +186,116 @@
                 "support"
             ],
             "time": "2019-02-27T18:33:30+00:00"
+        },
+        {
+            "name": "ctf0/media-manager",
+            "version": "v3.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ctf0/Laravel-Media-Manager.git",
+                "reference": "652b7a6e74a6cfeaa582f136cb649373b1e72406"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ctf0/Laravel-Media-Manager/zipball/652b7a6e74a6cfeaa582f136cb649373b1e72406",
+                "reference": "652b7a6e74a6cfeaa582f136cb649373b1e72406",
+                "shasum": ""
+            },
+            "require": {
+                "ctf0/package-changelog": "*",
+                "illuminate/support": "5.4 - 5.8",
+                "maennchen/zipstream-php": "~1.0",
+                "php": "~7.0"
+            },
+            "suggest": {
+                "league/flysystem-cached-adapter": "Required to use the Flysystem cache (~1.0)."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ctf0\\MediaManager\\MediaManagerServiceProvider"
+                    ]
+                },
+                "changeLog": "logs"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ctf0\\MediaManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muah",
+                    "email": "muah003@gmail.com"
+                }
+            ],
+            "description": "A Media Manager Built With Vuejs & Laravel",
+            "homepage": "https://github.com/ctf0/Laravel-Media-Manager",
+            "keywords": [
+                "ctf0",
+                "gui",
+                "laravel",
+                "manager",
+                "media",
+                "mediamanager"
+            ],
+            "time": "2019-05-17T09:04:56+00:00"
+        },
+        {
+            "name": "ctf0/package-changelog",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ctf0/PackageChangeLog.git",
+                "reference": "1919ad7d506cfb97111d19c514f043fd06b096bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ctf0/PackageChangeLog/zipball/1919ad7d506cfb97111d19c514f043fd06b096bb",
+                "reference": "1919ad7d506cfb97111d19c514f043fd06b096bb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": "~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ctf0\\PackageChangeLog\\PackageChangeLogServiceProvider"
+                    ]
+                },
+                "changeLog": "logs"
+            },
+            "autoload": {
+                "psr-4": {
+                    "ctf0\\PackageChangeLog\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muah",
+                    "email": "muah003@gmail.com"
+                }
+            ],
+            "description": "show package changeLog on install/update",
+            "homepage": "https://github.com/ctf0/PackageChangeLog",
+            "keywords": [
+                "ctf0",
+                "laravel",
+                "package-changelog"
+            ],
+            "time": "2018-09-26T13:10:13+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -1604,6 +1714,67 @@
             "time": "2019-05-05T09:22:01+00:00"
         },
         {
+            "name": "maennchen/zipstream-php",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maennchen/ZipStream-PHP.git",
+                "reference": "272cab6f9b7a7e80248ec59a8d114ca197458623"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/272cab6f9b7a7e80248ec59a8d114ca197458623",
+                "reference": "272cab6f9b7a7e80248ec59a8d114ca197458623",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "myclabs/php-enum": "^1.5",
+                "php": ">= 7.1",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "ext-zip": "*",
+                "guzzlehttp/guzzle": ">= 6.3",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": ">= 7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Duncan",
+                    "email": "pabs@pablotron.org"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
+                },
+                {
+                    "name": "Jonatan Männchen",
+                    "email": "jonatan@maennchen.ch"
+                },
+                {
+                    "name": "András Kolesár",
+                    "email": "kolesar@kolesar.hu"
+                }
+            ],
+            "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "time": "2019-04-30T17:14:47+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.24.0",
             "source": {
@@ -1680,6 +1851,51 @@
                 "psr-3"
             ],
             "time": "2018-11-05T09:00:11+00:00"
+        },
+        {
+            "name": "myclabs/php-enum",
+            "version": "1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/php-enum.git",
+                "reference": "f46847626b8739de22e4ebc6b56010f317d4448d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/f46847626b8739de22e4ebc6b56010f317d4448d",
+                "reference": "f46847626b8739de22e4ebc6b56010f317d4448d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyCLabs\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Enum contributors",
+                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+                }
+            ],
+            "description": "PHP Enum implementation",
+            "homepage": "http://github.com/myclabs/php-enum",
+            "keywords": [
+                "enum"
+            ],
+            "time": "2019-05-05T10:12:03+00:00"
         },
         {
             "name": "nesbot/carbon",
