@@ -147,6 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						
 						@permission('manage-company')
 						<li class="nav-item">
 							<router-link to="/company" class="nav-link">
