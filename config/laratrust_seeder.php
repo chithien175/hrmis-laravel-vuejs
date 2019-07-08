@@ -5,10 +5,12 @@ return [
         'superadmin'        => [
             'company'       => 'm',
             'developer'     => 'm',
-            'logs'          => 'm'
+            'logs'          => 'm',
+            'media'         => 'm'
         ],
         'admin'             => [
-            'company'       => 'm'
+            'company'       => 'm',
+            'media'         => 'm'
         ]
     ],
     'permission_structure'  => [],

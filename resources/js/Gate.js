@@ -12,20 +12,6 @@ export default class Gate{
         return this.user.roles[0].name === 'admin';
     }
 
-    // Users
-    isReadUsers(){
-        return this.user.can['read-users'];
-    }
-    isCreateUsers(){
-        return this.user.can['create-users'];
-    }
-    isUpdateUsers(){
-        return this.user.can['update-users'];
-    }
-    isDeleteUsers(){
-        return this.user.can['delete-users'];
-    }
-
     isManageACL(){
         return this.user.can['manage-acl'];
     }
@@ -40,5 +26,9 @@ export default class Gate{
 
     isManageLogs(){
         return this.user.can['manage-logs'];
+    }
+
+    isManageMedia(){
+        return this.user.can['manage-media'];
     }
 }
