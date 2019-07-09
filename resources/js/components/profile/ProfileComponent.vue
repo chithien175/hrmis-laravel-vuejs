@@ -5,13 +5,9 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 blue"><i class="fas fa-address-card"></i> Trang cá nhân</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
-                        <li class="breadcrumb-item active">Trang cá nhân</li>
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active"><i class="fas fa-id-card"></i> Trang cá nhân</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
@@ -53,7 +49,7 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="profile">
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
                                                 <label for="inputName" class="col-sm-12 control-label">Họ và tên</label>
                                                 <div class="col-sm-12">
@@ -84,7 +80,7 @@
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="change-password">
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
                                                 <label for="inputPassword" class="col-sm-12 control-label">Mật khẩu mới</label>
                                                 <div class="col-sm-12">
@@ -107,7 +103,7 @@
                             </div><!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-sm btn-primary" @click.prevent="updateProfile"><i class="fas fa-check-circle"></i> Cập nhật</button>
+                                    <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary" @click.prevent="updateProfile"><i class="fas fa-check-circle"></i> Cập nhật</button>
                                 </div>
                             </div>  
                         </div>
@@ -145,7 +141,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('api/profile').then( ({ data }) => {
+                axios.get('../api/profile').then( ({ data }) => {
                     this.form.fill(data);
                     this.isLoading = false;
                 });
@@ -169,7 +165,7 @@
             },
             updateProfile () {
                 this.$Progress.start();
-                this.form.put('api/profile')
+                this.form.put('../api/profile')
                 .then( () => {
                     Toast.fire({
                         type: 'success',
@@ -185,7 +181,7 @@
         },
         computed:{
             getProfilePhoto(){
-                return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "images/profile/"+this.form.photo ;
+                return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/profile/"+this.form.photo ;
            },
         },
         created () {

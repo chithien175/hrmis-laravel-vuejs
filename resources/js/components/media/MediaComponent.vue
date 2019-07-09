@@ -5,9 +5,12 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 blue">Quản lý tập tin</h1>
-                    </div><!-- /.col -->
+                    <div class="col-md-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-sliders-h"></i> Chức năng cơ bản</a></li>
+                            <li class="breadcrumb-item active"><i class="fas fa-photo-video"></i> Quản lý tập tin</li>
+                        </ol>
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>

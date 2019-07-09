@@ -5,13 +5,10 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 blue"><i class="fas fa-user"></i> Quản lý người dùng</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
-                                <li class="breadcrumb-item active">Quản lý người dùng</li>
+                        <div class="col-md-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-users-cog"></i> Người dùng & Quyền</a></li>
+                                <li class="breadcrumb-item active"><i class="fas fa-user"></i> Quản lý người dùng</li>
                             </ol>
                         </div>
                     </div><!-- /.row -->
@@ -181,9 +178,9 @@ export default {
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('api/user').then(({ data }) => { 
+            axios.get('../api/user').then(({ data }) => { 
                 this.users = data;
-                axios.get('api/role').then(({ data }) => { 
+                axios.get('../api/role').then(({ data }) => { 
                     this.roles = data; 
                     this.isLoading = false; 
                 });
@@ -193,7 +190,7 @@ export default {
         editModal (user) {
             this.editmode = true;
             this.form.reset();
-            this.form.clear()
+            this.form.clear();
             $('#userModal').modal('show');
             this.form.fill(user);
             this.form.type = user.roles[0].name;
@@ -201,12 +198,12 @@ export default {
         newModal () {
             this.editmode = false;
             this.form.reset();
-            this.form.clear()
+            this.form.clear();
             $('#userModal').modal('show');
         },
         createUser () {
             this.$Progress.start();
-            this.form.post('api/user')
+            this.form.post('../api/user')
             .then( () => {
                 $('#userModal').modal('hide');
                 Toast.fire({
@@ -222,7 +219,7 @@ export default {
         },
         updateUser () {
             this.$Progress.start();
-            this.form.put('api/user/'+this.form.id)
+            this.form.put('../api/user/'+this.form.id)
             .then( () =>{
                 $('#userModal').modal('hide');
                 Toast.fire({
@@ -250,7 +247,7 @@ export default {
                     if(result.value){
                         // Send request to the server
                         this.$Progress.start();
-                        this.form.delete('api/user/'+id)
+                        this.form.delete('../api/user/'+id)
                         .then( () => {
                             Swal.fire(
                                 'Xóa thành công!',
@@ -277,7 +274,7 @@ export default {
             let query = this.search;
             if(query){
                 this.$Progress.start();
-                axios.get('api/findUser?q='+query)
+                axios.get('../api/findUser?q='+query)
                 .then( (data) => {
                     this.users = data.data;
                     this.$Progress.finish();

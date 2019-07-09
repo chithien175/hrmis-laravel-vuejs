@@ -5,9 +5,12 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 blue"><i class="fas fa-building"></i> Thông tin công ty</h1>
-                </div><!-- /.col -->
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-sliders-h"></i> Chức năng cơ bản</a></li>
+                        <li class="breadcrumb-item active"><i class="fas fa-building"></i> Thông tin công ty</li>
+                    </ol>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>
@@ -46,7 +49,7 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="company">
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
                                                 <label for="inputName" class="col-sm-12 control-label">Tên công ty</label>
                                                 <div class="col-sm-12">
@@ -87,7 +90,7 @@
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="legal-representative">
-                                        <form class="form-horizontal">
+                                        <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
                                                 <label for="inputLegalRepresentative" class="col-sm-12 control-label">Họ và tên</label>
                                                 <div class="col-sm-12">
@@ -114,7 +117,7 @@
                             </div><!-- /.card-body -->
                             <div class="card-footer">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-sm btn-primary" @click.prevent="updateCompany"><i class="fas fa-check-circle"></i> Cập nhật</button>
+                                    <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary" @click.prevent="updateCompany"><i class="fas fa-check-circle"></i> Cập nhật</button>
                                 </div>
                             </div>  
                         </div>
@@ -157,7 +160,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('api/company').then( ({ data }) => {
+                axios.get('../api/company').then( ({ data }) => {
                     this.form.fill(data);
                     this.isLoading = false;
                 });
@@ -180,7 +183,7 @@
             },
             updateCompany () {
                 this.$Progress.start();
-                this.form.put('api/company')
+                this.form.put('../api/company')
                 .then( () => {
                     Toast.fire({
                         type: 'success',
@@ -196,7 +199,7 @@
         },
         computed:{
             getLogo(){
-                return (this.form.logo.indexOf('base64') != -1) ? this.form.logo : "images/company/"+this.form.logo ;
+                return (this.form.logo.indexOf('base64') != -1) ? this.form.logo : "../images/company/"+this.form.logo ;
            },
         },
         created () {

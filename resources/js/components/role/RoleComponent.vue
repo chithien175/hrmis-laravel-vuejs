@@ -5,13 +5,13 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                     <h1 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="void:javascript(0)">Cấu hình ứng dụng</a></li>
-                        <li class="breadcrumb-item active">Nhóm quyền sử dụng</li>
+                </div> -->
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-users-cog"></i> Người dùng & Quyền</a></li>
+                        <li class="breadcrumb-item active"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
@@ -145,9 +145,9 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('api/role').then(({ data }) => { 
+                axios.get('../api/role').then(({ data }) => { 
                     this.roles = data; 
-                    axios.get('api/getPermissions').then(({ data }) => { 
+                    axios.get('../api/getPermissions').then(({ data }) => { 
                         this.permissions = data; 
                         this.isLoading = false; 
                     });
@@ -158,6 +158,7 @@
             editModal (role) {
                 this.editmode = true;
                 this.form.reset();
+                this.form.clear();
                 this.form.fill(role);
                 this.form.checked_permissions = [];
                 
@@ -183,6 +184,7 @@
             newModal () {
                 this.editmode = false;
                 this.form.reset();
+                this.form.clear();
 
                 for(let i=0; i<this.permissions.length; i++){
                     this.form.checked_permissions.push({
@@ -195,7 +197,7 @@
             },
             createRole () {
                 this.$Progress.start();
-                this.form.post('api/role')
+                this.form.post('../api/role')
                 .then( () => {
                     $('#roleModal').modal('hide');
                     Toast.fire({
@@ -211,7 +213,7 @@
             },
             updateRole () {
                 this.$Progress.start();
-                this.form.put('api/role/'+this.form.id)
+                this.form.put('../api/role/'+this.form.id)
                 .then( () =>{
                     $('#roleModal').modal('hide');
                     Toast.fire({
@@ -239,7 +241,7 @@
                         if(result.value){
                             // Send request to the server
                             this.$Progress.start();
-                            this.form.delete('api/role/'+id)
+                            this.form.delete('../api/role/'+id)
                             .then( () => {
                                 Swal.fire( 'Xóa thành công!', 'Bạn đã xóa nhóm quyền thành công', 'success' );
                                 Fire.$emit('AfterCreate');
@@ -287,7 +289,7 @@
                 let query = this.search;
                 if(query){
                     this.$Progress.start();
-                    axios.get('api/findRole?q='+query)
+                    axios.get('../api/findRole?q='+query)
                     .then( (data) => {
                         this.roles = data.data;
                         this.$Progress.finish();

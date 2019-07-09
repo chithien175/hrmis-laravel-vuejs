@@ -4,7 +4,6 @@ return [
     'role_structure'        => [
         'superadmin'        => [
             'company'       => 'm',
-            'developer'     => 'm',
             'logs'          => 'm',
             'media'         => 'm'
         ],

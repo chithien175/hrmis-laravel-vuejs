@@ -5,9 +5,12 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 blue"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</h1>
-                </div><!-- /.col -->
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-cogs"></i> Cài đặt nâng cao</a></li>
+                        <li class="breadcrumb-item active"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</li>
+                    </ol>
+                </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
         </div>

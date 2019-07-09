@@ -15,16 +15,15 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/home', redirect: '/dashboard' },
-    { path: '/dashboard', component: require('./components/DashboardComponent.vue').default, },
-    { path: '/company', component: require('./components/company/CompanyComponent.vue').default },
-    { path: '/user', component: require('./components/user/UserComponent.vue').default },
-    { path: '/profile', component: require('./components/profile/ProfileComponent.vue').default },
-    { path: '/developer', component: require('./components/developer/DeveloperComponent.vue').default },
-    { path: '/role', component: require('./components/role/RoleComponent.vue').default },
-    { path: '/logviewer', component: require('./components/logs/LogComponent.vue').default },
-    { path: '/mediafile', component: require('./components/media/MediaComponent.vue').default },
-    { path: '*', component: require('./components/NotFoundComponent.vue').default },
+    { path: '/home', redirect: '/admin/dashboard' },
+    { path: '/admin/dashboard', component: require('./components/DashboardComponent.vue').default },
+    { path: '/admin/company', component: require('./components/company/CompanyComponent.vue').default },
+    { path: '/admin/user', component: require('./components/user/UserComponent.vue').default },
+    { path: '/admin/profile', component: require('./components/profile/ProfileComponent.vue').default },
+    { path: '/admin/role', component: require('./components/role/RoleComponent.vue').default },
+    { path: '/admin/logviewer', component: require('./components/logs/LogComponent.vue').default },
+    { path: '/admin/mediafile', component: require('./components/media/MediaComponent.vue').default },
+    { path: '/admin/*', component: require('./components/NotFoundComponent.vue').default },
 ];
 
 const router = new VueRouter({
