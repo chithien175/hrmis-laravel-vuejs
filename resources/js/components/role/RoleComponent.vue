@@ -112,8 +112,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
-                            <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
+                            <button :disabled="form.busy" type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
+                            <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
                         </div>
                     </form>
                 </div>
@@ -135,7 +135,7 @@
                 editmode: false,
                 roles: {},
                 form: new Form({
-                    id: '', name: '', display_name: '', description: '', checked_permissions: []
+                    id: '', name: '', display_name: '', description: '', checked_permissions: [],
                 }),
                 permissions: {},
                 search: '',
@@ -158,7 +158,6 @@
             editModal (role) {
                 this.editmode = true;
                 this.form.reset();
-                this.form.clear();
                 this.form.fill(role);
                 this.form.checked_permissions = [];
                 
@@ -184,7 +183,6 @@
             newModal () {
                 this.editmode = false;
                 this.form.reset();
-                this.form.clear();
 
                 for(let i=0; i<this.permissions.length; i++){
                     this.form.checked_permissions.push({
@@ -282,7 +280,7 @@
             }, 500)
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         },
         created() {
             Fire.$on('Searching',() => {

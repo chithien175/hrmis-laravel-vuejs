@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>HRMIS - Công ty TNHH Thịnh Phong</title>
+	<title>KATICMS - Hệ thống quản lý nội dung</title>
 
 	<link rel="stylesheet" href="/css/app.css">
 </head>
@@ -79,30 +79,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					Bảng điều khiển
 					</p>
 				</router-link>
-				</li>
-				<!-- Quản trị nhân sự -->
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-box"></i>
-						<p>
-						Quản trị nhân sự
-						<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Nhân sự công ty</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="#" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Thống kê nhân sự</p>
-							</a>
-						</li>
-					</ul>
 				</li>
 				<!-- Người dùng & Quyền -->
 				@role('superadmin')
@@ -214,10 +190,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
 		<!-- To the right -->
 		<div class="float-right d-none d-sm-inline">
-			Hệ thống thông tin quản lý nguồn nhân lực (bản thử nghiệm).
+			Hệ thống quản lý nội dung (bản thử nghiệm).
 		</div>
 		<!-- Default to the left -->
-		&copy; 2019 Bản quyền thuộc <strong>Công ty TNHH Thịnh Phong</strong>.
+		&copy; 2019 Bản quyền thuộc <strong>KaTiSoft</strong>.
     </footer>
 	@else
 	<h1 class="blue">Tài khoản chưa được kích hoạt. Vui lòng liên hệ quản trị viên!</h1>

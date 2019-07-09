@@ -36,7 +36,7 @@
                                                 <input class="form-control form-control-navbar" type="text" placeholder="Nhập tên / email tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
                                             </div>
                                         </div>
-                                        <div class="col-md-9 text-md-right">
+                                        <div class="col-md-9 text-md-right mt-2">
                                             <button class="btn btn-sm btn-primary" @click="newModal()">
                                             <i class="fas fa-user-plus fa-fw"></i> Thêm mới
                                             </button>
@@ -103,7 +103,7 @@
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form @submit.prevent="editmode ? updateUser() : createUser()">
+                        <form @submit.prevent="editmode ? updateUser() : createUser()" @keydown="form.onKeydown($event)">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <input v-model="form.name" type="text" name="name"
@@ -145,8 +145,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
+                                <button :disabled="form.busy" type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
+                                <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
                             </div>
                         </form>
                     </div>
@@ -176,7 +176,7 @@ export default {
         }
     },
     mounted() {
-        console.log('Component mounted.')
+        // console.log('Component mounted.')
     },
     methods: {
         loadData () {
@@ -273,7 +273,7 @@ export default {
     created() {
         this.loadData();
 
-        Fire.$on('Searching',() => {
+        Fire.$on('Searching', () => {
             let query = this.search;
             if(query){
                 this.$Progress.start();

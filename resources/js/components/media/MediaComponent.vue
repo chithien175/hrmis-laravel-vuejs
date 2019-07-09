@@ -3,13 +3,13 @@
     <div class="content-wrapper" v-if="$gate.isManageMedia()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 blue">Quản lý tập tin</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 blue">Quản lý tập tin</h1>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
 
@@ -25,7 +25,7 @@
                         </div>
                         <div class="row" v-if="!isLoading">
                             <div class="col-12">
-                                <iframe class="media-iframe embed-responsive-item" src="http://hrmis.local/media" allowfullscreen></iframe>
+                                
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         },
         data() {
             return {
@@ -67,9 +67,5 @@
 </script>
 
 <style>
-    .media-iframe{
-        border: none;
-        width: 100%;
-        height: 400px;
-    }
+
 </style>

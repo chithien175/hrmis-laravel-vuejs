@@ -12,18 +12,10 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
 
 Auth::routes();
-
-// ctf0\MediaManager\MediaRoutes::routes();
-Route::group([
-    'middleware' => 'auth',
-], function() {
-    // MediaManager
-    ctf0\MediaManager\MediaRoutes::routes();
-});
 
 // Home
 Route::get('/home', 'HomeController@index')->name('home');
