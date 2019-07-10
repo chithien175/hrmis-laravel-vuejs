@@ -5,10 +5,13 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-md-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-sliders-h"></i> Chức năng cơ bản</a></li>
-                            <li class="breadcrumb-item active"><i class="fas fa-photo-video"></i> Quản lý tập tin</li>
+                    <div class="col-md-6">
+                        <h5 class="m-0 blue"><i class="fas fa-photo-video"></i> Quản lý tập tin</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <ol class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
+                            <li class="breadcrumb-item active">Quản lý tập tin</li>
                         </ol>
                     </div>
                 </div><!-- /.row -->

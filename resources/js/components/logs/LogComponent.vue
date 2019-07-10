@@ -5,10 +5,13 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-cogs"></i> Cài đặt nâng cao</a></li>
-                        <li class="breadcrumb-item active"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</li>
+                <div class="col-md-6">
+                    <h5 class="m-0 blue"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</h5>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
+                        <li class="breadcrumb-item active">Nhật ký hệ thống</li>
                     </ol>
                 </div>
             </div><!-- /.row -->

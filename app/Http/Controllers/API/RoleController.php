@@ -121,7 +121,7 @@ class RoleController extends Controller
         }
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa nhóm quyền #' . $role->id . ' '. $role->display_name . '.');
-        return ['message' => 'Đã cập nhật nhóm quyền'];
+        return ['message' => 'Đã chỉnh sửa nhóm quyền'];
     }
 
     /**

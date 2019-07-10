@@ -80,6 +80,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</p>
 				</router-link>
 				</li>
+				<!-- Quản trị nội dung -->
+				@if($user_current->can('manage-post'))
+				<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+						<i class="nav-icon far fa-newspaper"></i>
+						<p>
+						Quản trị nội dung
+						<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<router-link to="/admin/post" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Bài viết</p>
+							</router-link>
+						</li>
+					</ul>
+				</li>
+				@endif
 				<!-- Người dùng & Quyền -->
 				@role('superadmin')
 				<li class="nav-item has-treeview">

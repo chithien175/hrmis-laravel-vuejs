@@ -90,7 +90,7 @@ class UserController extends Controller
         $user->update($request->all());
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa người dùng #' . $user->id . ' '. $user->name .'.');
-        return ['message' => 'Đã cập nhật người dùng'];
+        return ['message' => 'Đã chỉnh sửa người dùng'];
     }
 
     /**
@@ -149,8 +149,8 @@ class UserController extends Controller
 
         $user->update($request->all());
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Cập nhật trang cá nhân.');
-        return ['message' => 'Đã cập nhật thông tin cá nhân'];
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa trang cá nhân.');
+        return ['message' => 'Đã chỉnh sửa thông tin cá nhân'];
     }
 
     public function search()

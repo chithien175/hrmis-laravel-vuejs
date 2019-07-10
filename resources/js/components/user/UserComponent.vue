@@ -5,10 +5,13 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-md-12">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-users-cog"></i> Người dùng & Quyền</a></li>
-                                <li class="breadcrumb-item active"><i class="fas fa-user"></i> Quản lý người dùng</li>
+                        <div class="col-md-6">
+                            <h5 class="m-0 blue"><i class="fas fa-user"></i> Quản lý người dùng</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <ol class="breadcrumb float-md-right">
+                                <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
+                                <li class="breadcrumb-item active">Quản lý người dùng</li>
                             </ol>
                         </div>
                     </div><!-- /.row -->
@@ -33,7 +36,7 @@
                                                 <input class="form-control form-control-navbar" type="text" placeholder="Nhập tên / email tìm kiếm" aria-label="Search" v-model="search" @keyup="searchit">
                                             </div>
                                         </div>
-                                        <div class="col-md-9 text-md-right mt-2">
+                                        <div class="col-md-9 text-md-right">
                                             <button class="btn btn-sm btn-primary" @click="newModal()">
                                             <i class="fas fa-user-plus fa-fw"></i> Thêm mới
                                             </button>
@@ -95,7 +98,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title blue" id="userModalLabel">{{ editmode ? 'Cập nhật người dùng' : 'Thêm mới người dùng' }}</h5>
+                            <h5 class="modal-title blue" id="userModalLabel">{{ editmode ? 'Chỉnh sửa người dùng' : 'Thêm mới người dùng' }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -138,7 +141,7 @@
                                         <option value="active">Kích hoạt</option>
                                         <option value="deactive">Vô hiệu</option>
                                     </select>
-                                    <has-error :form="form" field="type"></has-error>
+                                    <has-error :form="form" field="status"></has-error>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -235,8 +238,8 @@ export default {
         },
         deleteUser (id) {
             Swal.fire({
-                title: 'Bạn chắc chứ?',
-                text: "Bạn muốn xóa người dùng này?",
+                title: 'Bạn muốn xóa người dùng này?',
+                text: "Bạn chắc chứ, Tất cả bài viết của người này sẽ bị xóa theo!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

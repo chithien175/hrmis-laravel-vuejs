@@ -16,13 +16,14 @@ Vue.use(VueRouter);
 
 const routes = [
     { path: '/home', redirect: '/admin/dashboard' },
-    { path: '/admin/dashboard', component: require('./components/DashboardComponent.vue').default },
-    { path: '/admin/company', component: require('./components/company/CompanyComponent.vue').default },
+    { path: '/admin/dashboard', component: require('./components/dashboard/DashboardComponent.vue').default },
+    { path: '/admin/post', component: require('./components/post/PostComponent.vue').default },
     { path: '/admin/user', component: require('./components/user/UserComponent.vue').default },
-    { path: '/admin/profile', component: require('./components/profile/ProfileComponent.vue').default },
     { path: '/admin/role', component: require('./components/role/RoleComponent.vue').default },
-    { path: '/admin/logviewer', component: require('./components/logs/LogComponent.vue').default },
     { path: '/admin/mediafile', component: require('./components/media/MediaComponent.vue').default },
+    { path: '/admin/company', component: require('./components/company/CompanyComponent.vue').default },
+    { path: '/admin/profile', component: require('./components/profile/ProfileComponent.vue').default },
+    { path: '/admin/logviewer', component: require('./components/logs/LogComponent.vue').default },
     { path: '/admin/*', component: require('./components/NotFoundComponent.vue').default },
 ];
 
@@ -98,24 +99,6 @@ window.Toast = Toast;
  * Fire
  */
 window.Fire = new Vue();
-
-/**
- * Laravel Passport
- */
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue').default
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
-);
 
 /**
  * Not Found

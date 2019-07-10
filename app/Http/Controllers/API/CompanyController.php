@@ -54,6 +54,6 @@ class CompanyController extends Controller
         ])->save();
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa thông tin công ty.');
-        return ['message' => 'Đã cập nhật thông tin công ty'];
+        return ['message' => 'Đã chỉnh sửa thông tin công ty'];
     }
 }

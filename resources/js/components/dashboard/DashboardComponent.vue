@@ -5,8 +5,8 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 blue">Bảng điều khiển</h1>
+                <div class="col-md-6">
+                    <h5 class="m-0 blue"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</h5>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

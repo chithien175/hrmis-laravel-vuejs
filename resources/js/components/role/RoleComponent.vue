@@ -5,13 +5,13 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <!-- <div class="col-sm-6">
-                    <h1 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</h1>
-                </div> -->
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="void:javascript(0)"><i class="fas fa-users-cog"></i> Người dùng & Quyền</a></li>
-                        <li class="breadcrumb-item active"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</li>
+                <div class="col-md-6">
+                    <h5 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</h5>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
+                        <li class="breadcrumb-item active">Nhóm quyền sử dụng</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
@@ -87,7 +87,7 @@
             <div class="modal-dialog modal-dialog-top" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title blue" id="roleModalLabel">{{ editmode ? 'Cập nhật nhóm quyền' : 'Thêm mới nhóm quyền' }}</h5>
+                        <h5 class="modal-title blue" id="roleModalLabel">{{ editmode ? 'Chỉnh sửa nhóm quyền' : 'Thêm mới nhóm quyền' }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <input v-model="form.display_name" type="text" name="display_name"
                                     placeholder="Nhóm quyền"
-                                    class="form-control" :class="{ 'is-invalid': form.errors.has('display_name') }" @change="convertName">
+                                    class="form-control" :class="{ 'is-invalid': form.errors.has('display_name') }" @change="convertName()">
                                 <has-error :form="form" field="display_name"></has-error>
                             </div>
                             <div class="form-group">

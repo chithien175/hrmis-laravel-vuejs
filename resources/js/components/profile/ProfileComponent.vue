@@ -5,9 +5,13 @@
         <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><i class="fas fa-id-card"></i> Trang cá nhân</li>
+                <div class="col-md-6">
+                    <h5 class="m-0 blue"><i class="fas fa-id-card"></i> Trang cá nhân</h5>
+                </div>
+                <div class="col-md-6">
+                    <ol class="breadcrumb float-md-right">
+                        <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
+                        <li class="breadcrumb-item active">Trang cá nhân</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
