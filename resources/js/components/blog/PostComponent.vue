@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content-wrapper" v-if="$gate.isManagePost()">
+    <div class="content-wrapper" v-if="$gate.isManageBlog() && $gate.isBlogModule()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -148,7 +148,7 @@
         </div>
         <!-- /. Post Modal -->
     </div>
-    <div v-if="!$gate.isManagePost()">
+    <div v-if="!$gate.isManageBlog() || !$gate.isBlogModule()">
         <not-found></not-found>
     </div>
 </div>
@@ -174,7 +174,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/post').then(({ data }) => { 
+                axios.get('../api/blog').then(({ data }) => { 
                     this.posts = data;
                     this.isLoading = false; 
                 });
@@ -195,7 +195,7 @@
             },
             createPost () {
                 this.$Progress.start();
-                this.form.post('../api/post')
+                this.form.post('../api/blog')
                 .then( () => {
                     $('#postModal').modal('hide');
                     Toast.fire({
@@ -211,7 +211,7 @@
             },
             updatePost () {
                 this.$Progress.start();
-                this.form.put('../api/post/'+this.form.id)
+                this.form.put('../api/blog/'+this.form.id)
                 .then( () =>{
                     $('#postModal').modal('hide');
                     Toast.fire({
@@ -239,7 +239,7 @@
                         if(result.value){
                             // Send request to the server
                             this.$Progress.start();
-                            this.form.delete('../api/post/'+id)
+                            this.form.delete('../api/blog/'+id)
                             .then( () => {
                                 Swal.fire(
                                     'Xóa thành công!',
@@ -311,7 +311,7 @@
                 let query = this.search;
                 if(query){
                     this.$Progress.start();
-                    axios.get('../api/findPost?q='+query)
+                    axios.get('../api/blog/find?q='+query)
                     .then( (data) => {
                         this.posts = data.data;
                         this.$Progress.finish();

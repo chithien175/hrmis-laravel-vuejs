@@ -21,6 +21,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper" id="app">
 @php
 	$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
+	$modules = [
+		'blog' => Module::find('blog')->get('active')
+	];
 @endphp
 	@if($user_current->status == 'active')
     <!-- Navbar -->
@@ -80,17 +83,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</p>
 				</router-link>
 				</li>
-				<!-- Quản trị nội dung -->
-				@if($user_current->can('manage-post'))
+				<!-- Nội dung trang web -->
+				@if($user_current->can('manage-blog') && $modules['blog'])
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon far fa-newspaper"></i>
 						<p>
-						Quản trị nội dung
+						Nội dung trang web
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
-					
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">
@@ -216,7 +218,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 @auth
 <script>
-	window.user = @json($user_current)
+	window.user = @json($user_current);
+	window.modules = @json($modules);
 </script>
 @endauth
 

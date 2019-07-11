@@ -2,6 +2,7 @@ export default class Gate{
 
     constructor(user){
         this.user = user;
+        this.modules = modules;
     }
 
     isSuperAdmin(){
@@ -12,8 +13,8 @@ export default class Gate{
         return this.user.roles[0].name === 'admin';
     }
 
-    isManagePost(){
-        return this.user.can['manage-post'];
+    isManageBlog(){
+        return this.user.can['manage-blog'];
     }
 
     isManageCompany(){
@@ -26,5 +27,9 @@ export default class Gate{
 
     isManageMedia(){
         return this.user.can['manage-media'];
+    }
+
+    isBlogModule(){
+        return this.modules.blog === 1;
     }
 }

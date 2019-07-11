@@ -1,44 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace Modules\Blog\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Post;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Modules\Blog\Entities\Post;
 
-class PostController extends Controller
+class BlogController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth:api');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Post::with('categories')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $request->validate([
             'title'     => 'required|string|max:255',
             'slug'      => 'required|string|max:255|unique:posts',
             'body'      => 'required'
@@ -68,18 +52,11 @@ class PostController extends Controller
         return ['message' => 'Tạo bài viết thành công'];
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
 
-        $this->validate($request, [
+        $request->validate([
             'title'     => 'required|string|max:255',
             'slug'      => 'required|string|max:255|unique:posts,slug,'.$post->id,
             'body'      => 'required'
@@ -106,22 +83,21 @@ class PostController extends Controller
         return ['message' => 'Đã chỉnh sửa bài viết thành công'];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
 
-        $id = $post->id;
-        $title = $post->title;
+        $post_id = $post->id;
+        $post_title = $post->title;
+
+        $post_photo = public_path('images/post/').$post->photo;
+        if(file_exists($post_photo) && $post->photo != 'post-image-default.jpg'){
+            @unlink($post_photo);
+        }
 
         $post->delete();
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa bài viết #' . $id . ' '. $title . '.');
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa bài viết #' . $post_id . ' '. $post_title . '.');
         return ['message' => 'Đã xóa bài viết'];
     }
 
