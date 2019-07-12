@@ -24,6 +24,7 @@ const routes = [
     { path: '/admin/company', component: require('./components/company/CompanyComponent.vue').default },
     { path: '/admin/profile', component: require('./components/profile/ProfileComponent.vue').default },
     { path: '/admin/logviewer', component: require('./components/logs/LogComponent.vue').default },
+    { path: '/admin/module', component: require('./components/module/ModuleComponent.vue').default },
     { path: '/admin/*', component: require('./components/NotFoundComponent.vue').default },
 ];
 

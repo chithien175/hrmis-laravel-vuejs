@@ -89,59 +89,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<a href="#" class="nav-link">
 						<i class="nav-icon far fa-newspaper"></i>
 						<p>
-						Nội dung trang web
+						Nội dung website
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						@permission('manage-blog')
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Bài viết</p>
 							</router-link>
 						</li>
+						@endpermission
 					</ul>
 				</li>
 				@endif
-				<!-- Người dùng & Quyền -->
-				@role('superadmin')
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-users-cog"></i>
-						<p>
-						Người dùng & Quyền
-						<i class="right fas fa-angle-left"></i>
-						</p>
-					</a>
-					
-					<ul class="nav nav-treeview">
-						@role('superadmin')
-						<li class="nav-item">
-							<router-link to="/admin/user" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Quản lý người dùng</p>
-							</router-link>
-						</li>
-						@endrole
-
-						@role('superadmin')
-						<li class="nav-item">
-							<router-link to="/admin/role" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Nhóm quyền sử dụng</p>
-							</router-link>
-						</li>
-						@endrole
-					</ul>
-				</li>
-				@endrole
+				
 				<!-- Cài đặt cơ bản -->
 				@if($user_current->can('manage-company|manage-media'))
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-sliders-h"></i>
 						<p>
-						Chức năng cơ bản
+						Cài đặt hệ thống
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
@@ -150,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="nav-item">
 							<router-link to="/admin/mediafile" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Quản lý tập tin</p>
+								<p>Ảnh và tập tin</p>
 							</router-link>
 						</li>
 						@endpermission
@@ -167,21 +138,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				@endif
 
 				@if($user_current->can('manage-developer|manage-logs'))
-				<!-- Cài đặt nâng cao -->
+				<!-- Quản trị hệ thống -->
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-cogs"></i>
 						<p>
-						Cài đặt nâng cao
+						Quản trị hệ thống
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						@role('superadmin')
+						<li class="nav-item">
+							<router-link to="/admin/user" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Quản trị người dùng</p>
+							</router-link>
+						</li>
+						@endrole
+
+						@role('superadmin')
+						<li class="nav-item">
+							<router-link to="/admin/role" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Nhóm và phân quyền</p>
+							</router-link>
+						</li>
+						@endrole
+
+						@role('superadmin')
+						<li class="nav-item">
+							<router-link to="/admin/module" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Chức năng mở rộng</p>
+							</router-link>
+						</li>
+						@endrole
+
 						@permission('manage-logs')
 						<li class="nav-item">
 							<router-link to="/admin/logviewer" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Nhật ký hệ thống</p>
+								<p>Lịch sử hệ thống</p>
 							</router-link>
 						</li>
 						@endpermission

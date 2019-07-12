@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>HRMIS | Công ty TNHH Thịnh Phong</title>
+    <title>KaTiCMS | Hệ thống quản trị nội dung</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    HỆ THỐNG THÔNG TIN QUẢN LÝ NGUỒN NHÂN LỰC | CÔNG TY TNHH THỊNH PHONG
+                    HỆ THỐNG QUẢN TRỊ NỘI DUNG | KaTiCMS
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

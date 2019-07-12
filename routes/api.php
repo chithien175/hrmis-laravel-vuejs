@@ -17,9 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::apiResources(['post' => 'API\PostController']);
-// Route::get('findPost', 'API\PostController@search');
-
 Route::apiResources(['user' => 'API\UserController']);
 Route::get('findUser', 'API\UserController@search');
 Route::get('profile', 'API\UserController@getProfile');
@@ -31,3 +28,5 @@ Route::get('getPermissions', 'API\RoleController@getPermissions');
 
 Route::get('company', 'API\CompanyController@index');
 Route::put('company', 'API\CompanyController@updateCompany');
+
+Route::post('module/toggle', 'API\ModuleController@toggle');

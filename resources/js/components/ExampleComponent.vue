@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="content-wrapper">
+    <div class="content-wrapper" v-if="$gate.isSuperAdmin()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -24,12 +24,24 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        
+                        <div class="row" v-if="isLoading">
+                            <div class="col-12">
+                                <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 6" :key="index"></vcl-facebook>
+                            </div>
+                        </div>
+                        <div class="row" v-if="!isLoading">
+                            <div class="col-12">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
+    </div>
+    <div v-if="!$gate.isSuperAdmin()">
+        <not-found></not-found>
     </div>
 </div>
 
@@ -39,6 +51,23 @@
     export default {
         mounted() {
             // console.log('Component mounted.')
+        },
+        data() {
+            return {
+                isLoading: true
+            }
+        },
+        methods: {
+            loadData () {
+                this.$Progress.start();
+                setTimeout( () => {
+                    this.isLoading = false;
+                    this.$Progress.finish();
+                }, 1000);
+            },
+        },
+        created() {
+            this.loadData();
         }
     }
 </script>

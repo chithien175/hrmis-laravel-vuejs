@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-md-6">
-                    <h5 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm quyền sử dụng</h5>
+                    <h5 class="m-0 blue"><i class="fas fa-user-tag"></i> Nhóm và phân quyền</h5>
                 </div>
                 <div class="col-md-6">
                     <ol class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                        <li class="breadcrumb-item active">Nhóm quyền sử dụng</li>
+                        <li class="breadcrumb-item active">Nhóm và phân quyền</li>
                     </ol>
                 </div>
             </div><!-- /.row -->
@@ -51,7 +51,7 @@
                                             <th>ID</th>
                                             <th>Nhóm quyền</th>
                                             <th>Mô tả</th>
-                                            <th>Tạo lúc</th>
+                                            <th>Ngày tạo</th>
                                             <th>Tác vụ</th>
                                         </tr>
                                     </thead>

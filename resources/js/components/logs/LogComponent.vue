@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-md-6">
-                    <h5 class="m-0 blue"><i class="fas fa-clipboard-list"></i> Nhật ký hệ thống</h5>
+                    <h5 class="m-0 blue"><i class="fas fa-clipboard-list"></i> Lịch sử hệ thống</h5>
                 </div>
                 <div class="col-md-6">
                     <ol class="breadcrumb float-md-right">
                         <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                        <li class="breadcrumb-item active">Nhật ký hệ thống</li>
+                        <li class="breadcrumb-item active">Lịch sử hệ thống</li>
                     </ol>
                 </div>
             </div><!-- /.row -->

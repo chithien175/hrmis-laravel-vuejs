@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <h5 class="m-0 blue"><i class="fas fa-photo-video"></i> Quản lý tập tin</h5>
+                        <h5 class="m-0 blue"><i class="fas fa-photo-video"></i> Ảnh và tập tin</h5>
                     </div>
                     <div class="col-md-6">
                         <ol class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                            <li class="breadcrumb-item active">Quản lý tập tin</li>
+                            <li class="breadcrumb-item active">Ảnh và tập tin</li>
                         </ol>
                     </div>
                 </div><!-- /.row -->
