@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				</router-link>
 				</li>
 				<!-- Nội dung trang web -->
-				@if($user_current->can('manage-blog') && $modules['blog'])
+				
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon far fa-newspaper"></i>
@@ -94,17 +94,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
-						@permission('manage-blog')
+						@if($user_current->can('manage-blog') && $modules['blog'])
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Bài viết</p>
 							</router-link>
 						</li>
-						@endpermission
+						@endif
 					</ul>
 				</li>
-				@endif
 				
 				<!-- Cài đặt cơ bản -->
 				@if($user_current->can('manage-company|manage-media'))

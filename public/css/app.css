@@ -35313,6 +35313,14 @@ a.text-dark:focus {
   }
 }
 
+.sidebar .nav-item {
+  font-size: 0.85rem !important;
+}
+
+.sidebar .nav-icon {
+  font-size: 0.85rem !important;
+}
+
 .router-link-exact-active {
   color: #ffffff !important;
   background-color: #0e4d9a;
@@ -35342,7 +35350,7 @@ a.text-dark:focus {
   color: #ffffff;
 }
 
-/* Scroll Bar */
+/* Chỉnh thanh cuộn - Scroll Bar */
 
 /* width */
 
@@ -35369,154 +35377,4 @@ a.text-dark:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #0E4D9B;
 }
-
-/* Datatable CSS */
-
-#v-datatable-light .header-item {
-  cursor: pointer;
-  color: #337ab7;
-  -webkit-transition: color 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out;
-}
-
-#v-datatable-light .header-item:hover {
-  color: #ed9b19;
-}
-
-#v-datatable-light .header-item.no-sortable {
-  cursor: default;
-}
-
-#v-datatable-light .header-item.no-sortable:hover {
-  color: #337ab7;
-}
-
-#v-datatable-light .header-item .th-wrapper {
-  display: -webkit-box;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  font-weight: bold;
-}
-
-#v-datatable-light .header-item .th-wrapper.checkboxes {
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-#v-datatable-light .header-item .th-wrapper .arrows-wrapper {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  margin-left: 10px;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-}
-
-#v-datatable-light .header-item .th-wrapper .arrows-wrapper.centralized {
-  -webkit-box-pack: center;
-          justify-content: center;
-}
-
-#v-datatable-light .arrow {
-  -webkit-transition: color 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out;
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-}
-
-#v-datatable-light .arrow.up {
-  border-bottom: 8px solid #337ab7;
-}
-
-#v-datatable-light .arrow.up:hover {
-  border-bottom: 8px solid #ed9b19;
-}
-
-#v-datatable-light .arrow.down {
-  border-top: 8px solid #337ab7;
-}
-
-#v-datatable-light .arrow.down:hover {
-  border-top: 8px solid #ed9b19;
-}
-
-#v-datatable-light .footer {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  width: 500px;
-}
-
-/* End Datatable CSS */
-
-/* Pagination CSS */
-
-#v-datatable-light-pagination {
-  list-style: none;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: start;
-          justify-content: flex-start;
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  height: 30px;
-}
-
-#v-datatable-light-pagination .pagination-item {
-  width: 30px;
-  margin-right: 5px;
-  font-size: 16px;
-  -webkit-transition: color 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out;
-}
-
-#v-datatable-light-pagination .pagination-item.selected {
-  color: #ed9b19;
-}
-
-#v-datatable-light-pagination .pagination-item .page-btn {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  color: #337ab7;
-  -webkit-transition: color 0.15s ease-in-out;
-  transition: color 0.15s ease-in-out;
-}
-
-#v-datatable-light-pagination .pagination-item .page-btn:hover {
-  color: #ed9b19;
-}
-
-#v-datatable-light-pagination .pagination-item .page-btn:disabled {
-  cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.65;
-}
-
-/* END PAGINATION CSS */
-
-/* ITEMS PER PAGE DROPDOWN CSS */
-
-.item-per-page-dropdown {
-  background-color: transparent;
-  min-height: 30px;
-  border: 1px solid #337ab7;
-  border-radius: 5px;
-  color: #337ab7;
-}
-
-.item-per-page-dropdown:hover {
-  cursor: pointer;
-}
-
-/* END ITEMS PER PAGE DROPDOWN CSS */
 
