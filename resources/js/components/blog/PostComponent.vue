@@ -115,9 +115,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBody" class="control-label">Nội dung</label>
-                                        <textarea v-model="form.body" name="body" id="body" rows="5"
-                                        placeholder="Nội dung bài viết"
-                                        class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"></textarea>
+
+                                        <!-- <ckeditor :editor="editor" v-model="form.body" :config="editorConfig" class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"></ckeditor> -->
+                                        <vue-editor v-model="form.body"></vue-editor>
+
                                         <has-error :form="form" field="body"></has-error>
                                     </div>
                                 </div>
@@ -156,179 +157,181 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            // console.log('Component mounted.')
+import { VueEditor } from "vue2-editor";
+// import { VueEditor, Quill } from "vue2-editor";
+export default {
+    mounted() {
+        // console.log('Component mounted.')
+    },
+    data() {
+        return {
+            editmode: false,
+            posts: {},
+            form: new Form({
+                id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: ''
+            }),
+            search: '',
+            isLoading: true,
+        }
+    },
+    methods: {
+        loadData () {
+            this.$Progress.start();
+            axios.get('../api/blog').then(({ data }) => { 
+                this.posts = data;
+                this.isLoading = false; 
+            });
+            this.$Progress.finish();
         },
-        data() {
-            return {
-                editmode: false,
-                posts: {},
-                form: new Form({
-                    id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: ''
-                }),
-                search: '',
-                isLoading: true
-            }
+        editModal (post) {
+            this.editmode = true;
+            this.form.reset();
+            this.form.clear();
+            $('#postModal').modal('show');
+            this.form.fill(post);
         },
-        methods: {
-            loadData () {
-                this.$Progress.start();
-                axios.get('../api/blog').then(({ data }) => { 
-                    this.posts = data;
-                    this.isLoading = false; 
+        newModal () {
+            this.editmode = false;
+            this.form.reset();
+            this.form.clear();
+            $('#postModal').modal('show');
+        },
+        createPost () {
+            this.$Progress.start();
+            this.form.post('../api/blog')
+            .then( () => {
+                $('#postModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Thêm bài viết thành công'
                 });
+                Fire.$emit('AfterCreate');
                 this.$Progress.finish();
-            },
-            editModal (post) {
-                this.editmode = true;
-                this.form.reset();
-                this.form.clear();
-                $('#postModal').modal('show');
-                this.form.fill(post);
-            },
-            newModal () {
-                this.editmode = false;
-                this.form.reset();
-                this.form.clear();
-                $('#postModal').modal('show');
-            },
-            createPost () {
+            })
+            .catch( () => {
+                this.$Progress.fail();
+            }); 
+        },
+        updatePost () {
+            this.$Progress.start();
+            this.form.put('../api/blog/'+this.form.id)
+            .then( () =>{
+                $('#postModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Chỉnh sửa bài viết thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () =>{
+                this.$Progress.fail();
+            });
+        },
+        deletePost (id) {
+            Swal.fire({
+                title: 'Bạn chắc chứ?',
+                text: "Bạn muốn xóa bài viết này?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xóa ngay!',
+                cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if(result.value){
+                        // Send request to the server
+                        this.$Progress.start();
+                        this.form.delete('../api/blog/'+id)
+                        .then( () => {
+                            Swal.fire(
+                                'Xóa thành công!',
+                                'Bạn đã xóa bài viết thành công',
+                                'success'
+                            );
+                            Fire.$emit('AfterCreate');
+                            this.$Progress.finish();
+                        })
+                        .catch( () => {
+                            Swal("Lỗi xóa bài viết!", "Vui lòng liên hệ admin xử lý.", "warning");
+                        });
+                    }
+            });
+        },
+        changePhoto (e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            if(file['size'] < 2111775){
+                reader.onloadend = (file) => {
+                    this.form.photo = reader.result;
+                }
+                reader.readAsDataURL(file);
+            }else{
+                Toast.fire({
+                    type: 'error',
+                    title: 'Vui lòng tải ảnh dưới 2MB'
+                });
+            }
+            
+        },
+        sanitizeTitle: function(title) {
+            var slug = "";
+            // Change to lower case
+            var titleLower = title.toLowerCase();
+            // Letter "e"
+            slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+            // Letter "a"
+            slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+            // Letter "o"
+            slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+            // Letter "u"
+            slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+            // Letter "d"
+            slug = slug.replace(/đ/gi, 'd');
+            // Trim the last whitespace
+            slug = slug.replace(/\s*$/g, '');
+            // Change whitespace to "-"
+            slug = slug.replace(/\s+/g, '-');
+            
+            return slug;
+        },
+        convertSlug (){
+            this.form.slug = this.sanitizeTitle(this.form.title);
+        },
+        searchit: _.debounce( () => {
+            Fire.$emit('Searching');
+        }, 500),
+    },
+    computed:{
+        getPostPhoto(){
+            return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/post/"+this.form.photo ;
+        },
+    },
+    created() {
+        this.loadData();
+
+        Fire.$on('Searching', () => {
+            let query = this.search;
+            if(query){
                 this.$Progress.start();
-                this.form.post('../api/blog')
-                .then( () => {
-                    $('#postModal').modal('hide');
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Thêm bài viết thành công'
-                    });
-                    Fire.$emit('AfterCreate');
-                    this.$Progress.finish();
-                })
-                .catch( () => {
-                    this.$Progress.fail();
-                }); 
-            },
-            updatePost () {
-                this.$Progress.start();
-                this.form.put('../api/blog/'+this.form.id)
-                .then( () =>{
-                    $('#postModal').modal('hide');
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Chỉnh sửa bài viết thành công'
-                    });
-                    Fire.$emit('AfterCreate');
+                axios.get('../api/blog/find?q='+query)
+                .then( (data) => {
+                    this.posts = data.data;
                     this.$Progress.finish();
                 })
                 .catch( () =>{
                     this.$Progress.fail();
                 });
-            },
-            deletePost (id) {
-                Swal.fire({
-                    title: 'Bạn chắc chứ?',
-                    text: "Bạn muốn xóa bài viết này?",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Có, xóa ngay!',
-                    cancelButtonText: 'Hủy'
-                    }).then((result) => {
-                        if(result.value){
-                            // Send request to the server
-                            this.$Progress.start();
-                            this.form.delete('../api/blog/'+id)
-                            .then( () => {
-                                Swal.fire(
-                                    'Xóa thành công!',
-                                    'Bạn đã xóa bài viết thành công',
-                                    'success'
-                                );
-                                Fire.$emit('AfterCreate');
-                                this.$Progress.finish();
-                            })
-                            .catch( () => {
-                                Swal("Lỗi xóa bài viết!", "Vui lòng liên hệ admin xử lý.", "warning");
-                            });
-                        }
-                });
-            },
-            changePhoto (e) {
-                let file = e.target.files[0];
-                let reader = new FileReader();
-                if(file['size'] < 2111775){
-                    reader.onloadend = (file) => {
-                        this.form.photo = reader.result;
-                    }
-                    reader.readAsDataURL(file);
-                }else{
-                    Toast.fire({
-                        type: 'error',
-                        title: 'Vui lòng tải ảnh dưới 2MB'
-                    });
-                }
-                
-            },
-            sanitizeTitle: function(title) {
-                var slug = "";
-                // Change to lower case
-                var titleLower = title.toLowerCase();
-                // Letter "e"
-                slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
-                // Letter "a"
-                slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
-                // Letter "o"
-                slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
-                // Letter "u"
-                slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
-                // Letter "d"
-                slug = slug.replace(/đ/gi, 'd');
-                // Trim the last whitespace
-                slug = slug.replace(/\s*$/g, '');
-                // Change whitespace to "-"
-                slug = slug.replace(/\s+/g, '-');
-                
-                return slug;
-            },
-            convertSlug (){
-                this.form.slug = this.sanitizeTitle(this.form.title);
-            },
-            searchit: _.debounce( () => {
-                Fire.$emit('Searching');
-            }, 500),
-        },
-        computed:{
-            getPostPhoto(){
-                return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/post/"+this.form.photo ;
-            },
-        },
-        created() {
-            this.loadData();
-
-            Fire.$on('Searching', () => {
-                let query = this.search;
-                if(query){
-                    this.$Progress.start();
-                    axios.get('../api/blog/find?q='+query)
-                    .then( (data) => {
-                        this.posts = data.data;
-                        this.$Progress.finish();
-                    })
-                    .catch( () =>{
-                        this.$Progress.fail();
-                    });
-                }else{
-                    this.loadData();
-                }
-            });
-
-            Fire.$on('AfterCreate',() => {
+            }else{
                 this.loadData();
-            });
-        }
+            }
+        });
+
+        Fire.$on('AfterCreate',() => {
+            this.loadData();
+        });
     }
+}
 </script>
 
 <style>

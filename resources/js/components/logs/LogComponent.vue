@@ -29,7 +29,7 @@
                 </div>
                 <div class="row" v-if="!isLoading">
                     <div class="col-12">
-                        <iframe class="log-iframe embed-responsive-item" src="http://hrmis.local/log-viewer" allowfullscreen></iframe>
+                        <iframe class="log-iframe embed-responsive-item" src="/log-viewer" allowfullscreen></iframe>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

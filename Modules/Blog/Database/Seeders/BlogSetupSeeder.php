@@ -47,10 +47,10 @@ class BlogSetupSeeder extends Seeder
 
         for($i=0; $i<20; $i++){
             $post = Post::create([
-                'title'         => 'Bài viết '.($i+1),
-                'slug'          => 'bai-viet-'.($i+1),
+                'title'         => 'Bài viết dữ liệu mẫu '.($i+1),
+                'slug'          => 'bai-viet-du-lieu-mau-'.($i+1),
                 'photo'         => 'post-image-default.jpg',
-                'body'          => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet. Perspiciatis, a.',
+                'body'          => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.',
                 'publish'       => 'publish',
                 'counter'        => 0,
                 'user_id'       => 1,
