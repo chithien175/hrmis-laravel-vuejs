@@ -39,7 +39,7 @@ class KaTiCMS extends Command
      */
     public function handle()
     {
-        $this->call('migrate', [
+        $this->call('migrate:fresh', [
             '--force' => 'force',
         ]);
         $this->call('module:migrate', [

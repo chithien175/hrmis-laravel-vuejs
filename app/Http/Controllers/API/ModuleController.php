@@ -24,7 +24,7 @@ class ModuleController extends Controller
             $permission = Permission::create([
                 'name'          => 'manage-blog',
                 'display_name'  => 'Manage Blog',
-                'description'   => 'Quản lý blog',
+                'description'   => 'Quản lý chức năng bài viết',
             ]);
             foreach( Role::all() as $role ){
                 $role->attachPermission($permission);

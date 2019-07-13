@@ -3,12 +3,14 @@
 return [
     'role_structure'        => [
         'superadmin'        => [
+            'dashboard'     => 'm',
             'blog'          => 'm',
             'company'       => 'm',
             'logs'          => 'm',
             'media'         => 'm'
         ],
         'admin'             => [
+            'dashboard'     => 'm',
             'blog'          => 'm',
             'company'       => 'm',
             'media'         => 'm'

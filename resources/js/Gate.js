@@ -13,6 +13,10 @@ export default class Gate{
         return this.user.roles[0].name === 'admin';
     }
 
+    isManageDashboard(){
+        return this.user.can['manage-dashboard'];
+    }
+
     isManageBlog(){
         return this.user.can['manage-blog'];
     }

@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>KATICMS - Hệ thống quản lý nội dung</title>
+	<title>KATICMS - Hệ thống quản trị nội dung</title>
 
 	<link rel="stylesheet" href="/css/app.css">
 </head>
@@ -202,7 +202,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
 		<!-- To the right -->
 		<div class="float-right d-none d-sm-inline">
-			Hệ thống quản lý nội dung (bản thử nghiệm).
+			Hệ thống quản trị nội dung (bản thử nghiệm).
 		</div>
 		<!-- Default to the left -->
 		&copy; 2019 Bản quyền thuộc <strong>KaTiSoft</strong>.
