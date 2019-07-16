@@ -84,7 +84,7 @@
 
         <!-- Category Modal -->
         <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title blue" id="categoryModalLabel">{{ editmode ? 'Chỉnh sửa chuyên mục' : 'Thêm mới chuyên mục' }}</h5>
@@ -95,23 +95,20 @@
                     <form @submit.prevent="editmode ? updateCategory() : createCategory()" @keydown="form.onKeydown($event)">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="inputName" class="control-label">Tên</label>
                                         <input v-model="form.name" type="text" name="name"
-                                            placeholder="Tên riêng sẽ hiển thị trên trang mạng của bạn." @change="convertSlug"
+                                            placeholder="Tên chuyên mục"
+                                            @change="convertSlug"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
                                         <has-error :form="form" field="name"></has-error>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputSlug" class="control-label">Chuỗi cho đường dẫn tĩnh</label>
                                         <input v-model="form.slug" type="text" name="slug"
-                                            placeholder="Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-)."
+                                            placeholder="Chuỗi cho đường dẫn tĩnh"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('slug') }">
                                         <has-error :form="form" field="slug"></has-error>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="inputParentId" class="control-label">Chuyên mục hiện tại</label>
                                         <select name="parent_id" id="parent_id" v-model="form.parent_id" class="form-control" :class="{ 'is-invalid' : form.errors.has('publish') }">

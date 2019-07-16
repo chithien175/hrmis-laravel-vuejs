@@ -104,14 +104,13 @@
                                     <div class="form-group">
                                         <label for="inputTitle" class="control-label">Tiêu đề</label>
                                         <input v-model="form.title" type="text" name="title"
-                                            placeholder="Tên riêng sẽ hiển thị trên trang mạng của bạn." @change="convertSlug"
+                                            @change="convertSlug"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
                                         <has-error :form="form" field="title"></has-error>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputSlug" class="control-label">Chuỗi cho đường dẫn tĩnh</label>
                                         <input v-model="form.slug" type="text" name="slug"
-                                            placeholder="Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-)."
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('slug') }">
                                         <has-error :form="form" field="slug"></has-error>
                                     </div>
@@ -379,7 +378,7 @@ export default {
         border-radius: 0.3rem;
     }
     #postModal .cate-list{
-        height: 125px;
+        height: 80px;
         overflow-y: scroll;
         overflow-x: hidden;
     }

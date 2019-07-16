@@ -1899,9 +1899,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
@@ -2091,7 +2088,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-editor */ "./node_modules/vue2-editor/dist/vue2-editor.esm.js");
-//
 //
 //
 //
@@ -10404,7 +10400,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#postModal .cate-list{\n    height: 125px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.post-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#postModal .cate-list{\n    height: 80px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
 
 // exports
 
@@ -75543,7 +75539,7 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "modal-dialog modal-dialog-centered modal-xl",
+                  staticClass: "modal-dialog modal-dialog-centered",
                   attrs: { role: "document" }
                 },
                 [
@@ -75587,20 +75583,11 @@ var render = function() {
                       [
                         _c("div", { staticClass: "modal-body" }, [
                           _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-9" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
                               _c(
                                 "div",
                                 { staticClass: "form-group" },
                                 [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "control-label",
-                                      attrs: { for: "inputName" }
-                                    },
-                                    [_vm._v("Tên")]
-                                  ),
-                                  _vm._v(" "),
                                   _c("input", {
                                     directives: [
                                       {
@@ -75617,8 +75604,7 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       name: "name",
-                                      placeholder:
-                                        "Tên riêng sẽ hiển thị trên trang mạng của bạn."
+                                      placeholder: "Tên chuyên mục"
                                     },
                                     domProps: { value: _vm.form.name },
                                     on: {
@@ -75647,15 +75633,6 @@ var render = function() {
                                 "div",
                                 { staticClass: "form-group" },
                                 [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "control-label",
-                                      attrs: { for: "inputSlug" }
-                                    },
-                                    [_vm._v("Chuỗi cho đường dẫn tĩnh")]
-                                  ),
-                                  _vm._v(" "),
                                   _c("input", {
                                     directives: [
                                       {
@@ -75672,8 +75649,7 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       name: "slug",
-                                      placeholder:
-                                        "Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-)."
+                                      placeholder: "Chuỗi cho đường dẫn tĩnh"
                                     },
                                     domProps: { value: _vm.form.slug },
                                     on: {
@@ -75695,10 +75671,8 @@ var render = function() {
                                   })
                                 ],
                                 1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
+                              ),
+                              _vm._v(" "),
                               _c(
                                 "div",
                                 { staticClass: "form-group" },
@@ -76228,12 +76202,7 @@ var render = function() {
                                     class: {
                                       "is-invalid": _vm.form.errors.has("title")
                                     },
-                                    attrs: {
-                                      type: "text",
-                                      name: "title",
-                                      placeholder:
-                                        "Tên riêng sẽ hiển thị trên trang mạng của bạn."
-                                    },
+                                    attrs: { type: "text", name: "title" },
                                     domProps: { value: _vm.form.title },
                                     on: {
                                       change: _vm.convertSlug,
@@ -76283,12 +76252,7 @@ var render = function() {
                                     class: {
                                       "is-invalid": _vm.form.errors.has("slug")
                                     },
-                                    attrs: {
-                                      type: "text",
-                                      name: "slug",
-                                      placeholder:
-                                        "Chuỗi cho đường dẫn tĩnh là phiên bản của tên hợp chuẩn với Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-)."
-                                    },
+                                    attrs: { type: "text", name: "slug" },
                                     domProps: { value: _vm.form.slug },
                                     on: {
                                       input: function($event) {
