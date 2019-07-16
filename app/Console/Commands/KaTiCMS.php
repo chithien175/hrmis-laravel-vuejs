@@ -45,6 +45,9 @@ class KaTiCMS extends Command
         $this->call('module:migrate', [
             'module' => 'Blog',
         ]);
+        $this->call('module:migrate', [
+            'module' => 'Menu',
+        ]);
 /**--------------- running seeders -----------------**/
         $this->call('db:seed', [
             '--force' => 'force',
