@@ -33,14 +33,24 @@ class BlogSetupSeeder extends Seeder
         // Create a new category
         $this->command->info('Creating Category');
 
-        for($i=0; $i<10; $i++){
-            $category = Category::create([
-                'name'          => 'Danh mục '.($i+1),
-                'slug'          => 'danh-muc-'.($i+1),
-                'parent_id'     => 0,
-                'created_at'    => Carbon::now()
-            ]);
-        }
+        $category = Category::create([
+            'name'          => 'Chưa phân loại',
+            'slug'          => 'chua-phan-loai',
+            'parent_id'     => 0,
+            'created_at'    => Carbon::now()
+        ]);
+        $category = Category::create([
+            'name'          => 'Thời sự',
+            'slug'          => 'thoi-su',
+            'parent_id'     => 0,
+            'created_at'    => Carbon::now()
+        ]);
+        $category = Category::create([
+            'name'          => 'Thể thao',
+            'slug'          => 'the-thao',
+            'parent_id'     => 0,
+            'created_at'    => Carbon::now()
+        ]);
 
         // Create a new post
         $this->command->info('Creating Post');
@@ -56,7 +66,7 @@ class BlogSetupSeeder extends Seeder
                 'user_id'       => 1,
                 'created_at'    => Carbon::now()
             ]);
-            $post->categories()->attach( rand(1, 10) );
+            $post->categories()->attach( ['1' ,'2', '3'] );
         }
     }
 }

@@ -1910,6 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editmode: false,
       categories: {},
+      should_show_categories: [],
       form: new Form({
         id: '',
         name: '',
@@ -1936,13 +1937,17 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = true;
       this.form.reset();
       this.form.clear();
-      $('#categoryModal').modal('show');
       this.form.fill(category);
+      this.should_show_categories = [];
+      this.shouldShowCategories(category.id);
+      $('#categoryModal').modal('show');
     },
     newModal: function newModal() {
       this.editmode = false;
       this.form.reset();
       this.form.clear();
+      this.should_show_categories = [];
+      this.shouldShowCategories();
       $('#categoryModal').modal('show');
     },
     createCategory: function createCategory() {
@@ -2034,7 +2039,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
-    }, 500)
+    }, 500),
+    shouldShowCategories: function shouldShowCategories(cate_id) {
+      for (var i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].parent_id == 0 && this.categories[i].id != cate_id) {
+          this.should_show_categories.push({
+            id: this.categories[i].id,
+            name: this.categories[i].name
+          });
+        }
+      }
+    }
   },
   computed: {},
   created: function created() {
@@ -2236,6 +2251,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
@@ -2244,6 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editmode: false,
       posts: {},
+      categories: {},
       form: new Form({
         id: '',
         title: '',
@@ -2252,7 +2271,8 @@ __webpack_require__.r(__webpack_exports__);
         body: '',
         publish: 'publish',
         counter: 0,
-        user_id: ''
+        user_id: '',
+        checked_categories: []
       }),
       search: '',
       isLoading: true
@@ -2266,7 +2286,11 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('../api/blog/post').then(function (_ref) {
         var data = _ref.data;
         _this.posts = data;
-        _this.isLoading = false;
+        axios.get('../api/blog/category/list').then(function (_ref2) {
+          var data = _ref2.data;
+          _this.categories = data;
+          _this.isLoading = false;
+        });
       });
       this.$Progress.finish();
     },
@@ -2274,13 +2298,41 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = true;
       this.form.reset();
       this.form.clear();
-      $('#postModal').modal('show');
       this.form.fill(post);
+      this.form.checked_categories = [];
+
+      for (var i = 0; i < this.categories.length; i++) {
+        // console.log(_.findIndex(post.categories, this.categories[i]) >= 0);
+        if (_.findIndex(post.categories, this.categories[i]) >= 0) {
+          this.form.checked_categories.push({
+            id: this.categories[i].id,
+            name: this.categories[i].name,
+            checked: true
+          });
+        } else {
+          this.form.checked_categories.push({
+            id: this.categories[i].id,
+            name: this.categories[i].name,
+            checked: false
+          });
+        }
+      }
+
+      $('#postModal').modal('show');
     },
     newModal: function newModal() {
       this.editmode = false;
       this.form.reset();
       this.form.clear();
+
+      for (var i = 0; i < this.categories.length; i++) {
+        this.form.checked_categories.push({
+          id: this.categories[i].id,
+          name: this.categories[i].name,
+          checked: false
+        });
+      }
+
       $('#postModal').modal('show');
     },
     createPost: function createPost() {
@@ -10352,7 +10404,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n", ""]);
+exports.push([module.i, "\n.post-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#postModal .cate-list{\n    height: 125px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
 
 // exports
 
@@ -75434,6 +75486,14 @@ var render = function() {
                                       _c(
                                         "button",
                                         {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: category.id != 1,
+                                              expression: "category.id != 1"
+                                            }
+                                          ],
                                           staticClass: "btn btn-sm btn-danger",
                                           on: {
                                             click: function($event) {
@@ -75704,18 +75764,27 @@ var render = function() {
                                         _vm._v("Trống")
                                       ]),
                                       _vm._v(" "),
-                                      _vm._l(_vm.categories, function(
-                                        category
-                                      ) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: category.id,
-                                            domProps: { value: category.id }
-                                          },
-                                          [_vm._v(_vm._s(category.name))]
-                                        )
-                                      })
+                                      _vm._l(
+                                        _vm.should_show_categories,
+                                        function(should_show_category) {
+                                          return _c(
+                                            "option",
+                                            {
+                                              key: should_show_category.id,
+                                              domProps: {
+                                                value: should_show_category.id
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  should_show_category.name
+                                                )
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      )
                                     ],
                                     2
                                   ),
@@ -76352,6 +76421,47 @@ var render = function() {
                                 ],
                                 1
                               ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputCategory" }
+                                  },
+                                  [_vm._v("Chuyên mục")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "cate-list form-control" },
+                                  _vm._l(_vm.form.checked_categories, function(
+                                    category
+                                  ) {
+                                    return _c(
+                                      "p-check",
+                                      {
+                                        key: category.id,
+                                        staticClass:
+                                          "p-default p-curve p-thick col-12 m-0 p-0",
+                                        attrs: {
+                                          type: "checkbox",
+                                          color: "primary-o"
+                                        },
+                                        model: {
+                                          value: category.checked,
+                                          callback: function($$v) {
+                                            _vm.$set(category, "checked", $$v)
+                                          },
+                                          expression: "category.checked"
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(category.name))]
+                                    )
+                                  }),
+                                  1
+                                )
+                              ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c(

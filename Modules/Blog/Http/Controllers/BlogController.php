@@ -23,6 +23,8 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+        // return ['data' => $request['checked_categories'] ];
+
         $request->validate([
             'title'     => 'required|string|max:255',
             'slug'      => 'required|string|max:255|unique:posts',
@@ -48,6 +50,12 @@ class BlogController extends Controller
             'counter'   => $request['counter'],
             'user_id'   => Auth::user()->id
         ]);
+
+        foreach($request['checked_categories'] as $key => $category){
+            if($category['checked'] == true){
+                $post->categories()->attach($category['id']);
+            }
+        }
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo bài viết #' . $post->id . ' '. $post->title . '.');
         return ['message' => 'Tạo bài viết thành công'];
@@ -78,7 +86,14 @@ class BlogController extends Controller
             }
         }
 
-        $post->update($request->all());
+        if($post->update($request->all())){
+            $post->categories()->detach();
+            foreach($request['checked_categories'] as $key => $category){
+                if($category['checked'] == true){
+                    $post->categories()->attach($category['id']);
+                }
+            }
+        }
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa bài viết #' . $post->id . ' ' . $post->title);
         return ['message' => 'Đã chỉnh sửa bài viết thành công'];
@@ -157,7 +172,9 @@ class BlogController extends Controller
         $category_id = $category->id;
         $category_name = $category->name;
 
-        $category->delete();
+        if($id != 1){
+            $category->delete();
+        }
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa chuyên mục #' . $category_id . ' '. $category_name . '.');
         return ['message' => 'Đã xóa chuyên mục'];
@@ -171,5 +188,10 @@ class BlogController extends Controller
         }
 
         return $categories;
+    }
+
+    public function cateList()
+    {
+        return Category::all();
     }
 }

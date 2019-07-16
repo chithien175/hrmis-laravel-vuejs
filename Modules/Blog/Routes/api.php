@@ -31,4 +31,5 @@ Route::prefix('blog')->group(function() {
     Route::put('/category/{id}', 'BlogController@cateUpdate');
     Route::delete('/category/{id}', 'BlogController@cateDestroy');
     Route::get('/category/find', 'BlogController@cateSearch');    
+    Route::get('/category/list', 'BlogController@cateList');  
 });

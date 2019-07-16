@@ -117,10 +117,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBody" class="control-label">Nội dung</label>
-
-                                        <!-- <ckeditor :editor="editor" v-model="form.body" :config="editorConfig" class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"></ckeditor> -->
                                         <vue-editor v-model="form.body"></vue-editor>
-
                                         <has-error :form="form" field="body"></has-error>
                                     </div>
                                 </div>
@@ -132,6 +129,12 @@
                                             <option value="draft">Bản nháp</option>
                                         </select>
                                         <has-error :form="form" field="publish"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputCategory" class="control-label">Chuyên mục</label>
+                                        <div class="cate-list form-control">
+                                            <p-check v-for="category in form.checked_categories" :key="category.id" class="p-default p-curve p-thick col-12 m-0 p-0" type="checkbox" color="primary-o" v-model="category.checked">{{ category.name }}</p-check>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
@@ -168,8 +171,9 @@ export default {
         return {
             editmode: false,
             posts: {},
+            categories: {},
             form: new Form({
-                id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: ''
+                id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: '', checked_categories: []
             }),
             search: '',
             isLoading: true,
@@ -180,7 +184,10 @@ export default {
             this.$Progress.start();
             axios.get('../api/blog/post').then(({ data }) => { 
                 this.posts = data;
-                this.isLoading = false; 
+                axios.get('../api/blog/category/list').then(({ data }) => { 
+                    this.categories = data; 
+                    this.isLoading = false; 
+                });
             });
             this.$Progress.finish();
         },
@@ -188,13 +195,41 @@ export default {
             this.editmode = true;
             this.form.reset();
             this.form.clear();
-            $('#postModal').modal('show');
             this.form.fill(post);
+
+            this.form.checked_categories = [];
+                
+            for(let i=0; i<this.categories.length; i++){
+                // console.log(_.findIndex(post.categories, this.categories[i]) >= 0);
+                if(_.findIndex(post.categories, this.categories[i]) >= 0){
+                    this.form.checked_categories.push({
+                        id: this.categories[i].id,
+                        name: this.categories[i].name,
+                        checked: true
+                    });
+                }else{
+                    this.form.checked_categories.push({
+                        id: this.categories[i].id,
+                        name: this.categories[i].name,
+                        checked: false
+                    });
+                }
+            }
+            $('#postModal').modal('show');
         },
         newModal () {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
+
+            for(let i=0; i<this.categories.length; i++){
+                this.form.checked_categories.push({
+                    id: this.categories[i].id,
+                    name: this.categories[i].name,
+                    checked: false
+                });
+            }
+
             $('#postModal').modal('show');
         },
         createPost () {
@@ -342,5 +377,10 @@ export default {
         width: 100%;
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-radius: 0.3rem;
+    }
+    #postModal .cate-list{
+        height: 125px;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 </style>

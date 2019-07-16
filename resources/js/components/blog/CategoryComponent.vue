@@ -65,7 +65,7 @@
                                                 <button class="btn btn-sm btn-primary" @click="editModal(category)">
                                                     <i class="fa fa-edit fa-fw"></i> Sửa
                                                 </button>
-                                                <button class="btn btn-sm btn-danger" @click="deleteCategory(category.id)">
+                                                <button class="btn btn-sm btn-danger" v-show="category.id != 1" @click="deleteCategory(category.id)">
                                                     <i class="fa fa-trash fa-fw"></i> Xóa
                                                 </button>
                                             </td>
@@ -116,7 +116,7 @@
                                         <label for="inputParentId" class="control-label">Chuyên mục hiện tại</label>
                                         <select name="parent_id" id="parent_id" v-model="form.parent_id" class="form-control" :class="{ 'is-invalid' : form.errors.has('publish') }">
                                             <option value="0">Trống</option>
-                                            <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.name }}</option>
+                                            <option :value="should_show_category.id" v-for="should_show_category in should_show_categories" :key="should_show_category.id">{{ should_show_category.name }}</option>
                                         </select>
                                         <has-error :form="form" field="parent_id"></has-error>
                                     </div>
@@ -150,6 +150,7 @@ export default {
         return {
             editmode: false,
             categories: {},
+            should_show_categories:[],
             form: new Form({
                 id: '', name: '', slug: '', parent_id: 0,
             }),
@@ -170,13 +171,17 @@ export default {
             this.editmode = true;
             this.form.reset();
             this.form.clear();
-            $('#categoryModal').modal('show');
             this.form.fill(category);
+            this.should_show_categories = [];
+            this.shouldShowCategories(category.id);
+            $('#categoryModal').modal('show');
         },
         newModal () {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
+            this.should_show_categories = [];
+            this.shouldShowCategories();
             $('#categoryModal').modal('show');
         },
         createCategory () {
@@ -270,8 +275,19 @@ export default {
         searchit: _.debounce( () => {
             Fire.$emit('Searching');
         }, 500),
+        shouldShowCategories (cate_id){
+            for(let i=0; i<this.categories.length; i++){
+                if(this.categories[i].parent_id == 0 && this.categories[i].id != cate_id){
+                   this.should_show_categories.push({
+                        id: this.categories[i].id,
+                        name: this.categories[i].name,
+                    }); 
+                }
+            }
+        }
     },
     computed:{
+        
     },
     created() {
         this.loadData();
