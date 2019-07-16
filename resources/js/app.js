@@ -124,6 +124,12 @@ Vue.use(PrettyCheckbox);
 import { VclFacebook } from 'vue-content-loading';
 Vue.component('vcl-facebook', VclFacebook);
 
+/**
+ * Vue Content Loading
+ * https://github.com/gilbitron/laravel-vue-pagination
+ */
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

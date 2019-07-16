@@ -16,9 +16,9 @@ class BlogController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return Post::with('categories')->get();
+        return Post::with('categories')->orderBy('id','desc')->paginate($request['per_page']);
     }
 
     public function store(Request $request)
@@ -121,10 +121,11 @@ class BlogController extends Controller
     {
         if($search = \Request::get('q')){
             $posts = Post::with('categories')->where('title', 'like', "%$search%")
-                        ->get();
+                        ->paginate(50);
         }
 
         return $posts;
+
     }
 
     // CATEGORY

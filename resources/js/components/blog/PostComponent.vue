@@ -57,7 +57,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="post in posts" :key="post.id">
+                                        <tr v-for="post in posts.data" :key="post.id">
                                             <td>{{ post.id }}</td>
                                             <td>{{ post.title }}</td>
                                             <td>{{ post.slug }}</td>
@@ -79,6 +79,9 @@
                                 </table>
                             </div>
                             <!-- /.card-body -->
+                            <div class="card-footer">
+                                <pagination :data="posts" @pagination-change-page="loadData"></pagination>
+                            </div>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -164,7 +167,9 @@
 import { VueEditor } from "vue2-editor";
 export default {
     mounted() {
-        // console.log('Component mounted.')
+        axios.get('../api/blog/category/list').then(({ data }) => { 
+            this.categories = data;
+        });
     },
     data() {
         return {
@@ -179,14 +184,11 @@ export default {
         }
     },
     methods: {
-        loadData () {
+        loadData (page = 1) {
             this.$Progress.start();
-            axios.get('../api/blog/post').then(({ data }) => { 
+            axios.get('../api/blog/post?page=' + page + '&per_page=10').then(({ data }) => { 
                 this.posts = data;
-                axios.get('../api/blog/category/list').then(({ data }) => { 
-                    this.categories = data; 
-                    this.isLoading = false; 
-                });
+                this.isLoading = false;
             });
             this.$Progress.finish();
         },
