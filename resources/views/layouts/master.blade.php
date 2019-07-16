@@ -101,6 +101,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								<p>Bài viết</p>
 							</router-link>
 						</li>
+						<li class="nav-item">
+							<router-link to="/admin/category" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Chuyên mục</p>
+							</router-link>
+						</li>
 						@endif
 					</ul>
 				</li>

@@ -18,9 +18,17 @@ Route::middleware('auth:api')->get('/blog', function (Request $request) {
 });
 
 Route::prefix('blog')->group(function() {
-    Route::get('/', 'BlogController@index');
-    Route::post('/', 'BlogController@store');
-    Route::put('/{id}', 'BlogController@update');
-    Route::delete('/{id}', 'BlogController@destroy');
-    Route::get('/find', 'BlogController@search');    
+    // POST
+    Route::get('/post', 'BlogController@index');
+    Route::post('/post', 'BlogController@store');
+    Route::put('/post/{id}', 'BlogController@update');
+    Route::delete('/post/{id}', 'BlogController@destroy');
+    Route::get('/post/find', 'BlogController@search');    
+
+    // CATEGORY
+    Route::get('/category', 'BlogController@cateIndex');
+    Route::post('/category', 'BlogController@cateStore');
+    Route::put('/category/{id}', 'BlogController@cateUpdate');
+    Route::delete('/category/{id}', 'BlogController@cateDestroy');
+    Route::get('/category/find', 'BlogController@cateSearch');    
 });

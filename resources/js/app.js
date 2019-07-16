@@ -18,6 +18,7 @@ const routes = [
     { path: '/home', redirect: '/admin/dashboard' },
     { path: '/admin/dashboard', component: require('./components/dashboard/DashboardComponent.vue').default },
     { path: '/admin/post', component: require('./components/blog/PostComponent.vue').default },
+    { path: '/admin/category', component: require('./components/blog/CategoryComponent.vue').default },
     { path: '/admin/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/admin/role', component: require('./components/role/RoleComponent.vue').default },
     { path: '/admin/mediafile', component: require('./components/media/MediaComponent.vue').default },

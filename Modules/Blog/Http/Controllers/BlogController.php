@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Modules\Blog\Entities\Post;
+use Modules\Blog\Entities\Category;
 
 class BlogController extends Controller
 {
@@ -109,5 +110,66 @@ class BlogController extends Controller
         }
 
         return $posts;
+    }
+
+    // CATEGORY
+    public function cateIndex()
+    {
+        return Category::get();
+    }
+
+    public function cateStore(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'slug'      => 'required|string|max:255|unique:categories'
+        ]);
+
+        $category = Category::create([
+            'name'     => $request['name'],
+            'slug'      => $request['slug'],
+            'parent_id'   => $request['parent_id'],
+        ]);
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo chuyên mục #' . $category->id . ' '. $category->name . '.');
+        return ['message' => 'Tạo chuyên mục thành công'];
+    }
+
+    public function cateUpdate(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'slug'      => 'required|string|max:255|unique:categories,slug,'.$category->id,
+        ]);
+
+        $category->update($request->all());
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa chuyên mục #' . $category->id . ' ' . $category->name);
+        return ['message' => 'Đã chỉnh sửa chuyên mục thành công'];
+    }
+
+    public function cateDestroy($id)
+    {
+        $category = Category::findOrFail($id);
+
+        $category_id = $category->id;
+        $category_name = $category->name;
+
+        $category->delete();
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa chuyên mục #' . $category_id . ' '. $category_name . '.');
+        return ['message' => 'Đã xóa chuyên mục'];
+    }
+
+    public function cateSearch()
+    {
+        if($search = \Request::get('q')){
+            $categories = Category::where('name', 'like', "%$search%")
+                        ->get();
+        }
+
+        return $categories;
     }
 }

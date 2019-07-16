@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <h5 class="m-0 blue"><i class="fas fa-file-alt"></i> Bài viết</h5>
+                        <h5 class="m-0 blue"><i class="fas fa-folder-open"></i> Chuyên mục</h5>
                     </div><!-- /.col -->
                     <div class="col-md-6">
                         <ol class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                            <li class="breadcrumb-item active">Bài viết</li>
+                            <li class="breadcrumb-item active">Chuyên mục</li>
                         </ol>
                     </div>
                 </div><!-- /.row -->
@@ -49,28 +49,23 @@
                                     <thead>
                                         <tr class="blue font-weight-bold">
                                             <th>ID</th>
-                                            <th>Tiêu đề</th>
+                                            <th>Tên</th>
                                             <th>Đường dẫn tĩnh</th>
                                             <th>Ngày tạo</th>
-                                            <th>Trạng thái</th>
                                             <th>Tác vụ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="post in posts" :key="post.id">
-                                            <td>{{ post.id }}</td>
-                                            <td>{{ post.title }}</td>
-                                            <td>{{ post.slug }}</td>
-                                            <td><span class="badge bg-info">{{ post.created_at | formatDateTime }}</span></td>
+                                        <tr v-for="category in categories" :key="category.id">
+                                            <td>{{ category.id }}</td>
+                                            <td>{{ category.name }}</td>
+                                            <td>{{ category.slug }}</td>
+                                            <td><span class="badge bg-info">{{ category.created_at | formatDateTime }}</span></td>
                                             <td>
-                                                <span v-if="post.publish == 'publish'" class="badge badge-success">Xuất bản</span>
-                                                <span v-else class="badge badge-danger">Bản nháp</span>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary" @click="editModal(post)">
+                                                <button class="btn btn-sm btn-primary" @click="editModal(category)">
                                                     <i class="fa fa-edit fa-fw"></i> Sửa
                                                 </button>
-                                                <button class="btn btn-sm btn-danger" @click="deletePost(post.id)">
+                                                <button class="btn btn-sm btn-danger" @click="deleteCategory(category.id)">
                                                     <i class="fa fa-trash fa-fw"></i> Xóa
                                                 </button>
                                             </td>
@@ -87,26 +82,26 @@
         </div>
         <!-- /.content -->
 
-        <!-- Post Modal -->
-        <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
+        <!-- Category Modal -->
+        <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title blue" id="postModalLabel">{{ editmode ? 'Chỉnh sửa bài viết' : 'Thêm mới bài viết' }}</h5>
+                        <h5 class="modal-title blue" id="categoryModalLabel">{{ editmode ? 'Chỉnh sửa chuyên mục' : 'Thêm mới chuyên mục' }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editmode ? updatePost() : createPost()" @keydown="form.onKeydown($event)">
+                    <form @submit.prevent="editmode ? updateCategory() : createCategory()" @keydown="form.onKeydown($event)">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <label for="inputTitle" class="control-label">Tiêu đề</label>
-                                        <input v-model="form.title" type="text" name="title"
+                                        <label for="inputName" class="control-label">Tên</label>
+                                        <input v-model="form.name" type="text" name="name"
                                             placeholder="Tên riêng sẽ hiển thị trên trang mạng của bạn." @change="convertSlug"
-                                            class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
-                                        <has-error :form="form" field="title"></has-error>
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                        <has-error :form="form" field="name"></has-error>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputSlug" class="control-label">Chuỗi cho đường dẫn tĩnh</label>
@@ -115,28 +110,15 @@
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('slug') }">
                                         <has-error :form="form" field="slug"></has-error>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputBody" class="control-label">Nội dung</label>
-
-                                        <!-- <ckeditor :editor="editor" v-model="form.body" :config="editorConfig" class="form-control" :class="{ 'is-invalid': form.errors.has('body') }"></ckeditor> -->
-                                        <vue-editor v-model="form.body"></vue-editor>
-
-                                        <has-error :form="form" field="body"></has-error>
-                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="inputPublish" class="control-label">Trạng thái</label>
-                                        <select name="publish" id="publish" v-model="form.publish" class="form-control" :class="{ 'is-invalid' : form.errors.has('publish') }">
-                                            <option value="publish">Xuất bản</option>
-                                            <option value="draft">Bản nháp</option>
+                                        <label for="inputParentId" class="control-label">Chuyên mục hiện tại</label>
+                                        <select name="parent_id" id="parent_id" v-model="form.parent_id" class="form-control" :class="{ 'is-invalid' : form.errors.has('publish') }">
+                                            <option value="0">Trống</option>
+                                            <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.name }}</option>
                                         </select>
-                                        <has-error :form="form" field="publish"></has-error>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
-                                        <img class="img-fluid post-photo" :src="getPostPhoto" alt="Post picture">
-                                        <input class="form-control" type="file" id="inputPhoto" @change="changePhoto">
+                                        <has-error :form="form" field="parent_id"></has-error>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <!-- /. Post Modal -->
+        <!-- /. Category Modal -->
     </div>
     <div v-if="!$gate.isManageBlog() || !$gate.isBlogModule()">
         <not-found></not-found>
@@ -167,9 +149,9 @@ export default {
     data() {
         return {
             editmode: false,
-            posts: {},
+            categories: {},
             form: new Form({
-                id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: ''
+                id: '', name: '', slug: '', parent_id: 0,
             }),
             search: '',
             isLoading: true,
@@ -178,34 +160,34 @@ export default {
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('../api/blog/post').then(({ data }) => { 
-                this.posts = data;
+            axios.get('../api/blog/category').then(({ data }) => { 
+                this.categories = data;
                 this.isLoading = false; 
             });
             this.$Progress.finish();
         },
-        editModal (post) {
+        editModal (category) {
             this.editmode = true;
             this.form.reset();
             this.form.clear();
-            $('#postModal').modal('show');
-            this.form.fill(post);
+            $('#categoryModal').modal('show');
+            this.form.fill(category);
         },
         newModal () {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
-            $('#postModal').modal('show');
+            $('#categoryModal').modal('show');
         },
-        createPost () {
+        createCategory () {
             this.$Progress.start();
             this.form.slug = this.sanitizeTitle(this.form.slug);
-            this.form.post('../api/blog/post')
+            this.form.post('../api/blog/category')
             .then( () => {
-                $('#postModal').modal('hide');
+                $('#categoryModal').modal('hide');
                 Toast.fire({
                     type: 'success',
-                    title: 'Thêm bài viết thành công'
+                    title: 'Thêm chuyên mục thành công'
                 });
                 Fire.$emit('AfterCreate');
                 this.$Progress.finish();
@@ -214,15 +196,15 @@ export default {
                 this.$Progress.fail();
             }); 
         },
-        updatePost () {
+        updateCategory () {
             this.$Progress.start();
             this.form.slug = this.sanitizeTitle(this.form.slug);
-            this.form.put('../api/blog/post/'+this.form.id)
+            this.form.put('../api/blog/category/'+this.form.id)
             .then( () =>{
-                $('#postModal').modal('hide');
+                $('#categoryModal').modal('hide');
                 Toast.fire({
                     type: 'success',
-                    title: 'Chỉnh sửa bài viết thành công'
+                    title: 'Chỉnh sửa chuyên mục thành công'
                 });
                 Fire.$emit('AfterCreate');
                 this.$Progress.finish();
@@ -231,10 +213,10 @@ export default {
                 this.$Progress.fail();
             });
         },
-        deletePost (id) {
+        deleteCategory (id) {
             Swal.fire({
                 title: 'Bạn chắc chứ?',
-                text: "Bạn muốn xóa bài viết này?",
+                text: "Bạn muốn xóa chuyên mục này?",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -245,37 +227,21 @@ export default {
                     if(result.value){
                         // Send request to the server
                         this.$Progress.start();
-                        this.form.delete('../api/blog/post/'+id)
+                        this.form.delete('../api/blog/category/'+id)
                         .then( () => {
                             Swal.fire(
                                 'Xóa thành công!',
-                                'Bạn đã xóa bài viết thành công',
+                                'Bạn đã xóa chuyên mục thành công',
                                 'success'
                             );
                             Fire.$emit('AfterCreate');
                             this.$Progress.finish();
                         })
                         .catch( () => {
-                            Swal("Lỗi xóa bài viết!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            Swal("Lỗi xóa chuyên mục!", "Vui lòng liên hệ admin xử lý.", "warning");
                         });
                     }
             });
-        },
-        changePhoto (e) {
-            let file = e.target.files[0];
-            let reader = new FileReader();
-            if(file['size'] < 2111775){
-                reader.onloadend = (file) => {
-                    this.form.photo = reader.result;
-                }
-                reader.readAsDataURL(file);
-            }else{
-                Toast.fire({
-                    type: 'error',
-                    title: 'Vui lòng tải ảnh dưới 2MB'
-                });
-            }
-            
         },
         sanitizeTitle: function(title) {
             var slug = "";
@@ -299,16 +265,13 @@ export default {
             return slug;
         },
         convertSlug (){
-            this.form.slug = this.sanitizeTitle(this.form.title);
+            this.form.slug = this.sanitizeTitle(this.form.name);
         },
         searchit: _.debounce( () => {
             Fire.$emit('Searching');
         }, 500),
     },
     computed:{
-        getPostPhoto(){
-            return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/post/"+this.form.photo ;
-        },
     },
     created() {
         this.loadData();
@@ -317,9 +280,9 @@ export default {
             let query = this.search;
             if(query){
                 this.$Progress.start();
-                axios.get('../api/blog/post/find?q='+query)
+                axios.get('../api/blog/category/find?q='+query)
                 .then( (data) => {
-                    this.posts = data.data;
+                    this.categories = data.data;
                     this.$Progress.finish();
                 })
                 .catch( () =>{
@@ -338,9 +301,4 @@ export default {
 </script>
 
 <style>
-    .post-photo{
-        width: 100%;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 0.3rem;
-    }
 </style>
