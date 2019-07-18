@@ -22,6 +22,8 @@ class KaTiCMS extends Command
      */
     protected $description = 'This command runs all system and sub-system migrations';
 
+    protected $modules = ['Blog', 'Menu'];
+
     /**
      * Create a new command instance.
      *
@@ -42,18 +44,17 @@ class KaTiCMS extends Command
         $this->call('migrate:fresh', [
             '--force' => 'force',
         ]);
-        $this->call('module:migrate', [
-            'module' => 'Blog',
-        ]);
-        $this->call('module:migrate', [
-            'module' => 'Menu',
-        ]);
-/**--------------- running seeders -----------------**/
         $this->call('db:seed', [
             '--force' => 'force',
         ]);
-        $this->call('module:seed', [
-            'module' => 'Blog',
-        ]);
+
+        foreach($this->modules as $module){
+            $this->call('module:migrate', [
+                'module' => $module,
+            ]);
+            $this->call('module:seed', [
+                'module' => $module,
+            ]);
+        }
     }
 }

@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/menu', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('menu')->group(function() {
+    // MENU
+    Route::get('/', 'MenuController@index');
+});

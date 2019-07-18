@@ -13,6 +13,7 @@ export default class Gate{
         return this.user.roles[0].name === 'admin';
     }
 
+    // Manager
     isManageDashboard(){
         return this.user.can['manage-dashboard'];
     }
@@ -33,7 +34,15 @@ export default class Gate{
         return this.user.can['manage-media'];
     }
 
+    isManageMenu(){
+        return this.user.can['manage-menu'];
+    }
+
+    // Module
     isBlogModule(){
         return this.modules.blog === 1;
+    }
+    isMenuModule(){
+        return this.modules.menu === 1;
     }
 }

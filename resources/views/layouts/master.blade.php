@@ -22,7 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @php
 	$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
 	$modules = [
-		'blog' => Module::find('blog')->get('active')
+		'blog' => Module::find('blog')->get('active'),
+		'menu' => Module::find('menu')->get('active'),
 	];
 @endphp
 	@if($user_current->status == 'active')
@@ -105,6 +106,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<router-link to="/admin/category" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Chuyên mục</p>
+							</router-link>
+						</li>
+						@endif
+						@if($user_current->can('manage-menu') && $modules['menu'])
+						<li class="nav-item">
+							<router-link to="/admin/menu" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Trình đơn</p>
 							</router-link>
 						</li>
 						@endif

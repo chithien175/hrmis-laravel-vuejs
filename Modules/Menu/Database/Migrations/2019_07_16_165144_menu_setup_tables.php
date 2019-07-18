@@ -32,6 +32,8 @@ class MenuSetupTables extends Migration
             $table->string('color')->nullable();
             $table->integer('parent_id')->nullable();
             $table->integer('order');
+            $table->string('route')->nullable();
+            $table->text('parameters')->nullable();
             $table->timestamps();
         });
     }
