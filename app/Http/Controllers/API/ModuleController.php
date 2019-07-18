@@ -22,9 +22,9 @@ class ModuleController extends Controller
             $module = \Module::find($request['slug'])->enable();
 
             $permission = Permission::create([
-                'name'          => 'manage-blog',
-                'display_name'  => 'Manage Blog',
-                'description'   => 'Quản lý chức năng bài viết',
+                'name'          => 'manage-'.$request['slug'],
+                'display_name'  => 'Quản lý '.$request['name'],
+                'description'   => '',
             ]);
             foreach( Role::all() as $role ){
                 $role->attachPermission($permission);

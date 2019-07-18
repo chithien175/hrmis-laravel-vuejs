@@ -3193,6 +3193,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -3201,7 +3224,8 @@ __webpack_require__.r(__webpack_exports__);
       isLoading: true,
       modules: modules,
       images: {
-        blog: 'blog.png'
+        blog: 'blog.png',
+        menu: 'menu.png'
       },
       form: new Form({
         slug: '',
@@ -79470,6 +79494,68 @@ var render = function() {
                           _vm._m(1)
                         ]
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card card-widget widget-user widget-module"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "widget-user-header text-white",
+                              class: [{ active: _vm.modules.menu }],
+                              staticStyle: { height: "80px" }
+                            },
+                            [
+                              _c("p-input", {
+                                staticClass: "p-switch p-fill",
+                                attrs: { type: "checkbox", color: "success" },
+                                on: {
+                                  change: function($event) {
+                                    return _vm.toggleModule(
+                                      "menu",
+                                      "Trình đơn",
+                                      _vm.modules.menu
+                                    )
+                                  }
+                                },
+                                model: {
+                                  value: _vm.modules.menu,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.modules, "menu", $$v)
+                                  },
+                                  expression: "modules.menu"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "widget-user-image",
+                              staticStyle: { top: "25px" }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "img-circle",
+                                attrs: {
+                                  src: "../images/module/" + _vm.images.menu,
+                                  alt: "User Avatar"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(2)
+                        ]
+                      )
                     ])
                   ])
                 : _vm._e()
@@ -79505,6 +79591,24 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("h6", { staticClass: "description-text" }, [
             _vm._v("Quản lý bài viết, thể loại")
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
+          _c("h5", { staticClass: "description-header" }, [
+            _vm._v("Trình đơn - Menu")
+          ]),
+          _vm._v(" "),
+          _c("h6", { staticClass: "description-text" }, [
+            _vm._v("Quản lý trình đơn")
           ])
         ])
       ])

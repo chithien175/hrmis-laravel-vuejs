@@ -30,6 +30,7 @@
                             </div>
                         </div>
                         <div class="row" v-if="!isLoading">
+                            <!-- Blog Module -->
                             <div class="col-md-4">
                                 <div class="card card-widget widget-user widget-module">
                                     <div class="widget-user-header text-white"
@@ -46,6 +47,28 @@
                                             <div class="col-sm-12">
                                                 <h5 class="description-header">Bài viết - Blog</h5>
                                                 <h6 class="description-text">Quản lý bài viết, thể loại</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Menu Module -->
+                            <div class="col-md-4">
+                                <div class="card card-widget widget-user widget-module">
+                                    <div class="widget-user-header text-white"
+                                        style="height:80px;"
+                                        v-bind:class="[{ 'active': modules.menu }]"
+                                    >
+                                        <p-input class="p-switch p-fill" type="checkbox" color="success" v-model="modules.menu" @change="toggleModule('menu', 'Trình đơn', modules.menu)"></p-input>
+                                    </div>
+                                    <div class="widget-user-image" style="top:25px;">
+                                        <img class="img-circle" v-bind:src="'../images/module/' + images.menu" alt="User Avatar">
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 class="description-header">Trình đơn - Menu</h5>
+                                                <h6 class="description-text">Quản lý trình đơn</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +95,8 @@
                 isLoading: true,
                 modules: modules,
                 images: {
-                    blog: 'blog.png'
+                    blog: 'blog.png',
+                    menu: 'menu.png',
                 },
                 form: new Form({
                     slug: '', name: '', status: ''
