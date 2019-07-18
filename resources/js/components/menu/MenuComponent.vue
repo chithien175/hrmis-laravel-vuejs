@@ -88,6 +88,39 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
+
+        <!-- Menu Modal -->
+        <div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="menuModalLabel">{{ editmode ? 'Chỉnh sửa trình đơn' : 'Thêm mới trình đơn' }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="editmode ? updateMenu() : createMenu()" @keydown="form.onKeydown($event)">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input v-model="form.name" type="text" name="name"
+                                            placeholder="Tên trình đơn"
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                        <has-error :form="form" field="name"></has-error>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button :disabled="form.busy" type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Hủy</button>
+                            <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> {{ editmode ? 'Cập nhật' : 'Thêm mới' }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /. Menu Modal -->
     </div>
     <div v-if="!$gate.isManageMenu() || !$gate.isMenuModule()">
         <not-found></not-found>
@@ -103,6 +136,7 @@
         },
         data() {
             return {
+                editmode: false,
                 isLoading: true,
                 menus: {},
                 form: new Form({
@@ -119,6 +153,81 @@
                     this.isLoading = false; 
                 });
                 this.$Progress.finish();
+            },
+            editModal (menu) {
+                this.editmode = true;
+                this.form.reset();
+                this.form.clear();
+                this.form.fill(menu);
+                $('#menuModal').modal('show');
+            },
+            newModal () {
+                this.editmode = false;
+                this.form.reset();
+                this.form.clear();
+                $('#menuModal').modal('show');
+            },
+            createMenu () {
+                this.$Progress.start();
+                this.form.post('../api/menu')
+                .then( () => {
+                    $('#menuModal').modal('hide');
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Thêm trình đơn thành công'
+                    });
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch( () => {
+                    this.$Progress.fail();
+                }); 
+            },
+            updateMenu () {
+                this.$Progress.start();
+                this.form.put('../api/menu/'+this.form.id)
+                .then( () =>{
+                    $('#menuModal').modal('hide');
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Chỉnh sửa trình đơn thành công'
+                    });
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch( () =>{
+                    this.$Progress.fail();
+                });
+            },
+            deleteMenu (id) {
+                Swal.fire({
+                    title: 'Bạn chắc chứ?',
+                    text: "Bạn muốn xóa trình đơn này?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, xóa ngay!',
+                    cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if(result.value){
+                            // Send request to the server
+                            this.$Progress.start();
+                            this.form.delete('../api/menu/'+id)
+                            .then( () => {
+                                Swal.fire(
+                                    'Xóa thành công!',
+                                    'Bạn đã xóa trình thành công',
+                                    'success'
+                                );
+                                Fire.$emit('AfterCreate');
+                                this.$Progress.finish();
+                            })
+                            .catch( () => {
+                                Swal("Lỗi xóa trình!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            });
+                        }
+                });
             },
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');

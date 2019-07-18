@@ -3086,11 +3086,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
   data: function data() {
     return {
+      editmode: false,
       isLoading: true,
       menus: {},
       form: new Form({
@@ -3112,33 +3146,108 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.$Progress.finish();
     },
+    editModal: function editModal(menu) {
+      this.editmode = true;
+      this.form.reset();
+      this.form.clear();
+      this.form.fill(menu);
+      $('#menuModal').modal('show');
+    },
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      this.form.clear();
+      $('#menuModal').modal('show');
+    },
+    createMenu: function createMenu() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.post('../api/menu').then(function () {
+        $('#menuModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Thêm trình đơn thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this2.$Progress.finish();
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    },
+    updateMenu: function updateMenu() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.put('../api/menu/' + this.form.id).then(function () {
+        $('#menuModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Chỉnh sửa trình đơn thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this3.$Progress.finish();
+      })["catch"](function () {
+        _this3.$Progress.fail();
+      });
+    },
+    deleteMenu: function deleteMenu(id) {
+      var _this4 = this;
+
+      Swal.fire({
+        title: 'Bạn chắc chứ?',
+        text: "Bạn muốn xóa trình đơn này?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Có, xóa ngay!',
+        cancelButtonText: 'Hủy'
+      }).then(function (result) {
+        if (result.value) {
+          // Send request to the server
+          _this4.$Progress.start();
+
+          _this4.form["delete"]('../api/menu/' + id).then(function () {
+            Swal.fire('Xóa thành công!', 'Bạn đã xóa trình thành công', 'success');
+            Fire.$emit('AfterCreate');
+
+            _this4.$Progress.finish();
+          })["catch"](function () {
+            Swal("Lỗi xóa trình!", "Vui lòng liên hệ admin xử lý.", "warning");
+          });
+        }
+      });
+    },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
     }, 500)
   },
   created: function created() {
-    var _this2 = this;
+    var _this5 = this;
 
     this.loadData();
     Fire.$on('Searching', function () {
-      var query = _this2.search;
+      var query = _this5.search;
 
       if (query) {
-        _this2.$Progress.start();
+        _this5.$Progress.start();
 
         axios.get('../api/menu/find?q=' + query).then(function (data) {
-          _this2.menus = data.data;
+          _this5.menus = data.data;
 
-          _this2.$Progress.finish();
+          _this5.$Progress.finish();
         })["catch"](function () {
-          _this2.$Progress.fail();
+          _this5.$Progress.fail();
         });
       } else {
-        _this2.loadData();
+        _this5.loadData();
       }
     });
     Fire.$on('AfterCreate', function () {
-      _this2.loadData();
+      _this5.loadData();
     });
   }
 });
@@ -79348,7 +79457,153 @@ var render = function() {
                 ])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "menuModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "menuModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _c(
+                        "h5",
+                        {
+                          staticClass: "modal-title blue",
+                          attrs: { id: "menuModalLabel" }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.editmode
+                                ? "Chỉnh sửa trình đơn"
+                                : "Thêm mới trình đơn"
+                            )
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.editmode ? _vm.updateMenu() : _vm.createMenu()
+                          },
+                          keydown: function($event) {
+                            return _vm.form.onKeydown($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.name,
+                                        expression: "form.name"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has("name")
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "name",
+                                      placeholder: "Tên trình đơn"
+                                    },
+                                    domProps: { value: _vm.form.name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "name" }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-danger",
+                              attrs: {
+                                disabled: _vm.form.busy,
+                                type: "button",
+                                "data-dismiss": "modal"
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-times-circle" }),
+                              _vm._v(" Hủy")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              attrs: { disabled: _vm.form.busy, type: "submit" }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-check-circle" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.editmode ? "Cập nhật" : "Thêm mới")
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -79384,6 +79639,23 @@ var staticRenderFns = [
         _c("th", [_vm._v("Tác vụ")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
