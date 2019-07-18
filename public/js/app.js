@@ -3111,10 +3111,35 @@ __webpack_require__.r(__webpack_exports__);
         _this.isLoading = false;
       });
       this.$Progress.finish();
-    }
+    },
+    searchit: _.debounce(function () {
+      Fire.$emit('Searching');
+    }, 500)
   },
   created: function created() {
+    var _this2 = this;
+
     this.loadData();
+    Fire.$on('Searching', function () {
+      var query = _this2.search;
+
+      if (query) {
+        _this2.$Progress.start();
+
+        axios.get('../api/menu/find?q=' + query).then(function (data) {
+          _this2.menus = data.data;
+
+          _this2.$Progress.finish();
+        })["catch"](function () {
+          _this2.$Progress.fail();
+        });
+      } else {
+        _this2.loadData();
+      }
+    });
+    Fire.$on('AfterCreate', function () {
+      _this2.loadData();
+    });
   }
 });
 

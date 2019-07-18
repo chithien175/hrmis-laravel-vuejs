@@ -17,4 +17,29 @@ class MenuController extends Controller
     {
         return Menu::get();
     }
+
+    public function store(Request $request)
+    {
+       
+    }
+
+    public function update(Request $request, $id)
+    {
+        
+    }
+
+    public function destroy($id)
+    {
+       
+    }
+
+    public function search()
+    {
+        if($search = \Request::get('q')){
+            $menus = Menu::where('name', 'like', "%$search%")
+                        ->get();
+        }
+
+        return $menus;
+    }
 }

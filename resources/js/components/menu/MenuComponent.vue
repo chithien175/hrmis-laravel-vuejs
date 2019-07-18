@@ -120,9 +120,33 @@
                 });
                 this.$Progress.finish();
             },
+            searchit: _.debounce( () => {
+                Fire.$emit('Searching');
+            }, 500),
         },
         created() {
             this.loadData();
+
+            Fire.$on('Searching', () => {
+                let query = this.search;
+                if(query){
+                    this.$Progress.start();
+                    axios.get('../api/menu/find?q='+query)
+                    .then( (data) => {
+                        this.menus = data.data;
+                        this.$Progress.finish();
+                    })
+                    .catch( () =>{
+                        this.$Progress.fail();
+                    });
+                }else{
+                    this.loadData();
+                }
+            });
+
+            Fire.$on('AfterCreate',() => {
+                this.loadData();
+            });
         }
     }
 </script>
