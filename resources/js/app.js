@@ -20,6 +20,7 @@ const routes = [
     { path: '/admin/post', component: require('./components/blog/PostComponent.vue').default },
     { path: '/admin/category', component: require('./components/blog/CategoryComponent.vue').default },
     { path: '/admin/menu', component: require('./components/menu/MenuComponent.vue').default },
+    { name: 'menu-builder', path: '/admin/menu/:menuId/builder', component: require('./components/menu/MenuBuilderComponent.vue').default },
     { path: '/admin/user', component: require('./components/user/UserComponent.vue').default },
     { path: '/admin/role', component: require('./components/role/RoleComponent.vue').default },
     { path: '/admin/mediafile', component: require('./components/media/MediaComponent.vue').default },
@@ -130,6 +131,13 @@ Vue.component('vcl-facebook', VclFacebook);
  * https://github.com/gilbitron/laravel-vue-pagination
  */
 Vue.component('pagination', require('laravel-vue-pagination'));
+
+/**
+ * VueNestable
+ * https://github.com/rhwilr/vue-nestable
+ */
+import VueNestable from 'vue-nestable';
+Vue.use(VueNestable);
 
 
 /**

@@ -35,6 +35,11 @@ class MenuController extends Controller
         return ['message' => 'Tạo trình thành công'];
     }
 
+    public function show($id)
+    {
+        return Menu::with('items')->findOrFail($id);
+    }
+
     public function update(Request $request, $id)
     {
         $menu = Menu::findOrFail($id);

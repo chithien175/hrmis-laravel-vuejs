@@ -20,8 +20,9 @@ Route::middleware('auth:api')->get('/menu', function (Request $request) {
 Route::prefix('menu')->group(function() {
     // MENU
     Route::get('/', 'MenuController@index');
+    Route::get('/{id}', 'MenuController@show');
     Route::post('/', 'MenuController@store');
     Route::put('/{id}', 'MenuController@update');
     Route::delete('/{id}', 'MenuController@destroy');
-    Route::get('/find', 'MenuController@search');  
+    Route::get('/find', 'MenuController@search');
 });
