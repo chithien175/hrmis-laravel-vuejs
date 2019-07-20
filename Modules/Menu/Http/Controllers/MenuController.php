@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Modules\Menu\Entities\Menu;
+use Modules\Menu\Entities\MenuItem;
 
 class MenuController extends Controller
 {
@@ -32,12 +33,12 @@ class MenuController extends Controller
         ]);
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo trình đơn #' . $menu->id . ' '. $menu->name . '.');
-        return ['message' => 'Tạo trình thành công'];
+        return ['message' => 'Tạo trình đơn thành công'];
     }
 
     public function show($id)
     {
-        return Menu::with('items')->findOrFail($id);
+        return Menu::sort_collection($id);
     }
 
     public function update(Request $request, $id)
@@ -50,7 +51,7 @@ class MenuController extends Controller
 
         $menu->update($request->all());
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa chuyên mục #' . $menu->id . ' ' . $menu->name);
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa trình đơn #' . $menu->id . ' ' . $menu->name);
         return ['message' => 'Đã chỉnh sửa trình đơn thành công'];
     }
 
@@ -63,7 +64,7 @@ class MenuController extends Controller
 
         $menu->delete();
 
-        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa chuyên mục #' . $menu_id . ' '. $menu_name . '.');
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa trình đơn #' . $menu_id . ' '. $menu_name . '.');
         return ['message' => 'Đã xóa trình đơn'];
     }
 
@@ -75,5 +76,66 @@ class MenuController extends Controller
         }
 
         return $menus;
+    }
+
+    public function itemStore(Request $request)
+    {
+        // return $request->all();
+        $request->validate([
+            'title'      => 'required|string|max:255',
+        ]);
+        
+        $item = new MenuItem;
+        
+        $item->menu_id    = $request['menu_id'];
+        $item->title      = $request['title'];
+        $item->type       = $request['type'];
+        $item->url        = $request['url'];
+        $item->target     = $request['target'];
+        $item->icon_class = $request['icon_class'];
+        $item->color      = $request['color'];
+        $item->order      = 1;
+        $item->route      = $request['route'];
+        $item->parameters = $request['parameters'];
+  
+        $item->save();
+        
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo mục trình đơn #' . $item->id . ' '. $item->title . '.');
+        return ['message' => 'Tạo mục trình đơn thành công'];
+    }
+
+    public function itemUpdate(Request $request, $id)
+    {
+        $item = MenuItem::findOrFail($id);
+
+        $item->menu_id    = $request['menu_id'];
+        $item->title      = $request['title'];
+        $item->type       = $request['type'];
+        $item->url        = $request['url'];
+        $item->target     = $request['target'];
+        $item->icon_class = $request['icon_class'];
+        $item->color      = $request['color'];
+        $item->order      = 1;
+        $item->route      = $request['route'];
+        $item->parameters = $request['parameters'];
+
+        $item->save();
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Chỉnh sửa mục trình đơn #' . $item->id . ' '. $item->title . '.');
+        return ['message' => 'Chỉnh sửa mục trình đơn thành công'];
+    }
+
+    public function itemDestroy($id)
+    {
+        $item = MenuItem::findOrFail($id);
+
+        $item_id = $item->id;
+        $item_title = $item->title;
+
+        $item->children()->delete();
+        $item->delete();
+
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa mục trình đơn #' . $item_id . ' '. $item_title . '.');
+        return ['message' => 'Đã xóa mục trình đơn'];
     }
 }

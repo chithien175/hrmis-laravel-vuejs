@@ -26,7 +26,8 @@ class MenuSetupTables extends Migration
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             
             $table->string('title');
-            $table->string('url');
+            $table->string('type')->default('url');
+            $table->string('url')->nullable();
             $table->string('target')->default('_self');
             $table->string('icon_class')->nullable();
             $table->string('color')->nullable();

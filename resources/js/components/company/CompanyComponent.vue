@@ -163,7 +163,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/company').then( ({ data }) => {
+                axios.get('/api/company').then( ({ data }) => {
                     this.form.fill(data);
                     this.isLoading = false;
                 });

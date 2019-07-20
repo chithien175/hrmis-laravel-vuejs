@@ -145,7 +145,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/profile').then( ({ data }) => {
+                axios.get('/api/profile').then( ({ data }) => {
                     this.form.fill(data);
                     this.isLoading = false;
                 });

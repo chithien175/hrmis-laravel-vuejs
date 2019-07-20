@@ -145,9 +145,9 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/role').then(({ data }) => { 
+                axios.get('/api/role').then(({ data }) => { 
                     this.roles = data; 
-                    axios.get('../api/getPermissions').then(({ data }) => { 
+                    axios.get('/api/getPermissions').then(({ data }) => { 
                         this.permissions = data; 
                         this.isLoading = false; 
                     });
@@ -289,7 +289,7 @@
                 let query = this.search;
                 if(query){
                     this.$Progress.start();
-                    axios.get('../api/findRole?q='+query)
+                    axios.get('/api/findRole?q='+query)
                     .then( (data) => {
                         this.roles = data.data;
                         this.$Progress.finish();

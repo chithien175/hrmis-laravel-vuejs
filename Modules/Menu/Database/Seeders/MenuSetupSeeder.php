@@ -45,35 +45,91 @@ class MenuSetupSeeder extends Seeder
 
         $menu = Menu::where('name', 'frontend')->firstOrFail();
 
+        // Giới thiệu
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Giới thiệu',
             'url'     => '',
             'route'   => 'frontend.pages.about',
+            'type'    => 'route'
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
                 'icon_class' => '',
-                'color'      => null,
+                'color'      => '#333333',
                 'parent_id'  => null,
                 'order'      => 1,
             ])->save();
         }
 
+        // Tin tức
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => 'Liên hệ',
+            'title'   => 'Tin tức',
             'url'     => '',
-            'route'   => 'frontend.pages.contact',
+            'route'   => 'frontend.pages.news',
+            'type'    => 'route'
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
                 'icon_class' => '',
-                'color'      => null,
+                'color'      => '#333333',
                 'parent_id'  => null,
                 'order'      => 2,
+            ])->save();
+        }
+
+        $subMenuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Trong nước',
+            'url'     => 'https://google.com.vn',
+            'route'   => '',
+            'type'    => 'url'
+        ]);
+        if (!$subMenuItem->exists) {
+            $subMenuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => $menuItem->id,
+                'order'      => 1,
+            ])->save();
+        }
+
+        $subMenuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Thế giới',
+            'url'     => 'https://google.com.vn',
+            'route'   => '',
+            'type'    => 'url'
+        ]);
+        if (!$subMenuItem->exists) {
+            $subMenuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => $menuItem->id,
+                'order'      => 1,
+            ])->save();
+        }
+
+        // Liên hệ
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Liên hệ',
+            'url'     => '',
+            'route'   => 'frontend.pages.contact',
+            'type'    => 'route'
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => null,
+                'order'      => 3,
             ])->save();
         }
     }

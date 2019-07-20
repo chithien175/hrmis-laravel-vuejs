@@ -25,4 +25,8 @@ Route::prefix('menu')->group(function() {
     Route::put('/{id}', 'MenuController@update');
     Route::delete('/{id}', 'MenuController@destroy');
     Route::get('/find', 'MenuController@search');
+
+    Route::post('/item', 'MenuController@itemStore');
+    Route::put('/item/{id}', 'MenuController@itemUpdate');
+    Route::delete('/item/{id}', 'MenuController@itemDestroy');
 });

@@ -158,7 +158,7 @@ export default {
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('../api/blog/category').then(({ data }) => { 
+            axios.get('/api/blog/category').then(({ data }) => { 
                 this.categories = data;
                 this.isLoading = false; 
             });
@@ -293,7 +293,7 @@ export default {
             let query = this.search;
             if(query){
                 this.$Progress.start();
-                axios.get('../api/blog/category/find?q='+query)
+                axios.get('/api/blog/category/find?q='+query)
                 .then( (data) => {
                     this.categories = data.data;
                     this.$Progress.finish();

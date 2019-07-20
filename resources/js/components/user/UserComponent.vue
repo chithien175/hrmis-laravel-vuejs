@@ -181,9 +181,9 @@ export default {
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('../api/user').then(({ data }) => { 
+            axios.get('/api/user').then(({ data }) => { 
                 this.users = data;
-                axios.get('../api/role').then(({ data }) => { 
+                axios.get('/api/role').then(({ data }) => { 
                     this.roles = data; 
                     this.isLoading = false; 
                 });
@@ -277,7 +277,7 @@ export default {
             let query = this.search;
             if(query){
                 this.$Progress.start();
-                axios.get('../api/findUser?q='+query)
+                axios.get('/api/findUser?q='+query)
                 .then( (data) => {
                     this.users = data.data;
                     this.$Progress.finish();

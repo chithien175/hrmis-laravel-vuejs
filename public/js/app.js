@@ -1923,7 +1923,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/blog/category').then(function (_ref) {
+      axios.get('/api/blog/category').then(function (_ref) {
         var data = _ref.data;
         _this.categories = data;
         _this.isLoading = false;
@@ -2059,7 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
       if (query) {
         _this5.$Progress.start();
 
-        axios.get('../api/blog/category/find?q=' + query).then(function (data) {
+        axios.get('/api/blog/category/find?q=' + query).then(function (data) {
           _this5.categories = data.data;
 
           _this5.$Progress.finish();
@@ -2258,7 +2258,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('../api/blog/category/list').then(function (_ref) {
+    axios.get('/api/blog/category/list').then(function (_ref) {
       var data = _ref.data;
       _this.categories = data;
     });
@@ -2289,7 +2289,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       this.$Progress.start();
-      axios.get('../api/blog/post?page=' + page + '&per_page=10').then(function (_ref2) {
+      axios.get('/api/blog/post?page=' + page + '&per_page=10').then(function (_ref2) {
         var data = _ref2.data;
         _this2.posts = data;
         _this2.isLoading = false;
@@ -2462,7 +2462,7 @@ __webpack_require__.r(__webpack_exports__);
       if (query) {
         _this7.$Progress.start();
 
-        axios.get('../api/blog/post/find?q=' + query).then(function (data) {
+        axios.get('/api/blog/post/find?q=' + query).then(function (data) {
           _this7.posts = data.data;
 
           _this7.$Progress.finish();
@@ -2655,7 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/company').then(function (_ref) {
+      axios.get('/api/company').then(function (_ref) {
         var data = _ref.data;
 
         _this.form.fill(data);
@@ -2798,7 +2798,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/dashboard').then(function (_ref) {
+      axios.get('/api/dashboard').then(function (_ref) {
         var data = _ref.data;
         _this.data = data;
         _this.isLoading = false;
@@ -3070,29 +3070,120 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
   data: function data() {
     return {
-      params: this.$route.params,
+      form: new Form({
+        menu_id: this.$route.params.menu_id,
+        id: '',
+        title: '',
+        type: 'url',
+        url: '',
+        route: '',
+        parameters: '',
+        icon_class: '',
+        color: '#333333',
+        target: '_self'
+      }),
       menu: {},
       editmode: false,
-      isLoading: true,
-      nestableItems: [{
-        id: 0,
-        text: 'Giới thiệu'
-      }, {
-        id: 1,
-        text: 'Dịch vụ',
-        children: [{
-          id: 2,
-          text: 'Dịch vụ 1'
-        }]
-      }, {
-        id: 3,
-        text: 'Dự án'
-      }]
+      isLoading: true
     };
   },
   methods: {
@@ -3100,23 +3191,106 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../../../api/menu/' + this.params.menuId).then(function (_ref) {
+      axios.get('/api/menu/' + this.$route.params.menu_id).then(function (_ref) {
         var data = _ref.data;
         _this.menu = data;
         _this.isLoading = false;
       });
       this.$Progress.finish();
     },
-    changeItem: function changeItem(nestableItems) {
-      console.log(nestableItems);
+    editModal: function editModal(item) {
+      this.editmode = true;
+      this.form.reset();
+      this.form.clear();
+      this.form.fill(item);
+      this.form.menu_id = this.menu.id;
+      $('#itemModal').modal('show');
+    },
+    newModal: function newModal() {
+      this.editmode = false;
+      this.form.reset();
+      this.form.clear();
+      this.form.menu_id = this.menu.id;
+      $('#itemModal').modal('show');
+    },
+    createItem: function createItem() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      axios.post('/api/menu/item', this.form).then(function () {
+        $('#itemModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Thêm mục trình đơn thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this2.$Progress.finish();
+      })["catch"](function (errors) {
+        Toast.fire({
+          type: 'error',
+          title: 'Nhập tên mục trình đơn'
+        });
+
+        _this2.$Progress.fail(); // console.log(errors);
+
+      });
+    },
+    updateItem: function updateItem() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      axios.put('/api/menu/item/' + this.form.id, this.form).then(function () {
+        $('#itemModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Chỉnh sửa trình đơn thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this3.$Progress.finish();
+      })["catch"](function () {
+        _this3.$Progress.fail();
+      });
+    },
+    deleteItem: function deleteItem(id) {
+      var _this4 = this;
+
+      Swal.fire({
+        title: 'Bạn chắc chứ?',
+        text: "Bạn xóa mục trình đơn này sẽ xóa các mục con của nó!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Có, xóa ngay!',
+        cancelButtonText: 'Hủy'
+      }).then(function (result) {
+        if (result.value) {
+          // Send request to the server
+          _this4.$Progress.start();
+
+          axios["delete"]('/api/menu/item/' + id).then(function () {
+            Swal.fire('Xóa thành công!', 'Bạn đã xóa mục trình đơn thành công', 'success');
+            Fire.$emit('AfterCreate');
+
+            _this4.$Progress.finish();
+          })["catch"](function () {
+            Swal("Lỗi xóa mục trình đơn!", "Vui lòng liên hệ admin xử lý.", "warning");
+          });
+        }
+      });
+    },
+    changeItem: function changeItem(menuItems) {
+      console.log(menuItems);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this5 = this;
 
     this.loadData();
     Fire.$on('AfterCreate', function () {
-      _this2.loadData();
+      _this5.loadData();
     });
   }
 });
@@ -3283,7 +3457,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/menu').then(function (_ref) {
+      axios.get('/api/menu').then(function (_ref) {
         var data = _ref.data;
         _this.menus = data;
         _this.isLoading = false;
@@ -3355,12 +3529,12 @@ __webpack_require__.r(__webpack_exports__);
           _this4.$Progress.start();
 
           _this4.form["delete"]('../api/menu/' + id).then(function () {
-            Swal.fire('Xóa thành công!', 'Bạn đã xóa trình thành công', 'success');
+            Swal.fire('Xóa thành công!', 'Bạn đã xóa trình đơn thành công', 'success');
             Fire.$emit('AfterCreate');
 
             _this4.$Progress.finish();
           })["catch"](function () {
-            Swal("Lỗi xóa trình!", "Vui lòng liên hệ admin xử lý.", "warning");
+            Swal("Lỗi xóa trình đơn!", "Vui lòng liên hệ admin xử lý.", "warning");
           });
         }
       });
@@ -3379,7 +3553,7 @@ __webpack_require__.r(__webpack_exports__);
       if (query) {
         _this5.$Progress.start();
 
-        axios.get('../api/menu/find?q=' + query).then(function (data) {
+        axios.get('/api/menu/find?q=' + query).then(function (data) {
           _this5.menus = data.data;
 
           _this5.$Progress.finish();
@@ -3712,7 +3886,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/profile').then(function (_ref) {
+      axios.get('/api/profile').then(function (_ref) {
         var data = _ref.data;
 
         _this.form.fill(data);
@@ -3935,10 +4109,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/role').then(function (_ref) {
+      axios.get('/api/role').then(function (_ref) {
         var data = _ref.data;
         _this.roles = data;
-        axios.get('../api/getPermissions').then(function (_ref2) {
+        axios.get('/api/getPermissions').then(function (_ref2) {
           var data = _ref2.data;
           _this.permissions = data;
           _this.isLoading = false;
@@ -4088,7 +4262,7 @@ __webpack_require__.r(__webpack_exports__);
       if (query) {
         _this5.$Progress.start();
 
-        axios.get('../api/findRole?q=' + query).then(function (data) {
+        axios.get('/api/findRole?q=' + query).then(function (data) {
           _this5.roles = data.data;
 
           _this5.$Progress.finish();
@@ -4307,10 +4481,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('../api/user').then(function (_ref) {
+      axios.get('/api/user').then(function (_ref) {
         var data = _ref.data;
         _this.users = data;
-        axios.get('../api/role').then(function (_ref2) {
+        axios.get('/api/role').then(function (_ref2) {
           var data = _ref2.data;
           _this.roles = data;
           _this.isLoading = false;
@@ -4408,7 +4582,7 @@ __webpack_require__.r(__webpack_exports__);
       if (query) {
         _this5.$Progress.start();
 
-        axios.get('../api/findUser?q=' + query).then(function (data) {
+        axios.get('/api/findUser?q=' + query).then(function (data) {
           _this5.users = data.data;
 
           _this5.$Progress.finish();
@@ -10887,7 +11061,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
 
 // exports
 
@@ -79414,9 +79588,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("h5", { staticClass: "m-0 blue" }, [
                     _c("i", { staticClass: "far fa-compass" }),
-                    _vm._v(
-                      " Sắp xếp trình đơn - (" + _vm._s(_vm.menu.name) + ")"
-                    )
+                    _vm._v(" Mục trình đơn - (" + _vm._s(_vm.menu.name) + ")")
                   ])
                 ]),
                 _vm._v(" "),
@@ -79447,7 +79619,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("li", { staticClass: "breadcrumb-item active" }, [
-                      _vm._v("Sắp xếp trình đơn")
+                      _vm._v("Mục trình đơn")
                     ])
                   ])
                 ])
@@ -79519,7 +79691,9 @@ var render = function() {
                                 _c("VueNestable", {
                                   on: {
                                     change: function($event) {
-                                      return _vm.changeItem(_vm.nestableItems)
+                                      return _vm.changeItem(
+                                        _vm.menu.parent_items
+                                      )
                                     }
                                   },
                                   scopedSlots: _vm._u(
@@ -79528,35 +79702,86 @@ var render = function() {
                                         key: "default",
                                         fn: function(ref) {
                                           var item = ref.item
-                                          return [
-                                            _c(
-                                              "VueNestableHandle",
-                                              { attrs: { item: item } },
-                                              [
-                                                _c("i", {
+                                          return _c(
+                                            "div",
+                                            {},
+                                            [
+                                              _c(
+                                                "VueNestableHandle",
+                                                { attrs: { item: item } },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-arrows-alt blue"
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _vm._v(_vm._s(item.title))
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
                                                   staticClass:
-                                                    "fas fa-arrows-alt blue"
-                                                })
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("span", [
-                                              _vm._v(_vm._s(item.text))
-                                            ])
-                                          ]
+                                                    "btn btn-sm btn-danger float-right",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.deleteItem(
+                                                        item.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fa fa-trash fa-fw"
+                                                  }),
+                                                  _vm._v(
+                                                    " Xóa\r\n                                                "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-sm btn-primary float-right mr-1",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.editModal(item)
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fa fa-edit fa-fw"
+                                                  }),
+                                                  _vm._v(
+                                                    " Sửa\r\n                                                "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
                                         }
                                       }
                                     ],
                                     null,
                                     false,
-                                    2062184876
+                                    916904629
                                   ),
                                   model: {
-                                    value: _vm.nestableItems,
+                                    value: _vm.menu.parent_items,
                                     callback: function($$v) {
-                                      _vm.nestableItems = $$v
+                                      _vm.$set(_vm.menu, "parent_items", $$v)
                                     },
-                                    expression: "nestableItems"
+                                    expression: "menu.parent_items"
                                   }
                                 })
                               ],
@@ -79569,7 +79794,491 @@ var render = function() {
                 ])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "itemModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "itemModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _c(
+                        "h5",
+                        {
+                          staticClass: "modal-title blue",
+                          attrs: { id: "itemModalLabel" }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.editmode
+                                ? "Chỉnh sửa mục trình đơn"
+                                : "Thêm mới mục trình đơn"
+                            )
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.editmode ? _vm.updateItem() : _vm.createItem()
+                          },
+                          keydown: function($event) {
+                            return _vm.form.onKeydown($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "inputTitle" } },
+                                    [_vm._v("Tên mục trình đơn")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.title,
+                                        expression: "form.title"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has("title")
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "title",
+                                      placeholder: "Tên mục trình đơn"
+                                    },
+                                    domProps: { value: _vm.form.title },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "title",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "title" }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "inputType" } }, [
+                                  _vm._v("Loại đường dẫn")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.type,
+                                        expression: "form.type"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { name: "type" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "type",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "url" } }, [
+                                      _vm._v("Đường dẫn tĩnh")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "route" } },
+                                      [_vm._v("Đường dẫn động")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.form.type == "url",
+                                    expression: "form.type == 'url'"
+                                  }
+                                ],
+                                staticClass: "col-md-12"
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", { attrs: { for: "inputUrl" } }, [
+                                    _vm._v("Đường dẫn tĩnh")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.url,
+                                        expression: "form.url"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "url",
+                                      placeholder: "Static URL"
+                                    },
+                                    domProps: { value: _vm.form.url },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "url",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.form.type == "route",
+                                    expression: "form.type == 'route'"
+                                  }
+                                ],
+                                staticClass: "col-md-12"
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "inputRoute" } },
+                                    [_vm._v("Đường dẫn động")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.route,
+                                        expression: "form.route"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "route",
+                                      placeholder: "Dynamic Route"
+                                    },
+                                    domProps: { value: _vm.form.route },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "route",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.form.type == "route",
+                                    expression: "form.type == 'route'"
+                                  }
+                                ],
+                                staticClass: "col-md-12"
+                              },
+                              [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "inputParameters" } },
+                                    [_vm._v("Thông số đường dẫn (nếu có)")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.parameters,
+                                        expression: "form.parameters"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      rows: "3",
+                                      name: "parameters",
+                                      placeholder: '{"key": "value"}'
+                                    },
+                                    domProps: { value: _vm.form.parameters },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "parameters",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _vm._m(2),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.icon_class,
+                                      expression: "form.icon_class"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "icon_class",
+                                    placeholder: "Icon Class (tùy chọn)"
+                                  },
+                                  domProps: { value: _vm.form.icon_class },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "icon_class",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "inputColor" } }, [
+                                  _vm._v("Màu RGB hoặc Hex (tùy chọn)")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.color,
+                                      expression: "form.color"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "color", name: "color" },
+                                  domProps: { value: _vm.form.color },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "color",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "inputTitle" } }, [
+                                  _vm._v("Mở trong")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.target,
+                                        expression: "form.target"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { name: "target" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "target",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "_self" } },
+                                      [_vm._v("Cùng tab / cửa sổ")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "_blank" } },
+                                      [_vm._v("Tab / cửa sổ mới")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              attrs: { type: "submit" }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-check-circle" }),
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.editmode ? "Cập nhật" : "Thêm mới")
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -79588,6 +80297,49 @@ var staticRenderFns = [
         _vm._v("Kéo và thả mục trình đơn bên dưới để sắp xếp theo ý muốn")
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "inputIconClass" } }, [
+      _vm._v("Biểu tượng "),
+      _c(
+        "a",
+        { attrs: { href: "https://fontawesome.com/icons", target: "_blank" } },
+        [_vm._v("(FontAwesome)")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-sm btn-danger",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times-circle" }), _vm._v(" Hủy")]
+    )
   }
 ]
 render._withStripped = true
@@ -79782,7 +80534,7 @@ var render = function() {
                                                     to: {
                                                       name: "menu-builder",
                                                       params: {
-                                                        menuId: menu.id
+                                                        menu_id: menu.id
                                                       }
                                                     }
                                                   }
@@ -98000,7 +98752,7 @@ var routes = [{
   component: __webpack_require__(/*! ./components/menu/MenuComponent.vue */ "./resources/js/components/menu/MenuComponent.vue")["default"]
 }, {
   name: 'menu-builder',
-  path: '/admin/menu/:menuId/builder',
+  path: '/admin/menu/:menu_id/builder',
   component: __webpack_require__(/*! ./components/menu/MenuBuilderComponent.vue */ "./resources/js/components/menu/MenuBuilderComponent.vue")["default"]
 }, {
   path: '/admin/user',

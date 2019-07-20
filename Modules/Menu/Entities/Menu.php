@@ -19,4 +19,15 @@ class Menu extends Model
         return $this->hasMany(MenuItem::class)
             ->whereNull('parent_id');
     }
+
+    public static function sort_collection($idMenu)
+    {
+        // GET THE MENU - sort collection in blade
+        $menu = static::where('id', '=', $idMenu)
+            ->with(['parent_items.children' => function ($q) {
+                $q->orderBy('order');
+            }])
+            ->first();
+        return $menu;
+    }
 }

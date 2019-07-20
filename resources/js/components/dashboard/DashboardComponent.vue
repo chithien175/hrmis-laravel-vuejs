@@ -70,7 +70,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/dashboard').then( ({ data }) => {
+                axios.get('/api/dashboard').then( ({ data }) => {
                     this.data = data;
                     this.isLoading = false;
                 });

@@ -64,7 +64,7 @@
                                                     <td>{{ menu.name }}</td>
                                                     <td><span class="badge bg-info">{{ menu.created_at | formatDateTime }}</span></td>
                                                     <td>
-                                                        <router-link class="btn btn-sm btn-success" :to="{ name: 'menu-builder', params: { menuId: menu.id }}">
+                                                        <router-link class="btn btn-sm btn-success" :to="{ name: 'menu-builder', params: { menu_id: menu.id }}">
                                                             <i class="fas fa-bars fa-fw"></i> Trình đơn
                                                         </router-link>
                                                         <button class="btn btn-sm btn-primary" @click="editModal(menu)">
@@ -148,7 +148,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('../api/menu').then(({ data }) => { 
+                axios.get('/api/menu').then(({ data }) => { 
                     this.menus = data;
                     this.isLoading = false; 
                 });
@@ -217,14 +217,14 @@
                             .then( () => {
                                 Swal.fire(
                                     'Xóa thành công!',
-                                    'Bạn đã xóa trình thành công',
+                                    'Bạn đã xóa trình đơn thành công',
                                     'success'
                                 );
                                 Fire.$emit('AfterCreate');
                                 this.$Progress.finish();
                             })
                             .catch( () => {
-                                Swal("Lỗi xóa trình!", "Vui lòng liên hệ admin xử lý.", "warning");
+                                Swal("Lỗi xóa trình đơn!", "Vui lòng liên hệ admin xử lý.", "warning");
                             });
                         }
                 });
@@ -240,7 +240,7 @@
                 let query = this.search;
                 if(query){
                     this.$Progress.start();
-                    axios.get('../api/menu/find?q='+query)
+                    axios.get('/api/menu/find?q='+query)
                     .then( (data) => {
                         this.menus = data.data;
                         this.$Progress.finish();

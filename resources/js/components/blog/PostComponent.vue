@@ -167,7 +167,7 @@
 import { VueEditor } from "vue2-editor";
 export default {
     mounted() {
-        axios.get('../api/blog/category/list').then(({ data }) => { 
+        axios.get('/api/blog/category/list').then(({ data }) => { 
             this.categories = data;
         });
     },
@@ -186,7 +186,7 @@ export default {
     methods: {
         loadData (page = 1) {
             this.$Progress.start();
-            axios.get('../api/blog/post?page=' + page + '&per_page=10').then(({ data }) => { 
+            axios.get('/api/blog/post?page=' + page + '&per_page=10').then(({ data }) => { 
                 this.posts = data;
                 this.isLoading = false;
             });
@@ -353,7 +353,7 @@ export default {
             let query = this.search;
             if(query){
                 this.$Progress.start();
-                axios.get('../api/blog/post/find?q='+query)
+                axios.get('/api/blog/post/find?q='+query)
                 .then( (data) => {
                     this.posts = data.data;
                     this.$Progress.finish();
