@@ -3179,7 +3179,8 @@ __webpack_require__.r(__webpack_exports__);
         parameters: '',
         icon_class: '',
         color: '#333333',
-        target: '_self'
+        target: '_self',
+        order: ''
       }),
       menu: {},
       editmode: false,
@@ -3211,6 +3212,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.form.clear();
       this.form.menu_id = this.menu.id;
+      this.form.order = this.menu.parent_items.length + 1;
       $('#itemModal').modal('show');
     },
     createItem: function createItem() {
@@ -11061,7 +11063,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
 
 // exports
 

@@ -80,7 +80,6 @@ class MenuController extends Controller
 
     public function itemStore(Request $request)
     {
-        // return $request->all();
         $request->validate([
             'title'      => 'required|string|max:255',
         ]);
@@ -94,7 +93,7 @@ class MenuController extends Controller
         $item->target     = $request['target'];
         $item->icon_class = $request['icon_class'];
         $item->color      = $request['color'];
-        $item->order      = 1;
+        $item->order      = $request['order'];
         $item->route      = $request['route'];
         $item->parameters = $request['parameters'];
   
@@ -115,7 +114,6 @@ class MenuController extends Controller
         $item->target     = $request['target'];
         $item->icon_class = $request['icon_class'];
         $item->color      = $request['color'];
-        $item->order      = 1;
         $item->route      = $request['route'];
         $item->parameters = $request['parameters'];
 

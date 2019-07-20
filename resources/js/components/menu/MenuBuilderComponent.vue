@@ -192,6 +192,7 @@
                     icon_class: '', 
                     color: '#333333', 
                     target: '_self',
+                    order: ''
                 }),
                 menu: {},
                 editmode: false,
@@ -221,6 +222,7 @@
                 this.form.reset();
                 this.form.clear();
                 this.form.menu_id = this.menu.id;
+                this.form.order = this.menu.parent_items.length + 1;
                 $('#itemModal').modal('show');
             },
             createItem () {
