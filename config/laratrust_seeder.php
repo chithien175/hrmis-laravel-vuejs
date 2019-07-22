@@ -5,6 +5,7 @@ return [
         'superadmin'        => [
             'dashboard'     => 'm',
             'blog'          => 'm',
+            'page'          => 'm',
             'menu'          => 'm',
             'company'       => 'm',
             'logs'          => 'm',
@@ -13,6 +14,7 @@ return [
         'admin'             => [
             'dashboard'     => 'm',
             'blog'          => 'm',
+            'page'          => 'm',
             'menu'          => 'm',
             'company'       => 'm',
             'media'         => 'm'

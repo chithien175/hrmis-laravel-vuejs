@@ -35313,6 +35313,10 @@ a.text-dark:focus {
   }
 }
 
+.main-sidebar {
+  overflow-x: hidden;
+}
+
 .sidebar .nav-item {
   font-size: 0.85rem !important;
 }

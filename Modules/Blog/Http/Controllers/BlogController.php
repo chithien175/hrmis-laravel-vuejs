@@ -125,7 +125,6 @@ class BlogController extends Controller
         }
 
         return $posts;
-
     }
 
     // CATEGORY

@@ -95,6 +95,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
+						@if($user_current->can('manage-page'))
+							<li class="nav-item">
+								<router-link to="/admin/page" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Trang</p>
+								</router-link>
+							<li>
+						@endif
 						@if($user_current->can('manage-blog') && $modules['blog'])
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">

@@ -18,6 +18,7 @@ const routes = [
     { path: '/admin', redirect: '/admin/dashboard' },
     { path: '/admin/dashboard', component: require('./components/dashboard/DashboardComponent.vue').default },
     { path: '/admin/post', component: require('./components/blog/PostComponent.vue').default },
+    { path: '/admin/page', component: require('./components/page/PageComponent.vue').default },
     { path: '/admin/category', component: require('./components/blog/CategoryComponent.vue').default },
     { path: '/admin/menu', component: require('./components/menu/MenuComponent.vue').default },
     { name: 'menu-builder', path: '/admin/menu/:menu_id/builder', component: require('./components/menu/MenuBuilderComponent.vue').default },

@@ -22,6 +22,10 @@ export default class Gate{
         return this.user.can['manage-blog'];
     }
 
+    isManagePage(){
+        return this.user.can['manage-page'];
+    }
+
     isManageCompany(){
         return this.user.can['manage-company'];
     }

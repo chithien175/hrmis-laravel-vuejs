@@ -32,3 +32,6 @@ Route::get('company', 'API\CompanyController@index');
 Route::put('company', 'API\CompanyController@updateCompany');
 
 Route::post('module/toggle', 'API\ModuleController@toggle');
+
+Route::apiResources(['page' => 'API\PageController']);
+Route::get('findPage', 'API\PageController@search');

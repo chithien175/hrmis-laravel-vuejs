@@ -20,6 +20,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 // Pretty Checkbox
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
+.main-sidebar{
+  overflow-x: hidden;
+}
 .sidebar .nav-item{
   font-size: .85rem !important;
 }
