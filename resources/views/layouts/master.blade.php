@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Bài viết</p>
+								<p>Bài viết - Blog</p>
 							</router-link>
 						</li>
 						<li class="nav-item">
@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="nav-item">
 							<router-link to="/admin/menu" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Trình đơn</p>
+								<p>Trình đơn - Menu</p>
 							</router-link>
 						</li>
 						@endif
