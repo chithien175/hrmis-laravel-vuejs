@@ -3192,7 +3192,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('/api/menu/' + this.$route.params.menu_id).then(function (_ref) {
+      axios.get('/api/menu/show/' + this.$route.params.menu_id).then(function (_ref) {
         var data = _ref.data;
         _this.menu = data;
         _this.isLoading = false;
@@ -80790,7 +80790,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-6" }, [
       _c("h5", { staticClass: "m-0 blue" }, [
         _c("i", { staticClass: "far fa-compass" }),
-        _vm._v(" Trình đơn")
+        _vm._v(" Trình đơn - Menu")
       ])
     ])
   },

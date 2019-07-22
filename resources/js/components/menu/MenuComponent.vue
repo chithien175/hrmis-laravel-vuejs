@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <h5 class="m-0 blue"><i class="far fa-compass"></i> Trình đơn</h5>
+                        <h5 class="m-0 blue"><i class="far fa-compass"></i> Trình đơn - Menu</h5>
                     </div><!-- /.col -->
                     <div class="col-md-6">
                         <ol class="breadcrumb float-md-right">

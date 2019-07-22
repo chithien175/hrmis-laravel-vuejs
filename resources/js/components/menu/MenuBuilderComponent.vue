@@ -202,7 +202,7 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('/api/menu/' + this.$route.params.menu_id).then(({ data }) => { 
+                axios.get('/api/menu/show/' + this.$route.params.menu_id).then(({ data }) => { 
                     this.menu = data;
 
                     this.isLoading = false; 
