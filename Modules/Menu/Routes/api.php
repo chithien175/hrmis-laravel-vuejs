@@ -29,4 +29,5 @@ Route::prefix('menu')->group(function() {
     Route::post('/item', 'MenuController@itemStore');
     Route::put('/item/{id}', 'MenuController@itemUpdate');
     Route::delete('/item/{id}', 'MenuController@itemDestroy');
+    Route::post('/item/sort', 'MenuController@itemSort');
 });

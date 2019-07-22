@@ -47,7 +47,7 @@
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive">
-                                        <VueNestable v-model="menu.parent_items" @change="changeItem(menu.parent_items)">
+                                        <VueNestable v-model="menu.parent_items" @change="changeItem(menu)">
                                             <div slot-scope="{ item }">
                                                 <!-- Handler -->
                                                 <VueNestableHandle :item="item">
@@ -293,8 +293,21 @@
                         }
                 }); 
             },
-            changeItem(menuItems){
-                console.log(menuItems);
+            changeItem(menu){
+                console.log(menu);
+                this.$Progress.start();
+                axios.post('/api/menu/item/sort', this.menu)
+                .then( () =>{
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Sắp xếp mục trình đơn thành công'
+                    });
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch( () =>{
+                    this.$Progress.fail();
+                });
             }
         },
         created() {

@@ -136,4 +136,29 @@ class MenuController extends Controller
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Xóa mục trình đơn #' . $item_id . ' '. $item_title . '.');
         return ['message' => 'Đã xóa mục trình đơn'];
     }
+
+    public function itemSort(Request $request)
+    {
+        $parent_items = $request['parent_items'];
+
+        $this->orderItem($parent_items, null);
+
+        // return $request->all();
+        Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sắp xếp mục trình đơn #' . $request['id'] . ' '. $request['name'] . '.');
+        return ['message' => 'Đã sắp xếp mục trình đơn'];
+    }
+
+    protected function orderItem(array $menuItems, $parentId)
+    {
+        foreach ($menuItems as $index => $menuItem) {
+            $item = MenuItem::findOrFail($menuItem['id']);
+            $item->order = $menuItem['order'];
+            $item->parent_id = $parentId;
+            $item->save();
+
+            if (isset($menuItem['children'])) {
+                $this->orderItem($menuItem['children'], $item->id);
+            }
+        }
+    }
 }

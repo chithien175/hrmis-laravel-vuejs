@@ -3283,16 +3283,30 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    changeItem: function changeItem(menuItems) {
-      console.log(menuItems);
+    changeItem: function changeItem(menu) {
+      var _this5 = this;
+
+      console.log(menu);
+      this.$Progress.start();
+      axios.post('/api/menu/item/sort', this.menu).then(function () {
+        Toast.fire({
+          type: 'success',
+          title: 'Sắp xếp mục trình đơn thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this5.$Progress.finish();
+      })["catch"](function () {
+        _this5.$Progress.fail();
+      });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.loadData();
     Fire.$on('AfterCreate', function () {
-      _this5.loadData();
+      _this6.loadData();
     });
   }
 });
@@ -11063,7 +11077,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
 
 // exports
 
@@ -79693,9 +79707,7 @@ var render = function() {
                                 _c("VueNestable", {
                                   on: {
                                     change: function($event) {
-                                      return _vm.changeItem(
-                                        _vm.menu.parent_items
-                                      )
+                                      return _vm.changeItem(_vm.menu)
                                     }
                                   },
                                   scopedSlots: _vm._u(
@@ -80547,7 +80559,7 @@ var render = function() {
                                                       "fas fa-bars fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Trình đơn\n                                                        "
+                                                    " Xây dựng trình đơn\n                                                        "
                                                   )
                                                 ]
                                               ),
@@ -98738,7 +98750,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
-  path: '/home',
+  path: '/admin',
   redirect: '/admin/dashboard'
 }, {
   path: '/admin/dashboard',

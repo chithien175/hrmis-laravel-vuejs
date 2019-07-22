@@ -65,7 +65,7 @@
                                                     <td><span class="badge bg-info">{{ menu.created_at | formatDateTime }}</span></td>
                                                     <td>
                                                         <router-link class="btn btn-sm btn-success" :to="{ name: 'menu-builder', params: { menu_id: menu.id }}">
-                                                            <i class="fas fa-bars fa-fw"></i> Trình đơn
+                                                            <i class="fas fa-bars fa-fw"></i> Xây dựng trình đơn
                                                         </router-link>
                                                         <button class="btn btn-sm btn-primary" @click="editModal(menu)">
                                                             <i class="fa fa-edit fa-fw"></i> Sửa

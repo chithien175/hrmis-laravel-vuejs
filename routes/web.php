@@ -17,10 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Home
-Route::get('/home', 'HomeController@index')->name('home');
-// Route::get('/{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
+
+
 
 Route::prefix('admin')->group(function () {
-    Route::get('/{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
+    // Admin
+    Route::get('/', 'HomeController@admin')->name('admin');
+
+    Route::get('/{path}', 'HomeController@admin')->where('path', '([A-z\d-\/_.]+)?');
 });

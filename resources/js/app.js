@@ -15,7 +15,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/home', redirect: '/admin/dashboard' },
+    { path: '/admin', redirect: '/admin/dashboard' },
     { path: '/admin/dashboard', component: require('./components/dashboard/DashboardComponent.vue').default },
     { path: '/admin/post', component: require('./components/blog/PostComponent.vue').default },
     { path: '/admin/category', component: require('./components/blog/CategoryComponent.vue').default },
