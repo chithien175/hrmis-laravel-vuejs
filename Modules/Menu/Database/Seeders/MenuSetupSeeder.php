@@ -45,12 +45,30 @@ class MenuSetupSeeder extends Seeder
 
         $menu = Menu::where('name', 'frontend')->firstOrFail();
 
+         // Giới thiệu
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $menu->id,
+            'title'   => 'Trang chủ',
+            'url'     => '',
+            'route'   => 'katitheme.pages.home',
+            'type'    => 'route'
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => null,
+                'order'      => 1,
+            ])->save();
+        }
+
         // Giới thiệu
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Giới thiệu',
             'url'     => '',
-            'route'   => 'frontend.pages.about',
+            'route'   => 'katitheme.pages.about',
             'type'    => 'route'
         ]);
         if (!$menuItem->exists) {
@@ -68,7 +86,7 @@ class MenuSetupSeeder extends Seeder
             'menu_id' => $menu->id,
             'title'   => 'Tin tức',
             'url'     => '',
-            'route'   => 'frontend.pages.news',
+            'route'   => 'katitheme.pages.news',
             'type'    => 'route'
         ]);
         if (!$menuItem->exists) {
@@ -120,7 +138,7 @@ class MenuSetupSeeder extends Seeder
             'menu_id' => $menu->id,
             'title'   => 'Liên hệ',
             'url'     => '',
-            'route'   => 'frontend.pages.contact',
+            'route'   => 'katitheme.pages.contact',
             'type'    => 'route'
         ]);
         if (!$menuItem->exists) {

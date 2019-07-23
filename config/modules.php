@@ -150,8 +150,8 @@ return [
     'composer' => [
         'vendor' => 'nwidart',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'Thien Pham',
+            'email' => 'chithien175@gmail.com',
         ],
     ],
     /*
