@@ -2,8 +2,8 @@
 
 /**
  * @param
- * menuName: string
- * options: array(id, class, sub_id, sub_class)
+ * $menuName: string
+ * $options: [$id, $class, $sub_id, $sub_class] array
  * @return string
  */
 if (!function_exists('menu')) {

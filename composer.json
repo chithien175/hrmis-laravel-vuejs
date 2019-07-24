@@ -17,6 +17,7 @@
         "laravel/passport": "^7.3",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^4.1",
+        "plank/laravel-mediable": "^2.9",
         "santigarcor/laratrust": "5.2.*"
     },
     "require-dev": {

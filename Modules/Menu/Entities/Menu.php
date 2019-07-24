@@ -31,7 +31,7 @@ class Menu extends Model
         return $menu;
     }
 
-    // For Frontend
+    // **** FOR FRONTEND ****
     protected function display($menuName, $options)
     {
         // GET THE MENU - sort collection in blade
@@ -39,14 +39,14 @@ class Menu extends Model
             ->with(['parent_items.children' => function ($q) {
                 $q->orderBy('order');
             }])
-            ->first()->toArray();
+            ->first();
 
         // Check for Menu Existence
         if (!isset($menu)) {
             return false;
         }
 
-        $menu_items = $menu['parent_items'];
+        $menu_items = $menu->parent_items->toArray();
         // return $menu_items;
 
         $menu_html = $this->renderMenu($menu_items, null, $options);
@@ -64,13 +64,12 @@ class Menu extends Model
         
         foreach ($menuItems as $index => $menuItem) {
             
-            if($menuItem['type'] == 'url'){
-                $html.= '<li>';
-                $html.= '<a href="'.$menuItem['url'].'" target="'.$menuItem['target'].'">'.$menuItem['title'];
-            }
-            if($menuItem['type'] == 'route'){
+            if( ($menuItem['type'] == 'route') && \Route::has($menuItem['route']) ){
                 $html.= (\Route::currentRouteName() == $menuItem['route']) ? '<li class="active">':'<li>';
                 $html.= '<a href="'.route($menuItem['route']).'" target="'.$menuItem['target'].'">'.$menuItem['title'];
+            }else{
+                $html.= '<li>';
+                $html.= '<a href="'.$menuItem['url'].'" target="'.$menuItem['target'].'">'.$menuItem['title'];
             }
             $html.= '</a>';
             $html.= (sizeof($menuItem['children'])) ? $this->renderMenu($menuItem['children'], $menuItem['id'], $options) : '';

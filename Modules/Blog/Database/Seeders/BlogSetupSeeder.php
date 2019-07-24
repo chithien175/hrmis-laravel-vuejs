@@ -66,7 +66,7 @@ class BlogSetupSeeder extends Seeder
                 'user_id'       => 1,
                 'created_at'    => Carbon::now()
             ]);
-            $post->categories()->attach( ['1' ,'2', '3'] );
+            $post->categories()->attach( ['1' ,'2'] );
         }
     }
 }

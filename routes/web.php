@@ -24,6 +24,8 @@ Route::get('/tin-tuc.html','Frontend\PageController@news')->name('katitheme.page
 // Liên hệ
 Route::get('/lien-he.html','Frontend\PageController@contact')->name('katitheme.pages.contact');
 
+// Route::get('/{pageSlug}.html', 'Frontend\PageController@index');
+
 // Auth
 Auth::routes();
 

@@ -18,7 +18,7 @@ class PageSetupTables extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('photo')->default('page-image-default.png');
+            $table->string('photo')->default('page-image-default.jpg');
             $table->longText('body')->nullable();
             $table->string('publish');
             $table->integer('counter')->default(0);

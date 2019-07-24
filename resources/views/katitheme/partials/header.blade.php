@@ -85,19 +85,6 @@
 
                             echo menu('frontend', $options);
                         ?>
-                        <!-- <ul id="navigation">
-                            <li class="active"><a href="{{ route('katitheme.pages.home') }}">Trang chủ</a></li>
-                            <li><a href="{{ route('katitheme.pages.about') }}">Giới thiệu</a></li>
-                            <li><a href="service.html">Service</a></li>
-                            <li>
-                                <a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="blog.html">Blog page</a></li>
-                                    <li><a href="blog2.html">Blog Two column</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul> -->
                     </div>
                 </div>
                 <div class="col-md-1 col-sm-2 col-xs-3">
