@@ -47,34 +47,49 @@
                                                 <button class="btn btn-sm btn-success">
                                                     <i class="fas fa-paragraph fa-fw"></i> Đổi tên
                                                 </button>
-                                                <button class="btn btn-sm btn-danger">
+                                                <button class="btn btn-sm btn-danger" @click="deleteItem(itemActive)">
                                                     <i class="fas fa-trash fa-fw"></i> Xóa
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body media-wrapper">
-                                            <div class="media-left">
-                                                <ul class="media-list">
-                                                    <li class="media-item" v-for="item in media" :key="item.id">
-                                                        <div class="file-link">
-                                                            <div class="file-icon">
-                                                                <img v-bind:src="'/'+item.directory+'/'+item.filename+'_thumb.'+item.extension">
-                                                            </div>
-                                                            <div class="file-detail">
-                                                                <div class="image/jpeg">
-                                                                    <h4>{{ item.filename }}</h4> <small>
-                                                                    <span class="file_size">{{ item.size }} KB</span></small>
-                                                                </div>
-                                                            </div>
-                                                            
+                                    <div class="card-body media-wrapper" v-if="!media.length">
+                                        <p class="p-3">Không tìm thấy tập tin nào!</p>
+                                    </div>
+                                    <div class="card-body media-wrapper" v-if="media.length">
+                                        <div class="media-left">
+                                            <ul class="media-list">
+                                                <li class="media-item" v-for="item in media" :key="item.id">
+                                                    <div class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)">
+                                                        <div class="file-icon">
+                                                            <div class="img-icon" :style="{ backgroundImage: 'url(\'' + getSrcImg(item) + '\')' }"></div>
                                                         </div>
-                                                    </li>
-                                                </ul>
+                                                        <div class="file-detail">
+                                                            <div class="image/jpeg">
+                                                                <h4>{{ item.filename }}</h4> <small>
+                                                                <span class="file_size">{{ item.size }} KB</span></small>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="media-right">
+                                            <div class="detail_img">
+                                                <div class="image/jpeg">
+                                                    <img v-bind:src="getSrcImg(itemActive)"> <!----> <!----> <!----> <!---->
+                                                </div>
                                             </div>
-                                            <div class="media-right">
-
+                                            <div class="detail_info">
+                                                <div class="image/jpeg">
+                                                    <span><h4>Title:</h4> <p>{{ itemActive.filename }}</p></span>
+                                                    <span><h4>Type:</h4> <p>{{ itemActive.mime_type }}</p>
+                                                    </span> <span><h4>Size:</h4><p><span class="selected_file_size">{{ itemActive.size }} KB</span></p></span> 
+                                                    <span><h4>Public URL:</h4> <p><a v-bind:href="getSrcImg(itemActive)" target="_blank">Click Here</a></p></span> <span><h4>Last Modified:</h4> <p>{{ itemActive.created_at | formatDateTime }}</p></span>
+                                                </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +115,8 @@
                             <div class="col-md-12">
                                 <div class="uploader-wrapper">
                                     <vue-dropzone ref="myVueDropzone" id="dropzone"
-                                    v-on:vdropzone-queue-complete="queuecomplete"
+                                    v-on:vdropzone-success="vdzSuccess"
+                                    v-on:vdropzone-queue-complete="vdzQueueComplete"
                                     :options="dropzoneOptions"
                                     :useCustomSlot=true>
                                         <div class="dropzone-custom-content">
@@ -145,8 +161,9 @@ export default {
                 thumbnailWidth: 150,
                 maxFilesize: 1,
             },
-            csrfHeaders: null,
             media: {},
+            selected: '',
+            itemActive: {}
         }
     },
     methods: {
@@ -154,20 +171,74 @@ export default {
             this.$Progress.start();
             axios.get('/api/mediaList').then(({ data }) => { 
                 this.media = data;
+                this.selected = (data[0]) ? data[0].id : 'undefined';
+                this.itemActive = (data[0]) ? data[0] : {};
                 this.isLoading = false; 
             });
             this.$Progress.finish();
+        },
+        deleteItem(item) {
+            Swal.fire({
+                title: 'Bạn chắc chứ?',
+                text: "Bạn muốn xóa tập tin "+item.filename+"?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Có, xóa ngay!',
+                cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if(result.value){
+                        // Send request to the server
+                        this.$Progress.start();
+                        axios.delete('/api/mediaDestroy/'+item.id)
+                        .then( () => {
+                            Swal.fire(
+                                'Xóa thành công!',
+                                'Bạn đã xóa tập tin thành công',
+                                'success'
+                            );
+                            Fire.$emit('AfterCreate');
+                            this.$Progress.finish();
+                        })
+                        .catch( () => {
+                            Swal("Lỗi xóa tập tin!", "Vui lòng liên hệ admin xử lý.", "warning");
+                        });
+                    }
+            });
+        },
+        selectedItem(item) {
+            this.selected = item.id;
+            this.itemActive = item;
         },
         openUploaderModal () {
             this.$refs.myVueDropzone.removeAllFiles();
             $('#uploadModal').modal('show');
         },
-        queuecomplete(file) {
+        vdzSuccess(file){
+            // console.log(file);
+        },
+        vdzQueueComplete(file) {
+            Fire.$emit('AfterCreate');
             $('#uploadModal').modal('hide');
+            Toast.fire({
+                type: 'success',
+                title: 'Tải lên thành công!'
+            });
+        },
+        getSrcImg(item){
+            if(item){
+                return '/'+item.directory+''+item.filename+'_thumb.'+item.extension;
+            }
+            
         },
     },
     created() {
         this.loadData();
+
+        Fire.$on('AfterCreate',() => {
+            this.loadData();
+        });
     }
 }
 </script>
@@ -193,6 +264,7 @@ export default {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    padding: 0;
 }
 .media-wrapper .media-left{
     -webkit-box-flex: 4;
@@ -200,6 +272,7 @@ export default {
     flex: 4;
     position: relative;
     min-height: 230px;
+    padding: 10px;
 }
 .media-wrapper .media-right{
     -webkit-box-flex: 1;
@@ -214,7 +287,7 @@ export default {
     margin: 0;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding: 10px;
+    padding: 0;
     position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -227,11 +300,10 @@ export default {
     flex: 1;
     width: 100%;
     min-width: 200px;
-    max-width: 250px;
 }
 .media-wrapper .file-link{
-    padding: 10px;
-    margin: 10px;
+    margin: 5px;
+    padding: 5px;
     cursor: pointer;
     border-radius: 3px;
     border: 1px solid #ecf0f1;
@@ -240,6 +312,11 @@ export default {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+}
+.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{
+    color: rgb(255, 255, 255);
+    background-color: #0e4d9a;
+    border-color: #0a366b;
 }
 .media-wrapper .file-icon{
     text-align: center;
@@ -250,6 +327,14 @@ export default {
     -ms-flex: 1;
     flex: 1;
 }
+.media-wrapper .file-icon .img-icon{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
 .media-wrapper .file-detail{
     -webkit-box-flex: 2;
     -ms-flex: 2;
@@ -257,8 +342,53 @@ export default {
     overflow: hidden;
     width: 100%;
 }
-.media-wrapper .file-icon img{
+.media-wrapper .file-detail h4{
+    margin-bottom: 2px;
+    margin-top: 10px;
+    max-height: 17px;
+    height: 17px;
+    overflow: hidden;
+    font-size: 13px;
+    text-overflow: ellipsis;
+}
+.media-wrapper .file-detail small{
+    font-size: 10px;
+    position: relative;
+    top: -3px;
+}
+.media-right .detail_img {
+    border-bottom: 1px solid #f1f1f1;
+    background: #eee;
+}
+.media-right .detail_img img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: inline-block;
+}
+.media-right .detail_info {
+    padding: 10px;
+}
+.media-right .detail_info span {
+    display: block;
+    clear: both;
+}
+.media-right .detail_info h4 {
+    float: left;
+    color: #bbb;
+    margin: 3px 8px 0 0;
+    padding-bottom: 2px;
+    font-size: 12px;
+}
+.media-right .detail_info p {
+    float: left;
+    color: #444;
+    margin-bottom: 0px;
+    font-size: 12px;
+}
+.media-right .detail_info a {
+    color: #0e4d9a;
+}
+.media-right .detail_info a:hover {
+    text-decoration: none;
 }
 </style>

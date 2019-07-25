@@ -44,3 +44,4 @@ Route::get('findPage', 'API\PageController@search');
 // Media
 Route::get('mediaList', 'API\MediaController@list');
 Route::post('mediaUpload', 'API\MediaController@upload');
+Route::delete('mediaDestroy/{id}', 'API\MediaController@destroy');

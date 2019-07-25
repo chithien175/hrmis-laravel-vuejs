@@ -57,4 +57,23 @@ class MediaController extends Controller
 
         return response()->json(['data' => $media], 201);
     }
+
+    public function destroy($id)
+    {
+        $media = Media::findOrFail($id);
+
+        $media_path = public_path($media->directory).''.$media->filename.'.'.$media->extension;
+        $media_thumb_path = public_path($media->directory).''.$media->filename.'_thumb.'.$media->extension;
+
+        if(file_exists($media_path)){
+            @unlink($media_path);
+        }
+        if(file_exists($media_thumb_path)){
+            @unlink($media_thumb_path);
+        }
+
+        $media->delete();
+
+        return ['message' => 'Đã xóa tập tin'];
+    }
 }

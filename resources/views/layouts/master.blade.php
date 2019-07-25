@@ -201,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="nav-item">
 							<router-link to="/admin/logviewer" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Lịch sử hệ thống</p>
+								<p>Nhật ký hệ thống</p>
 							</router-link>
 						</li>
 						@endpermission

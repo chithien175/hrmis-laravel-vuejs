@@ -3036,6 +3036,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3052,8 +3068,9 @@ __webpack_require__.r(__webpack_exports__);
         thumbnailWidth: 150,
         maxFilesize: 1
       },
-      csrfHeaders: null,
-      media: {}
+      media: {},
+      selected: '',
+      itemActive: {}
     };
   },
   methods: {
@@ -3064,20 +3081,71 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/mediaList').then(function (_ref) {
         var data = _ref.data;
         _this.media = data;
+        _this.selected = data[0] ? data[0].id : 'undefined';
+        _this.itemActive = data[0] ? data[0] : {};
         _this.isLoading = false;
       });
       this.$Progress.finish();
+    },
+    deleteItem: function deleteItem(item) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Bạn chắc chứ?',
+        text: "Bạn muốn xóa tập tin " + item.filename + "?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Có, xóa ngay!',
+        cancelButtonText: 'Hủy'
+      }).then(function (result) {
+        if (result.value) {
+          // Send request to the server
+          _this2.$Progress.start();
+
+          axios["delete"]('/api/mediaDestroy/' + item.id).then(function () {
+            Swal.fire('Xóa thành công!', 'Bạn đã xóa tập tin thành công', 'success');
+            Fire.$emit('AfterCreate');
+
+            _this2.$Progress.finish();
+          })["catch"](function () {
+            Swal("Lỗi xóa tập tin!", "Vui lòng liên hệ admin xử lý.", "warning");
+          });
+        }
+      });
+    },
+    selectedItem: function selectedItem(item) {
+      this.selected = item.id;
+      this.itemActive = item;
     },
     openUploaderModal: function openUploaderModal() {
       this.$refs.myVueDropzone.removeAllFiles();
       $('#uploadModal').modal('show');
     },
-    queuecomplete: function queuecomplete(file) {
+    vdzSuccess: function vdzSuccess(file) {// console.log(file);
+    },
+    vdzQueueComplete: function vdzQueueComplete(file) {
+      Fire.$emit('AfterCreate');
       $('#uploadModal').modal('hide');
+      Toast.fire({
+        type: 'success',
+        title: 'Tải lên thành công!'
+      });
+    },
+    getSrcImg: function getSrcImg(item) {
+      if (item) {
+        return '/' + item.directory + '' + item.filename + '_thumb.' + item.extension;
+      }
     }
   },
   created: function created() {
+    var _this3 = this;
+
     this.loadData();
+    Fire.$on('AfterCreate', function () {
+      _this3.loadData();
+    });
   }
 });
 
@@ -11565,7 +11633,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 10px;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n    max-width: 250px;\n}\n.media-wrapper .file-link{\n    padding: 10px;\n    margin: 10px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-icon img{\n    width: 100%;\n    height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n    padding: 0;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n    padding: 10px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 0;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n}\n.media-wrapper .file-link{\n    margin: 5px;\n    padding: 5px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{\n    color: rgb(255, 255, 255);\n    background-color: #0e4d9a;\n    border-color: #0a366b;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-icon .img-icon{\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-detail h4{\n    margin-bottom: 2px;\n    margin-top: 10px;\n    max-height: 17px;\n    height: 17px;\n    overflow: hidden;\n    font-size: 13px;\n    text-overflow: ellipsis;\n}\n.media-wrapper .file-detail small{\n    font-size: 10px;\n    position: relative;\n    top: -3px;\n}\n.media-right .detail_img {\n    border-bottom: 1px solid #f1f1f1;\n    background: #eee;\n}\n.media-right .detail_img img {\n    width: 100%;\n    height: auto;\n    display: inline-block;\n}\n.media-right .detail_info {\n    padding: 10px;\n}\n.media-right .detail_info span {\n    display: block;\n    clear: both;\n}\n.media-right .detail_info h4 {\n    float: left;\n    color: #bbb;\n    margin: 3px 8px 0 0;\n    padding-bottom: 2px;\n    font-size: 12px;\n}\n.media-right .detail_info p {\n    float: left;\n    color: #444;\n    margin-bottom: 0px;\n    font-size: 12px;\n}\n.media-right .detail_info a {\n    color: #0e4d9a;\n}\n.media-right .detail_info a:hover {\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -80169,98 +80237,262 @@ var render = function() {
                                     _vm._v(" "),
                                     _vm._m(3),
                                     _vm._v(" "),
-                                    _vm._m(4)
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-sm btn-danger",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.deleteItem(
+                                              _vm.itemActive
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-trash fa-fw"
+                                        }),
+                                        _vm._v(
+                                          " Xóa\n                                                "
+                                        )
+                                      ]
+                                    )
                                   ]
                                 )
                               ])
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "card-body media-wrapper" },
-                              [
-                                _c("div", { staticClass: "media-left" }, [
-                                  _c(
-                                    "ul",
-                                    { staticClass: "media-list" },
-                                    _vm._l(_vm.media, function(item) {
-                                      return _c(
-                                        "li",
-                                        {
-                                          key: item.id,
-                                          staticClass: "media-item"
-                                        },
-                                        [
-                                          _c(
-                                            "div",
-                                            { staticClass: "file-link" },
+                            !_vm.media.length
+                              ? _c(
+                                  "div",
+                                  { staticClass: "card-body media-wrapper" },
+                                  [
+                                    _c("p", { staticClass: "p-3" }, [
+                                      _vm._v("Không tìm thấy tập tin nào!")
+                                    ])
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.media.length
+                              ? _c(
+                                  "div",
+                                  { staticClass: "card-body media-wrapper" },
+                                  [
+                                    _c("div", { staticClass: "media-left" }, [
+                                      _c(
+                                        "ul",
+                                        { staticClass: "media-list" },
+                                        _vm._l(_vm.media, function(item) {
+                                          return _c(
+                                            "li",
+                                            {
+                                              key: item.id,
+                                              staticClass: "media-item"
+                                            },
                                             [
                                               _c(
                                                 "div",
-                                                { staticClass: "file-icon" },
-                                                [
-                                                  _c("img", {
-                                                    attrs: {
-                                                      src:
-                                                        "/" +
-                                                        item.directory +
-                                                        "/" +
-                                                        item.filename +
-                                                        "_thumb." +
-                                                        item.extension
+                                                {
+                                                  staticClass: "file-link",
+                                                  class: {
+                                                    selected:
+                                                      item.id == _vm.selected
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.selectedItem(
+                                                        item
+                                                      )
                                                     }
-                                                  })
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "file-detail" },
+                                                  }
+                                                },
                                                 [
                                                   _c(
                                                     "div",
                                                     {
-                                                      staticClass: "image/jpeg"
+                                                      staticClass: "file-icon"
                                                     },
                                                     [
-                                                      _c("h4", [
-                                                        _vm._v(
-                                                          _vm._s(item.filename)
-                                                        )
-                                                      ]),
-                                                      _vm._v(" "),
-                                                      _c("small", [
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "file_size"
-                                                          },
-                                                          [
+                                                      _c("div", {
+                                                        staticClass: "img-icon",
+                                                        style: {
+                                                          backgroundImage:
+                                                            "url('" +
+                                                            _vm.getSrcImg(
+                                                              item
+                                                            ) +
+                                                            "')"
+                                                        }
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "file-detail"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "image/jpeg"
+                                                        },
+                                                        [
+                                                          _c("h4", [
                                                             _vm._v(
                                                               _vm._s(
-                                                                item.size
-                                                              ) + " KB"
+                                                                item.filename
+                                                              )
                                                             )
-                                                          ]
-                                                        )
-                                                      ])
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("small", [
+                                                            _c(
+                                                              "span",
+                                                              {
+                                                                staticClass:
+                                                                  "file_size"
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.size
+                                                                  ) + " KB"
+                                                                )
+                                                              ]
+                                                            )
+                                                          ])
+                                                        ]
+                                                      )
                                                     ]
                                                   )
                                                 ]
                                               )
                                             ]
                                           )
+                                        }),
+                                        0
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "media-right" }, [
+                                      _c("div", { staticClass: "detail_img" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "image/jpeg" },
+                                          [
+                                            _c("img", {
+                                              attrs: {
+                                                src: _vm.getSrcImg(
+                                                  _vm.itemActive
+                                                )
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "detail_info" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "image/jpeg" },
+                                            [
+                                              _c("span", [
+                                                _c("h4", [_vm._v("Title:")]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.itemActive.filename
+                                                    )
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _c("h4", [_vm._v("Type:")]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.itemActive.mime_type
+                                                    )
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _c("h4", [_vm._v("Size:")]),
+                                                _c("p", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "selected_file_size"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.itemActive.size
+                                                        ) + " KB"
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _c("h4", [
+                                                  _vm._v("Public URL:")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      attrs: {
+                                                        href: _vm.getSrcImg(
+                                                          _vm.itemActive
+                                                        ),
+                                                        target: "_blank"
+                                                      }
+                                                    },
+                                                    [_vm._v("Click Here")]
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _c("h4", [
+                                                  _vm._v("Last Modified:")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("p", [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm._f("formatDateTime")(
+                                                        _vm.itemActive
+                                                          .created_at
+                                                      )
+                                                    )
+                                                  )
+                                                ])
+                                              ])
+                                            ]
+                                          )
                                         ]
                                       )
-                                    }),
-                                    0
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "media-right" })
-                              ]
-                            )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e()
                           ])
                         ])
                       ])
@@ -80291,7 +80523,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "row" }, [
@@ -80310,8 +80542,9 @@ var render = function() {
                                     useCustomSlot: true
                                   },
                                   on: {
+                                    "vdropzone-success": _vm.vdzSuccess,
                                     "vdropzone-queue-complete":
-                                      _vm.queuecomplete
+                                      _vm.vdzQueueComplete
                                   }
                                 },
                                 [
@@ -80349,7 +80582,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(5)
                   ])
                 ]
               )
@@ -80398,15 +80631,6 @@ var staticRenderFns = [
     return _c("button", { staticClass: "btn btn-sm btn-success" }, [
       _c("i", { staticClass: "fas fa-paragraph fa-fw" }),
       _vm._v(" Đổi tên\n                                                ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-danger" }, [
-      _c("i", { staticClass: "fas fa-trash fa-fw" }),
-      _vm._v(" Xóa\n                                                ")
     ])
   },
   function() {
