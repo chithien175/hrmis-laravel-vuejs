@@ -24,8 +24,6 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@ckeditor/ckeditor5-build-classic": "^12.3.1",
-        "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
         "@fortawesome/fontawesome-free": "^5.9.0",
         "admin-lte": "^3.0.0-beta.1",
         "laravel-vue-pagination": "^2.3.0",
@@ -38,7 +36,6 @@
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.0.6",
         "vue2-dropzone": "^3.6.0",
-        "vue2-editor": "^2.9.1",
-        "vuetable-2": "^2.0.0-beta.4"
+        "vue2-editor": "^2.9.1"
     }
 }

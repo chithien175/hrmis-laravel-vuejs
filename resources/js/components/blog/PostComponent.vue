@@ -113,13 +113,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputSlug" class="control-label">Chuỗi cho đường dẫn tĩnh</label>
-                                        <input v-model="form.slug" type="text" name="slug"
-                                            class="form-control" :class="{ 'is-invalid': form.errors.has('slug') }">
+                                        <div>
+                                            <input v-model="form.slug" type="text" name="slug"
+                                            class="form-control col-md-6 d-inline-block" :class="{ 'is-invalid': form.errors.has('slug') }"><span>.html</span>
+                                        </div>
+                                        
                                         <has-error :form="form" field="slug"></has-error>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBody" class="control-label">Nội dung</label>
-                                        <vue-editor v-model="form.body"></vue-editor>
+                                        <vue-editor v-model="form.body" useCustomImageHandler @imageAdded="handleImageAdded"></vue-editor>
                                         <has-error :form="form" field="body"></has-error>
                                     </div>
                                 </div>
@@ -336,6 +339,28 @@ export default {
         },
         convertSlug (){
             this.form.slug = this.sanitizeTitle(this.form.title);
+        },
+        handleImageAdded: function(file, Editor, cursorLocation, resetUploader) {
+            // An example of using FormData
+            // NOTE: Your key could be different such as:
+            // formData.append('file', file)
+
+            var formData = new FormData();
+            formData.append("image", file);
+
+            axios({
+                url: "/api/handleImageAdded",
+                method: "POST",
+                data: formData
+            })
+            .then(result => {
+            let url = result.data.url; // Get url from response
+            Editor.insertEmbed(cursorLocation, "image", url);
+            resetUploader();
+            })
+            .catch(err => {
+            console.log(err);
+            });
         },
         searchit: _.debounce( () => {
             Fire.$emit('Searching');

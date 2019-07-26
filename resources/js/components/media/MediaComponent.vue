@@ -57,17 +57,40 @@
                                         <p class="p-3">Không tìm thấy tập tin nào!</p>
                                     </div>
                                     <div class="card-body media-wrapper" v-if="media.length">
+                                        <ol class="media_breadcrumb">
+                                            <li class="item_breadcrumb">
+                                                Media Library <i class="fas fa-chevron-right"></i>
+                                            </li>
+                                            <li class="item_breadcrumb">
+                                                front-banners <i class="fas fa-chevron-right"></i>
+                                            </li>
+                                            <li class="item_breadcrumb">
+                                                June2018
+                                            </li>
+                                        </ol>
                                         <div class="media-left">
                                             <ul class="media-list">
                                                 <li class="media-item" v-for="item in media" :key="item.id">
-                                                    <div class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)">
+                                                    <div v-show="item.aggregate_type == 'folder'" class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)">
                                                         <div class="file-icon">
                                                             <div class="img-icon" :style="{ backgroundImage: 'url(\'' + getSrcImg(item) + '\')' }"></div>
                                                         </div>
                                                         <div class="file-detail">
                                                             <div class="image/jpeg">
-                                                                <h4>{{ item.filename }}</h4> <small>
-                                                                <span class="file_size">{{ item.size }} KB</span></small>
+                                                                <h4>{{ item.filename }}</h4> 
+                                                                <small>Thư mục</small>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div v-show="item.aggregate_type != 'folder'" class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)">
+                                                        <div class="file-icon">
+                                                            <div class="img-icon" :style="{ backgroundImage: 'url(\'' + getSrcImg(item) + '\')' }"></div>
+                                                        </div>
+                                                        <div class="file-detail">
+                                                            <div class="image/jpeg">
+                                                                <h4>{{ item.filename }}</h4>
+                                                                <small><span class="file_size">{{ item.size }} Bytes</span></small>
                                                             </div>
                                                         </div>
                                                         
@@ -77,16 +100,17 @@
                                         </div>
                                         <div class="media-right">
                                             <div class="detail_img">
-                                                <div class="image/jpeg">
+                                                <div class="image/jpeg" v-if="itemActive.aggregate_type == 'image'">
                                                     <img v-bind:src="getSrcImg(itemActive)"> <!----> <!----> <!----> <!---->
                                                 </div>
                                             </div>
                                             <div class="detail_info">
                                                 <div class="image/jpeg">
-                                                    <span><h4>Title:</h4> <p>{{ itemActive.filename }}</p></span>
-                                                    <span><h4>Type:</h4> <p>{{ itemActive.mime_type }}</p>
-                                                    </span> <span><h4>Size:</h4><p><span class="selected_file_size">{{ itemActive.size }} KB</span></p></span> 
-                                                    <span><h4>Public URL:</h4> <p><a v-bind:href="getSrcImg(itemActive)" target="_blank">Click Here</a></p></span> <span><h4>Last Modified:</h4> <p>{{ itemActive.created_at | formatDateTime }}</p></span>
+                                                    <span><h4>Tên:</h4> <p>{{ itemActive.filename }}</p></span>
+                                                    <span><h4>Loại:</h4> <p>{{ itemActive.aggregate_type }}/{{itemActive.extension}}</p>
+                                                    </span> 
+                                                    <span v-if="itemActive.aggregate_type != 'folder'"><h4>Kích thước:</h4><p><span class="selected_file_size">{{ itemActive.size }} Bytes</span></p></span> 
+                                                    <span v-if="itemActive.aggregate_type == 'image'"><h4>Đường dẫn:</h4> <p><a v-bind:href="getSrcImg(itemActive)" target="_blank">Xem tại đây</a></p></span> <span v-if="itemActive.aggregate_type != 'folder'"><h4>Ngày tạo:</h4> <p>{{ itemActive.created_at | formatDateTime }}</p></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +126,7 @@
 
         <!-- Upload Modal -->
         <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title blue" id="uploadModalLabel">Tải lên tập tin</h5>
@@ -115,13 +139,14 @@
                             <div class="col-md-12">
                                 <div class="uploader-wrapper">
                                     <vue-dropzone ref="myVueDropzone" id="dropzone"
+                                    v-on:vdropzone-sending="vdzSending"
                                     v-on:vdropzone-success="vdzSuccess"
                                     v-on:vdropzone-queue-complete="vdzQueueComplete"
                                     :options="dropzoneOptions"
                                     :useCustomSlot=true>
                                         <div class="dropzone-custom-content">
                                             <span><i class="fas fa-cloud-upload-alt blue"></i></span>
-                                            <h4 class="dropzone-custom-title blue">Kéo và thả / nhấp để tải lên nội dung!</h4>
+                                            <h4 class="dropzone-custom-title blue">Nhấp / Kéo - thả để tải lên!</h4>
                                         </div>
                                     </vue-dropzone>
                                 </div>
@@ -163,13 +188,14 @@ export default {
             },
             media: {},
             selected: '',
-            itemActive: {}
+            itemActive: {},
+            folder: 'media/',
         }
     },
     methods: {
         loadData () {
             this.$Progress.start();
-            axios.get('/api/mediaList').then(({ data }) => { 
+            axios.post('/api/mediaList', {'folder':this.folder}).then(({ data }) => { 
                 this.media = data;
                 this.selected = (data[0]) ? data[0].id : 'undefined';
                 this.itemActive = (data[0]) ? data[0] : {};
@@ -215,6 +241,9 @@ export default {
             this.$refs.myVueDropzone.removeAllFiles();
             $('#uploadModal').modal('show');
         },
+        vdzSending: function (file, xhr, formData) {
+            formData.append('folder', this.folder);
+        },
         vdzSuccess(file){
             // console.log(file);
         },
@@ -228,9 +257,21 @@ export default {
         },
         getSrcImg(item){
             if(item){
-                return '/'+item.directory+''+item.filename+'_thumb.'+item.extension;
+                if(item.aggregate_type == 'image'){
+                    return '/'+item.directory+''+item.filename+'.'+item.extension;
+                }
+                if(item.extension == 'folder'){
+                    return '/images/media/default-folder-icon.png';
+                }
+                if(item.extension == 'zip'){
+                    return '/images/media/default-zip-icon.png';
+                }
+                if(item.extension == 'txt'){
+                    return '/images/media/default-txt-icon.png';
+                }
+                
+                return '/images/media/default-file-icon.png';
             }
-            
         },
     },
     created() {
@@ -390,5 +431,32 @@ export default {
 }
 .media-right .detail_info a:hover {
     text-decoration: none;
+}
+
+.media_breadcrumb{
+    top: 0;
+    background: #f0f0f0;
+    padding-left: 20px;
+    width: 100%;
+    margin-top: 0;
+    left: 0;
+    padding-top: 7px;
+    padding-bottom: 8px;
+}
+.media_breadcrumb .item_breadcrumb {
+    cursor: pointer;
+    transition: color .1s linear;
+    position: relative;
+    font-size: 12px;
+    display: inline;
+}
+.media_breadcrumb .item_breadcrumb:hover {
+    color: #0e4d9a;
+}
+.media_breadcrumb .item_breadcrumb:not(:last-child){
+    font-weight: bold;
+}
+.media_breadcrumb .item_breadcrumb i{
+    font-size: 10px;
 }
 </style>

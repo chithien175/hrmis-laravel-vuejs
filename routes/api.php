@@ -42,6 +42,7 @@ Route::apiResources(['page' => 'API\PageController']);
 Route::get('findPage', 'API\PageController@search');
 
 // Media
-Route::get('mediaList', 'API\MediaController@list');
+Route::post('mediaList', 'API\MediaController@list');
 Route::post('mediaUpload', 'API\MediaController@upload');
 Route::delete('mediaDestroy/{id}', 'API\MediaController@destroy');
+Route::post('handleImageAdded', 'API\MediaController@handleImageAdded');

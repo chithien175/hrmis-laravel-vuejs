@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<li class="nav-item">
 							<router-link to="/admin/mediafile" class="nav-link">
 								<i class="far fa-circle nav-icon"></i>
-								<p>Ảnh và tập tin</p>
+								<p>Quản lý tập tin</p>
 							</router-link>
 						</li>
 						@endpermission

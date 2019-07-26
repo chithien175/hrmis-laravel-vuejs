@@ -2253,6 +2253,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -2442,6 +2445,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     convertSlug: function convertSlug() {
       this.form.slug = this.sanitizeTitle(this.form.title);
+    },
+    handleImageAdded: function handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      // An example of using FormData
+      // NOTE: Your key could be different such as:
+      // formData.append('file', file)
+      var formData = new FormData();
+      formData.append("image", file);
+      axios({
+        url: "/api/handleImageAdded",
+        method: "POST",
+        data: formData
+      }).then(function (result) {
+        var url = result.data.url; // Get url from response
+
+        Editor.insertEmbed(cursorLocation, "image", url);
+        resetUploader();
+      })["catch"](function (err) {
+        console.log(err);
+      });
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
@@ -3052,6 +3074,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3070,7 +3117,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       media: {},
       selected: '',
-      itemActive: {}
+      itemActive: {},
+      folder: 'media/'
     };
   },
   methods: {
@@ -3078,7 +3126,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.$Progress.start();
-      axios.get('/api/mediaList').then(function (_ref) {
+      axios.post('/api/mediaList', {
+        'folder': this.folder
+      }).then(function (_ref) {
         var data = _ref.data;
         _this.media = data;
         _this.selected = data[0] ? data[0].id : 'undefined';
@@ -3123,6 +3173,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.myVueDropzone.removeAllFiles();
       $('#uploadModal').modal('show');
     },
+    vdzSending: function vdzSending(file, xhr, formData) {
+      formData.append('folder', this.folder);
+    },
     vdzSuccess: function vdzSuccess(file) {// console.log(file);
     },
     vdzQueueComplete: function vdzQueueComplete(file) {
@@ -3135,7 +3188,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     getSrcImg: function getSrcImg(item) {
       if (item) {
-        return '/' + item.directory + '' + item.filename + '_thumb.' + item.extension;
+        if (item.aggregate_type == 'image') {
+          return '/' + item.directory + '' + item.filename + '.' + item.extension;
+        }
+
+        if (item.extension == 'folder') {
+          return '/images/media/default-folder-icon.png';
+        }
+
+        if (item.extension == 'zip') {
+          return '/images/media/default-zip-icon.png';
+        }
+
+        if (item.extension == 'txt') {
+          return '/images/media/default-txt-icon.png';
+        }
+
+        return '/images/media/default-file-icon.png';
       }
     }
   },
@@ -11633,7 +11702,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n    padding: 0;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n    padding: 10px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 0;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n}\n.media-wrapper .file-link{\n    margin: 5px;\n    padding: 5px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{\n    color: rgb(255, 255, 255);\n    background-color: #0e4d9a;\n    border-color: #0a366b;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-icon .img-icon{\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-detail h4{\n    margin-bottom: 2px;\n    margin-top: 10px;\n    max-height: 17px;\n    height: 17px;\n    overflow: hidden;\n    font-size: 13px;\n    text-overflow: ellipsis;\n}\n.media-wrapper .file-detail small{\n    font-size: 10px;\n    position: relative;\n    top: -3px;\n}\n.media-right .detail_img {\n    border-bottom: 1px solid #f1f1f1;\n    background: #eee;\n}\n.media-right .detail_img img {\n    width: 100%;\n    height: auto;\n    display: inline-block;\n}\n.media-right .detail_info {\n    padding: 10px;\n}\n.media-right .detail_info span {\n    display: block;\n    clear: both;\n}\n.media-right .detail_info h4 {\n    float: left;\n    color: #bbb;\n    margin: 3px 8px 0 0;\n    padding-bottom: 2px;\n    font-size: 12px;\n}\n.media-right .detail_info p {\n    float: left;\n    color: #444;\n    margin-bottom: 0px;\n    font-size: 12px;\n}\n.media-right .detail_info a {\n    color: #0e4d9a;\n}\n.media-right .detail_info a:hover {\n    text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n    padding: 0;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n    padding: 10px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 0;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n}\n.media-wrapper .file-link{\n    margin: 5px;\n    padding: 5px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{\n    color: rgb(255, 255, 255);\n    background-color: #0e4d9a;\n    border-color: #0a366b;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-icon .img-icon{\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-detail h4{\n    margin-bottom: 2px;\n    margin-top: 10px;\n    max-height: 17px;\n    height: 17px;\n    overflow: hidden;\n    font-size: 13px;\n    text-overflow: ellipsis;\n}\n.media-wrapper .file-detail small{\n    font-size: 10px;\n    position: relative;\n    top: -3px;\n}\n.media-right .detail_img {\n    border-bottom: 1px solid #f1f1f1;\n    background: #eee;\n}\n.media-right .detail_img img {\n    width: 100%;\n    height: auto;\n    display: inline-block;\n}\n.media-right .detail_info {\n    padding: 10px;\n}\n.media-right .detail_info span {\n    display: block;\n    clear: both;\n}\n.media-right .detail_info h4 {\n    float: left;\n    color: #bbb;\n    margin: 3px 8px 0 0;\n    padding-bottom: 2px;\n    font-size: 12px;\n}\n.media-right .detail_info p {\n    float: left;\n    color: #444;\n    margin-bottom: 0px;\n    font-size: 12px;\n}\n.media-right .detail_info a {\n    color: #0e4d9a;\n}\n.media-right .detail_info a:hover {\n    text-decoration: none;\n}\n.media_breadcrumb{\n    top: 0;\n    background: #f0f0f0;\n    padding-left: 20px;\n    width: 100%;\n    margin-top: 0;\n    left: 0;\n    padding-top: 7px;\n    padding-bottom: 8px;\n}\n.media_breadcrumb .item_breadcrumb {\n    cursor: pointer;\n    -webkit-transition: color .1s linear;\n    transition: color .1s linear;\n    position: relative;\n    font-size: 12px;\n    display: inline;\n}\n.media_breadcrumb .item_breadcrumb:hover {\n    color: #0e4d9a;\n}\n.media_breadcrumb .item_breadcrumb:not(:last-child){\n    font-weight: bold;\n}\n.media_breadcrumb .item_breadcrumb i{\n    font-size: 10px;\n}\n", ""]);
 
 // exports
 
@@ -78967,34 +79036,40 @@ var render = function() {
                                     [_vm._v("Chuỗi cho đường dẫn tĩnh")]
                                   ),
                                   _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.slug,
-                                        expression: "form.slug"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("slug")
-                                    },
-                                    attrs: { type: "text", name: "slug" },
-                                    domProps: { value: _vm.form.slug },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                                  _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.slug,
+                                          expression: "form.slug"
                                         }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "slug",
-                                          $event.target.value
+                                      ],
+                                      staticClass:
+                                        "form-control col-md-6 d-inline-block",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "slug"
                                         )
+                                      },
+                                      attrs: { type: "text", name: "slug" },
+                                      domProps: { value: _vm.form.slug },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "slug",
+                                            $event.target.value
+                                          )
+                                        }
                                       }
-                                    }
-                                  }),
+                                    }),
+                                    _c("span", [_vm._v(".html")])
+                                  ]),
                                   _vm._v(" "),
                                   _c("has-error", {
                                     attrs: { form: _vm.form, field: "slug" }
@@ -79017,6 +79092,8 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c("vue-editor", {
+                                    attrs: { useCustomImageHandler: "" },
+                                    on: { imageAdded: _vm.handleImageAdded },
                                     model: {
                                       value: _vm.form.body,
                                       callback: function($$v) {
@@ -80280,6 +80357,8 @@ var render = function() {
                                   "div",
                                   { staticClass: "card-body media-wrapper" },
                                   [
+                                    _vm._m(4),
+                                    _vm._v(" "),
                                     _c("div", { staticClass: "media-left" }, [
                                       _c(
                                         "ul",
@@ -80295,6 +80374,96 @@ var render = function() {
                                               _c(
                                                 "div",
                                                 {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        item.aggregate_type ==
+                                                        "folder",
+                                                      expression:
+                                                        "item.aggregate_type == 'folder'"
+                                                    }
+                                                  ],
+                                                  staticClass: "file-link",
+                                                  class: {
+                                                    selected:
+                                                      item.id == _vm.selected
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.selectedItem(
+                                                        item
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "file-icon"
+                                                    },
+                                                    [
+                                                      _c("div", {
+                                                        staticClass: "img-icon",
+                                                        style: {
+                                                          backgroundImage:
+                                                            "url('" +
+                                                            _vm.getSrcImg(
+                                                              item
+                                                            ) +
+                                                            "')"
+                                                        }
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "file-detail"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "image/jpeg"
+                                                        },
+                                                        [
+                                                          _c("h4", [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                item.filename
+                                                              )
+                                                            )
+                                                          ]),
+                                                          _vm._v(" "),
+                                                          _c("small", [
+                                                            _vm._v("Thư mục")
+                                                          ])
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "show",
+                                                      rawName: "v-show",
+                                                      value:
+                                                        item.aggregate_type !=
+                                                        "folder",
+                                                      expression:
+                                                        "item.aggregate_type != 'folder'"
+                                                    }
+                                                  ],
                                                   staticClass: "file-link",
                                                   class: {
                                                     selected:
@@ -80361,7 +80530,7 @@ var render = function() {
                                                                 _vm._v(
                                                                   _vm._s(
                                                                     item.size
-                                                                  ) + " KB"
+                                                                  ) + " Bytes"
                                                                 )
                                                               ]
                                                             )
@@ -80381,19 +80550,21 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("div", { staticClass: "media-right" }, [
                                       _c("div", { staticClass: "detail_img" }, [
-                                        _c(
-                                          "div",
-                                          { staticClass: "image/jpeg" },
-                                          [
-                                            _c("img", {
-                                              attrs: {
-                                                src: _vm.getSrcImg(
-                                                  _vm.itemActive
-                                                )
-                                              }
-                                            })
-                                          ]
-                                        )
+                                        _vm.itemActive.aggregate_type == "image"
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "image/jpeg" },
+                                              [
+                                                _c("img", {
+                                                  attrs: {
+                                                    src: _vm.getSrcImg(
+                                                      _vm.itemActive
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          : _vm._e()
                                       ]),
                                       _vm._v(" "),
                                       _c(
@@ -80405,7 +80576,7 @@ var render = function() {
                                             { staticClass: "image/jpeg" },
                                             [
                                               _c("span", [
-                                                _c("h4", [_vm._v("Title:")]),
+                                                _c("h4", [_vm._v("Tên:")]),
                                                 _vm._v(" "),
                                                 _c("p", [
                                                   _vm._v(
@@ -80417,74 +80588,93 @@ var render = function() {
                                               ]),
                                               _vm._v(" "),
                                               _c("span", [
-                                                _c("h4", [_vm._v("Type:")]),
+                                                _c("h4", [_vm._v("Loại:")]),
                                                 _vm._v(" "),
                                                 _c("p", [
                                                   _vm._v(
                                                     _vm._s(
-                                                      _vm.itemActive.mime_type
-                                                    )
+                                                      _vm.itemActive
+                                                        .aggregate_type
+                                                    ) +
+                                                      "/" +
+                                                      _vm._s(
+                                                        _vm.itemActive.extension
+                                                      )
                                                   )
                                                 ])
                                               ]),
                                               _vm._v(" "),
-                                              _c("span", [
-                                                _c("h4", [_vm._v("Size:")]),
-                                                _c("p", [
-                                                  _c(
-                                                    "span",
-                                                    {
-                                                      staticClass:
-                                                        "selected_file_size"
-                                                    },
-                                                    [
+                                              _vm.itemActive.aggregate_type !=
+                                              "folder"
+                                                ? _c("span", [
+                                                    _c("h4", [
+                                                      _vm._v("Kích thước:")
+                                                    ]),
+                                                    _c("p", [
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "selected_file_size"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm.itemActive
+                                                                .size
+                                                            ) + " Bytes"
+                                                          )
+                                                        ]
+                                                      )
+                                                    ])
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _vm.itemActive.aggregate_type ==
+                                              "image"
+                                                ? _c("span", [
+                                                    _c("h4", [
+                                                      _vm._v("Đường dẫn:")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("p", [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          attrs: {
+                                                            href: _vm.getSrcImg(
+                                                              _vm.itemActive
+                                                            ),
+                                                            target: "_blank"
+                                                          }
+                                                        },
+                                                        [_vm._v("Xem tại đây")]
+                                                      )
+                                                    ])
+                                                  ])
+                                                : _vm._e(),
+                                              _vm._v(" "),
+                                              _vm.itemActive.aggregate_type !=
+                                              "folder"
+                                                ? _c("span", [
+                                                    _c("h4", [
+                                                      _vm._v("Ngày tạo:")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("p", [
                                                       _vm._v(
                                                         _vm._s(
-                                                          _vm.itemActive.size
-                                                        ) + " KB"
+                                                          _vm._f(
+                                                            "formatDateTime"
+                                                          )(
+                                                            _vm.itemActive
+                                                              .created_at
+                                                          )
+                                                        )
                                                       )
-                                                    ]
-                                                  )
-                                                ])
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("span", [
-                                                _c("h4", [
-                                                  _vm._v("Public URL:")
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("p", [
-                                                  _c(
-                                                    "a",
-                                                    {
-                                                      attrs: {
-                                                        href: _vm.getSrcImg(
-                                                          _vm.itemActive
-                                                        ),
-                                                        target: "_blank"
-                                                      }
-                                                    },
-                                                    [_vm._v("Click Here")]
-                                                  )
-                                                ])
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("span", [
-                                                _c("h4", [
-                                                  _vm._v("Last Modified:")
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("p", [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      _vm._f("formatDateTime")(
-                                                        _vm.itemActive
-                                                          .created_at
-                                                      )
-                                                    )
-                                                  )
-                                                ])
-                                              ])
+                                                    ])
+                                                  ])
+                                                : _vm._e()
                                             ]
                                           )
                                         ]
@@ -80518,12 +80708,12 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass: "modal-dialog modal-dialog-centered modal-xl",
+                  staticClass: "modal-dialog modal-dialog-centered modal-lg",
                   attrs: { role: "document" }
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "row" }, [
@@ -80542,6 +80732,7 @@ var render = function() {
                                     useCustomSlot: true
                                   },
                                   on: {
+                                    "vdropzone-sending": _vm.vdzSending,
                                     "vdropzone-success": _vm.vdzSuccess,
                                     "vdropzone-queue-complete":
                                       _vm.vdzQueueComplete
@@ -80565,11 +80756,7 @@ var render = function() {
                                           staticClass:
                                             "dropzone-custom-title blue"
                                         },
-                                        [
-                                          _vm._v(
-                                            "Kéo và thả / nhấp để tải lên nội dung!"
-                                          )
-                                        ]
+                                        [_vm._v("Nhấp / Kéo - thả để tải lên!")]
                                       )
                                     ]
                                   )
@@ -80582,7 +80769,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(6)
                   ])
                 ]
               )
@@ -80631,6 +80818,32 @@ var staticRenderFns = [
     return _c("button", { staticClass: "btn btn-sm btn-success" }, [
       _c("i", { staticClass: "fas fa-paragraph fa-fw" }),
       _vm._v(" Đổi tên\n                                                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ol", { staticClass: "media_breadcrumb" }, [
+      _c("li", { staticClass: "item_breadcrumb" }, [
+        _vm._v(
+          "\n                                                Media Library "
+        ),
+        _c("i", { staticClass: "fas fa-chevron-right" })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "item_breadcrumb" }, [
+        _vm._v(
+          "\n                                                front-banners "
+        ),
+        _c("i", { staticClass: "fas fa-chevron-right" })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "item_breadcrumb" }, [
+        _vm._v(
+          "\n                                                June2018\n                                            "
+        )
+      ])
     ])
   },
   function() {
