@@ -3694,6 +3694,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -81934,7 +81955,9 @@ var render = function() {
                               ]
                             )
                           ])
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(2)
                       ])
                     : _vm._e()
                 ])
@@ -81981,7 +82004,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(3)
                     ]),
                     _vm._v(" "),
                     _c(
@@ -82120,6 +82143,43 @@ var staticRenderFns = [
         _c("th", [_vm._v("Ngày tạo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Tác vụ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 note-developer" }, [
+      _c("p", [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-sm btn-warning",
+            attrs: {
+              "data-toggle": "collapse",
+              href: "#collapseExample",
+              role: "button",
+              "aria-expanded": "false",
+              "aria-controls": "collapseExample"
+            }
+          },
+          [
+            _vm._v(
+              "\n                                        Sử dụng lập trình!\n                                    "
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
+        _c("div", { staticClass: "card card-body" }, [
+          _c("pre", { staticClass: "m-0" }, [
+            _vm._v(
+              "$options = array(\n    'id' => 'navigation',\n    'class' => 'navigation',\n    'sub_id' => 'submenu',\n    'sub_class' => 'submenu'\n);\necho menu('frontend', $options);"
+            )
+          ])
+        ])
       ])
     ])
   },

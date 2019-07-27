@@ -29,6 +29,7 @@
                                 <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 6" :key="index"></vcl-facebook>
                             </div>
                         </div>
+                        
                         <div class="row" v-if="!isLoading">
                             <div class="col-12">
                                 <div class="card">
@@ -82,6 +83,26 @@
                                 </div>
                                 <!-- /.card -->
                             </div>
+                            <div class="col-12 note-developer">
+                                <p>
+                                    <a class="btn btn-sm btn-warning" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                        Sử dụng lập trình!
+                                    </a>
+                                </p>
+                                
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <pre class="m-0">$options = array(
+    'id' => 'navigation',
+    'class' => 'navigation',
+    'sub_id' => 'submenu',
+    'sub_class' => 'submenu'
+);
+echo menu('frontend', $options);</pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
