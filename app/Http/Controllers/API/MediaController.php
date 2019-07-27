@@ -12,25 +12,26 @@ class MediaController extends Controller
 {
     public function list(Request $request)
     {
-        $media = Media::where('directory', $request['folder'])->orderBy('created_at', 'desc')->get()->toArray();
+        $media = Media::where('directory', $request['folder'].'/')->orderBy('created_at', 'desc')->get()->toArray();
 
-        $folders = scandir(public_path($request['folder']));
-        unset($folders[0]);unset($folders[1]);
-
+        $folders = scandir(public_path($request['folder'].'/'));
+   
         foreach($folders as $key => $folder){
-            if( is_file(public_path('media\\').$folders[$key]) ){
-                unset($folders[$key]);
-            }else{
-                $folder = [
+            if ($folder == '.' || $folder == '..') {
+                continue;
+            }
+            if( is_dir(public_path($request['folder'].'/').$folders[$key]) ){
+                $item = [
                     'id' => $key.'_'.$folder,
                     'aggregate_type' => 'folder',
                     'filename' => $folder,
                     'extension' => 'folder',
-                    'directory' => $folder
+                    'directory' => $request['folder']
                 ];
-                array_unshift($media , $folder);
+                array_unshift($media , $item);
+            }else{
+                unset($folders[$key]);
             }
-            
         }
 
         return $media;
@@ -47,7 +48,7 @@ class MediaController extends Controller
         }
 
         $file = $request['file'];
-        $folder = $request['folder'];
+        $folder = $request['folder'].'/';
         $uniqid = uniqid();
 
         if(!file_exists(public_path($folder))){
@@ -56,6 +57,7 @@ class MediaController extends Controller
 
         $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
 
+        // nếu là hình ảnh
         if($file->getClientOriginalExtension() == 'JPG|PNG|GIF'){
             $mainImage = \Image::make($file)
             ->resize(1080, null, function ($constraint){
@@ -63,15 +65,7 @@ class MediaController extends Controller
                 $constraint->upsize();
             })
             ->save(public_path($folder) . $mainFileName);
-
-            $thumbFileName = $uniqid . '_thumb.' . $file->getClientOriginalExtension();
-
-            $thumbImage = \Image::make($file)
-                ->resize(400, null, function ($constraint){
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->save(public_path($folder) . $thumbFileName);
+        // nếu không phải hình ảnh
         }else{
             $file->move(public_path($folder),$mainFileName);
         }
@@ -88,19 +82,56 @@ class MediaController extends Controller
         $media = Media::findOrFail($id);
 
         $media_path = public_path($media->directory).''.$media->filename.'.'.$media->extension;
-        $media_thumb_path = public_path($media->directory).''.$media->filename.'_thumb.'.$media->extension;
 
         if(file_exists($media_path)){
             @unlink($media_path);
-        }
-        if(file_exists($media_thumb_path)){
-            @unlink($media_thumb_path);
         }
 
         $media->delete();
 
         return ['message' => 'Đã xóa tập tin'];
     }
+
+    public function folderCreate(Request $request){
+        $request->validate([
+            'name'     => 'required|string|max:255',
+        ]);
+
+        $folder = $request['folder'];
+        $name = $request['name'];
+
+        $folder = $folder . '/' . $name . '/';
+        if(!file_exists(public_path($folder))){
+            mkdir(public_path($folder), 0755, true);
+        }
+
+        return ['message' => 'Tạo thư mục thành công'];
+    }
+
+    // chưa xong, xóa thư mục không trống?
+    public function folderDestroy(Request $request)
+    {
+        // return $request['folder'];
+        $path = public_path($request['folder'].'/');
+        $media = Media::where('directory', 'like', $request['folder'].'%')->get();
+        if($media){
+            foreach($media as $key => $value){
+                $value->delete();
+            }
+        }
+
+        $this->delDir($path);
+
+        return ['message' => 'Đã xóa thư mục'];
+    }
+
+    protected function delDir($dir) { 
+        $files = array_diff(scandir($dir), array('.','..')); 
+        foreach ($files as $file) { 
+        (is_dir("$dir/$file")) ? $this->delDir("$dir/$file") : unlink("$dir/$file"); 
+        } 
+        return rmdir($dir); 
+    } 
 
     public function handleImageAdded(Request $request){
         if ($request->hasFile('image')) {
@@ -120,7 +151,6 @@ class MediaController extends Controller
             $uniqid = uniqid();
     
             $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
-            $thumbFileName = $uniqid . '_thumb.' . $file->getClientOriginalExtension();
 
             if(!file_exists(public_path($folder))){
                 mkdir(public_path($folder), 0755, true);
@@ -136,13 +166,6 @@ class MediaController extends Controller
             $media = MediaUploader::fromSource(public_path($folder) . $mainFileName)
                 ->toDirectory($folder)
                 ->upload();
-
-            $thumbImage = \Image::make($file)
-                ->resize(400, null, function ($constraint){
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->save(public_path($folder) . $thumbFileName);
             
             $media_url = '/'.$media->directory.''.$media->filename.'.'.$media->extension;
 

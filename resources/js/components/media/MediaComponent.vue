@@ -38,7 +38,7 @@
                                                 <button class="btn btn-sm btn-primary" @click="openUploaderModal()">
                                                     <i class="fas fa-cloud-upload-alt fa-fw"></i> Tải lên tập tin
                                                 </button>
-                                                <button class="btn btn-sm btn-primary">
+                                                <button class="btn btn-sm btn-primary" @click="openCreateFolderModal()">
                                                     <i class="fas fa-folder fa-fw"></i> Thêm thư mục
                                                 </button>
                                                 <button class="btn btn-sm btn-success">
@@ -53,25 +53,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body media-wrapper" v-if="!media.length">
-                                        <p class="p-3">Không tìm thấy tập tin nào!</p>
-                                    </div>
-                                    <div class="card-body media-wrapper" v-if="media.length">
+                                    <div class="card-body media-wrapper">
                                         <ol class="media_breadcrumb">
-                                            <li class="item_breadcrumb">
-                                                Media Library <i class="fas fa-chevron-right"></i>
-                                            </li>
-                                            <li class="item_breadcrumb">
-                                                front-banners <i class="fas fa-chevron-right"></i>
-                                            </li>
-                                            <li class="item_breadcrumb">
-                                                June2018
+                                            <li class="item_breadcrumb" v-for="item in breadcrumb" :key="item" @click="clickBreadcrumb(item)">
+                                                <span v-show="item == 'media'">Thư mục gốc <i class="fas fa-chevron-right"></i></span>
+                                                <span v-show="item != 'media'">{{ item }} <i class="fas fa-chevron-right"></i></span>
                                             </li>
                                         </ol>
                                         <div class="media-left">
                                             <ul class="media-list">
                                                 <li class="media-item" v-for="item in media" :key="item.id">
-                                                    <div v-show="item.aggregate_type == 'folder'" class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)">
+                                                    <div v-show="item.aggregate_type == 'folder'" class="file-link" :class="{selected:item.id == selected}" v-on:click="selectedItem(item)" v-on:dblclick="dbClickFolder(item)">
                                                         <div class="file-icon">
                                                             <div class="img-icon" :style="{ backgroundImage: 'url(\'' + getSrcImg(item) + '\')' }"></div>
                                                         </div>
@@ -98,7 +90,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="media-right">
+                                        <div class="media-right" v-if="media.length">
                                             <div class="detail_img">
                                                 <div class="image/jpeg" v-if="itemActive.aggregate_type == 'image'">
                                                     <img v-bind:src="getSrcImg(itemActive)"> <!----> <!----> <!----> <!---->
@@ -160,6 +152,36 @@
             </div>
         </div>
         <!-- /. Upload Modal -->
+        <!-- Create Folder Modal -->
+        <div class="modal fade" id="createFolderModal" tabindex="-1" role="dialog" aria-labelledby="createFolderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="createFolderModalLabel">Thêm thư mục</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="createFolder()" @keydown="form.onKeydown($event)">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input v-model="form.name" type="text" name="name"
+                                        placeholder="Tên thư mục"
+                                        class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                    <has-error :form="form" field="name"></has-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Đóng</button>
+                            <button :disabled="form.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Tạo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /. Create Folder Modal -->
     </div>
     <div v-if="!$gate.isManageMedia()">
         <not-found></not-found>
@@ -189,7 +211,11 @@ export default {
             media: {},
             selected: '',
             itemActive: {},
-            folder: 'media/',
+            folder: 'media',
+            breadcrumb: [],
+            form: new Form({
+                name: '', folder: '',
+            }),
         }
     },
     methods: {
@@ -199,43 +225,98 @@ export default {
                 this.media = data;
                 this.selected = (data[0]) ? data[0].id : 'undefined';
                 this.itemActive = (data[0]) ? data[0] : {};
+                this.breadcrumb = this.folder.split("/");
                 this.isLoading = false; 
             });
             this.$Progress.finish();
         },
         deleteItem(item) {
-            Swal.fire({
-                title: 'Bạn chắc chứ?',
-                text: "Bạn muốn xóa tập tin "+item.filename+"?",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Có, xóa ngay!',
-                cancelButtonText: 'Hủy'
-                }).then((result) => {
-                    if(result.value){
-                        // Send request to the server
-                        this.$Progress.start();
-                        axios.delete('/api/mediaDestroy/'+item.id)
-                        .then( () => {
-                            Swal.fire(
-                                'Xóa thành công!',
-                                'Bạn đã xóa tập tin thành công',
-                                'success'
-                            );
-                            Fire.$emit('AfterCreate');
-                            this.$Progress.finish();
-                        })
-                        .catch( () => {
-                            Swal("Lỗi xóa tập tin!", "Vui lòng liên hệ admin xử lý.", "warning");
-                        });
-                    }
-            });
+            if(item.aggregate_type != 'folder'){
+                Swal.fire({
+                    title: 'Bạn chắc chứ?',
+                    text: "Bạn muốn xóa tập tin '"+item.filename+"'?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, xóa ngay!',
+                    cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if(result.value){
+                            // Send request to the server
+                            this.$Progress.start();
+                            axios.delete('/api/mediaDestroy/'+item.id)
+                            .then( () => {
+                                Swal.fire(
+                                    'Xóa thành công!',
+                                    'Bạn đã xóa tập tin thành công',
+                                    'success'
+                                );
+                                Fire.$emit('AfterCreate');
+                                this.$Progress.finish();
+                            })
+                            .catch( () => {
+                                Swal("Lỗi xóa tập tin!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            });
+                        }
+                });
+            }else{
+                Swal.fire({
+                    title: 'Bạn chắc chứ?',
+                    text: "Bạn muốn xóa thư mục '"+item.filename+"'?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, xóa ngay!',
+                    cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if(result.value){
+                            // Send request to the server
+                            this.$Progress.start();
+                            axios.post('/api/folderDestroy', {'folder':item.directory+'/'+this.itemActive.filename})
+                            .then( () => {
+                                Swal.fire(
+                                    'Xóa thành công!',
+                                    'Bạn đã xóa thư mục thành công',
+                                    'success'
+                                );
+                                Fire.$emit('AfterCreate');
+                                this.$Progress.finish();
+                            })
+                            .catch( () => {
+                                Swal("Lỗi xóa thư mục!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            });
+                        }
+                });
+            }
+            
         },
         selectedItem(item) {
             this.selected = item.id;
             this.itemActive = item;
+        },
+        openCreateFolderModal () {
+            this.form.reset();
+            this.form.clear();
+            $('#createFolderModal').modal('show');
+        },
+        createFolder () {
+            this.$Progress.start();
+                this.form.folder = this.folder;
+                this.form.post('/api/folderCreate')
+                .then( () => {
+                    $('#createFolderModal').modal('hide');
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Thêm thư mục thành công'
+                    });
+                    Fire.$emit('AfterCreate');
+                    this.$Progress.finish();
+                })
+                .catch( () => {
+                    this.$Progress.fail();
+                }); 
         },
         openUploaderModal () {
             this.$refs.myVueDropzone.removeAllFiles();
@@ -272,6 +353,28 @@ export default {
                 
                 return '/images/media/default-file-icon.png';
             }
+        },
+        clickBreadcrumb(item){
+            let num = 0;
+            let temp = 'media';
+            for(let i=0;i<this.breadcrumb.length;i++){
+                if(this.breadcrumb[i] == item){
+                    num = i;
+                }
+            }
+            if(num > 0){
+                for(let j=1; j<=num; j++){
+                    temp += '/' + this.breadcrumb[j];
+                }
+            }
+            
+            this.folder = temp;
+            Fire.$emit('AfterCreate');
+        },
+        dbClickFolder(item){
+            this.folder = item.directory +'/'+ item.filename;
+            Fire.$emit('AfterCreate');
+            console.log(this.folder);
         },
     },
     created() {
@@ -458,5 +561,8 @@ export default {
 }
 .media_breadcrumb .item_breadcrumb i{
     font-size: 10px;
+}
+.media_breadcrumb .item_breadcrumb:last-child i{
+    display: none;
 }
 </style>
