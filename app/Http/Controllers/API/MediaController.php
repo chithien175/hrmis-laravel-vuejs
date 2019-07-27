@@ -147,7 +147,7 @@ class MediaController extends Controller
             }
     
             $file = $request['image'];
-            $folder = 'media/post/' . Carbon::now()->year . '/' . Carbon::now()->month . '/';
+            $folder = 'media/post/' . Carbon::now()->year . '_' . Carbon::now()->month . '/';
             $uniqid = uniqid();
     
             $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();

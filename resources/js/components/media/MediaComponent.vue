@@ -41,10 +41,10 @@
                                                 <button class="btn btn-sm btn-primary" @click="openCreateFolderModal()">
                                                     <i class="fas fa-folder fa-fw"></i> Thêm thư mục
                                                 </button>
-                                                <button class="btn btn-sm btn-success">
+                                                <button class="btn btn-sm btn-default">
                                                     <i class="fas fa-arrow-circle-right fa-fw"></i> Di chuyển
                                                 </button>
-                                                <button class="btn btn-sm btn-success">
+                                                <button class="btn btn-sm btn-default">
                                                     <i class="fas fa-paragraph fa-fw"></i> Đổi tên
                                                 </button>
                                                 <button class="btn btn-sm btn-danger" @click="deleteItem(itemActive)">
@@ -262,8 +262,8 @@ export default {
                 });
             }else{
                 Swal.fire({
-                    title: 'Bạn chắc chứ?',
-                    text: "Bạn muốn xóa thư mục '"+item.filename+"'?",
+                    title: "Bạn muốn xóa thư mục '"+item.filename+"'?",
+                    text: "Việc này sẽ xóa các tập tin bên trong",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

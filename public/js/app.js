@@ -3195,8 +3195,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         Swal.fire({
-          title: 'Bạn chắc chứ?',
-          text: "Bạn muốn xóa thư mục '" + item.filename + "'?",
+          title: "Bạn muốn xóa thư mục '" + item.filename + "'?",
+          text: "Việc này sẽ xóa các tập tin bên trong",
           type: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -81078,7 +81078,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-success" }, [
+    return _c("button", { staticClass: "btn btn-sm btn-default" }, [
       _c("i", { staticClass: "fas fa-arrow-circle-right fa-fw" }),
       _vm._v(" Di chuyển\n                                                ")
     ])
@@ -81087,7 +81087,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-success" }, [
+    return _c("button", { staticClass: "btn btn-sm btn-default" }, [
       _c("i", { staticClass: "fas fa-paragraph fa-fw" }),
       _vm._v(" Đổi tên\n                                                ")
     ])
