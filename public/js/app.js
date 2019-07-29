@@ -3122,6 +3122,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3145,6 +3175,11 @@ __webpack_require__.r(__webpack_exports__);
       breadcrumb: [],
       form: new Form({
         name: '',
+        folder: ''
+      }),
+      formChangeName: new Form({
+        name: '',
+        item: {},
         folder: ''
       })
     };
@@ -3250,6 +3285,31 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$Progress.fail();
       });
     },
+    openChangeNameModal: function openChangeNameModal(itemActive) {
+      this.formChangeName.reset();
+      this.formChangeName.clear();
+      this.formChangeName.name = itemActive.filename;
+      this.formChangeName.item = itemActive;
+      this.formChangeName.folder = this.folder;
+      $('#changeNameModal').modal('show');
+    },
+    changeName: function changeName() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.formChangeName.post('/api/mediaChangeName').then(function () {
+        $('#changeNameModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Đổi tên thành công'
+        });
+        Fire.$emit('AfterCreate');
+
+        _this4.$Progress.finish();
+      })["catch"](function () {
+        _this4.$Progress.fail();
+      });
+    },
     openUploaderModal: function openUploaderModal() {
       this.$refs.myVueDropzone.removeAllFiles();
       $('#uploadModal').modal('show');
@@ -3314,11 +3374,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadData();
     Fire.$on('AfterCreate', function () {
-      _this4.loadData();
+      _this5.loadData();
     });
   }
 });
@@ -11852,7 +11912,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n    padding: 0;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n    padding: 10px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 0;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n}\n.media-wrapper .file-link{\n    margin: 5px;\n    padding: 5px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{\n    color: rgb(255, 255, 255);\n    background-color: #0e4d9a;\n    border-color: #0a366b;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-icon .img-icon{\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-detail h4{\n    margin-bottom: 2px;\n    margin-top: 10px;\n    max-height: 17px;\n    height: 17px;\n    overflow: hidden;\n    font-size: 13px;\n    text-overflow: ellipsis;\n}\n.media-wrapper .file-detail small{\n    font-size: 10px;\n    position: relative;\n    top: -3px;\n}\n.media-right .detail_img {\n    border-bottom: 1px solid #f1f1f1;\n    background: #eee;\n}\n.media-right .detail_img img {\n    width: 100%;\n    height: auto;\n    display: inline-block;\n}\n.media-right .detail_info {\n    padding: 10px;\n}\n.media-right .detail_info span {\n    display: block;\n    clear: both;\n}\n.media-right .detail_info h4 {\n    float: left;\n    color: #bbb;\n    margin: 3px 8px 0 0;\n    padding-bottom: 2px;\n    font-size: 12px;\n}\n.media-right .detail_info p {\n    float: left;\n    color: #444;\n    margin-bottom: 0px;\n    font-size: 12px;\n}\n.media-right .detail_info a {\n    color: #0e4d9a;\n}\n.media-right .detail_info a:hover {\n    text-decoration: none;\n}\n.media_breadcrumb{\n    top: 0;\n    background: #f0f0f0;\n    padding-left: 20px;\n    width: 100%;\n    margin-top: 0;\n    left: 0;\n    padding-top: 7px;\n    padding-bottom: 8px;\n}\n.media_breadcrumb .item_breadcrumb {\n    cursor: pointer;\n    -webkit-transition: color .1s linear;\n    transition: color .1s linear;\n    position: relative;\n    font-size: 12px;\n    display: inline;\n}\n.media_breadcrumb .item_breadcrumb:hover {\n    color: #0e4d9a;\n}\n.media_breadcrumb .item_breadcrumb:not(:last-child){\n    font-weight: bold;\n}\n.media_breadcrumb .item_breadcrumb i{\n    font-size: 10px;\n}\n.media_breadcrumb .item_breadcrumb:last-child i{\n    display: none;\n}\n", ""]);
+exports.push([module.i, "\n.dropzone-custom-content {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  text-align: center;\n}\n.dropzone-custom-content span {\n  font-size: 40px;\n}\n.dropzone-custom-content .dropzone-custom-title {\n  margin-top: 0;\n}\n.media-wrapper{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n    padding: 0;\n}\n.media-wrapper .media-left{\n    -webkit-box-flex: 4;\n    flex: 4;\n    position: relative;\n    min-height: 230px;\n    padding: 10px;\n}\n.media-wrapper .media-right{\n    -webkit-box-flex: 1;\n    flex: 1;\n    border-left: 1px solid #f1f1f1;\n}\n.media-wrapper .media-list{\n    display: -webkit-box;\n    display: flex;\n    list-style: none;\n    width: 100%;\n    margin: 0;\n    flex-wrap: wrap;\n    padding: 0;\n    position: relative;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\n.media-wrapper .media-item{\n    -webkit-box-flex: 1;\n    flex: 1;\n    width: 100%;\n    min-width: 200px;\n}\n.media-wrapper .file-link{\n    margin: 5px;\n    padding: 5px;\n    cursor: pointer;\n    border-radius: 3px;\n    border: 1px solid #ecf0f1;\n    overflow: hidden;\n    background: #f6f8f9;\n    display: -webkit-box;\n    display: flex;\n}\n.media-wrapper .file-link.selected,.media-wrapper .file-link:hover{\n    color: rgb(255, 255, 255);\n    background-color: #0e4d9a;\n    border-color: #0a366b;\n}\n.media-wrapper .file-icon{\n    text-align: center;\n    padding-left: 0;\n    margin-left: 0;\n    margin-right: 5px;\n    -webkit-box-flex: 1;\n    flex: 1;\n}\n.media-wrapper .file-icon .img-icon{\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-position: center center;\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n}\n.media-wrapper .file-detail{\n    -webkit-box-flex: 2;\n    flex: 2;\n    overflow: hidden;\n    width: 100%;\n}\n.media-wrapper .file-detail h4{\n    margin-bottom: 2px;\n    margin-top: 10px;\n    max-height: 17px;\n    height: 17px;\n    overflow: hidden;\n    font-size: 13px;\n    text-overflow: ellipsis;\n}\n.media-wrapper .file-detail small{\n    font-size: 10px;\n    position: relative;\n    top: -3px;\n}\n.media-right .detail_img {\n    border-bottom: 1px solid #f1f1f1;\n    background: #eee;\n}\n.media-right .detail_img img {\n    width: 100%;\n    height: auto;\n    display: inline-block;\n}\n.media-right .detail_info {\n    padding: 10px;\n}\n.media-right .detail_info span {\n    display: block;\n    clear: both;\n}\n.media-right .detail_info h4 {\n    float: left;\n    color: #bbb;\n    margin: 3px 8px 0 0;\n    padding-bottom: 2px;\n    font-size: 12px;\n}\n.media-right .detail_info p {\n    float: left;\n    color: #444;\n    margin-bottom: 0px;\n    font-size: 12px;\n}\n.media-right .detail_info a {\n    color: #0e4d9a;\n}\n.media-right .detail_info a:hover {\n    text-decoration: none;\n}\n.media_breadcrumb{\n    top: 0;\n    background: #f0f0f0;\n    padding-left: 20px;\n    width: 100%;\n    margin: 0;\n    left: 0;\n    padding-top: 7px;\n    padding-bottom: 8px;\n}\n.media_breadcrumb .item_breadcrumb {\n    cursor: pointer;\n    -webkit-transition: color .1s linear;\n    transition: color .1s linear;\n    position: relative;\n    font-size: 12px;\n    display: inline;\n}\n.media_breadcrumb .item_breadcrumb:hover {\n    color: #0e4d9a;\n}\n.media_breadcrumb .item_breadcrumb:not(:last-child){\n    font-weight: bold;\n}\n.media_breadcrumb .item_breadcrumb i{\n    font-size: 10px;\n}\n.media_breadcrumb .item_breadcrumb:last-child i{\n    display: none;\n}\n", ""]);
 
 // exports
 
@@ -80480,7 +80540,27 @@ var render = function() {
                                     _vm._v(" "),
                                     _vm._m(1),
                                     _vm._v(" "),
-                                    _vm._m(2),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openChangeNameModal(
+                                              _vm.itemActive
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-paragraph fa-fw"
+                                        }),
+                                        _vm._v(
+                                          " Đổi tên\n                                                "
+                                        )
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     _c(
                                       "button",
@@ -80911,7 +80991,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _c("div", { staticClass: "row" }, [
@@ -80967,7 +81047,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ])
                 ]
               )
@@ -80995,7 +81075,7 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c(
                       "form",
@@ -81060,7 +81140,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "modal-footer" }, [
-                          _vm._m(6),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "button",
@@ -81071,6 +81151,122 @@ var render = function() {
                             [
                               _c("i", { staticClass: "fas fa-check-circle" }),
                               _vm._v(" Tạo")
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "changeNameModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "changeNameModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.changeName()
+                          },
+                          keydown: function($event) {
+                            return _vm.formChangeName.onKeydown($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-md-12" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formChangeName.name,
+                                      expression: "formChangeName.name"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.formChangeName.errors.has(
+                                      "name"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "name",
+                                    placeholder: "Tên tập tin / thư mục"
+                                  },
+                                  domProps: { value: _vm.formChangeName.name },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.formChangeName,
+                                        "name",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.formChangeName,
+                                    field: "name"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-primary",
+                              attrs: {
+                                disabled: _vm.formChangeName.busy,
+                                type: "submit"
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-check-circle" }),
+                              _vm._v(" Cập nhật")
                             ]
                           )
                         ])
@@ -81106,15 +81302,6 @@ var staticRenderFns = [
     return _c("button", { staticClass: "btn btn-sm btn-default" }, [
       _c("i", { staticClass: "fas fa-arrow-circle-right fa-fw" }),
       _vm._v(" Di chuyển\n                                                ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-default" }, [
-      _c("i", { staticClass: "fas fa-paragraph fa-fw" }),
-      _vm._v(" Đổi tên\n                                                ")
     ])
   },
   function() {
@@ -81169,6 +81356,47 @@ var staticRenderFns = [
           attrs: { id: "createFolderModalLabel" }
         },
         [_vm._v("Thêm thư mục")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-sm btn-danger",
+        attrs: { type: "button", "data-dismiss": "modal" }
+      },
+      [_c("i", { staticClass: "fas fa-times-circle" }), _vm._v(" Đóng")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title blue",
+          attrs: { id: "changeNameModalLabel" }
+        },
+        [_vm._v("Đổi tên")]
       ),
       _vm._v(" "),
       _c(

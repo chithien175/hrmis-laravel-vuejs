@@ -44,7 +44,7 @@
                                                 <button class="btn btn-sm btn-default">
                                                     <i class="fas fa-arrow-circle-right fa-fw"></i> Di chuyển
                                                 </button>
-                                                <button class="btn btn-sm btn-default">
+                                                <button class="btn btn-sm btn-default" @click="openChangeNameModal(itemActive)">
                                                     <i class="fas fa-paragraph fa-fw"></i> Đổi tên
                                                 </button>
                                                 <button class="btn btn-sm btn-danger" @click="deleteItem(itemActive)">
@@ -182,6 +182,36 @@
             </div>
         </div>
         <!-- /. Create Folder Modal -->
+        <!-- Change Name Modal -->
+        <div class="modal fade" id="changeNameModal" tabindex="-1" role="dialog" aria-labelledby="changeNameModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="changeNameModalLabel">Đổi tên</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="changeName()" @keydown="formChangeName.onKeydown($event)">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input v-model="formChangeName.name" type="text" name="name"
+                                        placeholder="Tên tập tin / thư mục"
+                                        class="form-control" :class="{ 'is-invalid': formChangeName.errors.has('name') }">
+                                    <has-error :form="formChangeName" field="name"></has-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Đóng</button>
+                            <button :disabled="formChangeName.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Cập nhật</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /. Change Name Modal -->
     </div>
     <div v-if="!$gate.isManageMedia()">
         <not-found></not-found>
@@ -215,6 +245,9 @@ export default {
             breadcrumb: [],
             form: new Form({
                 name: '', folder: '',
+            }),
+            formChangeName: new Form({
+                name: '', item: {}, folder:''
             }),
         }
     },
@@ -303,20 +336,44 @@ export default {
         },
         createFolder () {
             this.$Progress.start();
-                this.form.folder = this.folder;
-                this.form.post('/api/folderCreate')
-                .then( () => {
-                    $('#createFolderModal').modal('hide');
-                    Toast.fire({
-                        type: 'success',
-                        title: 'Thêm thư mục thành công'
-                    });
-                    Fire.$emit('AfterCreate');
-                    this.$Progress.finish();
-                })
-                .catch( () => {
-                    this.$Progress.fail();
-                }); 
+            this.form.folder = this.folder;
+            this.form.post('/api/folderCreate')
+            .then( () => {
+                $('#createFolderModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Thêm thư mục thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () => {
+                this.$Progress.fail();
+            }); 
+        },
+        openChangeNameModal (itemActive) {
+            this.formChangeName.reset();
+            this.formChangeName.clear();
+            this.formChangeName.name = itemActive.filename;
+            this.formChangeName.item = itemActive;
+            this.formChangeName.folder = this.folder;
+            $('#changeNameModal').modal('show');
+        },
+        changeName () {
+            this.$Progress.start();
+            this.formChangeName.post('/api/mediaChangeName')
+            .then( () => {
+                $('#changeNameModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Đổi tên thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () => {
+                this.$Progress.fail();
+            }); 
         },
         openUploaderModal () {
             this.$refs.myVueDropzone.removeAllFiles();
@@ -541,7 +598,7 @@ export default {
     background: #f0f0f0;
     padding-left: 20px;
     width: 100%;
-    margin-top: 0;
+    margin: 0;
     left: 0;
     padding-top: 7px;
     padding-bottom: 8px;

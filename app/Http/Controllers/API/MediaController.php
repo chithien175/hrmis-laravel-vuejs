@@ -108,7 +108,6 @@ class MediaController extends Controller
         return ['message' => 'Tạo thư mục thành công'];
     }
 
-    // chưa xong, xóa thư mục không trống?
     public function folderDestroy(Request $request)
     {
         // return $request['folder'];
@@ -132,6 +131,46 @@ class MediaController extends Controller
         } 
         return rmdir($dir); 
     } 
+
+    public function changeName(Request $request)
+    {
+        $item = $request['item'];
+        $new_name = $request['name'];
+        $folder = $request['folder'];
+
+        if($item['aggregate_type'] == 'folder'){
+            // Xử lý đổi tên thư mục
+            $old_path = public_path($folder).'/'.$item['filename'];
+            $new_path = public_path($folder).'/'.$new_name;
+
+            if(file_exists($old_path) && !file_exists($new_path)){
+                rename($old_path, $new_path);
+
+                $media = Media::where('directory', 'like', $folder.'/'.$item['filename'].'%')->get();
+                foreach($media as $key => $value){
+                    $value->directory = str_replace($folder.'/'.$item['filename'], $folder.'/'.$new_name, $value->directory);
+                    $media[$key]->save();
+                }
+            }
+        }else{
+            // Xử lý đổi tên tập tin
+            $media = Media::findOrfail($item['id']);
+            $request->validate([
+                'name'      => 'required|string|max:255|unique:media,filename,'.$media->id
+            ]);
+            
+            if($media){
+                $old_path = public_path($folder).'/'.$media->filename.'.'.$media->extension;
+                $new_path = public_path($folder).'/'.$new_name.'.'.$media->extension;
+                if(file_exists($old_path)){
+                    rename($old_path, $new_path);
+                }
+                $media->filename = $new_name;
+                $media->save();
+            }
+        }
+        return ['message' => 'Đổi tên thành công'];
+    }
 
     public function handleImageAdded(Request $request){
         if ($request->hasFile('image')) {
