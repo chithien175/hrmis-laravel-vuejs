@@ -347,6 +347,7 @@ export default {
 
             var formData = new FormData();
             formData.append("image", file);
+            formData.append("module", 'post');
 
             axios({
                 url: "/api/handleImageAdded",

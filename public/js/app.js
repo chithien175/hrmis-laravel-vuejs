@@ -2452,6 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
       // formData.append('file', file)
       var formData = new FormData();
       formData.append("image", file);
+      formData.append("module", 'post');
       axios({
         url: "/api/handleImageAdded",
         method: "POST",
@@ -4121,6 +4122,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4308,7 +4311,7 @@ __webpack_require__.r(__webpack_exports__);
       search: ''
     };
   },
-  methods: {
+  methods: _defineProperty({
     loadData: function loadData() {
       var _this = this;
 
@@ -4439,10 +4442,32 @@ __webpack_require__.r(__webpack_exports__);
     convertSlug: function convertSlug() {
       this.form.slug = this.sanitizeTitle(this.form.title);
     },
+    handleImageAdded: function handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      // An example of using FormData
+      // NOTE: Your key could be different such as:
+      // formData.append('file', file)
+      var formData = new FormData();
+      formData.append("image", file);
+      formData.append("module", 'page');
+      axios({
+        url: "/api/handleImageAdded",
+        method: "POST",
+        data: formData
+      }).then(function (result) {
+        var url = result.data.url; // Get url from response
+
+        Editor.insertEmbed(cursorLocation, "image", url);
+        resetUploader();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
     }, 500)
-  },
+  }, "searchit", _.debounce(function () {
+    Fire.$emit('Searching');
+  }, 500)),
   computed: {
     getPagePhoto: function getPagePhoto() {
       return this.form.photo.indexOf('base64') != -1 ? this.form.photo : "../images/page/" + this.form.photo;
@@ -83168,6 +83193,8 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c("vue-editor", {
+                                    attrs: { useCustomImageHandler: "" },
+                                    on: { imageAdded: _vm.handleImageAdded },
                                     model: {
                                       value: _vm.form.body,
                                       callback: function($$v) {

@@ -58,7 +58,7 @@ class MediaController extends Controller
         $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
 
         // nếu là hình ảnh
-        if($file->getClientOriginalExtension() == 'JPG|PNG|GIF'){
+        if($file->getClientOriginalExtension() == 'jpg|JPG|png|PNG|gif|GIF'){
             $mainImage = \Image::make($file)
             ->resize(1080, null, function ($constraint){
                 $constraint->aspectRatio();
@@ -135,8 +135,6 @@ class MediaController extends Controller
 
     public function handleImageAdded(Request $request){
         if ($request->hasFile('image')) {
-            // $path = $request->image->path();
-            // $extension = $request->image->extension();
 
             $validator = \Validator::make($request->all(), [
                 'image' => 'image'
@@ -147,7 +145,7 @@ class MediaController extends Controller
             }
     
             $file = $request['image'];
-            $folder = 'media/post/' . Carbon::now()->year . '_' . Carbon::now()->month;
+            $folder = 'media/'.$request['module'].'/' . Carbon::now()->year . '_' . Carbon::now()->month;
             $uniqid = uniqid();
     
             $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
