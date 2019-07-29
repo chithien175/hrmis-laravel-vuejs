@@ -181,6 +181,19 @@ class MediaController extends Controller
         if($move_to){
             if($item['aggregate_type'] == 'folder'){
                 // Xử lý di chuyển thư mục
+                $old_path = public_path($folder).'/'.$item['filename'];
+                $new_path = public_path($folder).'/'.$move_to.'/'.$item['filename'];
+
+                if(file_exists($old_path)){
+                    rename($old_path, $new_path);
+
+                    $media = Media::where('directory', 'like', $folder.'/'.$item['filename'].'%')->get();
+                    foreach($media as $key => $value){
+                        $value->directory = str_replace($folder.'/'.$item['filename'], $folder.'/'.$move_to.'/'.$item['filename'], $value->directory);
+                        $media[$key]->save();
+                    }
+                }
+
             }else{
                 // Xử lý di chuyển tập tin
                 $media = Media::findOrFail($item['id']);
