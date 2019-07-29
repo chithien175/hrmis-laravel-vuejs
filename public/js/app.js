@@ -3269,7 +3269,7 @@ __webpack_require__.r(__webpack_exports__);
     getSrcImg: function getSrcImg(item) {
       if (item) {
         if (item.aggregate_type == 'image') {
-          return '/' + item.directory + '' + item.filename + '.' + item.extension;
+          return '/' + item.directory + '/' + item.filename + '.' + item.extension;
         }
 
         if (item.extension == 'folder') {

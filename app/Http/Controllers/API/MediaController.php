@@ -12,7 +12,7 @@ class MediaController extends Controller
 {
     public function list(Request $request)
     {
-        $media = Media::where('directory', $request['folder'].'/')->orderBy('created_at', 'desc')->get()->toArray();
+        $media = Media::where('directory', $request['folder'])->orderBy('created_at', 'desc')->get()->toArray();
 
         $folders = scandir(public_path($request['folder'].'/'));
    
@@ -48,11 +48,11 @@ class MediaController extends Controller
         }
 
         $file = $request['file'];
-        $folder = $request['folder'].'/';
+        $folder = $request['folder'];
         $uniqid = uniqid();
 
-        if(!file_exists(public_path($folder))){
-            mkdir(public_path($folder), 0755, true);
+        if(!file_exists(public_path($folder) . '/')){
+            mkdir(public_path($folder) . '/', 0755, true);
         }
 
         $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
@@ -64,13 +64,13 @@ class MediaController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
-            ->save(public_path($folder) . $mainFileName);
+            ->save(public_path($folder) . '/' . $mainFileName);
         // nếu không phải hình ảnh
         }else{
-            $file->move(public_path($folder),$mainFileName);
+            $file->move(public_path($folder) . '/',$mainFileName);
         }
 
-        $media = MediaUploader::fromSource(public_path($folder) . $mainFileName)
+        $media = MediaUploader::fromSource(public_path($folder) . '/' . $mainFileName)
             ->toDirectory($folder)
             ->upload();
 
@@ -81,7 +81,7 @@ class MediaController extends Controller
     {
         $media = Media::findOrFail($id);
 
-        $media_path = public_path($media->directory).''.$media->filename.'.'.$media->extension;
+        $media_path = public_path($media->directory).'/'.$media->filename.'.'.$media->extension;
 
         if(file_exists($media_path)){
             @unlink($media_path);
@@ -147,13 +147,13 @@ class MediaController extends Controller
             }
     
             $file = $request['image'];
-            $folder = 'media/post/' . Carbon::now()->year . '_' . Carbon::now()->month . '/';
+            $folder = 'media/post/' . Carbon::now()->year . '_' . Carbon::now()->month;
             $uniqid = uniqid();
     
             $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
 
-            if(!file_exists(public_path($folder))){
-                mkdir(public_path($folder), 0755, true);
+            if(!file_exists(public_path($folder) . '/')){
+                mkdir(public_path($folder) . '/', 0755, true);
             }
     
             $mainImage = \Image::make($file)
@@ -161,13 +161,13 @@ class MediaController extends Controller
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
-                ->save(public_path($folder) . $mainFileName);
+                ->save(public_path($folder) . '/' . $mainFileName);
     
-            $media = MediaUploader::fromSource(public_path($folder) . $mainFileName)
+            $media = MediaUploader::fromSource(public_path($folder) . '/' . $mainFileName)
                 ->toDirectory($folder)
                 ->upload();
             
-            $media_url = '/'.$media->directory.''.$media->filename.'.'.$media->extension;
+            $media_url = '/'.$media->directory.'/'.$media->filename.'.'.$media->extension;
 
             return response()->json(['url' => $media_url], 200);
         }

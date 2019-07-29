@@ -339,7 +339,7 @@ export default {
         getSrcImg(item){
             if(item){
                 if(item.aggregate_type == 'image'){
-                    return '/'+item.directory+''+item.filename+'.'+item.extension;
+                    return '/'+item.directory+'/'+item.filename+'.'+item.extension;
                 }
                 if(item.extension == 'folder'){
                     return '/images/media/default-folder-icon.png';
