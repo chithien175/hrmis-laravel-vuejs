@@ -72,6 +72,9 @@
                                                         <button class="btn btn-sm btn-primary" @click="editModal(page)">
                                                             <i class="fa fa-edit fa-fw"></i> Sửa
                                                         </button>
+                                                        <button class="btn btn-sm btn-success" @click="openCustomFieldModal(page.id)">
+                                                            <i class="fa fa-edit fa-fw"></i> Trường tùy chỉnh
+                                                        </button>
                                                         <button class="btn btn-sm btn-danger" @click="deletePage(page.id)">
                                                             <i class="fa fa-trash fa-fw"></i> Xóa
                                                         </button>
@@ -329,9 +332,9 @@
                 console.log(err);
                 });
             },
-            searchit: _.debounce( () => {
-                Fire.$emit('Searching');
-            }, 500),
+            openCustomFieldModal(id) {
+                console.log(id);
+            },
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');
             }, 500),

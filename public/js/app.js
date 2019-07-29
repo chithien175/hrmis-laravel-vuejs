@@ -4242,8 +4242,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
 //
 //
 //
@@ -4431,7 +4432,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       search: ''
     };
   },
-  methods: _defineProperty({
+  methods: {
     loadData: function loadData() {
       var _this = this;
 
@@ -4582,12 +4583,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(err);
       });
     },
+    openCustomFieldModal: function openCustomFieldModal(id) {
+      console.log(id);
+    },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
     }, 500)
-  }, "searchit", _.debounce(function () {
-    Fire.$emit('Searching');
-  }, 500)),
+  },
   computed: {
     getPagePhoto: function getPagePhoto() {
       return this.form.photo.indexOf('base64') != -1 ? this.form.photo : "../images/page/" + this.form.photo;
@@ -83471,6 +83473,30 @@ var render = function() {
                                               "button",
                                               {
                                                 staticClass:
+                                                  "btn btn-sm btn-success",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.openCustomFieldModal(
+                                                      page.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fa fa-edit fa-fw"
+                                                }),
+                                                _vm._v(
+                                                  " Trường tùy chỉnh\n                                                        "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
                                                   "btn btn-sm btn-danger",
                                                 on: {
                                                   click: function($event) {
@@ -102659,14 +102685,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/js/components/page/PageComponent.vue ***!
   \********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PageComponent_vue_vue_type_template_id_183efbce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=template&id=183efbce& */ "./resources/js/components/page/PageComponent.vue?vue&type=template&id=183efbce&");
 /* harmony import */ var _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/page/PageComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _PageComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/page/PageComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _PageComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/page/PageComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -102698,7 +102725,7 @@ component.options.__file = "resources/js/components/page/PageComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/page/PageComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
