@@ -172,6 +172,49 @@ class MediaController extends Controller
         return ['message' => 'Đổi tên thành công'];
     }
 
+    public function moveItemName(Request $request)
+    {
+        $item = $request['item'];
+        $move_to = $request['move_to'];
+        $folder = $request['folder'];
+
+        if($move_to){
+            if($item['aggregate_type'] == 'folder'){
+                // Xử lý di chuyển thư mục
+            }else{
+                // Xử lý di chuyển tập tin
+                $media = Media::findOrFail($item['id']);
+                
+                if($media){
+                    $current_file_path = public_path($folder).'/'.$media->filename.'.'.$media->extension;
+
+                    if($move_to == '../'){
+                        $temp = explode("/", $media->directory);
+                        $removed = array_pop($temp);
+                        $temp = implode('/', $temp);
+                        $media->directory = $temp;
+                        $media->save();
+
+                        $new_file_path = public_path($media->directory).'/'.$media->filename.'.'.$media->extension;
+                        if(file_exists($current_file_path)){
+                            rename($current_file_path, $new_file_path);
+                        }
+                    }else{
+                        $media->directory = $media->directory.'/'.$move_to;
+                        $media->save();
+
+                        $new_file_path = public_path($media->directory).'/'.$media->filename.'.'.$media->extension;
+                        if(file_exists($current_file_path)){
+                            rename($current_file_path, $new_file_path);
+                        }
+                    }
+                }
+            }
+            return ['message' => 'Di chuyển thành công'];
+        }
+        
+    }
+
     public function handleImageAdded(Request $request){
         if ($request->hasFile('image')) {
 

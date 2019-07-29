@@ -41,7 +41,7 @@
                                                 <button class="btn btn-sm btn-primary" @click="openCreateFolderModal()">
                                                     <i class="fas fa-folder fa-fw"></i> Thêm thư mục
                                                 </button>
-                                                <button class="btn btn-sm btn-default">
+                                                <button class="btn btn-sm btn-default" @click="openMoveItemModal(itemActive)">
                                                     <i class="fas fa-arrow-circle-right fa-fw"></i> Di chuyển
                                                 </button>
                                                 <button class="btn btn-sm btn-default" @click="openChangeNameModal(itemActive)">
@@ -212,6 +212,37 @@
             </div>
         </div>
         <!-- /. Change Name Modal -->
+        <!-- Move Item Modal -->
+        <div class="modal fade" id="moveItemModal" tabindex="-1" role="dialog" aria-labelledby="moveItemModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="moveItemModalLabel">Di chuyển</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form @submit.prevent="moveItem()" @keydown="formMoveItem.onKeydown($event)">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <select v-model="formMoveItem.move_to" class="form-control">
+                                        <option disabled value="">Chọn thư mục chuyển đến</option>
+                                        <option value="../" v-show="folder != 'media'">../</option>
+                                        <option v-for="item in media" :key="item.id" v-show="item.aggregate_type == 'folder' && item.filename != itemActive.filename">{{ item.filename }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Đóng</button>
+                            <button :disabled="formMoveItem.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Di chuyển</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /. Move Item Modal -->
     </div>
     <div v-if="!$gate.isManageMedia()">
         <not-found></not-found>
@@ -248,6 +279,9 @@ export default {
             }),
             formChangeName: new Form({
                 name: '', item: {}, folder:''
+            }),
+            formMoveItem: new Form({
+                move_to: '', item: {}, folder:''
             }),
         }
     },
@@ -367,6 +401,29 @@ export default {
                 Toast.fire({
                     type: 'success',
                     title: 'Đổi tên thành công'
+                });
+                Fire.$emit('AfterCreate');
+                this.$Progress.finish();
+            })
+            .catch( () => {
+                this.$Progress.fail();
+            }); 
+        },
+        openMoveItemModal(itemActive) {
+            this.formMoveItem.reset();
+            this.formMoveItem.clear();
+            this.formMoveItem.item = itemActive;
+            this.formMoveItem.folder = this.folder;
+            $('#moveItemModal').modal('show');
+        },
+        moveItem(){
+            this.$Progress.start();
+            this.formMoveItem.post('/api/mediaMoveItem')
+            .then( () => {
+                $('#moveItemModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Di chuyển thành công'
                 });
                 Fire.$emit('AfterCreate');
                 this.$Progress.finish();
@@ -501,6 +558,7 @@ export default {
     flex: 1;
     width: 100%;
     min-width: 200px;
+    max-width: 250px;
 }
 .media-wrapper .file-link{
     margin: 5px;

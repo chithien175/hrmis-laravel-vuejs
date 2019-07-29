@@ -46,6 +46,7 @@ Route::post('mediaList', 'API\MediaController@list');
 Route::post('mediaUpload', 'API\MediaController@upload');
 Route::delete('mediaDestroy/{id}', 'API\MediaController@destroy');
 Route::post('mediaChangeName', 'API\MediaController@changeName');
+Route::post('mediaMoveItem', 'API\MediaController@moveItemName');
 Route::post('folderCreate', 'API\MediaController@folderCreate');
 Route::post('folderDestroy', 'API\MediaController@folderDestroy');
 Route::post('handleImageAdded', 'API\MediaController@handleImageAdded');
