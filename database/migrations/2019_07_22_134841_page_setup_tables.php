@@ -31,6 +31,22 @@ class PageSetupTables extends Migration
             
             $table->timestamps();
         });
+
+        // Page Custom Field
+        Schema::create('page_custom_fields', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('key')->unique();
+            $table->string('display_name');
+            $table->longText('value')->nullable();
+            $table->string('type');
+            $table->integer('order')->default(1);
+
+            $table->unsignedBigInteger('page_id');
+            $table->foreign('page_id')->references('id')->on('pages')
+            ->onUpdate('cascade')->onDelete('cascade');
+            
+            $table->timestamps();
+        });
     }
 
     /**
@@ -40,6 +56,7 @@ class PageSetupTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('page_custom_fields');
         Schema::dropIfExists('pages');
     }
 }
