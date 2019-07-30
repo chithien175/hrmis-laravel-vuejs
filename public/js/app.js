@@ -3931,15 +3931,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -4472,10 +4463,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isLoading: true,
+      isLoadingFields: true,
       editmode: false,
       pages: {},
       form: new Form({
@@ -4517,6 +4522,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.form.clear();
       this.form.fill(page);
+      this.getFieldsByPageId(page.id);
       $('#pageModal').modal('show');
     },
     newModal: function newModal() {
@@ -4651,17 +4657,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    openCustomFieldModal: function openCustomFieldModal(id) {
+    getFieldsByPageId: function getFieldsByPageId(id) {
       var _this6 = this;
 
-      this.formCustomField.reset();
-      this.formCustomField.clear();
-      this.formCustomField.page_id = id;
+      this.isLoadingFields = true;
       axios.get('/api/getFieldsByPageId/' + id).then(function (_ref2) {
         var data = _ref2.data;
         _this6.pageFields = data;
+        _this6.isLoadingFields = false;
       });
+    },
+    openCustomFieldModal: function openCustomFieldModal(id) {
+      this.formCustomField.reset();
+      this.formCustomField.clear();
+      this.formCustomField.page_id = id;
       $('#customFieldModal').modal('show');
+      this.getFieldsByPageId(id);
     },
     createCustomField: function createCustomField() {
       var _this7 = this;
@@ -4672,10 +4683,9 @@ __webpack_require__.r(__webpack_exports__);
         _this7.formCustomField.name = '';
         _this7.formCustomField.key = '';
         _this7.formCustomField.type = '';
-        axios.get('/api/getFieldsByPageId/' + _this7.formCustomField.page_id).then(function (_ref3) {
-          var data = _ref3.data;
-          _this7.pageFields = data;
-        });
+
+        _this7.getFieldsByPageId(_this7.formCustomField.page_id);
+
         Toast.fire({
           type: 'success',
           title: 'Thêm trường tùy chỉnh thành công'
@@ -4721,8 +4731,8 @@ __webpack_require__.r(__webpack_exports__);
           _this9.$Progress.start();
 
           axios.post('../api/deleteFieldPage/' + id).then(function () {
-            axios.get('/api/getFieldsByPageId/' + _this9.formCustomField.page_id).then(function (_ref4) {
-              var data = _ref4.data;
+            axios.get('/api/getFieldsByPageId/' + _this9.formCustomField.page_id).then(function (_ref3) {
+              var data = _ref3.data;
               _this9.pageFields = data;
             });
             Swal.fire('Xóa thành công!', 'Bạn đã xóa trường thành công', 'success');
@@ -12148,6 +12158,25 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.note-developer{\n    border-radius: 30px;\n    font-size: 11px;\n    border: 0;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/module/ModuleComponent.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/module/ModuleComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -12179,7 +12208,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n.list-fields-page .developer{\n    border-radius: 30px;    \n    padding: 5px 10px;\n    font-size: 11px;\n    border: 0;\n    position: relative;\n    top: -2px;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
+exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n", ""]);
 
 // exports
 
@@ -73753,6 +73782,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MenuComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/module/ModuleComponent.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/module/ModuleComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -83084,37 +83143,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 note-developer" }, [
-      _c("p", [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-warning",
-            attrs: {
-              "data-toggle": "collapse",
-              href: "#collapseExample",
-              role: "button",
-              "aria-expanded": "false",
-              "aria-controls": "collapseExample"
-            }
-          },
-          [
-            _vm._v(
-              "\n                                        Sử dụng lập trình!\n                                    "
-            )
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
-        _c("div", { staticClass: "card card-body" }, [
-          _c("pre", { staticClass: "m-0" }, [
-            _vm._v(
-              "$options = array(\n    'id' => 'navigation',\n    'class' => 'navigation',\n    'sub_id' => 'submenu',\n    'sub_class' => 'submenu'\n);\necho menu('frontend', $options);"
-            )
-          ])
-        ])
-      ])
+    return _c("code", { staticClass: "note-developer p-3" }, [
+      _vm._v(
+        "\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
+      ),
+      _c("br"),
+      _vm._v(
+        "\n                                $options = array(\n                                    'id' => 'navigation',\n                                    'class' => 'navigation',\n                                    'sub_id' => 'submenu',\n                                    'sub_class' => 'submenu'\n                                );\n                                "
+      ),
+      _c("br"),
+      _vm._v(
+        "\n                                menu('frontend', $options);\n                            "
+      )
     ])
   },
   function() {
@@ -83740,144 +83780,253 @@ var render = function() {
                       [
                         _c("div", { staticClass: "modal-body" }, [
                           _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-9" }, [
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "control-label",
-                                      attrs: { for: "inputTitle" }
-                                    },
-                                    [_vm._v("Tiêu đề")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
+                            _c(
+                              "div",
+                              { staticClass: "col-md-9" },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
                                       {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.title,
-                                        expression: "form.title"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("title")
-                                    },
-                                    attrs: { type: "text", name: "title" },
-                                    domProps: { value: _vm.form.title },
-                                    on: {
-                                      change: _vm.convertSlug,
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "title",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "title" }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "control-label",
-                                      attrs: { for: "inputSlug" }
-                                    },
-                                    [_vm._v("Chuỗi cho đường dẫn tĩnh")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {}, [
+                                        staticClass: "control-label",
+                                        attrs: { for: "inputTitle" }
+                                      },
+                                      [_vm._v("Tiêu đề")]
+                                    ),
+                                    _vm._v(" "),
                                     _c("input", {
                                       directives: [
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.form.slug,
-                                          expression: "form.slug"
+                                          value: _vm.form.title,
+                                          expression: "form.title"
                                         }
                                       ],
-                                      staticClass:
-                                        "form-control col-md-6 d-inline-block",
+                                      staticClass: "form-control",
                                       class: {
                                         "is-invalid": _vm.form.errors.has(
-                                          "slug"
+                                          "title"
                                         )
                                       },
-                                      attrs: { type: "text", name: "slug" },
-                                      domProps: { value: _vm.form.slug },
+                                      attrs: { type: "text", name: "title" },
+                                      domProps: { value: _vm.form.title },
                                       on: {
+                                        change: _vm.convertSlug,
                                         input: function($event) {
                                           if ($event.target.composing) {
                                             return
                                           }
                                           _vm.$set(
                                             _vm.form,
-                                            "slug",
+                                            "title",
                                             $event.target.value
                                           )
                                         }
                                       }
                                     }),
-                                    _c("span", [_vm._v(".html")])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "slug" }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "control-label",
-                                      attrs: { for: "inputBody" }
-                                    },
-                                    [_vm._v("Nội dung")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("vue-editor", {
-                                    attrs: { useCustomImageHandler: "" },
-                                    on: { imageAdded: _vm.handleImageAdded },
-                                    model: {
-                                      value: _vm.form.body,
-                                      callback: function($$v) {
-                                        _vm.$set(_vm.form, "body", $$v)
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "title" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "control-label",
+                                        attrs: { for: "inputSlug" }
                                       },
-                                      expression: "form.body"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "body" }
-                                  })
-                                ],
-                                1
-                              )
-                            ]),
+                                      [_vm._v("Chuỗi cho đường dẫn tĩnh")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", {}, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.slug,
+                                            expression: "form.slug"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "form-control col-md-6 d-inline-block",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "slug"
+                                          )
+                                        },
+                                        attrs: { type: "text", name: "slug" },
+                                        domProps: { value: _vm.form.slug },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form,
+                                              "slug",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _c("span", [_vm._v(".html")])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "slug" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "control-label",
+                                        attrs: { for: "inputBody" }
+                                      },
+                                      [_vm._v("Nội dung")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("vue-editor", {
+                                      attrs: { useCustomImageHandler: "" },
+                                      on: { imageAdded: _vm.handleImageAdded },
+                                      model: {
+                                        value: _vm.form.body,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.form, "body", $$v)
+                                        },
+                                        expression: "form.body"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "body" }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.pageFields, function(field) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: field.id,
+                                      staticClass: "form-group"
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "control-label",
+                                          attrs: { for: "inputTitle" }
+                                        },
+                                        [_vm._v(_vm._s(field.display_name))]
+                                      ),
+                                      _vm._v(" "),
+                                      field.type == "text"
+                                        ? _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: field.value,
+                                                expression: "field.value"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { type: "text" },
+                                            domProps: { value: field.value },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  field,
+                                                  "value",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      field.type == "text_area"
+                                        ? _c("textarea", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: field.value,
+                                                expression: "field.value"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { rows: "3" },
+                                            domProps: { value: field.value },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  field,
+                                                  "value",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      field.type == "text_editor"
+                                        ? _c("vue-editor", {
+                                            attrs: {
+                                              useCustomImageHandler: ""
+                                            },
+                                            on: {
+                                              imageAdded: _vm.handleImageAdded
+                                            },
+                                            model: {
+                                              value: field.value,
+                                              callback: function($$v) {
+                                                _vm.$set(field, "value", $$v)
+                                              },
+                                              expression: "field.value"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      field.type == "image"
+                                        ? _c("input", {
+                                            staticClass: "form-control",
+                                            attrs: { type: "file" }
+                                          })
+                                        : _vm._e()
+                                    ],
+                                    1
+                                  )
+                                })
+                              ],
+                              2
+                            ),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c(
@@ -84121,7 +84270,8 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       name: "name",
-                                      placeholder: "Tên trường hiển thị"
+                                      placeholder:
+                                        "Tên trường (Vd: Tiêu Đề Banner)"
                                     },
                                     domProps: {
                                       value: _vm.formCustomField.name
@@ -84172,7 +84322,8 @@ var render = function() {
                                     attrs: {
                                       type: "text",
                                       name: "key",
-                                      placeholder: "Mã khóa trường"
+                                      placeholder:
+                                        "Mã khóa trường. (Vd: about.title_banner)"
                                     },
                                     domProps: {
                                       value: _vm.formCustomField.key
@@ -84311,97 +84462,119 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-8 list-fields-page" },
-                          [
-                            _c("VueNestable", {
-                              on: {
-                                change: function($event) {
-                                  return _vm.orderFields(_vm.pageFields)
-                                }
-                              },
-                              scopedSlots: _vm._u(
-                                [
-                                  {
-                                    key: "default",
-                                    fn: function(ref) {
-                                      var item = ref.item
-                                      return _c(
-                                        "div",
-                                        {},
-                                        [
-                                          _c(
-                                            "VueNestableHandle",
-                                            { attrs: { item: item } },
-                                            [
-                                              _c("i", {
-                                                staticClass:
-                                                  "fas fa-arrows-alt blue"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("span", [
-                                            _vm._v(
-                                              _vm._s(item.display_name) + " "
-                                            )
-                                          ]),
-                                          _c(
-                                            "code",
-                                            { staticClass: "developer" },
-                                            [
-                                              _vm._v(
-                                                "getFieldPage('" +
-                                                  _vm._s(item.key) +
-                                                  "')"
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "button",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-danger float-right",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.deleteFieldPage(
-                                                    item.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "fa fa-trash fa-fw"
-                                              }),
-                                              _vm._v(
-                                                " Xóa\n                                        "
-                                              )
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
+                        _vm.isLoadingFields
+                          ? _c(
+                              "div",
+                              { staticClass: "col-md-8" },
+                              _vm._l(3, function(index) {
+                                return _c("vcl-facebook", {
+                                  key: index,
+                                  staticClass: "mb-3 mr-3",
+                                  attrs: { height: 100 }
+                                })
+                              }),
+                              1
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.isLoadingFields
+                          ? _c(
+                              "div",
+                              { staticClass: "col-md-8 list-fields-page" },
+                              [
+                                _c("VueNestable", {
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.orderFields(_vm.pageFields)
                                     }
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var item = ref.item
+                                          return _c(
+                                            "div",
+                                            {},
+                                            [
+                                              _c(
+                                                "VueNestableHandle",
+                                                { attrs: { item: item } },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fas fa-arrows-alt blue"
+                                                  })
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _vm._v(
+                                                  _vm._s(item.display_name) +
+                                                    " "
+                                                )
+                                              ]),
+                                              _c(
+                                                "code",
+                                                {
+                                                  staticClass:
+                                                    "note-developer p-1"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldPage('" +
+                                                      _vm._s(item.key) +
+                                                      "')"
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "btn btn-sm btn-danger float-right",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.deleteFieldPage(
+                                                        item.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _c("i", {
+                                                    staticClass:
+                                                      "fa fa-trash fa-fw"
+                                                  }),
+                                                  _vm._v(
+                                                    " Xóa\n                                        "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    false,
+                                    557620811
+                                  ),
+                                  model: {
+                                    value: _vm.pageFields,
+                                    callback: function($$v) {
+                                      _vm.pageFields = $$v
+                                    },
+                                    expression: "pageFields"
                                   }
-                                ],
-                                null,
-                                false,
-                                1727945306
-                              ),
-                              model: {
-                                value: _vm.pageFields,
-                                callback: function($$v) {
-                                  _vm.pageFields = $$v
-                                },
-                                expression: "pageFields"
-                              }
-                            })
-                          ],
-                          1
-                        )
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
                       ])
                     ])
                   ])
@@ -84473,7 +84646,11 @@ var staticRenderFns = [
           staticClass: "modal-title blue",
           attrs: { id: "customFieldModalLabel" }
         },
-        [_vm._v("Trường tùy chỉnh")]
+        [
+          _vm._v(
+            "Trường tùy chỉnh (Dùng cho lập trình - vui lòng tham khảo khi sử dụng!)"
+          )
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -103063,7 +103240,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MenuComponent_vue_vue_type_template_id_2c26ffce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MenuComponent.vue?vue&type=template&id=2c26ffce& */ "./resources/js/components/menu/MenuComponent.vue?vue&type=template&id=2c26ffce&");
 /* harmony import */ var _MenuComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MenuComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/menu/MenuComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MenuComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -103071,7 +103250,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _MenuComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _MenuComponent_vue_vue_type_template_id_2c26ffce___WEBPACK_IMPORTED_MODULE_0__["render"],
   _MenuComponent_vue_vue_type_template_id_2c26ffce___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -103100,6 +103279,22 @@ component.options.__file = "resources/js/components/menu/MenuComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MenuComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/MenuComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MenuComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/menu/MenuComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MenuComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

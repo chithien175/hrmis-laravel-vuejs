@@ -128,6 +128,16 @@
                                         <vue-editor v-model="form.body" useCustomImageHandler @imageAdded="handleImageAdded"></vue-editor>
                                         <has-error :form="form" field="body"></has-error>
                                     </div>
+
+                                    <!-- Page Custom Fields -->
+                                    <div class="form-group" v-for="field in pageFields" :key="field.id">
+                                        <label for="inputTitle" class="control-label">{{ field.display_name }}</label>
+                                        <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
+                                        <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
+                                        <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
+                                        <input class="form-control" type="file" v-if="field.type == 'image'">
+                                    </div>
+                                    <!-- ./ End Page Custom Fields -->
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -166,7 +176,7 @@
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title blue" id="customFieldModalLabel">Trường tùy chỉnh</h5>
+                        <h5 class="modal-title blue" id="customFieldModalLabel">Trường tùy chỉnh (Dùng cho lập trình - vui lòng tham khảo khi sử dụng!)</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -176,12 +186,12 @@
                             <div class="col-md-4">
                                 <form @submit.prevent="createCustomField()" @keydown="formCustomField.onKeydown($event)">
                                     <div class="form-group">
-                                        <input v-model="formCustomField.name" type="text" name="name" placeholder="Tên trường hiển thị"
+                                        <input v-model="formCustomField.name" type="text" name="name" placeholder="Tên trường (Vd: Tiêu Đề Banner)"
                                             class="form-control" :class="{ 'is-invalid': formCustomField.errors.has('name') }">
                                         <has-error :form="formCustomField" field="name"></has-error>
                                     </div>
                                     <div class="form-group">
-                                        <input v-model="formCustomField.key" type="text" name="key" placeholder="Mã khóa trường"
+                                        <input v-model="formCustomField.key" type="text" name="key" placeholder="Mã khóa trường. (Vd: about.title_banner)"
                                             class="form-control" :class="{ 'is-invalid': formCustomField.errors.has('key') }">
                                         <has-error :form="formCustomField" field="key"></has-error>
                                     </div>
@@ -198,7 +208,10 @@
                                     <button :disabled="formCustomField.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Thêm mới</button>
                                 </form>
                             </div>
-                            <div class="col-md-8 list-fields-page">
+                            <div class="col-md-8" v-if="isLoadingFields">
+                                <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 3" :key="index"></vcl-facebook>
+                            </div>
+                            <div class="col-md-8 list-fields-page" v-if="!isLoadingFields">
                                 <VueNestable v-model="pageFields" @change="orderFields(pageFields)">
                                     <div slot-scope="{ item }">
                                         <!-- Handler -->
@@ -207,7 +220,7 @@
                                         </VueNestableHandle>
 
                                         <!-- Content -->
-                                        <span>{{ item.display_name }} </span><code class="developer">getFieldPage('{{ item.key }}')</code>
+                                        <span>{{ item.display_name }} </span><code class="note-developer p-1">getFieldPage('{{ item.key }}')</code>
                                         <button class="btn btn-sm btn-danger float-right" @click="deleteFieldPage(item.id)">
                                             <i class="fa fa-trash fa-fw"></i> Xóa
                                         </button>
@@ -233,6 +246,7 @@
         data() {
             return {
                 isLoading: true,
+                isLoadingFields: true,
                 editmode: false,
                 pages: {},
                 form: new Form({
@@ -259,7 +273,7 @@
                 this.form.reset();
                 this.form.clear();
                 this.form.fill(page);
-
+                this.getFieldsByPageId(page.id);
                 $('#pageModal').modal('show');
             },
             newModal () {
@@ -347,7 +361,6 @@
                         title: 'Vui lòng tải ảnh dưới 2MB'
                     });
                 }
-                
             },
             sanitizeTitle: function(title) {
                 var slug = "";
@@ -396,16 +409,19 @@
                     console.log(err);
                 });
             },
+            getFieldsByPageId(id){
+                this.isLoadingFields = true;
+                axios.get('/api/getFieldsByPageId/'+id).then(({ data }) => { 
+                    this.pageFields = data;
+                    this.isLoadingFields = false;
+                });
+            },
             openCustomFieldModal(id) {
                 this.formCustomField.reset();
                 this.formCustomField.clear();
                 this.formCustomField.page_id = id;
-
-                axios.get('/api/getFieldsByPageId/'+id).then(({ data }) => { 
-                    this.pageFields = data;
-                });
-
                 $('#customFieldModal').modal('show');
+                this.getFieldsByPageId(id);
             },
             createCustomField() {
                 this.$Progress.start();
@@ -415,11 +431,7 @@
                     this.formCustomField.name = '';
                     this.formCustomField.key = '';
                     this.formCustomField.type = '';
-
-                    axios.get('/api/getFieldsByPageId/'+this.formCustomField.page_id).then(({ data }) => { 
-                        this.pageFields = data;
-                    });
-
+                    this.getFieldsByPageId(this.formCustomField.page_id);
                     Toast.fire({
                         type: 'success',
                         title: 'Thêm trường tùy chỉnh thành công'
@@ -517,16 +529,5 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
-}
-.list-fields-page .developer{
-    border-radius: 30px;    
-    padding: 5px 10px;
-    font-size: 11px;
-    border: 0;
-    position: relative;
-    top: -2px;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 </style>

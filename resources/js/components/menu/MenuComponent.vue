@@ -83,26 +83,17 @@
                                 </div>
                                 <!-- /.card -->
                             </div>
-                            <div class="col-12 note-developer">
-                                <p>
-                                    <a class="btn btn-sm btn-warning" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        Sử dụng lập trình!
-                                    </a>
-                                </p>
-                                
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <pre class="m-0">$options = array(
-    'id' => 'navigation',
-    'class' => 'navigation',
-    'sub_id' => 'submenu',
-    'sub_class' => 'submenu'
-);
-echo menu('frontend', $options);</pre>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                            <code class="note-developer p-3">
+                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!<br>
+                                $options = array(
+                                    'id' => 'navigation',
+                                    'class' => 'navigation',
+                                    'sub_id' => 'submenu',
+                                    'sub_class' => 'submenu'
+                                );
+                                <br>
+                                menu('frontend', $options);
+                            </code>
                         </div>
                     </div>
                 </div>
@@ -280,3 +271,14 @@ echo menu('frontend', $options);</pre>
         }
     }
 </script>
+
+<style>
+.note-developer{
+    border-radius: 30px;
+    font-size: 11px;
+    border: 0;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+</style>
