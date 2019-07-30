@@ -83,26 +83,16 @@
                                 </div>
                                 <!-- /.card -->
                             </div>
-                            <div class="col-12 note-developer">
-                                <p>
-                                    <a class="btn btn-sm btn-warning" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        Sử dụng lập trình!
-                                    </a>
-                                </p>
-                                
-                                <div class="collapse" id="collapseExample">
-                                    <div class="card card-body">
-                                        <pre class="m-0">$options = array(
-    'id' => 'navigation',
-    'class' => 'navigation',
-    'sub_id' => 'submenu',
-    'sub_class' => 'submenu'
-);
-echo menu('frontend', $options);</pre>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                                <code class="note-developer p-3">
+                                    Code hiển thị menu:<br>
+                                    $options = array(
+                                    'id' => 'navigation',
+                                    'class' => 'navigation',
+                                    'sub_id' => 'submenu',
+                                    'sub_class' => 'submenu'
+                                );<br>
+                                menu('frontend', $options);
+                                </code>
                         </div>
                     </div>
                 </div>

@@ -3930,16 +3930,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -12141,7 +12131,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*\r\n* Style for nestable\r\n*/\n.nestable {\r\n  position: relative;\n}\n.nestable .nestable-list {\r\n  margin: 0;\r\n  padding: 0 0 0 40px;\r\n  list-style-type: none;\n}\n.nestable > .nestable-list {\r\n  padding: 0;\n}\n.nestable-item,\r\n.nestable-item-copy {\r\n  margin: 10px 0 0;\n}\n.nestable-item-content{\r\n    border: 1px solid #ccc;\r\n    border-radius: 3px;\r\n    padding: 14px 15px 14px 0;\r\n    color: #333;\r\n    height: 50px;\r\n    font-weight: 700;\n}\n.nestable-handle{\r\n    margin-right: 10px;\r\n    padding: 15px;\n}\n.nestable-item:first-child,\r\n.nestable-item-copy:first-child {\r\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\r\n.nestable-item-copy .nestable-list {\r\n  margin-top: 10px;\n}\n.nestable-item {\r\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\r\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\r\n  opacity: 0;\r\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\r\n  content: ' ';\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\r\n  border: 1px dashed #0e4d9a;\r\n  border-radius: 5px;\n}\n.nestable-drag-layer {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 100;\r\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  padding: 0;\r\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\r\n  cursor: move;\n}\n.nestable-handle {\r\n  display: inline;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*\n* Style for nestable\n*/\n.nestable {\n  position: relative;\n}\n.nestable .nestable-list {\n  margin: 0;\n  padding: 0 0 0 40px;\n  list-style-type: none;\n}\n.nestable > .nestable-list {\n  padding: 0;\n}\n.nestable-item,\n.nestable-item-copy {\n  margin: 10px 0 0;\n}\n.nestable-item-content{\n    border: 1px solid #ccc;\n    border-radius: 3px;\n    padding: 14px 15px 14px 0;\n    color: #333;\n    height: 50px;\n    font-weight: 700;\n}\n.nestable-handle{\n    margin-right: 10px;\n    padding: 15px;\n}\n.nestable-item:first-child,\n.nestable-item-copy:first-child {\n  margin-top: 0;\n}\n.nestable-item .nestable-list,\n.nestable-item-copy .nestable-list {\n  margin-top: 10px;\n}\n.nestable-item {\n  position: relative;\n}\n.nestable-item.is-dragging .nestable-list {\n  pointer-events: none;\n}\n.nestable-item.is-dragging * {\n  opacity: 0;\n  filter: alpha(opacity=0);\n}\n.nestable-item.is-dragging:before {\n  content: ' ';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(106, 127, 233, 0.274);\n  border: 1px dashed #0e4d9a;\n  border-radius: 5px;\n}\n.nestable-drag-layer {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 100;\n  pointer-events: none;\n}\n.nestable-drag-layer > .nestable-list {\n  position: absolute;\n  top: 0;\n  left: 0;\n  padding: 0;\n  background-color: rgba(106, 127, 233, 0.274);\n}\n.nestable [draggable=\"true\"] {\n  cursor: move;\n}\n.nestable-handle {\n  display: inline;\n}\n", ""]);
 
 // exports
 
@@ -12179,7 +12169,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n.list-fields-page .developer{\n    border-radius: 30px;    \n    padding: 5px 10px;\n    font-size: 11px;\n    border: 0;\n    position: relative;\n    top: -2px;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
+exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n.note-developer{\n    border-radius: 30px;    \n    padding: 5px 10px;\n    font-size: 11px;\n    border: 0;\n    position: relative;\n    top: -2px;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
 
 // exports
 
@@ -78621,7 +78611,7 @@ var render = function() {
                                       staticClass: "fas fa-plus fa-fw"
                                     }),
                                     _vm._v(
-                                      " Thêm mới\r\n                                        "
+                                      " Thêm mới\n                                        "
                                     )
                                   ]
                                 )
@@ -78679,7 +78669,7 @@ var render = function() {
                                             staticClass: "fa fa-edit fa-fw"
                                           }),
                                           _vm._v(
-                                            " Sửa\r\n                                                "
+                                            " Sửa\n                                                "
                                           )
                                         ]
                                       ),
@@ -78709,7 +78699,7 @@ var render = function() {
                                             staticClass: "fa fa-trash fa-fw"
                                           }),
                                           _vm._v(
-                                            " Xóa\r\n                                                "
+                                            " Xóa\n                                                "
                                           )
                                         ]
                                       )
@@ -79207,7 +79197,7 @@ var render = function() {
                                       staticClass: "fas fa-plus fa-fw"
                                     }),
                                     _vm._v(
-                                      " Thêm mới\r\n                                        "
+                                      " Thêm mới\n                                        "
                                     )
                                   ]
                                 )
@@ -79283,7 +79273,7 @@ var render = function() {
                                             staticClass: "fa fa-edit fa-fw"
                                           }),
                                           _vm._v(
-                                            " Sửa\r\n                                                "
+                                            " Sửa\n                                                "
                                           )
                                         ]
                                       ),
@@ -79303,7 +79293,7 @@ var render = function() {
                                             staticClass: "fa fa-trash fa-fw"
                                           }),
                                           _vm._v(
-                                            " Xóa\r\n                                                "
+                                            " Xóa\n                                                "
                                           )
                                         ]
                                       )
@@ -81959,7 +81949,7 @@ var render = function() {
                                           staticClass: "fas fa-plus fa-fw"
                                         }),
                                         _vm._v(
-                                          " Thêm mới\r\n                                                "
+                                          " Thêm mới\n                                                "
                                         )
                                       ]
                                     )
@@ -82022,7 +82012,7 @@ var render = function() {
                                                       "fa fa-trash fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Xóa\r\n                                                "
+                                                    " Xóa\n                                                "
                                                   )
                                                 ]
                                               ),
@@ -82044,7 +82034,7 @@ var render = function() {
                                                       "fa fa-edit fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Sửa\r\n                                                "
+                                                    " Sửa\n                                                "
                                                   )
                                                 ]
                                               )
@@ -82056,7 +82046,7 @@ var render = function() {
                                     ],
                                     null,
                                     false,
-                                    916904629
+                                    3978140725
                                   ),
                                   model: {
                                     value: _vm.menu.parent_items,
@@ -83084,37 +83074,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 note-developer" }, [
-      _c("p", [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-warning",
-            attrs: {
-              "data-toggle": "collapse",
-              href: "#collapseExample",
-              role: "button",
-              "aria-expanded": "false",
-              "aria-controls": "collapseExample"
-            }
-          },
-          [
-            _vm._v(
-              "\n                                        Sử dụng lập trình!\n                                    "
-            )
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "collapse", attrs: { id: "collapseExample" } }, [
-        _c("div", { staticClass: "card card-body" }, [
-          _c("pre", { staticClass: "m-0" }, [
-            _vm._v(
-              "$options = array(\n    'id' => 'navigation',\n    'class' => 'navigation',\n    'sub_id' => 'submenu',\n    'sub_class' => 'submenu'\n);\necho menu('frontend', $options);"
-            )
-          ])
-        ])
-      ])
+    return _c("code", { staticClass: "note-developer p-3" }, [
+      _vm._v("\n                                    Code hiển thị menu:"),
+      _c("br"),
+      _vm._v(
+        "\n                                    $options = array(\n                                    'id' => 'navigation',\n                                    'class' => 'navigation',\n                                    'sub_id' => 'submenu',\n                                    'sub_class' => 'submenu'\n                                );"
+      ),
+      _c("br"),
+      _vm._v(
+        "\n                                menu('frontend', $options);\n                                "
+      )
     ])
   },
   function() {
@@ -84349,7 +84318,7 @@ var render = function() {
                                           ]),
                                           _c(
                                             "code",
-                                            { staticClass: "developer" },
+                                            { staticClass: "note-developer" },
                                             [
                                               _vm._v(
                                                 "getFieldPage('" +
@@ -84389,7 +84358,7 @@ var render = function() {
                                 ],
                                 null,
                                 false,
-                                1727945306
+                                2131238375
                               ),
                               model: {
                                 value: _vm.pageFields,
@@ -85149,7 +85118,7 @@ var render = function() {
                                       staticClass: "fas fa-plus fa-fw"
                                     }),
                                     _vm._v(
-                                      " Thêm mới\r\n                                        "
+                                      " Thêm mới\n                                        "
                                     )
                                   ]
                                 )
@@ -85211,7 +85180,7 @@ var render = function() {
                                             staticClass: "fa fa-edit fa-fw"
                                           }),
                                           _vm._v(
-                                            " Sửa\r\n                                                "
+                                            " Sửa\n                                                "
                                           )
                                         ]
                                       ),
@@ -85231,7 +85200,7 @@ var render = function() {
                                             staticClass: "fa fa-trash fa-fw"
                                           }),
                                           _vm._v(
-                                            " Xóa\r\n                                                "
+                                            " Xóa\n                                                "
                                           )
                                         ]
                                       )
@@ -103520,8 +103489,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\laragon\www\katicms\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\laragon\www\katicms\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/hrmis-laravel-vuejs/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/hrmis-laravel-vuejs/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

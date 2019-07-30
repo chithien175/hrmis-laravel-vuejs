@@ -11,6 +11,6 @@ if (!function_exists('menu')) {
     {
         $menu = Modules\Menu\Entities\Menu::display($menuName, $options);
 
-        return $menu;
+        echo $menu;
     }
 }

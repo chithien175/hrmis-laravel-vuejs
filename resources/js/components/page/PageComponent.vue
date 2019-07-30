@@ -207,7 +207,7 @@
                                         </VueNestableHandle>
 
                                         <!-- Content -->
-                                        <span>{{ item.display_name }} </span><code class="developer">getFieldPage('{{ item.key }}')</code>
+                                        <span>{{ item.display_name }} </span><code class="note-developer">getFieldPage('{{ item.key }}')</code>
                                         <button class="btn btn-sm btn-danger float-right" @click="deleteFieldPage(item.id)">
                                             <i class="fa fa-trash fa-fw"></i> Xóa
                                         </button>
@@ -518,7 +518,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
 }
-.list-fields-page .developer{
+.note-developer{
     border-radius: 30px;    
     padding: 5px 10px;
     font-size: 11px;
