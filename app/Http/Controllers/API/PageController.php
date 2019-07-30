@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Page;
+use App\PageCustomField;
 
 class PageController extends Controller
 {
@@ -108,5 +109,55 @@ class PageController extends Controller
         }
 
         return $pages;
+    }
+
+    public function createCustomField(Request $request)
+    {
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'key'      => 'required|string|max:255|unique:page_custom_fields',
+            'type'     => 'required'
+        ]);
+
+        $page = Page::findOrFail($request['page_id']);
+
+        if( $page ){
+            $field = PageCustomField::create([
+                'key'           => $request['key'],
+                'display_name'  => $request['name'],
+                'value'         => '',
+                'type'          => $request['type'],
+                'order'         => $request['order'],
+                'page_id'       => $page['id']
+            ]);
+        }
+
+        return ['message' => 'Đã thêm trường tùy chỉnh'];
+    }
+
+    public function getFieldsByPageId($id)
+    {
+        return Page::findOrFail($id)->fields;
+    }
+
+    public function orderFieldsPage(Request $request){
+        $fields = $request['pageFields'];
+
+        foreach($fields as $key => $field){
+            $item = PageCustomField::findOrFail($field['id']);
+            $item->order = $key+1;
+            $item->save(); 
+        }
+
+        return ['message' => 'Đã sắp xếp trường tùy chỉnh'];
+    }
+
+    public function deleteFieldPage($id)
+    {
+        $field = PageCustomField::findOrFail($id);
+
+        $field->delete();
+
+        return ['message' => 'Đã xóa trường'];
     }
 }

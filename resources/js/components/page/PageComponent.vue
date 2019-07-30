@@ -160,6 +160,66 @@
             </div>
         </div>
         <!-- /. Page Modal -->
+
+        <!-- Custom Field Modal -->
+        <div class="modal fade" id="customFieldModal" tabindex="-1" role="dialog" aria-labelledby="customFieldModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="customFieldModalLabel">Trường tùy chỉnh</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form @submit.prevent="createCustomField()" @keydown="formCustomField.onKeydown($event)">
+                                    <div class="form-group">
+                                        <input v-model="formCustomField.name" type="text" name="name" placeholder="Tên trường hiển thị"
+                                            class="form-control" :class="{ 'is-invalid': formCustomField.errors.has('name') }">
+                                        <has-error :form="formCustomField" field="name"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <input v-model="formCustomField.key" type="text" name="key" placeholder="Mã khóa trường"
+                                            class="form-control" :class="{ 'is-invalid': formCustomField.errors.has('key') }">
+                                        <has-error :form="formCustomField" field="key"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <select v-model="formCustomField.type" class="form-control" :class="{ 'is-invalid': formCustomField.errors.has('type') }">
+                                            <option disabled value="">Chọn loại trường</option>
+                                            <option value="text">Text Box</option>
+                                            <option value="text_area">Text Area</option>
+                                            <option value="text_editor">Text Editor</option>
+                                            <option value="image">Hình Ảnh</option>
+                                        </select>
+                                        <has-error :form="formCustomField" field="type"></has-error>
+                                    </div>
+                                    <button :disabled="formCustomField.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Thêm mới</button>
+                                </form>
+                            </div>
+                            <div class="col-md-8 list-fields-page">
+                                <VueNestable v-model="pageFields" @change="orderFields(pageFields)">
+                                    <div slot-scope="{ item }">
+                                        <!-- Handler -->
+                                        <VueNestableHandle :item="item">
+                                        <i class="fas fa-arrows-alt blue"></i>
+                                        </VueNestableHandle>
+
+                                        <!-- Content -->
+                                        <span>{{ item.display_name }} </span><code class="developer">getFieldPage('{{ item.key }}')</code>
+                                        <button class="btn btn-sm btn-danger float-right" @click="deleteFieldPage(item.id)">
+                                            <i class="fa fa-trash fa-fw"></i> Xóa
+                                        </button>
+                                    </div>
+                                </VueNestable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. Custom Field Modal -->
     </div>
     <div v-if="!$gate.isManagePage()">
         <not-found></not-found>
@@ -178,7 +238,11 @@
                 form: new Form({
                     id: '', title: '', slug: '', photo: 'page-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: '', is_homepage: false,
                 }),
+                formCustomField: new Form({
+                    name: '', key: '', type: '', page_id: '', order: ''
+                }),
                 search: '',
+                pageFields: [],
             }
         },
         methods: {
@@ -324,16 +388,93 @@
                     data: formData
                 })
                 .then(result => {
-                let url = result.data.url; // Get url from response
-                Editor.insertEmbed(cursorLocation, "image", url);
-                resetUploader();
+                    let url = result.data.url; // Get url from response
+                    Editor.insertEmbed(cursorLocation, "image", url);
+                    resetUploader();
                 })
                 .catch(err => {
-                console.log(err);
+                    console.log(err);
                 });
             },
             openCustomFieldModal(id) {
-                console.log(id);
+                this.formCustomField.reset();
+                this.formCustomField.clear();
+                this.formCustomField.page_id = id;
+
+                axios.get('/api/getFieldsByPageId/'+id).then(({ data }) => { 
+                    this.pageFields = data;
+                });
+
+                $('#customFieldModal').modal('show');
+            },
+            createCustomField() {
+                this.$Progress.start();
+                this.formCustomField.order = this.pageFields.length + 1;
+                this.formCustomField.post('/api/createCustomFieldPage')
+                .then( () => {
+                    this.formCustomField.name = '';
+                    this.formCustomField.key = '';
+                    this.formCustomField.type = '';
+
+                    axios.get('/api/getFieldsByPageId/'+this.formCustomField.page_id).then(({ data }) => { 
+                        this.pageFields = data;
+                    });
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Thêm trường tùy chỉnh thành công'
+                    });
+                    this.$Progress.finish();
+                })
+                .catch( () => {
+                    this.$Progress.fail();
+                }); 
+            },
+            orderFields(pageFields){
+                this.$Progress.start();
+                axios.post('/api/orderFieldsPage', {'pageFields': pageFields})
+                .then( () =>{
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Sắp xếp trường thành công'
+                    });
+                    this.$Progress.finish();
+                })
+                .catch( () =>{
+                    this.$Progress.fail();
+                });
+            },
+            deleteFieldPage (id) {
+                Swal.fire({
+                    title: 'Bạn chắc chứ?',
+                    text: "Bạn muốn xóa trường này?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, xóa ngay!',
+                    cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if(result.value){
+                            // Send request to the server
+                            this.$Progress.start();
+                            axios.post('../api/deleteFieldPage/'+id)
+                            .then( () => {
+                                axios.get('/api/getFieldsByPageId/'+this.formCustomField.page_id).then(({ data }) => { 
+                                    this.pageFields = data;
+                                });
+                                Swal.fire(
+                                    'Xóa thành công!',
+                                    'Bạn đã xóa trường thành công',
+                                    'success'
+                                );
+                                this.$Progress.finish();
+                            })
+                            .catch( () => {
+                                Swal("Lỗi xóa trang!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            });
+                        }
+                });
             },
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');
@@ -376,5 +517,16 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
+}
+.list-fields-page .developer{
+    border-radius: 30px;    
+    padding: 5px 10px;
+    font-size: 11px;
+    border: 0;
+    position: relative;
+    top: -2px;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 </style>

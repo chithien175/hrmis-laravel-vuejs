@@ -40,6 +40,10 @@ Route::post('module/toggle', 'API\ModuleController@toggle');
 // Page
 Route::apiResources(['page' => 'API\PageController']);
 Route::get('findPage', 'API\PageController@search');
+Route::post('createCustomFieldPage', 'API\PageController@createCustomField');
+Route::get('getFieldsByPageId/{id}', 'API\PageController@getFieldsByPageId');
+Route::post('orderFieldsPage', 'API\PageController@orderFieldsPage');
+Route::post('deleteFieldPage/{id}', 'API\PageController@deleteFieldPage');
 
 // Media
 Route::post('mediaList', 'API\MediaController@list');

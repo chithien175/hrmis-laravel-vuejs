@@ -9,4 +9,9 @@ class Page extends Model
     protected $fillable = [
         'title', 'slug', 'photo', 'body', 'publish', 'counter', 'user_id', 'is_homepage',
     ];
+
+    public function fields()
+    {
+        return $this->hasMany('App\PageCustomField')->orderBy('order', 'asc');
+    }
 }

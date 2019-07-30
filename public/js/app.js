@@ -3752,7 +3752,7 @@ __webpack_require__.r(__webpack_exports__);
     changeItem: function changeItem(menu) {
       var _this5 = this;
 
-      console.log(menu);
+      // console.log(menu);
       this.$Progress.start();
       axios.post('/api/menu/item/sort', this.menu).then(function () {
         Toast.fire({
@@ -4412,6 +4412,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4429,7 +4489,15 @@ __webpack_require__.r(__webpack_exports__);
         user_id: '',
         is_homepage: false
       }),
-      search: ''
+      formCustomField: new Form({
+        name: '',
+        key: '',
+        type: '',
+        page_id: '',
+        order: ''
+      }),
+      search: '',
+      pageFields: []
     };
   },
   methods: {
@@ -4584,7 +4652,87 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     openCustomFieldModal: function openCustomFieldModal(id) {
-      console.log(id);
+      var _this6 = this;
+
+      this.formCustomField.reset();
+      this.formCustomField.clear();
+      this.formCustomField.page_id = id;
+      axios.get('/api/getFieldsByPageId/' + id).then(function (_ref2) {
+        var data = _ref2.data;
+        _this6.pageFields = data;
+      });
+      $('#customFieldModal').modal('show');
+    },
+    createCustomField: function createCustomField() {
+      var _this7 = this;
+
+      this.$Progress.start();
+      this.formCustomField.order = this.pageFields.length + 1;
+      this.formCustomField.post('/api/createCustomFieldPage').then(function () {
+        _this7.formCustomField.name = '';
+        _this7.formCustomField.key = '';
+        _this7.formCustomField.type = '';
+        axios.get('/api/getFieldsByPageId/' + _this7.formCustomField.page_id).then(function (_ref3) {
+          var data = _ref3.data;
+          _this7.pageFields = data;
+        });
+        Toast.fire({
+          type: 'success',
+          title: 'Thêm trường tùy chỉnh thành công'
+        });
+
+        _this7.$Progress.finish();
+      })["catch"](function () {
+        _this7.$Progress.fail();
+      });
+    },
+    orderFields: function orderFields(pageFields) {
+      var _this8 = this;
+
+      this.$Progress.start();
+      axios.post('/api/orderFieldsPage', {
+        'pageFields': pageFields
+      }).then(function () {
+        Toast.fire({
+          type: 'success',
+          title: 'Sắp xếp trường thành công'
+        });
+
+        _this8.$Progress.finish();
+      })["catch"](function () {
+        _this8.$Progress.fail();
+      });
+    },
+    deleteFieldPage: function deleteFieldPage(id) {
+      var _this9 = this;
+
+      Swal.fire({
+        title: 'Bạn chắc chứ?',
+        text: "Bạn muốn xóa trường này?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Có, xóa ngay!',
+        cancelButtonText: 'Hủy'
+      }).then(function (result) {
+        if (result.value) {
+          // Send request to the server
+          _this9.$Progress.start();
+
+          axios.post('../api/deleteFieldPage/' + id).then(function () {
+            axios.get('/api/getFieldsByPageId/' + _this9.formCustomField.page_id).then(function (_ref4) {
+              var data = _ref4.data;
+              _this9.pageFields = data;
+            });
+            Swal.fire('Xóa thành công!', 'Bạn đã xóa trường thành công', 'success');
+
+            _this9.$Progress.finish();
+          })["catch"](function () {
+            Swal("Lỗi xóa trang!", "Vui lòng liên hệ admin xử lý.", "warning");
+          });
+        }
+      });
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
@@ -4596,28 +4744,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this6 = this;
+    var _this10 = this;
 
     this.loadData();
     Fire.$on('Searching', function () {
-      var query = _this6.search;
+      var query = _this10.search;
 
       if (query) {
-        _this6.$Progress.start();
+        _this10.$Progress.start();
 
         axios.get('/api/findPage?q=' + query).then(function (data) {
-          _this6.pages = data.data;
+          _this10.pages = data.data;
 
-          _this6.$Progress.finish();
+          _this10.$Progress.finish();
         })["catch"](function () {
-          _this6.$Progress.fail();
+          _this10.$Progress.fail();
         });
       } else {
-        _this6.loadData();
+        _this10.loadData();
       }
     });
     Fire.$on('AfterCreate', function () {
-      _this6.loadData();
+      _this10.loadData();
     });
   }
 });
@@ -12031,7 +12179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n", ""]);
+exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n.list-fields-page .developer{\n    border-radius: 30px;    \n    padding: 5px 10px;\n    font-size: 11px;\n    border: 0;\n    position: relative;\n    top: -2px;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
 
 // exports
 
@@ -83909,6 +84057,357 @@ var render = function() {
                 ]
               )
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "customFieldModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "customFieldModalLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "modal-dialog modal-dialog-centered modal-xl",
+                  attrs: { role: "document" }
+                },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c(
+                            "form",
+                            {
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.createCustomField()
+                                },
+                                keydown: function($event) {
+                                  return _vm.formCustomField.onKeydown($event)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.formCustomField.name,
+                                        expression: "formCustomField.name"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.formCustomField.errors.has(
+                                        "name"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "name",
+                                      placeholder: "Tên trường hiển thị"
+                                    },
+                                    domProps: {
+                                      value: _vm.formCustomField.name
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.formCustomField,
+                                          "name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.formCustomField,
+                                      field: "name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.formCustomField.key,
+                                        expression: "formCustomField.key"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.formCustomField.errors.has(
+                                        "key"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "key",
+                                      placeholder: "Mã khóa trường"
+                                    },
+                                    domProps: {
+                                      value: _vm.formCustomField.key
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.formCustomField,
+                                          "key",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.formCustomField,
+                                      field: "key"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formCustomField.type,
+                                          expression: "formCustomField.type"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.formCustomField.errors.has(
+                                          "type"
+                                        )
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.formCustomField,
+                                            "type",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Chọn loại trường")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "text" } },
+                                        [_vm._v("Text Box")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "text_area" } },
+                                        [_vm._v("Text Area")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "text_editor" } },
+                                        [_vm._v("Text Editor")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "image" } },
+                                        [_vm._v("Hình Ảnh")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.formCustomField,
+                                      field: "type"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-sm btn-primary",
+                                  attrs: {
+                                    disabled: _vm.formCustomField.busy,
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-check-circle"
+                                  }),
+                                  _vm._v(" Thêm mới")
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "col-md-8 list-fields-page" },
+                          [
+                            _c("VueNestable", {
+                              on: {
+                                change: function($event) {
+                                  return _vm.orderFields(_vm.pageFields)
+                                }
+                              },
+                              scopedSlots: _vm._u(
+                                [
+                                  {
+                                    key: "default",
+                                    fn: function(ref) {
+                                      var item = ref.item
+                                      return _c(
+                                        "div",
+                                        {},
+                                        [
+                                          _c(
+                                            "VueNestableHandle",
+                                            { attrs: { item: item } },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fas fa-arrows-alt blue"
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(item.display_name) + " "
+                                            )
+                                          ]),
+                                          _c(
+                                            "code",
+                                            { staticClass: "developer" },
+                                            [
+                                              _vm._v(
+                                                "getFieldPage('" +
+                                                  _vm._s(item.key) +
+                                                  "')"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-danger float-right",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.deleteFieldPage(
+                                                    item.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-trash fa-fw"
+                                              }),
+                                              _vm._v(
+                                                " Xóa\n                                        "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    }
+                                  }
+                                ],
+                                null,
+                                false,
+                                1727945306
+                              ),
+                              model: {
+                                value: _vm.pageFields,
+                                callback: function($$v) {
+                                  _vm.pageFields = $$v
+                                },
+                                expression: "pageFields"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
           )
         ])
       : _vm._e(),
@@ -83962,6 +84461,34 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title blue",
+          attrs: { id: "customFieldModalLabel" }
+        },
+        [_vm._v("Trường tùy chỉnh")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -102685,15 +103212,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************************!*\
   !*** ./resources/js/components/page/PageComponent.vue ***!
   \********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PageComponent_vue_vue_type_template_id_183efbce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=template&id=183efbce& */ "./resources/js/components/page/PageComponent.vue?vue&type=template&id=183efbce&");
 /* harmony import */ var _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/page/PageComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _PageComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _PageComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/page/PageComponent.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _PageComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/page/PageComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -102725,7 +103251,7 @@ component.options.__file = "resources/js/components/page/PageComponent.vue"
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/page/PageComponent.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

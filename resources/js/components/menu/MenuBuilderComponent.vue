@@ -294,7 +294,7 @@
                 }); 
             },
             changeItem(menu){
-                console.log(menu);
+                // console.log(menu);
                 this.$Progress.start();
                 axios.post('/api/menu/item/sort', this.menu)
                 .then( () =>{
