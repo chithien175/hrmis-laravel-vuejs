@@ -135,7 +135,11 @@
                                         <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
                                         <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
                                         <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
-                                        <input class="form-control" type="file" v-if="field.type == 'image'">
+                                        <div class="" v-if="field.type == 'image'">
+                                            <img class="img-fluid page-photo" :src="field.value" alt="Page picture">
+                                            <input class="form-control" type="file" @change="changeFieldPhoto">
+                                        </div>
+                                        
                                     </div>
                                     <!-- ./ End Page Custom Fields -->
                                 </div>
@@ -353,6 +357,22 @@
                 if(file['size'] < 2111775){
                     reader.onloadend = (file) => {
                         this.form.photo = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: 'Vui lòng tải ảnh dưới 2MB'
+                    });
+                }
+            },
+            changeFieldPhoto(e){
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                if(file['size'] < 2111775){
+                    reader.onloadend = (file) => {
+                        // this.form.photo = reader.result;
+                        console.log(reader.result);
                     }
                     reader.readAsDataURL(file);
                 }else{

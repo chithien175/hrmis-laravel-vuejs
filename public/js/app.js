@@ -4476,6 +4476,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4604,6 +4608,24 @@ __webpack_require__.r(__webpack_exports__);
       if (file['size'] < 2111775) {
         reader.onloadend = function (file) {
           _this5.form.photo = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        Toast.fire({
+          type: 'error',
+          title: 'Vui lòng tải ảnh dưới 2MB'
+        });
+      }
+    },
+    changeFieldPhoto: function changeFieldPhoto(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          // this.form.photo = reader.result;
+          console.log(reader.result);
         };
 
         reader.readAsDataURL(file);
@@ -84015,10 +84037,24 @@ var render = function() {
                                         : _vm._e(),
                                       _vm._v(" "),
                                       field.type == "image"
-                                        ? _c("input", {
-                                            staticClass: "form-control",
-                                            attrs: { type: "file" }
-                                          })
+                                        ? _c("div", {}, [
+                                            _c("img", {
+                                              staticClass:
+                                                "img-fluid page-photo",
+                                              attrs: {
+                                                src: field.value,
+                                                alt: "Page picture"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              staticClass: "form-control",
+                                              attrs: { type: "file" },
+                                              on: {
+                                                change: _vm.changeFieldPhoto
+                                              }
+                                            })
+                                          ])
                                         : _vm._e()
                                     ],
                                     1
