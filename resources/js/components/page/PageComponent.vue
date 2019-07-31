@@ -130,14 +130,15 @@
                                     </div>
 
                                     <!-- Page Custom Fields -->
-                                    <div v-if="editmode">
-                                        <div class="form-group" v-for="field in pageFields" :key="field.id">
+                                    <div v-if="editmode && pageFields.length>0" class="row">
+                                        <hr>
+                                        <div class="form-group col-12" v-for="field in pageFields" :key="field.id">
                                             <label for="inputTitle" class="control-label">{{ field.display_name }}</label>
                                             <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
                                             <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
                                             <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
-                                            <div class="col-6 p-0" v-if="field.type == 'image'">
-                                                <img class="img-fluid page-photo" :src="field.value" :alt="field.display_name" v-if="field.value">
+                                            <div class="" v-if="field.type == 'image'">
+                                                <img class="img-fluid page-photo" :src="srcFieldPhoto(field.value)" :alt="field.display_name" v-if="field.value">
                                                 <input class="form-control" type="file" @change="changeFieldPhoto($event, field.id)">
                                             </div>
                                         </div>
@@ -310,8 +311,10 @@
                 this.form.slug = this.sanitizeTitle(this.form.slug);
                 this.form.put('/api/page/'+this.form.id)
                 .then( () =>{
-                    if(this.pageFields){
-                        // axios.post
+                    if(this.pageFields.length > 0){
+                        axios.post('/api/updateFieldsPage', {'pageFields':this.pageFields}).then(({ data }) => { 
+                            this.pageFields = [];
+                        });
                     }
                     $('#pageModal').modal('hide');
                     Toast.fire({
@@ -516,6 +519,9 @@
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');
             }, 500),
+            srcFieldPhoto(name){
+                return (name.indexOf('base64') != -1) ? name : "../images/page/"+name;
+            },
         },
         computed:{
             getPagePhoto(){

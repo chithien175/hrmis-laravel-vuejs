@@ -154,12 +154,52 @@ class PageController extends Controller
 
     public function updateFieldsPage(Request $request)
     {
-        return $request->all();
+        $fields = $request['pageFields'];
+
+        // return $fields;
+
+        foreach($fields as $key => $field){
+            $item = PageCustomField::findOrFail($field['id']);
+
+            if($field['type'] == 'image'){
+
+                if($field['value'] != $item->value){
+                    $name = 'field' . $item['id'] . '_' . time() . '.' . explode('/', explode(':', substr($field['value'], 0, strpos($field['value'], ';')))[1])[1];
+
+                    $item_photo = public_path('images/page/').$item->value;
+                    if(file_exists($item_photo)){
+                        @unlink($item_photo);
+                    }
+
+                    $mainImage = \Image::make($field['value'])
+                    ->resize(1920, null, function ($constraint){
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })
+                    ->save(public_path('images/page/').$name);
+
+                    $item->value = $name;
+                    $item->save();
+                }
+            }else{
+                $item->value = $field['value'];
+                $item->save();
+            }
+        }
+
+        return ['message' => 'Đã cập nhật value trường tùy chỉnh'];
     }
 
     public function deleteFieldPage($id)
     {
         $field = PageCustomField::findOrFail($id);
+
+        if($field->type == 'image'){
+            $photo = public_path('images/page/').$field->value;
+            if(file_exists($photo)){
+                @unlink($photo);
+            }
+        }
 
         $field->delete();
 

@@ -45,12 +45,12 @@ class MenuSetupSeeder extends Seeder
 
         $menu = Menu::where('name', 'frontend')->firstOrFail();
 
-         // Giới thiệu
+         // Trang chủ
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Trang chủ',
             'url'     => '',
-            'route'   => 'katitheme.pages.home',
+            'route'   => 'katitheme.homepage',
             'type'    => 'route'
         ]);
         if (!$menuItem->exists) {
@@ -67,9 +67,9 @@ class MenuSetupSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Giới thiệu',
-            'url'     => '',
-            'route'   => 'katitheme.pages.about',
-            'type'    => 'route'
+            'url'     => 'http://katicms.local/gioi-thieu.html',
+            'route'   => '',
+            'type'    => 'url'
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
@@ -85,9 +85,9 @@ class MenuSetupSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Tin tức',
-            'url'     => '',
-            'route'   => 'katitheme.pages.news',
-            'type'    => 'route'
+            'url'     => 'http://katicms.local/tin-tuc.html',
+            'route'   => '',
+            'type'    => 'url'
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([
@@ -137,9 +137,9 @@ class MenuSetupSeeder extends Seeder
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Liên hệ',
-            'url'     => '',
-            'route'   => 'katitheme.pages.contact',
-            'type'    => 'route'
+            'url'     => 'http://katicms.local/lien-he.html',
+            'route'   => '',
+            'type'    => 'url'
         ]);
         if (!$menuItem->exists) {
             $menuItem->fill([

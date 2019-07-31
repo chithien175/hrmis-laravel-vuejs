@@ -13,6 +13,9 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".2s">
+                    
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".3s">
                     <div class="footer-widget footer-menu">
                         <h2>Footer Menu</h2>
                         <ul>
@@ -25,7 +28,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".3s">
+                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".4s">
                     <div class="footer-widget instagram-wrap">
                         <h2>Instagram</h2>
                         <ul>
@@ -36,17 +39,6 @@
                             <li><a href="#"><img src="{{ asset('katitheme/images/instagram/5.jpg') }}" alt=""></a></li>
                             <li><a href="#"><img src="{{ asset('katitheme/images/instagram/6.jpg') }}" alt=""></a></li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".4s">
-                    <div class="footer-widget quick-contact">
-                        <h2>Quick Contact</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Full Name">
-                            <input type="email" placeholder="Email">
-                            <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Massage"></textarea>
-                            <button type="button" name="button" class="btn-style">Send</button>
-                        </form>
                     </div>
                 </div>
             </div>

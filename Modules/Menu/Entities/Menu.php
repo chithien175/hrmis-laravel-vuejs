@@ -63,12 +63,21 @@ class Menu extends Model
         }
         
         foreach ($menuItems as $index => $menuItem) {
-            
-            if( ($menuItem['type'] == 'route') && \Route::has($menuItem['route']) ){
-                $html.= (\Route::currentRouteName() == $menuItem['route']) ? '<li class="active">':'<li>';
-                $html.= '<a href="'.route($menuItem['route']).'" target="'.$menuItem['target'].'">'.$menuItem['title'];
-            }else{
-                $html.= '<li>';
+            // Nếu là ROUTE
+            if( ($menuItem['type'] == 'route') ){
+                if(\Route::has($menuItem['route'])){
+                    $html.= (\Route::currentRouteName() == $menuItem['route']) ? '<li class="active">':'<li>';
+                    $html.= '<a href="'.route($menuItem['route']).'" target="'.$menuItem['target'].'">'.$menuItem['title'];
+                }else{
+                    $html.= '<li>';
+                    $html.= '<a href="#" target="'.$menuItem['target'].'">'.$menuItem['title'];
+                }
+            }
+
+            // Nếu là URL
+            if( ($menuItem['type'] == 'url') ){
+                $html.= (url()->current() == $menuItem['url']) ? '<li class="active">':'<li>';
+                // $html.= '<li class="'.url()->current().'">';
                 $html.= '<a href="'.$menuItem['url'].'" target="'.$menuItem['target'].'">'.$menuItem['title'];
             }
             $html.= '</a>';

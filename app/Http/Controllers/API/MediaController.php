@@ -58,9 +58,9 @@ class MediaController extends Controller
         $mainFileName = $uniqid . '.' . $file->getClientOriginalExtension();
 
         // nếu là hình ảnh
-        if($file->getClientOriginalExtension() == 'jpg|JPG|png|PNG|gif|GIF'){
+        if($file->getClientOriginalExtension() == 'jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF'){
             $mainImage = \Image::make($file)
-            ->resize(1080, null, function ($constraint){
+            ->resize(1920, null, function ($constraint){
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
@@ -250,7 +250,7 @@ class MediaController extends Controller
             }
     
             $mainImage = \Image::make($file)
-                ->resize(1080, null, function ($constraint){
+                ->resize(1920, null, function ($constraint){
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })

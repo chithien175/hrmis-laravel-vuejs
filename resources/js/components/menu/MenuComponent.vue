@@ -92,7 +92,7 @@
                                     'sub_class' => 'submenu'
                                 );
                                 <br>
-                                menu('frontend', $options);
+                                echo menu('frontend', $options);
                             </code>
                         </div>
                     </div>

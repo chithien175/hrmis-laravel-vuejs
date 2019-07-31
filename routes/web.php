@@ -13,18 +13,22 @@
 
 // Frontend
 // Trang Chủ
-Route::get('/', 'Frontend\PageController@home')->name('katitheme.pages.home');
+// Route::get('/', 'Frontend\PageController@home')->name('katitheme.pages.home');
 
 // Giới Thiệu
-Route::get('/gioi-thieu.html','Frontend\PageController@about')->name('katitheme.pages.about');
+// Route::get('/gioi-thieu.html','Frontend\PageController@about')->name('katitheme.pages.about');
 
 // Tin tức
-Route::get('/tin-tuc.html','Frontend\PageController@news')->name('katitheme.pages.news');
+// Route::get('/tin-tuc.html','Frontend\PageController@news')->name('katitheme.pages.news');
 
 // Liên hệ
-Route::get('/lien-he.html','Frontend\PageController@contact')->name('katitheme.pages.contact');
+// Route::get('/lien-he.html','Frontend\PageController@contact')->name('katitheme.pages.contact');
 
-// Route::get('/{pageSlug}.html', 'Frontend\PageController@index');
+// Trang chủ
+Route::get('/', 'Frontend\PageController@getHomePage')->name('katitheme.homepage');
+Route::get('/{pageSlug}.html', 'Frontend\PageController@getOtherPage');
+
+Route::post('/contact-form', 'Frontend\ContactController@postContactForm')->name('post.contactForm');
 
 // Auth
 Auth::routes();

@@ -11,6 +11,20 @@ if (!function_exists('menu')) {
     {
         $menu = Modules\Menu\Entities\Menu::display($menuName, $options);
 
-        echo $menu;
+        return $menu;
+    }
+}
+
+/**
+ * @param
+ * $key: string
+ * @return string
+ */
+if (!function_exists('getFieldPage')) {
+    function getFieldPage($key)
+    {
+        $value = App\PageCustomField::display($key);
+
+        return $value;
     }
 }

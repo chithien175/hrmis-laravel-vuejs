@@ -8,6 +8,25 @@ use App\Page;
 
 class PageController extends Controller
 {
+    public function getHomePage()
+    {
+        $page = Page::where('is_homepage', true)->first();
+
+        if($page){
+            return $this->getOtherPage($page->slug);
+        }
+    }
+
+    public function getOtherPage($pageSlug)
+    {
+        $page = Page::where('slug', $pageSlug)->first();
+
+        if($page){
+            $page_view = 'katitheme.pages.' . $page->slug;
+            return view($page_view)->with(['page_data' => $page]);
+        }
+    }
+
     public function home()
     {
         $home_data = Page::where(['is_homepage' => true, 'publish' => 'publish'])->first();
