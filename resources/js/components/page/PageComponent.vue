@@ -130,16 +130,17 @@
                                     </div>
 
                                     <!-- Page Custom Fields -->
-                                    <div class="form-group" v-for="field in pageFields" :key="field.id">
-                                        <label for="inputTitle" class="control-label">{{ field.display_name }}</label>
-                                        <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
-                                        <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
-                                        <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
-                                        <div class="" v-if="field.type == 'image'">
-                                            <img class="img-fluid page-photo" :src="field.value" alt="Page picture">
-                                            <input class="form-control" type="file" @change="changeFieldPhoto">
+                                    <div v-if="editmode">
+                                        <div class="form-group" v-for="field in pageFields" :key="field.id">
+                                            <label for="inputTitle" class="control-label">{{ field.display_name }}</label>
+                                            <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
+                                            <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
+                                            <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
+                                            <div class="col-6 p-0" v-if="field.type == 'image'">
+                                                <img class="img-fluid page-photo" :src="field.value" :alt="field.display_name" v-if="field.value">
+                                                <input class="form-control" type="file" @change="changeFieldPhoto($event, field.id)">
+                                            </div>
                                         </div>
-                                        
                                     </div>
                                     <!-- ./ End Page Custom Fields -->
                                 </div>
@@ -309,6 +310,9 @@
                 this.form.slug = this.sanitizeTitle(this.form.slug);
                 this.form.put('/api/page/'+this.form.id)
                 .then( () =>{
+                    if(this.pageFields){
+                        // axios.post
+                    }
                     $('#pageModal').modal('hide');
                     Toast.fire({
                         type: 'success',
@@ -366,13 +370,14 @@
                     });
                 }
             },
-            changeFieldPhoto(e){
-                let file = e.target.files[0];
+            changeFieldPhoto(event, id){
+                let fieldIndex = this.pageFields.findIndex(x => x.id === id);
+                let file = event.target.files[0];
                 let reader = new FileReader();
                 if(file['size'] < 2111775){
                     reader.onloadend = (file) => {
-                        // this.form.photo = reader.result;
-                        console.log(reader.result);
+                        this.pageFields[fieldIndex].value = reader.result;
+                        // console.log(fieldIndex);
                     }
                     reader.readAsDataURL(file);
                 }else{
@@ -549,5 +554,16 @@
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
+}
+.note-developer{
+    border-radius: 30px;    
+    padding: 5px 10px;
+    font-size: 11px;
+    border: 0;
+    position: relative;
+    top: -2px;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 </style>

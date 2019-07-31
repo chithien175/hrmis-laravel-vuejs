@@ -44,6 +44,7 @@ Route::post('createCustomFieldPage', 'API\PageController@createCustomField');
 Route::get('getFieldsByPageId/{id}', 'API\PageController@getFieldsByPageId');
 Route::post('orderFieldsPage', 'API\PageController@orderFieldsPage');
 Route::post('deleteFieldPage/{id}', 'API\PageController@deleteFieldPage');
+Route::post('updateFieldsPage', 'API\PageController@updateFieldsPage');
 
 // Media
 Route::post('mediaList', 'API\MediaController@list');

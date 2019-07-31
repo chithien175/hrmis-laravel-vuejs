@@ -152,6 +152,11 @@ class PageController extends Controller
         return ['message' => 'Đã sắp xếp trường tùy chỉnh'];
     }
 
+    public function updateFieldsPage(Request $request)
+    {
+        return $request->all();
+    }
+
     public function deleteFieldPage($id)
     {
         $field = PageCustomField::findOrFail($id);

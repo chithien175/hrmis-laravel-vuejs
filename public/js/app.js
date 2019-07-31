@@ -4480,6 +4480,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4559,6 +4560,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       this.form.slug = this.sanitizeTitle(this.form.slug);
       this.form.put('/api/page/' + this.form.id).then(function () {
+        if (_this3.pageFields) {// axios.post
+        }
+
         $('#pageModal').modal('hide');
         Toast.fire({
           type: 'success',
@@ -4618,14 +4622,18 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    changeFieldPhoto: function changeFieldPhoto(e) {
-      var file = e.target.files[0];
+    changeFieldPhoto: function changeFieldPhoto(event, id) {
+      var _this6 = this;
+
+      var fieldIndex = this.pageFields.findIndex(function (x) {
+        return x.id === id;
+      });
+      var file = event.target.files[0];
       var reader = new FileReader();
 
       if (file['size'] < 2111775) {
         reader.onloadend = function (file) {
-          // this.form.photo = reader.result;
-          console.log(reader.result);
+          _this6.pageFields[fieldIndex].value = reader.result; // console.log(fieldIndex);
         };
 
         reader.readAsDataURL(file);
@@ -4680,13 +4688,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getFieldsByPageId: function getFieldsByPageId(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       this.isLoadingFields = true;
       axios.get('/api/getFieldsByPageId/' + id).then(function (_ref2) {
         var data = _ref2.data;
-        _this6.pageFields = data;
-        _this6.isLoadingFields = false;
+        _this7.pageFields = data;
+        _this7.isLoadingFields = false;
       });
     },
     openCustomFieldModal: function openCustomFieldModal(id) {
@@ -4697,29 +4705,29 @@ __webpack_require__.r(__webpack_exports__);
       this.getFieldsByPageId(id);
     },
     createCustomField: function createCustomField() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.$Progress.start();
       this.formCustomField.order = this.pageFields.length + 1;
       this.formCustomField.post('/api/createCustomFieldPage').then(function () {
-        _this7.formCustomField.name = '';
-        _this7.formCustomField.key = '';
-        _this7.formCustomField.type = '';
+        _this8.formCustomField.name = '';
+        _this8.formCustomField.key = '';
+        _this8.formCustomField.type = '';
 
-        _this7.getFieldsByPageId(_this7.formCustomField.page_id);
+        _this8.getFieldsByPageId(_this8.formCustomField.page_id);
 
         Toast.fire({
           type: 'success',
           title: 'Thêm trường tùy chỉnh thành công'
         });
 
-        _this7.$Progress.finish();
+        _this8.$Progress.finish();
       })["catch"](function () {
-        _this7.$Progress.fail();
+        _this8.$Progress.fail();
       });
     },
     orderFields: function orderFields(pageFields) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$Progress.start();
       axios.post('/api/orderFieldsPage', {
@@ -4730,13 +4738,13 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Sắp xếp trường thành công'
         });
 
-        _this8.$Progress.finish();
+        _this9.$Progress.finish();
       })["catch"](function () {
-        _this8.$Progress.fail();
+        _this9.$Progress.fail();
       });
     },
     deleteFieldPage: function deleteFieldPage(id) {
-      var _this9 = this;
+      var _this10 = this;
 
       Swal.fire({
         title: 'Bạn chắc chứ?',
@@ -4750,16 +4758,16 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // Send request to the server
-          _this9.$Progress.start();
+          _this10.$Progress.start();
 
           axios.post('../api/deleteFieldPage/' + id).then(function () {
-            axios.get('/api/getFieldsByPageId/' + _this9.formCustomField.page_id).then(function (_ref3) {
+            axios.get('/api/getFieldsByPageId/' + _this10.formCustomField.page_id).then(function (_ref3) {
               var data = _ref3.data;
-              _this9.pageFields = data;
+              _this10.pageFields = data;
             });
             Swal.fire('Xóa thành công!', 'Bạn đã xóa trường thành công', 'success');
 
-            _this9.$Progress.finish();
+            _this10.$Progress.finish();
           })["catch"](function () {
             Swal("Lỗi xóa trang!", "Vui lòng liên hệ admin xử lý.", "warning");
           });
@@ -4776,28 +4784,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this10 = this;
+    var _this11 = this;
 
     this.loadData();
     Fire.$on('Searching', function () {
-      var query = _this10.search;
+      var query = _this11.search;
 
       if (query) {
-        _this10.$Progress.start();
+        _this11.$Progress.start();
 
         axios.get('/api/findPage?q=' + query).then(function (data) {
-          _this10.pages = data.data;
+          _this11.pages = data.data;
 
-          _this10.$Progress.finish();
+          _this11.$Progress.finish();
         })["catch"](function () {
-          _this10.$Progress.fail();
+          _this11.$Progress.fail();
         });
       } else {
-        _this10.loadData();
+        _this11.loadData();
       }
     });
     Fire.$on('AfterCreate', function () {
-      _this10.loadData();
+      _this11.loadData();
     });
   }
 });
@@ -12192,7 +12200,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.note-developer{\n    border-radius: 30px;\n    font-size: 11px;\n    border: 0;\n    color: #c7254e;\n    background-color: #f9f2f4;\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\n", ""]);
+exports.push([module.i, "\n.note-developer{\r\n    border-radius: 30px;\r\n    font-size: 11px;\r\n    border: 0;\r\n    color: #c7254e;\r\n    background-color: #f9f2f4;\r\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\r\n", ""]);
 
 // exports
 
@@ -12230,7 +12238,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.page-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n", ""]);
+exports.push([module.i, "\n.page-photo{\r\n    width: 100%;\r\n    border: 1px solid rgba(0, 0, 0, 0.2);\r\n    border-radius: 0.3rem;\n}\n.note-developer{\r\n    border-radius: 30px;    \r\n    padding: 5px 10px;\r\n    font-size: 11px;\r\n    border: 0;\r\n    position: relative;\r\n    top: -2px;\r\n    color: #c7254e;\r\n    background-color: #f9f2f4;\r\n    font-family: Menlo,Monaco,Consolas,\"Courier New\",monospace;\n}\r\n", ""]);
 
 // exports
 
@@ -82842,7 +82850,7 @@ var render = function() {
                                           staticClass: "fas fa-plus fa-fw"
                                         }),
                                         _vm._v(
-                                          " Thêm mới\n                                                "
+                                          " Thêm mới\r\n                                                "
                                         )
                                       ]
                                     )
@@ -82908,7 +82916,7 @@ var render = function() {
                                                       "fas fa-bars fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Xây dựng trình đơn\n                                                        "
+                                                    " Xây dựng trình đơn\r\n                                                        "
                                                   )
                                                 ]
                                               ),
@@ -82930,7 +82938,7 @@ var render = function() {
                                                       "fa fa-edit fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Sửa\n                                                        "
+                                                    " Sửa\r\n                                                        "
                                                   )
                                                 ]
                                               ),
@@ -82954,7 +82962,7 @@ var render = function() {
                                                       "fa fa-trash fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Xóa\n                                                        "
+                                                    " Xóa\r\n                                                        "
                                                   )
                                                 ]
                                               )
@@ -83167,15 +83175,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("code", { staticClass: "note-developer p-3" }, [
       _vm._v(
-        "\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
+        "\r\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
       ),
       _c("br"),
       _vm._v(
-        "\n                                $options = array(\n                                    'id' => 'navigation',\n                                    'class' => 'navigation',\n                                    'sub_id' => 'submenu',\n                                    'sub_class' => 'submenu'\n                                );\n                                "
+        "\r\n                                $options = array(\r\n                                    'id' => 'navigation',\r\n                                    'class' => 'navigation',\r\n                                    'sub_id' => 'submenu',\r\n                                    'sub_class' => 'submenu'\r\n                                );\r\n                                "
       ),
       _c("br"),
       _vm._v(
-        "\n                                menu('frontend', $options);\n                            "
+        "\r\n                                menu('frontend', $options);\r\n                            "
       )
     ])
   },
@@ -83588,7 +83596,7 @@ var render = function() {
                                           staticClass: "fas fa-plus fa-fw"
                                         }),
                                         _vm._v(
-                                          " Thêm mới\n                                                "
+                                          " Thêm mới\r\n                                                "
                                         )
                                       ]
                                     )
@@ -83674,7 +83682,7 @@ var render = function() {
                                                     "fa fa-edit fa-fw"
                                                 }),
                                                 _vm._v(
-                                                  " Sửa\n                                                        "
+                                                  " Sửa\r\n                                                        "
                                                 )
                                               ]
                                             ),
@@ -83698,7 +83706,7 @@ var render = function() {
                                                     "fa fa-edit fa-fw"
                                                 }),
                                                 _vm._v(
-                                                  " Trường tùy chỉnh\n                                                        "
+                                                  " Trường tùy chỉnh\r\n                                                        "
                                                 )
                                               ]
                                             ),
@@ -83722,7 +83730,7 @@ var render = function() {
                                                     "fa fa-trash fa-fw"
                                                 }),
                                                 _vm._v(
-                                                  " Xóa\n                                                        "
+                                                  " Xóa\r\n                                                        "
                                                 )
                                               ]
                                             )
@@ -83802,267 +83810,291 @@ var render = function() {
                       [
                         _c("div", { staticClass: "modal-body" }, [
                           _c("div", { staticClass: "row" }, [
-                            _c(
-                              "div",
-                              { staticClass: "col-md-9" },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _c(
-                                      "label",
+                            _c("div", { staticClass: "col-md-9" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "control-label",
+                                      attrs: { for: "inputTitle" }
+                                    },
+                                    [_vm._v("Tiêu đề")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
                                       {
-                                        staticClass: "control-label",
-                                        attrs: { for: "inputTitle" }
-                                      },
-                                      [_vm._v("Tiêu đề")]
-                                    ),
-                                    _vm._v(" "),
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.title,
+                                        expression: "form.title"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has("title")
+                                    },
+                                    attrs: { type: "text", name: "title" },
+                                    domProps: { value: _vm.form.title },
+                                    on: {
+                                      change: _vm.convertSlug,
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "title",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "title" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "control-label",
+                                      attrs: { for: "inputSlug" }
+                                    },
+                                    [_vm._v("Chuỗi cho đường dẫn tĩnh")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", {}, [
                                     _c("input", {
                                       directives: [
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.form.title,
-                                          expression: "form.title"
+                                          value: _vm.form.slug,
+                                          expression: "form.slug"
                                         }
                                       ],
-                                      staticClass: "form-control",
+                                      staticClass:
+                                        "form-control col-md-6 d-inline-block",
                                       class: {
                                         "is-invalid": _vm.form.errors.has(
-                                          "title"
+                                          "slug"
                                         )
                                       },
-                                      attrs: { type: "text", name: "title" },
-                                      domProps: { value: _vm.form.title },
+                                      attrs: { type: "text", name: "slug" },
+                                      domProps: { value: _vm.form.slug },
                                       on: {
-                                        change: _vm.convertSlug,
                                         input: function($event) {
                                           if ($event.target.composing) {
                                             return
                                           }
                                           _vm.$set(
                                             _vm.form,
-                                            "title",
+                                            "slug",
                                             $event.target.value
                                           )
                                         }
                                       }
                                     }),
-                                    _vm._v(" "),
-                                    _c("has-error", {
-                                      attrs: { form: _vm.form, field: "title" }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "control-label",
-                                        attrs: { for: "inputSlug" }
-                                      },
-                                      [_vm._v("Chuỗi cho đường dẫn tĩnh")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", {}, [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.form.slug,
-                                            expression: "form.slug"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "form-control col-md-6 d-inline-block",
-                                        class: {
-                                          "is-invalid": _vm.form.errors.has(
-                                            "slug"
-                                          )
-                                        },
-                                        attrs: { type: "text", name: "slug" },
-                                        domProps: { value: _vm.form.slug },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.form,
-                                              "slug",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      }),
-                                      _c("span", [_vm._v(".html")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("has-error", {
-                                      attrs: { form: _vm.form, field: "slug" }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "form-group" },
-                                  [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "control-label",
-                                        attrs: { for: "inputBody" }
-                                      },
-                                      [_vm._v("Nội dung")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("vue-editor", {
-                                      attrs: { useCustomImageHandler: "" },
-                                      on: { imageAdded: _vm.handleImageAdded },
-                                      model: {
-                                        value: _vm.form.body,
-                                        callback: function($$v) {
-                                          _vm.$set(_vm.form, "body", $$v)
-                                        },
-                                        expression: "form.body"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("has-error", {
-                                      attrs: { form: _vm.form, field: "body" }
-                                    })
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _vm._l(_vm.pageFields, function(field) {
-                                  return _c(
-                                    "div",
+                                    _c("span", [_vm._v(".html")])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "slug" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c(
+                                    "label",
                                     {
-                                      key: field.id,
-                                      staticClass: "form-group"
+                                      staticClass: "control-label",
+                                      attrs: { for: "inputBody" }
                                     },
-                                    [
-                                      _c(
-                                        "label",
+                                    [_vm._v("Nội dung")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("vue-editor", {
+                                    attrs: { useCustomImageHandler: "" },
+                                    on: { imageAdded: _vm.handleImageAdded },
+                                    model: {
+                                      value: _vm.form.body,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.form, "body", $$v)
+                                      },
+                                      expression: "form.body"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "body" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _vm.editmode
+                                ? _c(
+                                    "div",
+                                    _vm._l(_vm.pageFields, function(field) {
+                                      return _c(
+                                        "div",
                                         {
-                                          staticClass: "control-label",
-                                          attrs: { for: "inputTitle" }
+                                          key: field.id,
+                                          staticClass: "form-group"
                                         },
-                                        [_vm._v(_vm._s(field.display_name))]
-                                      ),
-                                      _vm._v(" "),
-                                      field.type == "text"
-                                        ? _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: field.value,
-                                                expression: "field.value"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            attrs: { type: "text" },
-                                            domProps: { value: field.value },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  field,
-                                                  "value",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      field.type == "text_area"
-                                        ? _c("textarea", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: field.value,
-                                                expression: "field.value"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            attrs: { rows: "3" },
-                                            domProps: { value: field.value },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.$set(
-                                                  field,
-                                                  "value",
-                                                  $event.target.value
-                                                )
-                                              }
-                                            }
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      field.type == "text_editor"
-                                        ? _c("vue-editor", {
-                                            attrs: {
-                                              useCustomImageHandler: ""
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass: "control-label",
+                                              attrs: { for: "inputTitle" }
                                             },
-                                            on: {
-                                              imageAdded: _vm.handleImageAdded
-                                            },
-                                            model: {
-                                              value: field.value,
-                                              callback: function($$v) {
-                                                _vm.$set(field, "value", $$v)
-                                              },
-                                              expression: "field.value"
-                                            }
-                                          })
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      field.type == "image"
-                                        ? _c("div", {}, [
-                                            _c("img", {
-                                              staticClass:
-                                                "img-fluid page-photo",
-                                              attrs: {
-                                                src: field.value,
-                                                alt: "Page picture"
-                                              }
-                                            }),
-                                            _vm._v(" "),
-                                            _c("input", {
-                                              staticClass: "form-control",
-                                              attrs: { type: "file" },
-                                              on: {
-                                                change: _vm.changeFieldPhoto
-                                              }
-                                            })
-                                          ])
-                                        : _vm._e()
-                                    ],
-                                    1
+                                            [_vm._v(_vm._s(field.display_name))]
+                                          ),
+                                          _vm._v(" "),
+                                          field.type == "text"
+                                            ? _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: field.value,
+                                                    expression: "field.value"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                attrs: { type: "text" },
+                                                domProps: {
+                                                  value: field.value
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      field,
+                                                      "value",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              })
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          field.type == "text_area"
+                                            ? _c("textarea", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: field.value,
+                                                    expression: "field.value"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                attrs: { rows: "3" },
+                                                domProps: {
+                                                  value: field.value
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      field,
+                                                      "value",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              })
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          field.type == "text_editor"
+                                            ? _c("vue-editor", {
+                                                attrs: {
+                                                  useCustomImageHandler: ""
+                                                },
+                                                on: {
+                                                  imageAdded:
+                                                    _vm.handleImageAdded
+                                                },
+                                                model: {
+                                                  value: field.value,
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      field,
+                                                      "value",
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression: "field.value"
+                                                }
+                                              })
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          field.type == "image"
+                                            ? _c(
+                                                "div",
+                                                { staticClass: "col-6 p-0" },
+                                                [
+                                                  field.value
+                                                    ? _c("img", {
+                                                        staticClass:
+                                                          "img-fluid page-photo",
+                                                        attrs: {
+                                                          src: field.value,
+                                                          alt:
+                                                            field.display_name
+                                                        }
+                                                      })
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  _c("input", {
+                                                    staticClass: "form-control",
+                                                    attrs: { type: "file" },
+                                                    on: {
+                                                      change: function($event) {
+                                                        return _vm.changeFieldPhoto(
+                                                          $event,
+                                                          field.id
+                                                        )
+                                                      }
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ],
+                                        1
+                                      )
+                                    }),
+                                    0
                                   )
-                                })
-                              ],
-                              2
-                            ),
+                                : _vm._e()
+                            ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [
                               _c(
@@ -84585,7 +84617,7 @@ var render = function() {
                                                       "fa fa-trash fa-fw"
                                                   }),
                                                   _vm._v(
-                                                    " Xóa\n                                        "
+                                                    " Xóa\r\n                                        "
                                                   )
                                                 ]
                                               )
@@ -84597,7 +84629,7 @@ var render = function() {
                                     ],
                                     null,
                                     false,
-                                    557620811
+                                    3107448741
                                   ),
                                   model: {
                                     value: _vm.pageFields,
