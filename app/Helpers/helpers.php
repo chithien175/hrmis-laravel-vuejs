@@ -51,6 +51,6 @@ if (!function_exists('getAllPosts')) {
     {
         $posts = Modules\Blog\Entities\Post::getAll($paginate);
 
-        return $posts;
+        return (Module::find('blog')->get('active')) ? $posts : false;
     }
 }

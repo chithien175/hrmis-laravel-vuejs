@@ -121,6 +121,10 @@
                                         <has-error :form="form" field="slug"></has-error>
                                     </div>
                                     <div class="form-group">
+                                        <label for="inputDescription" class="control-label">Trích đoạn</label>
+                                        <textarea class="form-control" v-model="form.description" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="inputBody" class="control-label">Nội dung</label>
                                         <vue-editor v-model="form.body" useCustomImageHandler @imageAdded="handleImageAdded"></vue-editor>
                                         <has-error :form="form" field="body"></has-error>
@@ -180,7 +184,7 @@ export default {
             posts: {},
             categories: {},
             form: new Form({
-                id: '', title: '', slug: '', photo: 'post-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: '', checked_categories: []
+                id: '', title: '', slug: '', photo: 'post-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, user_id: '', checked_categories: []
             }),
             search: '',
             isLoading: true,

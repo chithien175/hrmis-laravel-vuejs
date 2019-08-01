@@ -8,7 +8,7 @@ use Modules\Blog\Entities\Category;
 class Post extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'photo', 'body', 'publish', 'counter', 'user_id',
+        'title', 'slug', 'photo', 'description', 'body', 'publish', 'counter', 'user_id',
     ];
 
     function categories() {
@@ -18,7 +18,7 @@ class Post extends Model
     // **** FOR FRONTEND ****
     protected function getAll($paginate)
     {
-        $posts = static::where('publish', 'publish')->orderBy('id', 'desc')->paginate($paginate);
+        $posts = static::where('publish', 'publish')->orderBy('id', 'desc')->with('categories')->paginate($paginate);
 
         return ($posts) ? $posts : false;
     }

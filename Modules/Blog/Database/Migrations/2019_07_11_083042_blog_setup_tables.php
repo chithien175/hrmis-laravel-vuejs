@@ -19,6 +19,7 @@ class BlogSetupTables extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('photo')->default('post-image-default.png');
+            $table->text('description');
             $table->longText('body');
             $table->string('publish');
             $table->integer('counter')->default(0);
