@@ -14,4 +14,12 @@ class Post extends Model
     function categories() {
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
+
+    // **** FOR FRONTEND ****
+    protected function getAll($paginate)
+    {
+        $posts = static::where('publish', 'publish')->orderBy('id', 'desc')->paginate($paginate);
+
+        return ($posts) ? $posts : false;
+    }
 }

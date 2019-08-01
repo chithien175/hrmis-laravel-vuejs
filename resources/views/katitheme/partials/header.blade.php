@@ -4,17 +4,17 @@
             <div class="row">
                 <div class="col-md-6 col-sm-8 col-xs-12">
                     <div class="header-top-left">
-                        <p>We are landscaping company, offer various landscape services</p>
+                        <p>{{ getFieldCompany('company.slogan') }}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-4 col-xs-12">
                     <div class="header-top-right text-right">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="{{ getFieldCompany('company.facebook') }}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{{ getFieldCompany('company.twitter') }}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="{{ getFieldCompany('company.linkedin') }}"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="{{ getFieldCompany('company.googleplus') }}"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="{{ getFieldCompany('company.youtube') }}"><i class="fa fa-youtube"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-3 hidden-sm hidden-xs">
                     <div class="logo">
-                        <h1><a href="index.html">Martxa</a></h1>
+                        <h1><a href="{{ route('katitheme.homepage') }}">{{ getFieldCompany('company.name') }}</a></h1>
                     </div>
                 </div>
                 <div class="col-md-9 col-xs-12">
@@ -46,8 +46,8 @@
                                     <i class="fa fa-envelope"></i>
                                 </div>
                                 <div class="contact-info">
-                                    <p>MAIL US</p>
-                                    <span>info@yourdomail.com</span>
+                                    <p>EMAIL</p>
+                                    <span>{{ getFieldCompany('company.email') }}</span>
                                 </div>
                             </li>
                             <li>
@@ -55,8 +55,8 @@
                                     <i class="fa fa-phone"></i>
                                 </div>
                                 <div class="contact-info">
-                                    <p>PHONE US</p>
-                                    <span> (+1) 1144-1254</span>
+                                    <p>ĐIỆN THOẠI</p>
+                                    <span> {{ getFieldCompany('company.phone') }}</span>
                                 </div>
                             </li>
                         </ul>

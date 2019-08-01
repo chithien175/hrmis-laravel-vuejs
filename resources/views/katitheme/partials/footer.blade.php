@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-12  col wow fadeInUp" data-wow-delay=".1s">
                     <div class="footer-widget footer-logo">
-                        <h1>Martxa</h1>
-                        <p>Lor separat existentie es un myth. Por scientie, musica, sport etc, litot  usa li sam larLor separat existentie es un myth existentie.</p>
+                        <h1>{{ getFieldCompany('company.name') }}</h1>
+                        <p>{{ getFieldCompany('company.description') }}</p>
                         <ul>
-                            <li><i class="fa fa-phone"></i> +455 5475 6645</li>
-                            <li><i class="fa fa-envelope"></i> info@yourdomail.com</li>
+                            <li><i class="fa fa-phone"></i> {{ getFieldCompany('company.phone') }}</li>
+                            <li><i class="fa fa-envelope"></i> {{ getFieldCompany('company.email') }}</li>
                         </ul>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" style="color: white;">Colorlib</a>
+&copy;<script>document.write(new Date().getFullYear());</script> Designed by Katisoft - Thiết kế và phát triển bởi Katisoft <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://webdepnhatrang.com" target="_blank" style="color: white;">Web Đẹp Nha Trang</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </div>
             </div>

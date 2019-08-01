@@ -100,7 +100,27 @@ class PageSeeder extends Seeder
             'created_at'    => Carbon::now()
         ]);
 
-         // Contact
+        // News
+        DB::table('page_custom_fields')->insert([
+            'key'           => 'news.title_banner',
+            'display_name'  => 'Tiêu đề biểu ngữ',
+            'value'         => 'Blog - Tin Tức',
+            'type'          => 'text',
+            'order'         => 1,
+            'page_id'       => 3,
+            'created_at'    => Carbon::now()
+        ]);
+        DB::table('page_custom_fields')->insert([
+            'key'           => 'news.image_banner',
+            'display_name'  => 'Hình ảnh biểu ngữ',
+            'value'         => '',
+            'type'          => 'image',
+            'order'         => 2,
+            'page_id'       => 3,
+            'created_at'    => Carbon::now()
+        ]);
+
+        // Contact
         DB::table('page_custom_fields')->insert([
             'key'           => 'contact.title_banner',
             'display_name'  => 'Tiêu đề biểu ngữ',

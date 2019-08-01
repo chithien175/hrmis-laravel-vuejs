@@ -42,15 +42,22 @@ class CompanyController extends Controller
         }
 
         setting([
+            // Tab 1
             'company.name'                  => $request['name'],
+            'company.slogan'                => $request['slogan'],
+            'company.description'           => $request['description'],
             'company.address'               => $request['address'],
             'company.phone'                 => $request['phone'],
             'company.fax'                   => $request['fax'],
             'company.logo'                  => $request['logo'],
-            'company.legal_representative'  => $request['legal_representative'],
-            'company.position'              => $request['position'],
-            'company.nationality'           => $request['nationality'],
             'company.website'               => $request['website'],
+            'company.email'                 => $request['email'],
+            // Tab 2
+            'company.facebook'              => $request['facebook'],
+            'company.linkedin'              => $request['linkedin'],
+            'company.twitter'               => $request['twitter'],
+            'company.googleplus'            => $request['googleplus'],
+            'company.youtube'               => $request['youtube'],
         ])->save();
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Sửa thông tin công ty.');

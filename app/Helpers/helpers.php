@@ -9,9 +9,7 @@
 if (!function_exists('menu')) {
     function menu($menuName, $options)
     {
-        $menu = Modules\Menu\Entities\Menu::display($menuName, $options);
-
-        return $menu;
+        return (Module::find('menu')->get('active')) ? Modules\Menu\Entities\Menu::display($menuName, $options) : false;
     }
 }
 
@@ -26,5 +24,33 @@ if (!function_exists('getFieldPage')) {
         $value = App\PageCustomField::display($key);
 
         return $value;
+    }
+}
+
+/**
+ * @param
+ * $key: string
+ * @return string
+ */
+if (!function_exists('getFieldCompany')) {
+    function getFieldCompany($key)
+    {
+        $value = setting()->get($key);
+
+        return ($value) ? $value : false;
+    }
+}
+
+/**
+ * @param
+ * null
+ * @return array
+ */
+if (!function_exists('getAllPosts')) {
+    function getAllPosts($paginate)
+    {
+        $posts = Modules\Blog\Entities\Post::getAll($paginate);
+
+        return $posts;
     }
 }

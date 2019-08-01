@@ -130,16 +130,16 @@
                                     </div>
 
                                     <!-- Page Custom Fields -->
-                                    <div v-if="editmode && pageFields.length>0" class="row">
+                                    <div v-if="editmode && pageFields.length>0">
                                         <hr>
-                                        <div class="form-group col-12" v-for="field in pageFields" :key="field.id">
+                                        <div class="form-group" v-for="field in pageFields" :key="field.id">
                                             <label for="inputTitle" class="control-label">{{ field.display_name }}</label>
                                             <input v-model="field.value" type="text" class="form-control" v-if="field.type == 'text'">
                                             <textarea v-model="field.value" class="form-control" rows="3" v-if="field.type == 'text_area'"></textarea>
                                             <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
                                             <div class="" v-if="field.type == 'image'">
                                                 <img class="img-fluid page-photo" :src="srcFieldPhoto(field.value)" :alt="field.display_name" v-if="field.value">
-                                                <input class="form-control" type="file" @change="changeFieldPhoto($event, field.id)">
+                                                <input class="" type="file" @change="changeFieldPhoto($event, field.id)">
                                             </div>
                                         </div>
                                     </div>

@@ -2654,21 +2654,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
   data: function data() {
     return {
       form: new Form({
+        // Tab 1
         name: '',
+        slogan: '',
+        description: '',
         address: '',
         phone: '',
         fax: '',
         website: '',
         logo: '',
-        legal_representative: '',
-        position: '',
-        nationality: ''
+        email: '',
+        // Tab 2
+        facebook: '',
+        twitter: '',
+        linkedin: '',
+        googleplus: '',
+        youtube: ''
       }),
       isLoading: true
     };
@@ -79995,15 +80031,7 @@ var render = function() {
                                   },
                                   [
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputName" }
-                                        },
-                                        [_vm._v("Tên công ty")]
-                                      ),
+                                      _vm._m(2),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80039,15 +80067,81 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputAddress" }
-                                        },
-                                        [_vm._v("Địa chỉ văn phòng")]
-                                      ),
+                                      _vm._m(3),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.slogan,
+                                              expression: "form.slogan"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputSlogan",
+                                            placeholder: "Slogan công ty"
+                                          },
+                                          domProps: { value: _vm.form.slogan },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "slogan",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _vm._m(4),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("textarea", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.description,
+                                              expression: "form.description"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            rows: "3",
+                                            id: "inputDescription",
+                                            placeholder: "Mô tả công ty"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.description
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "description",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _vm._m(5),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80083,15 +80177,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputPhone" }
-                                        },
-                                        [_vm._v("Điện thoại")]
-                                      ),
+                                      _vm._m(6),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80127,15 +80213,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputFax" }
-                                        },
-                                        [_vm._v("Fax")]
-                                      ),
+                                      _vm._m(7),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80171,15 +80249,43 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputWebsite" }
-                                        },
-                                        [_vm._v("Trang web")]
-                                      ),
+                                      _vm._m(8),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.email,
+                                              expression: "form.email"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "email",
+                                            id: "inputEmail",
+                                            placeholder: "Địa chỉ E-mail"
+                                          },
+                                          domProps: { value: _vm.form.email },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "email",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _vm._m(9),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80215,15 +80321,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputLogo" }
-                                        },
-                                        [_vm._v("Logo công ty (giới hạn 2MB)")]
-                                      ),
+                                      _vm._m(10),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80244,7 +80342,7 @@ var render = function() {
                               "div",
                               {
                                 staticClass: "tab-pane",
-                                attrs: { id: "legal-representative" }
+                                attrs: { id: "socials" }
                               },
                               [
                                 _c(
@@ -80259,17 +80357,7 @@ var render = function() {
                                   },
                                   [
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: {
-                                            for: "inputLegalRepresentative"
-                                          }
-                                        },
-                                        [_vm._v("Họ và tên")]
-                                      ),
+                                      _vm._m(11),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80277,20 +80365,19 @@ var render = function() {
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value:
-                                                _vm.form.legal_representative,
-                                              expression:
-                                                "form.legal_representative"
+                                              value: _vm.form.facebook,
+                                              expression: "form.facebook"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
                                             type: "text",
-                                            id: "inputLegalRepresentative",
-                                            placeholder: "Họ tên người đại diện"
+                                            id: "inputFacebook",
+                                            placeholder:
+                                              "Đường dẫn liên kết Facebook"
                                           },
                                           domProps: {
-                                            value: _vm.form.legal_representative
+                                            value: _vm.form.facebook
                                           },
                                           on: {
                                             input: function($event) {
@@ -80299,7 +80386,7 @@ var render = function() {
                                               }
                                               _vm.$set(
                                                 _vm.form,
-                                                "legal_representative",
+                                                "facebook",
                                                 $event.target.value
                                               )
                                             }
@@ -80309,15 +80396,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputPosition" }
-                                        },
-                                        [_vm._v("Chức vụ")]
-                                      ),
+                                      _vm._m(12),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80325,19 +80404,18 @@ var render = function() {
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value: _vm.form.position,
-                                              expression: "form.position"
+                                              value: _vm.form.twitter,
+                                              expression: "form.twitter"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
                                             type: "text",
-                                            id: "inputPosition",
-                                            placeholder: "Chức vụ"
+                                            id: "inputTwitter",
+                                            placeholder:
+                                              "Đường dẫn liên kết Twitter"
                                           },
-                                          domProps: {
-                                            value: _vm.form.position
-                                          },
+                                          domProps: { value: _vm.form.twitter },
                                           on: {
                                             input: function($event) {
                                               if ($event.target.composing) {
@@ -80345,7 +80423,7 @@ var render = function() {
                                               }
                                               _vm.$set(
                                                 _vm.form,
-                                                "position",
+                                                "twitter",
                                                 $event.target.value
                                               )
                                             }
@@ -80355,15 +80433,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputNationality" }
-                                        },
-                                        [_vm._v("Quốc tịch")]
-                                      ),
+                                      _vm._m(13),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80371,18 +80441,19 @@ var render = function() {
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value: _vm.form.nationality,
-                                              expression: "form.nationality"
+                                              value: _vm.form.linkedin,
+                                              expression: "form.linkedin"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
                                             type: "text",
-                                            id: "inputNationality",
-                                            placeholder: "Quốc tịch"
+                                            id: "inputLinkedIn",
+                                            placeholder:
+                                              "Đường dẫn liên kết Linkedin"
                                           },
                                           domProps: {
-                                            value: _vm.form.nationality
+                                            value: _vm.form.linkedin
                                           },
                                           on: {
                                             input: function($event) {
@@ -80391,7 +80462,83 @@ var render = function() {
                                               }
                                               _vm.$set(
                                                 _vm.form,
-                                                "nationality",
+                                                "linkedin",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _vm._m(14),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.googleplus,
+                                              expression: "form.googleplus"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputGooglePlus",
+                                            placeholder:
+                                              "Đường dẫn liên kết Google Plus"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.googleplus
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "googleplus",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _vm._m(15),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.youtube,
+                                              expression: "form.youtube"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputYoutube",
+                                            placeholder:
+                                              "Đường dẫn liên kết Youtube"
+                                          },
+                                          domProps: { value: _vm.form.youtube },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "youtube",
                                                 $event.target.value
                                               )
                                             }
@@ -80476,13 +80623,247 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "nav-link",
-              attrs: { href: "#legal-representative", "data-toggle": "tab" }
+              attrs: { href: "#socials", "data-toggle": "tab" }
             },
-            [_vm._v("Người đại diện")]
+            [_vm._v("Mạng xã hội")]
           )
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputName" } },
+      [
+        _vm._v("Tên công ty "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.name')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputSlogan" } },
+      [
+        _vm._v("Slogan "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.slogan')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputDescription" }
+      },
+      [
+        _vm._v("Mô tả công ty "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.description')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputAddress" }
+      },
+      [
+        _vm._v("Địa chỉ văn phòng "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.address')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputPhone" } },
+      [
+        _vm._v("Điện thoại "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.phone')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputFax" } },
+      [
+        _vm._v("Fax "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.fax')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputEmail" } },
+      [
+        _vm._v("Địa chỉ E-mail "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.email')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputWebsite" }
+      },
+      [
+        _vm._v("Trang web "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.website')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-12 control-label", attrs: { for: "inputLogo" } },
+      [
+        _vm._v("Logo công ty (giới hạn 2MB) "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.logo')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputFacebook" }
+      },
+      [
+        _vm._v("Facebook "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.facebook')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputTwitter" }
+      },
+      [
+        _vm._v("Twitter "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.twitter')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputLinkedIn" }
+      },
+      [
+        _vm._v("LinkedIn "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.linkedin')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputGooglePlus" }
+      },
+      [
+        _vm._v("GooglePlus "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.googleplus')")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-12 control-label",
+        attrs: { for: "inputYoutube" }
+      },
+      [
+        _vm._v("Youtube "),
+        _c("code", { staticClass: "note-developer" }, [
+          _vm._v("getFieldCompany('company.youtube')")
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -83961,7 +84342,6 @@ var render = function() {
                               _vm.editmode && _vm.pageFields.length > 0
                                 ? _c(
                                     "div",
-                                    { staticClass: "row" },
                                     [
                                       _c("hr"),
                                       _vm._v(" "),
@@ -83970,7 +84350,7 @@ var render = function() {
                                           "div",
                                           {
                                             key: field.id,
-                                            staticClass: "form-group col-12"
+                                            staticClass: "form-group"
                                           },
                                           [
                                             _c(
@@ -84090,7 +84470,6 @@ var render = function() {
                                                     : _vm._e(),
                                                   _vm._v(" "),
                                                   _c("input", {
-                                                    staticClass: "form-control",
                                                     attrs: { type: "file" },
                                                     on: {
                                                       change: function($event) {

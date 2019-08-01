@@ -68,22 +68,19 @@
                     <ul>
                         <li>
                             <i class="fa fa-phone"></i>
-                            <p>+842 1544 2554</p>
-                            <p>+842 1544 2554</p>
+                            <p>{{ getFieldCompany('company.phone') }}</p>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i>
-                            <p>martxa1545@gmail.com</p>
-                            <p>martxa1545@gmail.com</p>
+                            <p>{{ getFieldCompany('company.email') }}</p>
                         </li>
                         <li>
                             <i class="fa fa-fax"></i>
-                            <p>15455 54564866 3554</p>
-                            <p>15455 54564866 3554</p>
+                            <p>{{ getFieldCompany('company.fax') }}</p>
                         </li>
                         <li>
                             <i class="fa fa-location-arrow"></i>
-                            227 Marion Street Address Here Columbia, SC 29201
+                            {{ getFieldCompany('company.address') }}
                         </li>
                     </ul>
                 </div>
