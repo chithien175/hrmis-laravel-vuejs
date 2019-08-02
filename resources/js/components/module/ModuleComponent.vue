@@ -40,7 +40,7 @@
                                         <p-input class="p-switch p-fill" type="checkbox" color="success" v-model="modules.blog" @change="toggleModule('blog', 'Bài viết', modules.blog)"></p-input>
                                     </div>
                                     <div class="widget-user-image" style="top:25px;">
-                                        <img class="img-circle" v-bind:src="'../images/module/' + images.blog" alt="User Avatar">
+                                        <img class="img-circle" v-bind:src="'../images/module/' + images.blog" alt="Blog Module">
                                     </div>
                                     <div class="card-footer">
                                         <div class="row">
@@ -52,6 +52,8 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- ./ END Blog Module -->
+
                             <!-- Menu Module -->
                             <div class="col-md-4">
                                 <div class="card card-widget widget-user widget-module">
@@ -62,7 +64,7 @@
                                         <p-input class="p-switch p-fill" type="checkbox" color="success" v-model="modules.menu" @change="toggleModule('menu', 'Trình đơn', modules.menu)"></p-input>
                                     </div>
                                     <div class="widget-user-image" style="top:25px;">
-                                        <img class="img-circle" v-bind:src="'../images/module/' + images.menu" alt="User Avatar">
+                                        <img class="img-circle" v-bind:src="'../images/module/' + images.menu" alt="Menu Module">
                                     </div>
                                     <div class="card-footer">
                                         <div class="row">
@@ -74,6 +76,31 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- ./ END Menu Module -->
+
+                            <!-- Ecommerce Module -->
+                            <div class="col-md-4">
+                                <div class="card card-widget widget-user widget-module">
+                                    <div class="widget-user-header text-white"
+                                        style="height:80px;"
+                                        v-bind:class="[{ 'active': modules.ecommerce }]"
+                                    >
+                                        <p-input class="p-switch p-fill" type="checkbox" color="success" v-model="modules.ecommerce" @change="toggleModule('ecommerce', 'Thương mại điện tử', modules.ecommerce)"></p-input>
+                                    </div>
+                                    <div class="widget-user-image" style="top:25px;">
+                                        <img class="img-circle" v-bind:src="'../images/module/' + images.ecommerce" alt="Ecommerce Module">
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 class="description-header">Thương mại điện tử</h5>
+                                                <h6 class="description-text">Quản lý sản phẩm, danh mục sp</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ./ END Ecommerce Module -->
                         </div>
                     </div>
                 </div>
@@ -97,6 +124,7 @@
                 images: {
                     blog: 'blog.png',
                     menu: 'menu.png',
+                    ecommerce: 'ecommerce.png',
                 },
                 form: new Form({
                     slug: '', name: '', status: ''

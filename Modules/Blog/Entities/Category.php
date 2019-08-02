@@ -7,6 +7,8 @@ use Modules\Blog\Entities\Post;
 
 class Category extends Model
 {
+    protected $table = 'categories';
+
     protected $fillable = ['name', 'slug', 'parent_id'];
 
     function posts() {

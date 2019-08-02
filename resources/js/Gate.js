@@ -42,11 +42,18 @@ export default class Gate{
         return this.user.can['manage-menu'];
     }
 
+    isManageEcommerce(){
+        return this.user.can['manage-ecommerce'];
+    }
+
     // Module
     isBlogModule(){
         return this.modules.blog === 1;
     }
     isMenuModule(){
         return this.modules.menu === 1;
+    }
+    isEcommerceModule(){
+        return this.modules.ecommerce === 1;
     }
 }

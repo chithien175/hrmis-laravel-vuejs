@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/ecommerce",
+    "description": "",
+    "authors": [
+        {
+            "name": "Thien Pham",
+            "email": "chithien175@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Ecommerce\\Providers\\EcommerceServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Ecommerce\\": ""
+        }
+    }
+}

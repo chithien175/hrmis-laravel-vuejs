@@ -9,7 +9,8 @@ return [
             'menu'          => 'm',
             'company'       => 'm',
             'logs'          => 'm',
-            'media'         => 'm'
+            'media'         => 'm',
+            'ecommerce'     => 'm'
         ],
         'admin'             => [
             'dashboard'     => 'm',
@@ -17,7 +18,8 @@ return [
             'page'          => 'm',
             'menu'          => 'm',
             'company'       => 'm',
-            'media'         => 'm'
+            'media'         => 'm',
+            'ecommerce'     => 'm'
         ]
     ],
     'permission_structure'  => [],

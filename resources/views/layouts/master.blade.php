@@ -4,7 +4,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="vi">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	$modules = [
 		'blog' => Module::find('blog')->get('active'),
 		'menu' => Module::find('menu')->get('active'),
+		'ecommerce' => Module::find('ecommerce')->get('active'),
 	];
 @endphp
 	@if($user_current->status == 'active')
@@ -127,6 +128,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@endif
 					</ul>
 				</li>
+
+				<!-- Thương mại điện tử -->
+				@if($user_current->can('manage-ecommerce') && $modules['ecommerce'])
+				<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-shopping-cart"></i>
+						<p>
+						Thương mại điện tử
+						<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<router-link to="/admin/product" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Sản phẩm</p>
+							</router-link>
+						<li>
+						<li class="nav-item">
+							<router-link to="/admin/p-category" class="nav-link">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Danh mục sản phẩm</p>
+							</router-link>
+						</li>
+					</ul>
+				</li>
+				@endif
 				
 				<!-- Cài đặt cơ bản -->
 				@if($user_current->can('manage-company|manage-media'))
