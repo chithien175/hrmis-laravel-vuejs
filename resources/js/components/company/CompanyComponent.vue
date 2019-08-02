@@ -54,55 +54,55 @@
                                     <div class="tab-pane active" id="company">
                                         <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
-                                                <label for="inputName" class="col-sm-12 control-label">Tên công ty <code class="note-developer">getFieldCompany('company.name')</code></label>
+                                                <label for="inputName" class="col-sm-12 control-label">Tên công ty <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.name')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputName" placeholder="Tên công ty" v-model="form.name">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputSlogan" class="col-sm-12 control-label">Slogan <code class="note-developer">getFieldCompany('company.slogan')</code></label>
+                                                <label for="inputSlogan" class="col-sm-12 control-label">Slogan <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.slogan')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputSlogan" placeholder="Slogan công ty" v-model="form.slogan">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputDescription" class="col-sm-12 control-label">Mô tả công ty <code class="note-developer">getFieldCompany('company.description')</code></label>
+                                                <label for="inputDescription" class="col-sm-12 control-label">Mô tả công ty <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.description')</code></label>
                                                 <div class="col-sm-12">
                                                     <textarea rows="3" class="form-control" id="inputDescription" placeholder="Mô tả công ty" v-model="form.description"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputAddress" class="col-sm-12 control-label">Địa chỉ văn phòng <code class="note-developer">getFieldCompany('company.address')</code></label>
+                                                <label for="inputAddress" class="col-sm-12 control-label">Địa chỉ văn phòng <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.address')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ văn phòng" v-model="form.address">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputPhone" class="col-sm-12 control-label">Điện thoại <code class="note-developer">getFieldCompany('company.phone')</code></label>
+                                                <label for="inputPhone" class="col-sm-12 control-label">Điện thoại <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.phone')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputPhone" placeholder="Điện thoại" v-model="form.phone">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputFax" class="col-sm-12 control-label">Fax <code class="note-developer">getFieldCompany('company.fax')</code></label>
+                                                <label for="inputFax" class="col-sm-12 control-label">Fax <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.fax')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputFax" placeholder="Fax" v-model="form.fax">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputEmail" class="col-sm-12 control-label">Địa chỉ E-mail <code class="note-developer">getFieldCompany('company.email')</code></label>
+                                                <label for="inputEmail" class="col-sm-12 control-label">Địa chỉ E-mail <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.email')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="email" class="form-control" id="inputEmail" placeholder="Địa chỉ E-mail" v-model="form.email">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputWebsite" class="col-sm-12 control-label">Trang web <code class="note-developer">getFieldCompany('company.website')</code></label>
+                                                <label for="inputWebsite" class="col-sm-12 control-label">Trang web <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.website')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputWebsite" placeholder="Trang web" v-model="form.website">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputLogo" class="col-sm-12 control-label">Logo công ty (giới hạn 2MB) <code class="note-developer">getFieldCompany('company.logo')</code></label>
+                                                <label for="inputLogo" class="col-sm-12 control-label">Logo công ty (giới hạn 2MB) <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.logo')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="file" id="inputLogo" @change="changePhoto">
                                                 </div>
@@ -112,31 +112,31 @@
                                     <div class="tab-pane" id="socials">
                                         <form class="form-horizontal" @keydown="form.onKeydown($event)">
                                             <div class="form-group">
-                                                <label for="inputFacebook" class="col-sm-12 control-label">Facebook <code class="note-developer">getFieldCompany('company.facebook')</code></label>
+                                                <label for="inputFacebook" class="col-sm-12 control-label">Facebook <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.facebook')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputFacebook" placeholder="Đường dẫn liên kết Facebook" v-model="form.facebook">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputTwitter" class="col-sm-12 control-label">Twitter <code class="note-developer">getFieldCompany('company.twitter')</code></label>
+                                                <label for="inputTwitter" class="col-sm-12 control-label">Twitter <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.twitter')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputTwitter" placeholder="Đường dẫn liên kết Twitter" v-model="form.twitter">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputLinkedIn" class="col-sm-12 control-label">LinkedIn <code class="note-developer">getFieldCompany('company.linkedin')</code></label>
+                                                <label for="inputLinkedIn" class="col-sm-12 control-label">LinkedIn <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.linkedin')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputLinkedIn" placeholder="Đường dẫn liên kết Linkedin" v-model="form.linkedin">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputGooglePlus" class="col-sm-12 control-label">GooglePlus <code class="note-developer">getFieldCompany('company.googleplus')</code></label>
+                                                <label for="inputGooglePlus" class="col-sm-12 control-label">GooglePlus <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.googleplus')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputGooglePlus" placeholder="Đường dẫn liên kết Google Plus" v-model="form.googleplus">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="inputYoutube" class="col-sm-12 control-label">Youtube <code class="note-developer">getFieldCompany('company.youtube')</code></label>
+                                                <label for="inputYoutube" class="col-sm-12 control-label">Youtube <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.youtube')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputYoutube" placeholder="Đường dẫn liên kết Youtube" v-model="form.youtube">
                                                 </div>

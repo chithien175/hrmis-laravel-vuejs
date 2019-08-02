@@ -42,6 +42,19 @@
                                 <router-link to="/admin/post" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></router-link>
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-6" v-if="$gate.isEcommerceModule()">
+                                <!-- small box -->
+                                <div class="small-box bg-indigo">
+                                <div class="inner">
+                                    <h3>{{ data.product_number }}</h3>
+                                    <p>Sản phẩm</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-dolly"></i>
+                                </div>
+                                <router-link to="/admin/product" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></router-link>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2848,6 +2848,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -80921,7 +80934,30 @@ var render = function() {
                                   },
                                   [
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(2),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputName" }
+                                        },
+                                        [
+                                          _vm._v("Tên công ty "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.name')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80957,7 +80993,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(3),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputSlogan" }
+                                        },
+                                        [
+                                          _vm._v("Slogan "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.slogan')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -80993,7 +81052,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(4),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputDescription" }
+                                        },
+                                        [
+                                          _vm._v("Mô tả công ty "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.description')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("textarea", {
@@ -81031,7 +81113,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(5),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputAddress" }
+                                        },
+                                        [
+                                          _vm._v("Địa chỉ văn phòng "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.address')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81067,7 +81172,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(6),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputPhone" }
+                                        },
+                                        [
+                                          _vm._v("Điện thoại "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.phone')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81103,7 +81231,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(7),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputFax" }
+                                        },
+                                        [
+                                          _vm._v("Fax "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.fax')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81139,7 +81290,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(8),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputEmail" }
+                                        },
+                                        [
+                                          _vm._v("Địa chỉ E-mail "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.email')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81175,7 +81349,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(9),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputWebsite" }
+                                        },
+                                        [
+                                          _vm._v("Trang web "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.website')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81211,7 +81408,32 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(10),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputLogo" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "Logo công ty (giới hạn 2MB) "
+                                          ),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.logo')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81247,7 +81469,30 @@ var render = function() {
                                   },
                                   [
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(11),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputFacebook" }
+                                        },
+                                        [
+                                          _vm._v("Facebook "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.facebook')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81286,7 +81531,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(12),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputTwitter" }
+                                        },
+                                        [
+                                          _vm._v("Twitter "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.twitter')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81323,7 +81591,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(13),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputLinkedIn" }
+                                        },
+                                        [
+                                          _vm._v("LinkedIn "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.linkedin')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81362,7 +81653,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(14),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputGooglePlus" }
+                                        },
+                                        [
+                                          _vm._v("GooglePlus "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.googleplus')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81401,7 +81715,30 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
-                                      _vm._m(15),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputYoutube" }
+                                        },
+                                        [
+                                          _vm._v("Youtube "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.youtube')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "col-sm-12" }, [
                                         _c("input", {
@@ -81520,240 +81857,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputName" } },
-      [
-        _vm._v("Tên công ty "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.name')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputSlogan" } },
-      [
-        _vm._v("Slogan "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.slogan')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputDescription" }
-      },
-      [
-        _vm._v("Mô tả công ty "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.description')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputAddress" }
-      },
-      [
-        _vm._v("Địa chỉ văn phòng "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.address')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputPhone" } },
-      [
-        _vm._v("Điện thoại "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.phone')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputFax" } },
-      [
-        _vm._v("Fax "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.fax')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputEmail" } },
-      [
-        _vm._v("Địa chỉ E-mail "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.email')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputWebsite" }
-      },
-      [
-        _vm._v("Trang web "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.website')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-12 control-label", attrs: { for: "inputLogo" } },
-      [
-        _vm._v("Logo công ty (giới hạn 2MB) "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.logo')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputFacebook" }
-      },
-      [
-        _vm._v("Facebook "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.facebook')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputTwitter" }
-      },
-      [
-        _vm._v("Twitter "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.twitter')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputLinkedIn" }
-      },
-      [
-        _vm._v("LinkedIn "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.linkedin')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputGooglePlus" }
-      },
-      [
-        _vm._v("GooglePlus "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.googleplus')")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      {
-        staticClass: "col-sm-12 control-label",
-        attrs: { for: "inputYoutube" }
-      },
-      [
-        _vm._v("Youtube "),
-        _c("code", { staticClass: "note-developer" }, [
-          _vm._v("getFieldCompany('company.youtube')")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -81838,6 +81941,41 @@ var render = function() {
                                 1
                               )
                             ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.$gate.isEcommerceModule()
+                          ? _c("div", { staticClass: "col-lg-3 col-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "small-box bg-indigo" },
+                                [
+                                  _c("div", { staticClass: "inner" }, [
+                                    _c("h3", [
+                                      _vm._v(_vm._s(_vm.data.product_number))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [_vm._v("Sản phẩm")])
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "small-box-footer",
+                                      attrs: { to: "/admin/product" }
+                                    },
+                                    [
+                                      _vm._v("Xem thêm "),
+                                      _c("i", {
+                                        staticClass: "fas fa-arrow-circle-right"
+                                      })
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ])
                           : _vm._e()
                       ])
                     : _vm._e()
@@ -81883,6 +82021,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
       _c("i", { staticClass: "far fa-file-alt" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-dolly" })
     ])
   }
 ]
@@ -85678,7 +85824,21 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(2)
+                        _vm.$gate.isSuperAdmin()
+                          ? _c("code", { staticClass: "note-developer p-3" }, [
+                              _vm._v(
+                                "\r\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\r\n                                $options = array(\r\n                                    'id' => 'navigation',\r\n                                    'class' => 'navigation',\r\n                                    'sub_id' => 'submenu',\r\n                                    'sub_class' => 'submenu'\r\n                                );\r\n                                "
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\r\n                                echo menu('frontend', $options);\r\n                            "
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     : _vm._e()
                 ])
@@ -85725,7 +85885,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm._m(3)
+                      _vm._m(2)
                     ]),
                     _vm._v(" "),
                     _c(
@@ -85865,24 +86025,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Tác vụ")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("code", { staticClass: "note-developer p-3" }, [
-      _vm._v(
-        "\r\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
-      ),
-      _c("br"),
-      _vm._v(
-        "\r\n                                $options = array(\r\n                                    'id' => 'navigation',\r\n                                    'class' => 'navigation',\r\n                                    'sub_id' => 'submenu',\r\n                                    'sub_class' => 'submenu'\r\n                                );\r\n                                "
-      ),
-      _c("br"),
-      _vm._v(
-        "\r\n                                echo menu('frontend', $options);\r\n                            "
-      )
     ])
   },
   function() {
@@ -86466,29 +86608,31 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-sm btn-success",
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.openCustomFieldModal(
-                                                      page.id
+                                            _vm.$gate.isSuperAdmin()
+                                              ? _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-sm btn-success",
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.openCustomFieldModal(
+                                                          page.id
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "fa fa-edit fa-fw"
+                                                    }),
+                                                    _vm._v(
+                                                      " Trường tùy chỉnh\r\n                                                        "
                                                     )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass:
-                                                    "fa fa-edit fa-fw"
-                                                }),
-                                                _vm._v(
-                                                  " Trường tùy chỉnh\r\n                                                        "
+                                                  ]
                                                 )
-                                              ]
-                                            ),
+                                              : _vm._e(),
                                             _vm._v(" "),
                                             _c(
                                               "button",

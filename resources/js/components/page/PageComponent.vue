@@ -72,7 +72,7 @@
                                                         <button class="btn btn-sm btn-primary" @click="editModal(page)">
                                                             <i class="fa fa-edit fa-fw"></i> Sửa
                                                         </button>
-                                                        <button class="btn btn-sm btn-success" @click="openCustomFieldModal(page.id)">
+                                                        <button v-if="$gate.isSuperAdmin()" class="btn btn-sm btn-success" @click="openCustomFieldModal(page.id)">
                                                             <i class="fa fa-edit fa-fw"></i> Trường tùy chỉnh
                                                         </button>
                                                         <button class="btn btn-sm btn-danger" @click="deletePage(page.id)">
