@@ -107,7 +107,6 @@
                                     <div class="form-group">
                                         <label for="inputCode" class="control-label">Mã sản phẩm</label>
                                         <input v-model="form.code" type="text" name="code"
-                                            @change="convertSlug"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('code') }">
                                         <has-error :form="form" field="code"></has-error>
                                     </div>
@@ -144,6 +143,11 @@
                                             <option value="draft">Bản nháp</option>
                                         </select>
                                         <has-error :form="form" field="publish"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPrice" class="control-label">Giá hiển thị</label>
+                                        <input v-model="form.price" type="text" name="price"
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCategory" class="control-label">Chuyên mục</label>
