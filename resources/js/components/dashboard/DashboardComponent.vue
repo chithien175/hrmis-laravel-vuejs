@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-lg-3 col-6" v-if="$gate.isEcommerceModule()">
                                 <!-- small box -->
-                                <div class="small-box bg-indigo">
+                                <div class="small-box bg-teal">
                                 <div class="inner">
                                     <h3>{{ data.product_number }}</h3>
                                     <p>Sản phẩm</p>

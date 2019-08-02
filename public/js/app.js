@@ -81947,7 +81947,7 @@ var render = function() {
                           ? _c("div", { staticClass: "col-lg-3 col-6" }, [
                               _c(
                                 "div",
-                                { staticClass: "small-box bg-indigo" },
+                                { staticClass: "small-box bg-teal" },
                                 [
                                   _c("div", { staticClass: "inner" }, [
                                     _c("h3", [
