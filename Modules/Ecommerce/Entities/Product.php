@@ -4,6 +4,7 @@ namespace Modules\Ecommerce\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Ecommerce\Entities\Category;
+use Modules\Ecommerce\Entities\Gallery;
 
 class Product extends Model
 {
@@ -13,5 +14,9 @@ class Product extends Model
 
     function categories() {
         return $this->belongsToMany(Category::class, 'category_product')->withTimestamps();
+    }
+
+    function galleries() {
+        return $this->hasMany(Gallery::class);
     }
 }

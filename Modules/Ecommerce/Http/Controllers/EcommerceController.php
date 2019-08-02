@@ -18,7 +18,7 @@ class EcommerceController extends Controller
 
     public function index(Request $request)
     {
-        return Product::with('categories')->orderBy('id','desc')->paginate($request['per_page']);
+        return Product::with('categories')->with('galleries')->orderBy('id','desc')->paginate($request['per_page']);
     }
 
     public function store(Request $request)
@@ -198,5 +198,9 @@ class EcommerceController extends Controller
     public function cateList()
     {
         return Category::all();
+    }
+
+    public function galleryStore(Request $request){
+        return 1;
     }
 }

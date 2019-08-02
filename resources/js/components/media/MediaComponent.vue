@@ -267,7 +267,6 @@ export default {
             dropzoneOptions: {
                 url: '/api/mediaUpload',
                 thumbnailWidth: 150,
-                maxFilesize: 1,
             },
             media: {},
             selected: '',

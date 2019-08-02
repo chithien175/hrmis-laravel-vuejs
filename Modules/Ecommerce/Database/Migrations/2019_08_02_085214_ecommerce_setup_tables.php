@@ -57,6 +57,18 @@ class EcommerceSetupTables extends Migration
                 
             $table->primary(['category_id', 'product_id']);
         });
+
+        // Product Gallery
+        Schema::create('p_galleries', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->string('name')->unique();
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
+
+            $table->foreign('product_id')
+                ->references('id')->on('products')
+                ->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**

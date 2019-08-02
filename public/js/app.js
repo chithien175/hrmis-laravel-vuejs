@@ -3410,6 +3410,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3423,6 +3434,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editmode: false,
+      dropzoneOptions: {
+        // url: '/api/ecommerce/gallery',
+        thumbnailWidth: 150,
+        autoProcessQueue: false,
+        addRemoveLinks: true
+      },
       products: {},
       categories: {},
       form: new Form({
@@ -3437,7 +3454,8 @@ __webpack_require__.r(__webpack_exports__);
         counter: 0,
         price: '',
         user_id: '',
-        checked_categories: []
+        checked_categories: [],
+        galleries: []
       }),
       search: '',
       isLoading: true
@@ -3580,6 +3598,23 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    changeGallery: function changeGallery(e) {
+      var files = e.target.files;
+
+      if (files) {
+        for (var i = 0; i < files.length; i++) {
+          var reader = new FileReader();
+          var vm = this;
+
+          reader.onload = function (e) {
+            vm.form.galleries.push(e.target.result); // HERE
+          };
+
+          reader.readAsDataURL(files[i]);
+        }
+      } // console.log(vm.form.galleries);
+
+    },
     sanitizeTitle: function sanitizeTitle(title) {
       var slug = ""; // Change to lower case
 
@@ -3625,7 +3660,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
-    }, 500)
+    }, 500),
+    getGalleryPhoto: function getGalleryPhoto(gallery) {
+      return gallery.indexOf('base64') != -1 ? gallery : "../images/product/" + gallery;
+    }
   },
   computed: {
     getProductPhoto: function getProductPhoto() {
@@ -4021,8 +4059,7 @@ __webpack_require__.r(__webpack_exports__);
       isLoading: true,
       dropzoneOptions: {
         url: '/api/mediaUpload',
-        thumbnailWidth: 150,
-        maxFilesize: 1
+        thumbnailWidth: 150
       },
       media: {},
       selected: '',
@@ -13006,7 +13043,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 80px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.gallery-wrap{\n    width: 100%;\n    padding: 10px;\n    min-height: 150px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n.gallery-wrap .gallery-item{\n    width: 20%;\n}\n.gallery-wrap .gallery-item img{\n    width: 100%;\n}\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 80px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
 
 // exports
 
@@ -81931,7 +81968,7 @@ var render = function() {
                                       attrs: { to: "/admin/post" }
                                     },
                                     [
-                                      _vm._v("Xem thêm "),
+                                      _vm._v("Xem chi tiết "),
                                       _c("i", {
                                         staticClass: "fas fa-arrow-circle-right"
                                       })
@@ -81966,7 +82003,7 @@ var render = function() {
                                       attrs: { to: "/admin/product" }
                                     },
                                     [
-                                      _vm._v("Xem thêm "),
+                                      _vm._v("Xem chi tiết "),
                                       _c("i", {
                                         staticClass: "fas fa-arrow-circle-right"
                                       })
@@ -83160,7 +83197,60 @@ var render = function() {
                                   })
                                 ],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputGallery" }
+                                  },
+                                  [_vm._v("Thư viện ảnh")]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "gallery-wrap" }, [
+                                  this.form.galleries.length > 0
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "galleries-list" },
+                                        _vm._l(this.form.galleries, function(
+                                          gallery
+                                        ) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              key: gallery,
+                                              staticClass: "gallery-item"
+                                            },
+                                            [
+                                              _c("img", {
+                                                staticClass:
+                                                  "img-fluid product-photo",
+                                                attrs: {
+                                                  src: _vm.getGalleryPhoto(
+                                                    gallery
+                                                  ),
+                                                  alt: ""
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: {
+                                    type: "file",
+                                    multiple: "",
+                                    accept: "image/*"
+                                  },
+                                  on: { change: _vm.changeGallery }
+                                })
+                              ])
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-md-3" }, [

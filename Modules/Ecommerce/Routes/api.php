@@ -32,4 +32,7 @@ Route::prefix('ecommerce')->group(function() {
     Route::delete('/category/{id}', 'EcommerceController@cateDestroy');
     Route::get('/category/find', 'EcommerceController@cateSearch');    
     Route::get('/category/list', 'EcommerceController@cateList');  
+
+    // GALLERY
+    Route::post('/gallery', 'EcommerceController@galleryStore');
 });

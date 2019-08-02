@@ -134,6 +134,17 @@
                                         <vue-editor v-model="form.body" useCustomImageHandler @imageAdded="handleImageAdded"></vue-editor>
                                         <has-error :form="form" field="body"></has-error>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="inputGallery" class="control-label">Thư viện ảnh</label>
+                                        <div class="gallery-wrap">
+                                            <div class="galleries-list" v-if="this.form.galleries.length > 0">
+                                                <div class="gallery-item" v-for="gallery in this.form.galleries" :key="gallery">
+                                                    <img class="img-fluid product-photo" :src="getGalleryPhoto(gallery)" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="file" multiple accept="image/*" @change="changeGallery">
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -191,10 +202,16 @@ export default {
     data() {
         return {
             editmode: false,
+            dropzoneOptions: {
+                // url: '/api/ecommerce/gallery',
+                thumbnailWidth: 150,
+                autoProcessQueue: false,
+                addRemoveLinks: true,
+            },
             products: {},
             categories: {},
             form: new Form({
-                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', user_id: '', checked_categories: []
+                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', user_id: '', checked_categories: [], galleries: [],
             }),
             search: '',
             isLoading: true,
@@ -328,6 +345,20 @@ export default {
                     title: 'Vui lòng tải ảnh dưới 2MB'
                 });
             }
+        },
+        changeGallery(e){
+            let files = e.target.files;
+            if(files){
+                for (let i=0; i<files.length; i++){
+                var reader = new FileReader();
+                var vm = this;
+                reader.onload = function(e){
+                    vm.form.galleries.push(e.target.result);    // HERE
+                }
+                reader.readAsDataURL(files[i]);
+                }
+            }
+            // console.log(vm.form.galleries);
             
         },
         sanitizeTitle: function(title) {
@@ -380,11 +411,14 @@ export default {
         searchit: _.debounce( () => {
             Fire.$emit('Searching');
         }, 500),
+        getGalleryPhoto(gallery){
+            return (gallery.indexOf('base64') != -1) ? gallery : "../images/product/"+gallery ;
+        },
     },
     computed:{
         getProductPhoto(){
             return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/product/"+this.form.photo ;
-        },
+        }
     },
     created() {
         this.loadData();
@@ -414,6 +448,21 @@ export default {
 </script>
 
 <style>
+    .gallery-wrap{
+        width: 100%;
+        padding: 10px;
+        min-height: 150px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .gallery-wrap .gallery-item{
+        width: 20%;
+    }
+    .gallery-wrap .gallery-item img{
+        width: 100%;
+    }
     .product-photo{
         width: 100%;
         border: 1px solid rgba(0, 0, 0, 0.2);

@@ -39,7 +39,7 @@
                                 <div class="icon">
                                     <i class="far fa-file-alt"></i>
                                 </div>
-                                <router-link to="/admin/post" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></router-link>
+                                <router-link to="/admin/post" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></router-link>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6" v-if="$gate.isEcommerceModule()">
@@ -52,7 +52,7 @@
                                 <div class="icon">
                                     <i class="fas fa-dolly"></i>
                                 </div>
-                                <router-link to="/admin/product" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></router-link>
+                                <router-link to="/admin/product" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></router-link>
                                 </div>
                             </div>
                         </div>
