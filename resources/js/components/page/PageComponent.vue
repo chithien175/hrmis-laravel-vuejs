@@ -164,6 +164,19 @@
                                         <img class="img-fluid page-photo" :src="getPagePhoto" alt="Page picture">
                                         <input class="form-control" type="file" id="inputPhoto" @change="changePhoto">
                                     </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label for="inputSEOTitle" class="control-label">SEO - Tiêu đề</label>
+                                        <input v-model="form.seo_title" type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSEODescription" class="control-label">SEO - Mô tả</label>
+                                        <textarea class="form-control" v-model="form.seo_description" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSEOKeyword" class="control-label">SEO - Từ khóa</label>
+                                        <input v-model="form.seo_keyword" type="text" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +269,7 @@
                 editmode: false,
                 pages: {},
                 form: new Form({
-                    id: '', title: '', slug: '', photo: 'page-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: '', is_homepage: false,
+                    id: '', title: '', slug: '', photo: 'page-image-default.jpg', body: '', publish: 'publish', counter: 0, user_id: '', is_homepage: false, seo_title: '', seo_description: '', seo_keyword: ''
                 }),
                 formCustomField: new Form({
                     name: '', key: '', type: '', page_id: '', order: ''

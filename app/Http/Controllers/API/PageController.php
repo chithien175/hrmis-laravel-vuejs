@@ -39,14 +39,17 @@ class PageController extends Controller
         }
 
         $page = Page::create([
-            'title'     => $request['title'],
-            'slug'      => $request['slug'],
-            'photo'     => $request['photo'],
-            'body'      => $request['body'],
-            'publish'   => $request['publish'],
-            'counter'   => $request['counter'],
-            'user_id'   => Auth::user()->id,
-            'is_homepage' => $request['is_homepage']
+            'title'             => $request['title'],
+            'slug'              => $request['slug'],
+            'photo'             => $request['photo'],
+            'body'              => $request['body'],
+            'publish'           => $request['publish'],
+            'counter'           => $request['counter'],
+            'user_id'           => Auth::user()->id,
+            'is_homepage'       => $request['is_homepage'],
+            'seo_title'         => $request['seo_title'],
+            'seo_description'   => $request['seo_description'],
+            'seo_keyword'       => $request['seo_keyword']
         ]);
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo trang #' . $page->id . ' '. $page->title . '.');

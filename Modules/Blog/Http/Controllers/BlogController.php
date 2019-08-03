@@ -42,14 +42,17 @@ class BlogController extends Controller
         }
 
         $post = Post::create([
-            'title'         => $request['title'],
-            'slug'          => $request['slug'],
-            'photo'         => $request['photo'],
-            'description'   => $request['description'],
-            'body'          => $request['body'],
-            'publish'       => $request['publish'],
-            'counter'       => $request['counter'],
-            'user_id'       => Auth::user()->id
+            'title'             => $request['title'],
+            'slug'              => $request['slug'],
+            'photo'             => $request['photo'],
+            'description'       => $request['description'],
+            'body'              => $request['body'],
+            'publish'           => $request['publish'],
+            'counter'           => $request['counter'],
+            'user_id'           => Auth::user()->id,
+            'seo_title'         => $request['seo_title'],
+            'seo_description'   => $request['seo_description'],
+            'seo_keyword'       => $request['seo_keyword']
         ]);
 
         foreach($request['checked_categories'] as $key => $category){

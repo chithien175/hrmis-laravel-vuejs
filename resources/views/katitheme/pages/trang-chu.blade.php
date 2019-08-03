@@ -1,17 +1,20 @@
 @extends('katitheme.layouts.master')
 
 <?php
-    $page_title = (getFieldCompany('company.show_site_name') == 'true') ? 'Trang chủ - ' . getFieldCompany('company.site_title') : 'Trang chủ';
+    $page_title = (getFieldCompany('company.show_site_name') == 'true') ? $page_data['seo_title'] . ' - ' . getFieldCompany('company.site_title') : $page_data['seo_title'];
+    $pape_description = $page_data['seo_description'];
+    $page_keyword = $page_data['seo_keyword'];
     $page_url = url()->current();
 ?>
 
 @section('title', $page_title)
-@section('description', '')
+@section('description', $pape_description)
+@section('keywords', $page_keyword)
 
 @section('fb_url', $page_url)
 @section('fb_type', 'website')
 @section('fb_title', $page_title)
-@section('fb_des', '')
+@section('fb_des', $pape_description)
 
 @section('content')
 <!-- slider area start -->

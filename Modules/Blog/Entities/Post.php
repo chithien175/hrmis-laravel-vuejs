@@ -8,7 +8,7 @@ use Modules\Blog\Entities\Category;
 class Post extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'photo', 'description', 'body', 'publish', 'counter', 'user_id',
+        'title', 'slug', 'photo', 'description', 'body', 'publish', 'counter', 'user_id', 'seo_title', 'seo_description', 'seo_keyword'
     ];
 
     function categories() {

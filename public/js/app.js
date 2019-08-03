@@ -2260,6 +2260,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -2285,7 +2298,10 @@ __webpack_require__.r(__webpack_exports__);
         publish: 'publish',
         counter: 0,
         user_id: '',
-        checked_categories: []
+        checked_categories: [],
+        seo_title: '',
+        seo_description: '',
+        seo_keyword: ''
       }),
       search: '',
       isLoading: true
@@ -5446,6 +5462,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5462,7 +5491,10 @@ __webpack_require__.r(__webpack_exports__);
         publish: 'publish',
         counter: 0,
         user_id: '',
-        is_homepage: false
+        is_homepage: false,
+        seo_title: '',
+        seo_description: '',
+        seo_keyword: ''
       }),
       formCustomField: new Form({
         name: '',
@@ -80828,6 +80860,119 @@ var render = function() {
                                   },
                                   on: { change: _vm.changePhoto }
                                 })
+                              ]),
+                              _vm._v(" "),
+                              _c("hr"),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEOTitle" }
+                                  },
+                                  [_vm._v("SEO - Tiêu đề")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_title,
+                                      expression: "form.seo_title"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.form.seo_title },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_title",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEODescription" }
+                                  },
+                                  [_vm._v("SEO - Mô tả")]
+                                ),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_description,
+                                      expression: "form.seo_description"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { rows: "3" },
+                                  domProps: { value: _vm.form.seo_description },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_description",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEOKeyword" }
+                                  },
+                                  [_vm._v("SEO - Từ khóa")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_keyword,
+                                      expression: "form.seo_keyword"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.form.seo_keyword },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_keyword",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
                               ])
                             ])
                           ])
@@ -87595,6 +87740,119 @@ var render = function() {
                                   staticClass: "form-control",
                                   attrs: { type: "file", id: "inputPhoto" },
                                   on: { change: _vm.changePhoto }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("hr"),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEOTitle" }
+                                  },
+                                  [_vm._v("SEO - Tiêu đề")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_title,
+                                      expression: "form.seo_title"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.form.seo_title },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_title",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEODescription" }
+                                  },
+                                  [_vm._v("SEO - Mô tả")]
+                                ),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_description,
+                                      expression: "form.seo_description"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { rows: "3" },
+                                  domProps: { value: _vm.form.seo_description },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_description",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputSEOKeyword" }
+                                  },
+                                  [_vm._v("SEO - Từ khóa")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.seo_keyword,
+                                      expression: "form.seo_keyword"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { type: "text" },
+                                  domProps: { value: _vm.form.seo_keyword },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "seo_keyword",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
                                 })
                               ])
                             ])

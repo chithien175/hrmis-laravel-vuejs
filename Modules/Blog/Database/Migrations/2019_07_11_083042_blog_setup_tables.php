@@ -27,6 +27,10 @@ class BlogSetupTables extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->string('seo_keyword')->nullable();
             
             $table->timestamps();
         });

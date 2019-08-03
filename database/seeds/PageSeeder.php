@@ -22,6 +22,9 @@ class PageSeeder extends Seeder
             'counter'       => 0,
             'user_id'       => 1,
             'is_homepage'   => 1,
+            'seo_title'     => 'Trang chủ',
+            'seo_description'=> 'Trang chủ',
+            'seo_keyword'   => 'Trang chủ',
             'created_at'    => Carbon::now()
         ]);
 
@@ -34,6 +37,9 @@ class PageSeeder extends Seeder
             'counter'       => 0,
             'user_id'       => 1,
             'is_homepage'   => 0,
+            'seo_title'     => 'Giới thiệu',
+            'seo_description'=> 'Giới thiệu',
+            'seo_keyword'   => 'Giới thiệu',
             'created_at'    => Carbon::now()
         ]);
 
@@ -46,6 +52,9 @@ class PageSeeder extends Seeder
             'counter'       => 0,
             'user_id'       => 1,
             'is_homepage'   => 0,
+            'seo_title'     => 'Tin tức',
+            'seo_description'=> 'Tin tức',
+            'seo_keyword'   => 'Tin tức',
             'created_at'    => Carbon::now()
         ]);
 
@@ -58,6 +67,9 @@ class PageSeeder extends Seeder
             'counter'       => 0,
             'user_id'       => 1,
             'is_homepage'   => 0,
+            'seo_title'     => 'Liên hệ',
+            'seo_description'=> 'Liên hệ',
+            'seo_keyword'   => 'Liên hệ',
             'created_at'    => Carbon::now()
         ]);
 

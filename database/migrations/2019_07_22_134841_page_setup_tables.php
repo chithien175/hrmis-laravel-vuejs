@@ -28,6 +28,10 @@ class PageSetupTables extends Migration
             ->onUpdate('cascade')->onDelete('cascade');
 
             $table->boolean('is_homepage')->default(0);
+
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->string('seo_keyword')->nullable();
             
             $table->timestamps();
         });
