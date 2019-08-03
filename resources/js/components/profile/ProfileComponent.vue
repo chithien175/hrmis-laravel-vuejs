@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <label for="inputPhoto" class="col-sm-12 control-label">Ảnh đại diện (giới hạn 2MB)</label>
                                                 <div class="col-sm-12">
-                                                    <input type="file" id="inputPhoto" placeholder="Địa chỉ Photo" @change="changePhoto">
+                                                    <input type="file" accept="image/*" id="inputPhoto" placeholder="Địa chỉ Photo" @change="changePhoto">
                                                 </div>
                                             </div>
                                             

@@ -137,13 +137,16 @@
                                     <div class="form-group">
                                         <label for="inputGallery" class="control-label">Thư viện ảnh</label>
                                         <div class="gallery-wrap">
-                                            <div class="galleries-list" v-if="this.form.galleries.length > 0">
+                                            <div class="gallery-list" v-if="this.form.galleries.length > 0">
                                                 <div class="gallery-item" v-for="gallery in this.form.galleries" :key="gallery">
+                                                    <div class="overlay">
+                                                        <span class="remove-btn" @click="removeGalleryItem(gallery)"><i class="fas fa-times-circle"></i></span>
+                                                    </div>
                                                     <img class="img-fluid product-photo" :src="getGalleryPhoto(gallery)" alt="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="file" multiple accept="image/*" @change="changeGallery">
+                                        <input id="inputGalleries" type="file" multiple accept="image/*" @change="changeGallery">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -169,7 +172,7 @@
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
                                         <img class="img-fluid product-photo" :src="getProductPhoto" alt="Product picture">
-                                        <input class="form-control" type="file" id="inputPhoto" @change="changePhoto">
+                                        <input class="form-control" type="file" accept="image/*" id="inputPhoto" @change="changePhoto">
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +214,7 @@ export default {
             products: {},
             categories: {},
             form: new Form({
-                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', user_id: '', checked_categories: [], galleries: [],
+                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', user_id: '', checked_categories: [], galleries: [], del_galleries: [],
             }),
             search: '',
             isLoading: true,
@@ -233,7 +236,6 @@ export default {
             this.form.fill(product);
 
             this.form.checked_categories = [];
-                
             for(let i=0; i<this.categories.length; i++){
                 // console.log(_.findIndex(product.categories, this.categories[i]) >= 0);
                 if(_.findIndex(product.categories, this.categories[i]) >= 0){
@@ -250,6 +252,17 @@ export default {
                     });
                 }
             }
+            
+            this.form.del_galleries = [];
+            this.form.galleries = [];
+            for(let i=0; i<product.galleries.length; i++){
+                var gallery = product.galleries[i].name;
+                // console.log(this.form.galleries);
+                this.form.galleries.push(
+                    gallery
+                );
+            }
+
             $('#productModal').modal('show');
         },
         newModal () {
@@ -361,6 +374,14 @@ export default {
             // console.log(vm.form.galleries);
             
         },
+        getGalleryPhoto(gallery){
+            return (gallery.indexOf('base64') != -1) ? gallery : "../images/product/"+gallery ;
+        },
+        removeGalleryItem: function (gallery) {
+            let idx = this.form.galleries.indexOf(gallery);
+            this.form.galleries.splice(idx,1);
+            this.form.del_galleries.push(gallery);
+        },
         sanitizeTitle: function(title) {
             var slug = "";
             // Change to lower case
@@ -411,9 +432,7 @@ export default {
         searchit: _.debounce( () => {
             Fire.$emit('Searching');
         }, 500),
-        getGalleryPhoto(gallery){
-            return (gallery.indexOf('base64') != -1) ? gallery : "../images/product/"+gallery ;
-        },
+        
     },
     computed:{
         getProductPhoto(){
@@ -451,17 +470,44 @@ export default {
     .gallery-wrap{
         width: 100%;
         padding: 10px;
-        min-height: 150px;
+        min-height: 100px;
         border: 1px solid #ced4da;
         border-radius: 0.25rem;
         -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+    .gallery-wrap .gallery-list{
+        display: -webkit-box;
+        display: flex;
+        flex-wrap: wrap;
+    }
     .gallery-wrap .gallery-item{
         width: 20%;
+        min-height: 100px;
+        -webkit-box-flex: 0;
+        position: relative;
     }
-    .gallery-wrap .gallery-item img{
+    .gallery-wrap .gallery-item .overlay{
         width: 100%;
+        height: 100%;
+        background-color: #333333;
+        opacity: 0.7;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 0.3rem;
+        display: none;
+    }
+    .gallery-wrap .gallery-item .overlay .remove-btn{
+        color: #e3342f;
+        position: relative;
+        font-size: 50px;
+        top: 30px;
+        left: 33%;
+    }
+    .gallery-wrap .gallery-item .overlay .remove-btn:hover{
+        cursor: pointer;
+    }
+    .gallery-wrap .gallery-item:hover .overlay{
+        display: block;
     }
     .product-photo{
         width: 100%;

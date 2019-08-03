@@ -3421,6 +3421,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3455,7 +3458,8 @@ __webpack_require__.r(__webpack_exports__);
         price: '',
         user_id: '',
         checked_categories: [],
-        galleries: []
+        galleries: [],
+        del_galleries: []
       }),
       search: '',
       isLoading: true
@@ -3496,6 +3500,15 @@ __webpack_require__.r(__webpack_exports__);
             checked: false
           });
         }
+      }
+
+      this.form.del_galleries = [];
+      this.form.galleries = [];
+
+      for (var _i = 0; _i < product.galleries.length; _i++) {
+        var gallery = product.galleries[_i].name; // console.log(this.form.galleries);
+
+        this.form.galleries.push(gallery);
       }
 
       $('#productModal').modal('show');
@@ -3615,6 +3628,14 @@ __webpack_require__.r(__webpack_exports__);
       } // console.log(vm.form.galleries);
 
     },
+    getGalleryPhoto: function getGalleryPhoto(gallery) {
+      return gallery.indexOf('base64') != -1 ? gallery : "../images/product/" + gallery;
+    },
+    removeGalleryItem: function removeGalleryItem(gallery) {
+      var idx = this.form.galleries.indexOf(gallery);
+      this.form.galleries.splice(idx, 1);
+      this.form.del_galleries.push(gallery);
+    },
     sanitizeTitle: function sanitizeTitle(title) {
       var slug = ""; // Change to lower case
 
@@ -3660,10 +3681,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
-    }, 500),
-    getGalleryPhoto: function getGalleryPhoto(gallery) {
-      return gallery.indexOf('base64') != -1 ? gallery : "../images/product/" + gallery;
-    }
+    }, 500)
   },
   computed: {
     getProductPhoto: function getProductPhoto() {
@@ -13043,7 +13061,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.gallery-wrap{\n    width: 100%;\n    padding: 10px;\n    min-height: 150px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n.gallery-wrap .gallery-item{\n    width: 20%;\n}\n.gallery-wrap .gallery-item img{\n    width: 100%;\n}\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 80px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.gallery-wrap{\n    width: 100%;\n    padding: 10px;\n    min-height: 100px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n.gallery-wrap .gallery-list{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n}\n.gallery-wrap .gallery-item{\n    width: 20%;\n    min-height: 100px;\n    -webkit-box-flex: 0;\n    position: relative;\n}\n.gallery-wrap .gallery-item .overlay{\n    width: 100%;\n    height: 100%;\n    background-color: #333333;\n    opacity: 0.7;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n    display: none;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn{\n    color: #e3342f;\n    position: relative;\n    font-size: 50px;\n    top: 30px;\n    left: 33%;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn:hover{\n    cursor: pointer;\n}\n.gallery-wrap .gallery-item:hover .overlay{\n    display: block;\n}\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 80px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
 
 // exports
 
@@ -80747,7 +80765,11 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("input", {
                                   staticClass: "form-control",
-                                  attrs: { type: "file", id: "inputPhoto" },
+                                  attrs: {
+                                    type: "file",
+                                    accept: "image/*",
+                                    id: "inputPhoto"
+                                  },
                                   on: { change: _vm.changePhoto }
                                 })
                               ])
@@ -81476,6 +81498,7 @@ var render = function() {
                                         _c("input", {
                                           attrs: {
                                             type: "file",
+                                            accept: "image/*",
                                             id: "inputLogo"
                                           },
                                           on: { change: _vm.changePhoto }
@@ -83213,7 +83236,7 @@ var render = function() {
                                   this.form.galleries.length > 0
                                     ? _c(
                                         "div",
-                                        { staticClass: "galleries-list" },
+                                        { staticClass: "gallery-list" },
                                         _vm._l(this.form.galleries, function(
                                           gallery
                                         ) {
@@ -83224,6 +83247,34 @@ var render = function() {
                                               staticClass: "gallery-item"
                                             },
                                             [
+                                              _c(
+                                                "div",
+                                                { staticClass: "overlay" },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "remove-btn",
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.removeGalleryItem(
+                                                            gallery
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-times-circle"
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
                                               _c("img", {
                                                 staticClass:
                                                   "img-fluid product-photo",
@@ -83244,6 +83295,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("input", {
                                   attrs: {
+                                    id: "inputGalleries",
                                     type: "file",
                                     multiple: "",
                                     accept: "image/*"
@@ -83434,7 +83486,11 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("input", {
                                   staticClass: "form-control",
-                                  attrs: { type: "file", id: "inputPhoto" },
+                                  attrs: {
+                                    type: "file",
+                                    accept: "image/*",
+                                    id: "inputPhoto"
+                                  },
                                   on: { change: _vm.changePhoto }
                                 })
                               ])
@@ -87092,7 +87148,10 @@ var render = function() {
                                                     : _vm._e(),
                                                   _vm._v(" "),
                                                   _c("input", {
-                                                    attrs: { type: "file" },
+                                                    attrs: {
+                                                      type: "file",
+                                                      accept: "image/*"
+                                                    },
                                                     on: {
                                                       change: function($event) {
                                                         return _vm.changeFieldPhoto(
@@ -88046,6 +88105,7 @@ var render = function() {
                                     _c("input", {
                                       attrs: {
                                         type: "file",
+                                        accept: "image/*",
                                         id: "inputPhoto",
                                         placeholder: "Địa chỉ Photo"
                                       },

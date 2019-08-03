@@ -20,8 +20,8 @@ class EcommerceSetupTables extends Migration
             $table->string('slug')->unique();
             $table->string('code')->unique();
             $table->string('photo')->default('product-image-default.png');
-            $table->text('description');
-            $table->longText('body');
+            $table->text('description')->nullable();
+            $table->longText('body')->nullable();
             $table->string('publish');
             $table->string('price')->nullable();
             $table->integer('counter')->default(0);
@@ -60,7 +60,7 @@ class EcommerceSetupTables extends Migration
 
         // Product Gallery
         Schema::create('p_galleries', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
+            $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->unsignedBigInteger('product_id');
             $table->timestamps();

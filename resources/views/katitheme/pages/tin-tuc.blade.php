@@ -44,7 +44,6 @@
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                
                                 <ul>
                                     @if($post['categories'])
                                         <li>
@@ -55,7 +54,6 @@
                                         </li>
                                     @endif
                                 </ul>
-                               
                             </div>
                             <h3><a href="blog.html">{{ $post['title'] }}</a></h3>
                             <p>{{ $post['description'] }}</p>

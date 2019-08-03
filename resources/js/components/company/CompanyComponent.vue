@@ -104,7 +104,7 @@
                                             <div class="form-group">
                                                 <label for="inputLogo" class="col-sm-12 control-label">Logo công ty (giới hạn 2MB) <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.logo')</code></label>
                                                 <div class="col-sm-12">
-                                                    <input type="file" id="inputLogo" @change="changePhoto">
+                                                    <input type="file" accept="image/*" id="inputLogo" @change="changePhoto">
                                                 </div>
                                             </div>
                                         </form>

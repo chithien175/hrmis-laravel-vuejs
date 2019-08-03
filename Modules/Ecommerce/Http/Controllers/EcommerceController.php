@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Modules\Ecommerce\Entities\Product;
 use Modules\Ecommerce\Entities\Category;
+use Modules\Ecommerce\Entities\Gallery;
 
 class EcommerceController extends Controller
 {
@@ -29,7 +30,6 @@ class EcommerceController extends Controller
             'name'     => 'required|string|max:255',
             'slug'      => 'required|string|max:255|unique:products',
             'code'      => 'required|string|max:255|unique:products',
-            'body'      => 'required'
         ]);
 
         $request['photo'] = ($request['photo'] == '') ? 'product-image-default.jpg' : $request['photo'];
@@ -43,7 +43,7 @@ class EcommerceController extends Controller
         }
 
         $product = Product::create([
-            'name'         => $request['name'],
+            'name'          => $request['name'],
             'slug'          => $request['slug'],
             'code'          => $request['code'],
             'photo'         => $request['photo'],
@@ -55,10 +55,23 @@ class EcommerceController extends Controller
             'user_id'       => Auth::user()->id
         ]);
 
+        // Thêm vào bảng p_categories
         foreach($request['checked_categories'] as $key => $category){
             if($category['checked'] == true){
                 $product->categories()->attach($category['id']);
             }
+        }
+
+        // Thêm vào bảng p_galleries
+        foreach($request['galleries'] as $key => $value){
+            $photo_name = $key . '_' . time() . '.' . explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
+
+            \Image::make($value)->save(public_path('images/product/').$photo_name);
+
+            $gallery = new Gallery;
+            $gallery->name = $photo_name;
+            $gallery->product_id = $product->id;
+            $gallery->save();
         }
 
         Log::info('#'. Auth::user()->id .' '. Auth::user()->name .': Tạo sản phẩm #' . $product->id . ' '. $product->name . '.');
@@ -70,10 +83,9 @@ class EcommerceController extends Controller
         $product = Product::findOrFail($id);
 
         $request->validate([
-            'name'     => 'required|string|max:255',
+            'name'      => 'required|string|max:255',
             'slug'      => 'required|string|max:255|unique:products,slug,'.$product->id,
             'code'      => 'required|string|max:255|unique:products,code,'.$product->id,
-            'body'      => 'required'
         ]);
 
         $request['photo'] = ($request['photo'] == '') ? 'product-image-default.jpg' : $request['photo'];
@@ -92,10 +104,38 @@ class EcommerceController extends Controller
         }
 
         if($product->update($request->all())){
+
+            // check categories
             $product->categories()->detach();
             foreach($request['checked_categories'] as $key => $category){
                 if($category['checked'] == true){
                     $product->categories()->attach($category['id']);
+                }
+            }
+
+            // check galleries
+            $galleries = $product->galleries;
+            foreach($request['galleries'] as $key => $value){
+                $check_photo = Gallery::where('name', $value)->first();
+                if(!$check_photo){
+                    $photo_name = $key . '_' . time() . '.' . explode('/', explode(':', substr($value, 0, strpos($value, ';')))[1])[1];
+                    \Image::make($value)->save(public_path('images/product/').$photo_name);
+
+                    $gallery = new Gallery;
+                    $gallery->name = $photo_name;
+                    $gallery->product_id = $product->id;
+                    $gallery->save();
+                }
+            }
+
+            foreach($request['del_galleries'] as $key => $value){
+                $check_photo = Gallery::where('name', $value)->first();
+                if($check_photo){
+                    if(file_exists(public_path('images/product/').$check_photo->name)){
+                        @unlink(public_path('images/product/').$check_photo->name);
+                    }
+
+                    $check_photo->delete();
                 }
             }
         }
@@ -114,6 +154,13 @@ class EcommerceController extends Controller
         $product_photo = public_path('images/product/').$product->photo;
         if(file_exists($product_photo) && $product->photo != 'product-image-default.jpg'){
             @unlink($product_photo);
+        }
+
+        //Xóa ảnh galleries
+        foreach($product->galleries as $key => $value){
+            if(file_exists(public_path('images/product/').$value->name)){
+                @unlink(public_path('images/product/').$value->name);
+            }
         }
 
         $product->delete();

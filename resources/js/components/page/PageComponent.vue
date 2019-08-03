@@ -139,7 +139,7 @@
                                             <vue-editor v-model="field.value" useCustomImageHandler @imageAdded="handleImageAdded" v-if="field.type == 'text_editor'"></vue-editor>
                                             <div class="" v-if="field.type == 'image'">
                                                 <img class="img-fluid page-photo" :src="srcFieldPhoto(field.value)" :alt="field.display_name" v-if="field.value">
-                                                <input class="" type="file" @change="changeFieldPhoto($event, field.id)">
+                                                <input class="" type="file" accept="image/*" @change="changeFieldPhoto($event, field.id)">
                                             </div>
                                         </div>
                                     </div>

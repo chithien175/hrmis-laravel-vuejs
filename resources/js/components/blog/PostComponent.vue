@@ -148,7 +148,7 @@
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
                                         <img class="img-fluid post-photo" :src="getPostPhoto" alt="Post picture">
-                                        <input class="form-control" type="file" id="inputPhoto" @change="changePhoto">
+                                        <input class="form-control" type="file" accept="image/*" id="inputPhoto" @change="changePhoto">
                                     </div>
                                 </div>
                             </div>
