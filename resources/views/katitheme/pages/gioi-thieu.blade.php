@@ -1,5 +1,18 @@
 @extends('katitheme.layouts.master')
 
+<?php
+    $page_title = (getFieldCompany('company.show_site_name') == 'true') ? 'Giới thiệu - ' . getFieldCompany('company.site_title') : 'Giới thiệu';
+    $page_url = url()->current();
+?>
+
+@section('title', $page_title)
+@section('description', '')
+
+@section('fb_url', $page_url)
+@section('fb_type', 'website')
+@section('fb_title', $page_title)
+@section('fb_des', '')
+
 @section('content')
 <div class="breadcumb-area black-opacity" style="background: url({{ getFieldPage('about.image_banner') }}) no-repeat center center / cover;">
     <div class="container">

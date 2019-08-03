@@ -123,21 +123,9 @@
                                                 <label for="inputShowSiteName" class="col-sm-12 control-label">Hiển thị tiêu đề trang, ngăn cách bởi "-" ? <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.show_site_name')</code></label>
                                                 <div class="col-sm-12">
                                                     <select v-model="form.show_site_name" id="showSiteName" class="form-control">
-                                                        <option value="yes">Không</option>
-                                                        <option value="no">Có</option>
+                                                        <option value=false>Không</option>
+                                                        <option value=true>Có</option>
                                                     </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputSEOTitle" class="col-sm-12 control-label">SEO Tiêu đề <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.seo_title')</code></label>
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control" id="inputSEOTitle" placeholder="SEO Tiêu đề trang chủ" v-model="form.seo_title">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputSEODescription" class="col-sm-12 control-label">SEO Mô tả <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.seo_description')</code></label>
-                                                <div class="col-sm-12">
-                                                    <textarea class="form-control" id="inputSEODescription" placeholder="SEO Mô tả trang chủ" v-model="form.seo_description" rows="3"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -230,9 +218,7 @@
                     email: '',
                     // Tab 2
                     site_title: '',
-                    show_site_name: 'no',
-                    seo_title: '',
-                    seo_description: '',
+                    show_site_name: true,
                     favicon: '',
                     // Tab 3
                     facebook: '',

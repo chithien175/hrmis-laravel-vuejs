@@ -3,12 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Martxa || Home</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="shortcut icon" type="image/png" href="{{ asset('katitheme/images/favicon.png') }}">
-        <!-- Place favicon.ico in the root directory -->
+        <!-- Google Open Graph Tags -->
+        <title>@yield('title')</title>
+        <meta name="description" content="@yield('description')">
+        <meta name="keywords" content="@yield('keywords')">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('images/company/' . getFieldCompany('company.favicon')) }}">
+
+        <!-- FB Open Graph Tags -->
+        <meta property="og:url"           content="@yield('fb_url')" />
+        <meta property="og:type"          content="@yield('fb_type')" />
+        <meta property="og:title"         content="@yield('fb_title')" />
+        <meta property="og:description"   content="@yield('fb_des')" />
 
 		<!-- all css here -->
 		<!-- bootstrap v3.3.7 css -->

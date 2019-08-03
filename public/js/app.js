@@ -2718,18 +2718,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -2748,9 +2736,7 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         // Tab 2
         site_title: '',
-        show_site_name: 'no',
-        seo_title: '',
-        seo_description: '',
+        show_site_name: true,
         favicon: '',
         // Tab 3
         facebook: '',
@@ -81731,139 +81717,17 @@ var render = function() {
                                           [
                                             _c(
                                               "option",
-                                              { attrs: { value: "yes" } },
+                                              { attrs: { value: "false" } },
                                               [_vm._v("Không")]
                                             ),
                                             _vm._v(" "),
                                             _c(
                                               "option",
-                                              { attrs: { value: "no" } },
+                                              { attrs: { value: "true" } },
                                               [_vm._v("Có")]
                                             )
                                           ]
                                         )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputSEOTitle" }
-                                        },
-                                        [
-                                          _vm._v("SEO Tiêu đề "),
-                                          _vm.$gate.isSuperAdmin()
-                                            ? _c(
-                                                "code",
-                                                {
-                                                  staticClass: "note-developer"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "getFieldCompany('company.seo_title')"
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e()
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "col-sm-12" }, [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.seo_title,
-                                              expression: "form.seo_title"
-                                            }
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            type: "text",
-                                            id: "inputSEOTitle",
-                                            placeholder: "SEO Tiêu đề trang chủ"
-                                          },
-                                          domProps: {
-                                            value: _vm.form.seo_title
-                                          },
-                                          on: {
-                                            input: function($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                _vm.form,
-                                                "seo_title",
-                                                $event.target.value
-                                              )
-                                            }
-                                          }
-                                        })
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "form-group" }, [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "col-sm-12 control-label",
-                                          attrs: { for: "inputSEODescription" }
-                                        },
-                                        [
-                                          _vm._v("SEO Mô tả "),
-                                          _vm.$gate.isSuperAdmin()
-                                            ? _c(
-                                                "code",
-                                                {
-                                                  staticClass: "note-developer"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "getFieldCompany('company.seo_description')"
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e()
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "col-sm-12" }, [
-                                        _c("textarea", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.form.seo_description,
-                                              expression: "form.seo_description"
-                                            }
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: {
-                                            id: "inputSEODescription",
-                                            placeholder: "SEO Mô tả trang chủ",
-                                            rows: "3"
-                                          },
-                                          domProps: {
-                                            value: _vm.form.seo_description
-                                          },
-                                          on: {
-                                            input: function($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                _vm.form,
-                                                "seo_description",
-                                                $event.target.value
-                                              )
-                                            }
-                                          }
-                                        })
                                       ])
                                     ]),
                                     _vm._v(" "),

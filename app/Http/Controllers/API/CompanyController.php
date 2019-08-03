@@ -68,8 +68,6 @@ class CompanyController extends Controller
             // Tab 2
             'company.site_title'            => $request['site_title'],
             'company.show_site_name'        => $request['show_site_name'],
-            'company.seo_title'             => $request['seo_title'],
-            'company.seo_description'       => $request['seo_description'],
             'company.favicon'               => $request['favicon'],
             // Tab 3
             'company.facebook'              => $request['facebook'],
