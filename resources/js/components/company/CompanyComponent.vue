@@ -46,7 +46,9 @@
                             <div class="card-header">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item"><a class="nav-link active" href="#company" data-toggle="tab">Thông tin công ty</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#theme-options" data-toggle="tab">Tùy chỉnh giao diện</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#socials" data-toggle="tab">Mạng xã hội</a></li>
+
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -105,6 +107,46 @@
                                                 <label for="inputLogo" class="col-sm-12 control-label">Logo công ty (giới hạn 2MB) <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.logo')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="file" accept="image/*" id="inputLogo" @change="changePhoto">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="theme-options">
+                                        <form class="form-horizontal" @keydown="form.onKeydown($event)">
+                                            <div class="form-group">
+                                                <label for="inputSiteTitle" class="col-sm-12 control-label">Tiêu đề trang web <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.site_title')</code></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="inputSiteTitle" placeholder="Tiêu đề trang web" v-model="form.site_title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputShowSiteName" class="col-sm-12 control-label">Hiển thị tiêu đề trang, ngăn cách bởi "-" ? <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.show_site_name')</code></label>
+                                                <div class="col-sm-12">
+                                                    <select v-model="form.show_site_name" id="showSiteName" class="form-control">
+                                                        <option value="yes">Không</option>
+                                                        <option value="no">Có</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputSEOTitle" class="col-sm-12 control-label">SEO Tiêu đề <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.seo_title')</code></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="inputSEOTitle" placeholder="SEO Tiêu đề trang chủ" v-model="form.seo_title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputSEODescription" class="col-sm-12 control-label">SEO Mô tả <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.seo_description')</code></label>
+                                                <div class="col-sm-12">
+                                                    <textarea class="form-control" id="inputSEODescription" placeholder="SEO Mô tả trang chủ" v-model="form.seo_description" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputFavicon" class="col-sm-12 control-label">Favicon (giới hạn 2MB) <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.favicon')</code></label>
+                                                <div class="col-sm-12">
+                                                    <div>
+                                                        <img class="img-fluid" :src="getFavicon" alt="Company logo picture" style="width: 100px; height: auto;">
+                                                    </div>
+                                                    <input type="file" accept="image/*" id="inputFavicon" @change="changeFavicon">
                                                 </div>
                                             </div>
                                         </form>
@@ -187,6 +229,12 @@
                     logo: '',
                     email: '',
                     // Tab 2
+                    site_title: '',
+                    show_site_name: 'no',
+                    seo_title: '',
+                    seo_description: '',
+                    favicon: '',
+                    // Tab 3
                     facebook: '',
                     twitter: '',
                     linkedin: '',
@@ -220,6 +268,21 @@
                     });
                 }
             },
+            changeFavicon (e) {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                if(file['size'] < 2111775){
+                    reader.onloadend = (file) => {
+                        this.form.favicon = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: 'Vui lòng tải ảnh dưới 2MB'
+                    });
+                }
+            },
             updateCompany () {
                 this.$Progress.start();
                 this.form.put('../api/company')
@@ -239,7 +302,10 @@
         computed:{
             getLogo(){
                 return (this.form.logo.indexOf('base64') != -1) ? this.form.logo : "../images/company/"+this.form.logo ;
-           },
+            },
+            getFavicon(){
+                return (this.form.favicon.indexOf('base64') != -1) ? this.form.favicon : "../images/company/"+this.form.favicon ;
+            },
         },
         created () {
             this.loadData();

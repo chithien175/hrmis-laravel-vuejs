@@ -2688,6 +2688,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -2705,6 +2747,12 @@ __webpack_require__.r(__webpack_exports__);
         logo: '',
         email: '',
         // Tab 2
+        site_title: '',
+        show_site_name: 'no',
+        seo_title: '',
+        seo_description: '',
+        favicon: '',
+        // Tab 3
         facebook: '',
         twitter: '',
         linkedin: '',
@@ -2747,8 +2795,27 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    updateCompany: function updateCompany() {
+    changeFavicon: function changeFavicon(e) {
       var _this3 = this;
+
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          _this3.form.favicon = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        Toast.fire({
+          type: 'error',
+          title: 'Vui lòng tải ảnh dưới 2MB'
+        });
+      }
+    },
+    updateCompany: function updateCompany() {
+      var _this4 = this;
 
       this.$Progress.start();
       this.form.put('../api/company').then(function () {
@@ -2758,23 +2825,26 @@ __webpack_require__.r(__webpack_exports__);
         });
         Fire.$emit('AfterCreate');
 
-        _this3.$Progress.finish();
+        _this4.$Progress.finish();
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this4.$Progress.fail();
       });
     }
   },
   computed: {
     getLogo: function getLogo() {
       return this.form.logo.indexOf('base64') != -1 ? this.form.logo : "../images/company/" + this.form.logo;
+    },
+    getFavicon: function getFavicon() {
+      return this.form.favicon.indexOf('base64') != -1 ? this.form.favicon : "../images/company/" + this.form.favicon;
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadData();
     Fire.$on('AfterCreate', function () {
-      _this4.loadData();
+      _this5.loadData();
     });
   }
 });
@@ -81514,6 +81584,349 @@ var render = function() {
                               "div",
                               {
                                 staticClass: "tab-pane",
+                                attrs: { id: "theme-options" }
+                              },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    staticClass: "form-horizontal",
+                                    on: {
+                                      keydown: function($event) {
+                                        return _vm.form.onKeydown($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputSiteTitle" }
+                                        },
+                                        [
+                                          _vm._v("Tiêu đề trang web "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.site_title')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.site_title,
+                                              expression: "form.site_title"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputSiteTitle",
+                                            placeholder: "Tiêu đề trang web"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.site_title
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "site_title",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputShowSiteName" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            'Hiển thị tiêu đề trang, ngăn cách bởi "-" ? '
+                                          ),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.show_site_name')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c(
+                                          "select",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.form.show_site_name,
+                                                expression:
+                                                  "form.show_site_name"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            attrs: { id: "showSiteName" },
+                                            on: {
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "show_site_name",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "yes" } },
+                                              [_vm._v("Không")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "option",
+                                              { attrs: { value: "no" } },
+                                              [_vm._v("Có")]
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputSEOTitle" }
+                                        },
+                                        [
+                                          _vm._v("SEO Tiêu đề "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.seo_title')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.seo_title,
+                                              expression: "form.seo_title"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputSEOTitle",
+                                            placeholder: "SEO Tiêu đề trang chủ"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.seo_title
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "seo_title",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputSEODescription" }
+                                        },
+                                        [
+                                          _vm._v("SEO Mô tả "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.seo_description')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("textarea", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.seo_description,
+                                              expression: "form.seo_description"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            id: "inputSEODescription",
+                                            placeholder: "SEO Mô tả trang chủ",
+                                            rows: "3"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.seo_description
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "seo_description",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputFavicon" }
+                                        },
+                                        [
+                                          _vm._v("Favicon (giới hạn 2MB) "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.favicon')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("div", [
+                                          _c("img", {
+                                            staticClass: "img-fluid",
+                                            staticStyle: {
+                                              width: "100px",
+                                              height: "auto"
+                                            },
+                                            attrs: {
+                                              src: _vm.getFavicon,
+                                              alt: "Company logo picture"
+                                            }
+                                          })
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "file",
+                                            accept: "image/*",
+                                            id: "inputFavicon"
+                                          },
+                                          on: { change: _vm.changeFavicon }
+                                        })
+                                      ])
+                                    ])
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane",
                                 attrs: { id: "socials" }
                               },
                               [
@@ -81902,6 +82315,17 @@ var staticRenderFns = [
               attrs: { href: "#company", "data-toggle": "tab" }
             },
             [_vm._v("Thông tin công ty")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "#theme-options", "data-toggle": "tab" }
+            },
+            [_vm._v("Tùy chỉnh giao diện")]
           )
         ]),
         _vm._v(" "),
