@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="hidden-md hidden-lg col-sm-8 col-xs-6">
                     <div class="logo">
-                        <h1><a href="index.html">Martxa</a></h1>
+                        <h1><a href="{{ route('katitheme.homepage') }}">{{ getFieldCompany('company.name') }}</a></h1>
                     </div>
                 </div>
                 <div class="col-md-11 hidden-sm hidden-xs">

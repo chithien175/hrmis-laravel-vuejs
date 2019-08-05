@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>KATICMS - Hệ thống quản trị nội dung</title>
+	<title>Hệ thống quản trị nội dung - {{ getFieldCompany('company.name') }}</title>
 
 	<link rel="stylesheet" href="/css/app.css">
 </head>
@@ -65,10 +65,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-		<a href="void:javascript(0)" class="brand-link">
+		<a href="{{ route('katitheme.homepage') }}" target="_blank" class="brand-link">
 			<img src="{{ url('/images/profile/') }}/profile.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
 				style="opacity: .8">
-			<span class="brand-text font-weight-light">KATICMS</span>
+			<span class="brand-text font-weight-light">{{ getFieldCompany('company.name') }}</span>
 		</a>
 
 		<!-- Sidebar -->
@@ -85,8 +85,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</p>
 				</router-link>
 				</li>
+
 				<!-- Nội dung trang web -->
-				
+				@if( $user_current->can('manage-page') || ($user_current->can('manage-blog') && $modules['blog']) || ($user_current->can('manage-menu') && $modules['menu']) )
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon far fa-newspaper"></i>
@@ -128,6 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@endif
 					</ul>
 				</li>
+				@endif
 
 				<!-- Thương mại điện tử -->
 				@if($user_current->can('manage-ecommerce') && $modules['ecommerce'])

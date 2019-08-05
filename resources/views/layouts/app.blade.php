@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>KaTiCMS | Hệ thống quản trị nội dung</title>
+    <title>Hệ thống quản trị nội dung | {{ getFieldCompany('company.name') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -43,11 +43,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
                             </li>
+                            {{--
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">Đăng ký</a>
                                 </li>
                             @endif
+                            --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -2273,6 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -5213,6 +5214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -80972,7 +80974,13 @@ var render = function() {
                                       )
                                     }
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("small", [
+                                  _vm._v(
+                                    'Từ khóa ngăn cách nhau bằng dấu (phẩy) ","'
+                                  )
+                                ])
                               ])
                             ])
                           ])
@@ -87853,7 +87861,13 @@ var render = function() {
                                       )
                                     }
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("small", [
+                                  _vm._v(
+                                    'Từ khóa ngăn cách nhau bằng dấu (phẩy) ","'
+                                  )
+                                ])
                               ])
                             ])
                           ])

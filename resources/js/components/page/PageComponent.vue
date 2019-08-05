@@ -176,6 +176,7 @@
                                     <div class="form-group">
                                         <label for="inputSEOKeyword" class="control-label">SEO - Từ khóa</label>
                                         <input v-model="form.seo_keyword" type="text" class="form-control">
+                                        <small>Từ khóa ngăn cách nhau bằng dấu (phẩy) ","</small>
                                     </div>
                                 </div>
                             </div>
