@@ -1,17 +1,17 @@
 <template>
 <div>
-    <div class="content-wrapper" v-if="$gate.isManageMenu() && $gate.isMenuModule()">
+    <div class="content-wrapper" v-if="$gate.isManageGallery()">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <h5 class="m-0 blue"><i class="far fa-compass"></i> Trình đơn - Menu</h5>
+                        <h5 class="m-0 blue"><i class="fas fa-camera"></i> Bộ sưu tập ảnh</h5>
                     </div><!-- /.col -->
                     <div class="col-md-6">
                         <ol class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                            <li class="breadcrumb-item active">Trình đơn</li>
+                            <li class="breadcrumb-item active">Bộ sưu tập ảnh</li>
                         </ol>
                     </div>
                 </div><!-- /.row -->
@@ -29,7 +29,6 @@
                                 <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 6" :key="index"></vcl-facebook>
                             </div>
                         </div>
-                        
                         <div class="row" v-if="!isLoading">
                             <div class="col-12">
                                 <div class="card">
@@ -54,24 +53,26 @@
                                             <thead>
                                                 <tr class="blue font-weight-bold">
                                                     <th>ID</th>
-                                                    <th>Tên</th>
-                                                    <th>Ngày tạo</th>
+                                                    <th>Tiêu đề</th>
+                                                    <th>Đường dẫn tĩnh</th>
+                                                    <th>Trạng thái</th>
                                                     <th>Tác vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="menu in menus" :key="menu.id">
-                                                    <td>{{ menu.id }}</td>
-                                                    <td>{{ menu.name }}</td>
-                                                    <td><span class="badge bg-info">{{ menu.created_at | formatDateTime }}</span></td>
+                                                <tr v-for="gallery in galleries" :key="gallery.id">
+                                                    <td>{{ gallery.id }}</td>
+                                                    <td>{{ gallery.title }}</td>
+                                                    <td>{{ gallery.slug }}</td>
                                                     <td>
-                                                        <router-link class="btn btn-sm btn-success" :to="{ name: 'menu-builder', params: { menu_id: menu.id }}">
-                                                            <i class="fas fa-bars fa-fw"></i> Xây dựng trình đơn
-                                                        </router-link>
-                                                        <button class="btn btn-sm btn-primary" @click="editModal(menu)">
+                                                        <span v-if="gallery.publish == 'publish'" class="badge badge-success">Xuất bản</span>
+                                                        <span v-else class="badge badge-danger">Bản nháp</span>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-primary" @click="editModal(gallery)">
                                                             <i class="fa fa-edit fa-fw"></i> Sửa
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger" @click="deleteMenu(menu.id)">
+                                                        <button class="btn btn-sm btn-danger" @click="deleteGallery(gallery.id)">
                                                             <i class="fa fa-trash fa-fw"></i> Xóa
                                                         </button>
                                                     </td>
@@ -79,21 +80,9 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
                             </div>
-                            <code class="note-developer p-3" v-if="$gate.isSuperAdmin()">
-                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!<br>
-                                $options = array(
-                                    'id' => 'navigation',
-                                    'class' => 'navigation',
-                                    'sub_id' => 'submenu',
-                                    'sub_class' => 'submenu'
-                                );
-                                <br>
-                                echo menu('main-menu', $options);
-                            </code>
                         </div>
                     </div>
                 </div>
@@ -101,25 +90,45 @@
         </div>
         <!-- /.content -->
 
-        <!-- Menu Modal -->
-        <div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <!-- Gallery Modal -->
+        <div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="galleryModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title blue" id="menuModalLabel">{{ editmode ? 'Chỉnh sửa trình đơn' : 'Thêm mới trình đơn' }}</h5>
+                        <h5 class="modal-title blue" id="galleryModalLabel">{{ editmode ? 'Chỉnh sửa bộ sưu tập' : 'Thêm mới bộ sưu tập' }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editmode ? updateMenu() : createMenu()" @keydown="form.onKeydown($event)">
+                    <form @submit.prevent="editmode ? updateGallery() : createGallery()" @keydown="form.onKeydown($event)">
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <div class="form-group">
-                                        <input v-model="form.name" type="text" name="name"
-                                            placeholder="Tên trình đơn"
-                                            class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                                        <has-error :form="form" field="name"></has-error>
+                                        <label for="inputTitle" class="control-label">Tiêu đề</label>
+                                        <input v-model="form.title" type="text" name="title"
+                                            @change="convertSlug"
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
+                                        <has-error :form="form" field="title"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputSlug" class="control-label">Chuỗi cho đường dẫn tĩnh</label>
+                                        <div class="">
+                                            <input v-model="form.slug" type="text" name="slug"
+                                            class="form-control col-md-6 d-inline-block" :class="{ 'is-invalid': form.errors.has('slug') }"><span>.html</span>
+                                        </div>
+                                        
+                                        <has-error :form="form" field="slug"></has-error>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="inputPublish" class="control-label">Trạng thái</label>
+                                        <select name="publish" id="publish" v-model="form.publish" class="form-control" :class="{ 'is-invalid' : form.errors.has('publish') }">
+                                            <option value="publish">Xuất bản</option>
+                                            <option value="draft">Bản nháp</option>
+                                        </select>
+                                        <has-error :form="form" field="publish"></has-error>
                                     </div>
                                 </div>
                             </div>
@@ -132,9 +141,9 @@
                 </div>
             </div>
         </div>
-        <!-- /. Menu Modal -->
+        <!-- /. Gallery Modal -->
     </div>
-    <div v-if="!$gate.isManageMenu() || !$gate.isMenuModule()">
+    <div v-if="!$gate.isManageGallery()">
         <not-found></not-found>
     </div>
 </div>
@@ -143,16 +152,13 @@
 
 <script>
     export default {
-        mounted() {
-            // console.log('Component mounted.')
-        },
         data() {
             return {
-                editmode: false,
                 isLoading: true,
-                menus: {},
+                editmode: false,
+                galleries: {},
                 form: new Form({
-                    id: '', name: '',
+                    id: '', title: '', slug: '', publish: 'publish'
                 }),
                 search: '',
             }
@@ -160,33 +166,35 @@
         methods: {
             loadData () {
                 this.$Progress.start();
-                axios.get('/api/menu').then(({ data }) => { 
-                    this.menus = data;
-                    this.isLoading = false; 
+                axios.get('/api/gallery').then(({ data }) => { 
+                    this.galleries = data;
+                    this.isLoading = false;
                 });
                 this.$Progress.finish();
             },
-            editModal (menu) {
+            editModal (gallery) {
                 this.editmode = true;
                 this.form.reset();
                 this.form.clear();
-                this.form.fill(menu);
-                $('#menuModal').modal('show');
+                this.form.fill(gallery);
+                $('#galleryModal').modal('show');
             },
             newModal () {
                 this.editmode = false;
                 this.form.reset();
                 this.form.clear();
-                $('#menuModal').modal('show');
+
+                $('#galleryModal').modal('show');
             },
-            createMenu () {
+            createGallery () {
                 this.$Progress.start();
-                this.form.post('../api/menu')
+                this.form.slug = this.sanitizeTitle(this.form.slug);
+                this.form.post('/api/gallery')
                 .then( () => {
-                    $('#menuModal').modal('hide');
+                    $('#galleryModal').modal('hide');
                     Toast.fire({
                         type: 'success',
-                        title: 'Thêm trình đơn thành công'
+                        title: 'Thêm bộ sưu tập ảnh thành công'
                     });
                     Fire.$emit('AfterCreate');
                     this.$Progress.finish();
@@ -195,14 +203,15 @@
                     this.$Progress.fail();
                 }); 
             },
-            updateMenu () {
+            updateGallery () {
                 this.$Progress.start();
-                this.form.put('../api/menu/'+this.form.id)
+                this.form.slug = this.sanitizeTitle(this.form.slug);
+                this.form.put('/api/gallery/'+this.form.id)
                 .then( () =>{
-                    $('#menuModal').modal('hide');
+                    $('#galleryModal').modal('hide');
                     Toast.fire({
                         type: 'success',
-                        title: 'Chỉnh sửa trình đơn thành công'
+                        title: 'Chỉnh sửa bộ sưu tập ảnh thành công'
                     });
                     Fire.$emit('AfterCreate');
                     this.$Progress.finish();
@@ -211,10 +220,10 @@
                     this.$Progress.fail();
                 });
             },
-            deleteMenu (id) {
+            deleteGallery (id) {
                 Swal.fire({
                     title: 'Bạn chắc chứ?',
-                    text: "Bạn muốn xóa trình đơn này?",
+                    text: "Bạn muốn xóa bộ sưu tập ảnh này?",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -225,25 +234,51 @@
                         if(result.value){
                             // Send request to the server
                             this.$Progress.start();
-                            this.form.delete('../api/menu/'+id)
+                            this.form.delete('../api/gallery/'+id)
                             .then( () => {
                                 Swal.fire(
                                     'Xóa thành công!',
-                                    'Bạn đã xóa trình đơn thành công',
+                                    'Bạn đã xóa bộ sưu tập ản thành công',
                                     'success'
                                 );
                                 Fire.$emit('AfterCreate');
                                 this.$Progress.finish();
                             })
                             .catch( () => {
-                                Swal("Lỗi xóa trình đơn!", "Vui lòng liên hệ admin xử lý.", "warning");
+                                Swal("Lỗi xóa bộ sưu tập ản!", "Vui lòng liên hệ admin xử lý.", "warning");
                             });
                         }
                 });
             },
+            sanitizeTitle: function(title) {
+                var slug = "";
+                // Change to lower case
+                var titleLower = title.toLowerCase();
+                // Letter "e"
+                slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+                // Letter "a"
+                slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+                // Letter "o"
+                slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+                // Letter "u"
+                slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+                // Letter "d"
+                slug = slug.replace(/đ/gi, 'd');
+                // Trim the last whitespace
+                slug = slug.replace(/\s*$/g, '');
+                // Change whitespace to "-"
+                slug = slug.replace(/\s+/g, '-');
+                
+                return slug;
+            },
+            convertSlug (){
+                this.form.slug = this.sanitizeTitle(this.form.title);
+            },
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');
             }, 500),
+        },
+        computed:{
         },
         created() {
             this.loadData();
@@ -252,9 +287,9 @@
                 let query = this.search;
                 if(query){
                     this.$Progress.start();
-                    axios.get('/api/menu/find?q='+query)
+                    axios.get('/api/findGallery?q='+query)
                     .then( (data) => {
-                        this.menus = data.data;
+                        this.galleries = data.data;
                         this.$Progress.finish();
                     })
                     .catch( () =>{
@@ -273,12 +308,4 @@
 </script>
 
 <style>
-.note-developer{
-    border-radius: 30px;
-    font-size: 11px;
-    border: 0;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-}
 </style>

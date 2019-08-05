@@ -18,14 +18,16 @@
                 <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".3s">
                     <div class="footer-widget footer-menu">
                         <h2>Footer Menu</h2>
-                        <ul>
-                            <li><a href="faq.html">Faq</a></li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="#">Customer Insights</a></li>
-                            <li><a href="service.html">FInancial Service</a></li>
-                            <li><a href="#">Business Devlopment</a></li>
-                            <li><a href="">Project Management</a></li>
-                        </ul>
+                        <?php 
+                            $options = array(
+                                'id' => 'navigation',
+                                'class' => '',
+                                'sub_id' => '',
+                                'sub_class' => 'submenu'
+                            );
+
+                            echo menu('footer-menu', $options);
+                        ?>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".4s">

@@ -10,6 +10,7 @@ return [
             'company'       => 'm',
             'logs'          => 'm',
             'media'         => 'm',
+            'gallery'       => 'm',
             'ecommerce'     => 'm'
         ],
         'admin'             => [
@@ -19,6 +20,7 @@ return [
             'menu'          => 'm',
             'company'       => 'm',
             'media'         => 'm',
+            'gallery'       => 'm',
             'ecommerce'     => 'm'
         ]
     ],

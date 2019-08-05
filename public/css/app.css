@@ -35325,6 +35325,10 @@ a.text-dark:focus {
   font-size: 0.85rem !important;
 }
 
+.sidebar .nav-treeview {
+  padding-left: 20px;
+}
+
 .router-link-exact-active {
   color: #ffffff !important;
   background-color: #0e4d9a;

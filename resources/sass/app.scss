@@ -29,6 +29,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .sidebar .nav-icon{
   font-size: .85rem !important;
 }
+.sidebar .nav-treeview{
+  padding-left: 20px;
+}
 
 .router-link-exact-active{
     color: #ffffff !important;

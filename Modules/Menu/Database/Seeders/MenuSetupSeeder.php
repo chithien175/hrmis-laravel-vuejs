@@ -32,20 +32,20 @@ class MenuSetupSeeder extends Seeder
         $this->command->info('Creating Menu');
 
         $category = Menu::create([
-            'name'          => 'frontend',
+            'name'          => 'main-menu',
             'created_at'    => Carbon::now()
         ]);
         $category = Menu::create([
-            'name'          => 'backend',
+            'name'          => 'footer-menu',
             'created_at'    => Carbon::now()
         ]);
 
-        // Create a new menuitem
-        $this->command->info('Creating MenuItem');
+        // Create menuitem for Main Menu
+        $this->command->info('Creating MenuItem for Main Menu');
 
-        $menu = Menu::where('name', 'frontend')->firstOrFail();
+        $menu = Menu::where('name', 'main-menu')->firstOrFail();
 
-         // Trang chủ
+        // Trang chủ
         $menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
             'title'   => 'Trang chủ',
@@ -148,6 +148,64 @@ class MenuSetupSeeder extends Seeder
                 'color'      => '#333333',
                 'parent_id'  => null,
                 'order'      => 3,
+            ])->save();
+        }
+
+        // Create menuitem for Footer Menu
+        $this->command->info('Creating MenuItem for Footer Menu');
+
+        $footer_menu = Menu::where('name', 'footer-menu')->firstOrFail();
+
+        // Dịch vụ
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $footer_menu->id,
+            'title'   => 'Dịch vụ',
+            'url'     => '#',
+            'route'   => '',
+            'type'    => 'url'
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => null,
+                'order'      => 1,
+            ])->save();
+        }
+        // Tuyển dụng
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $footer_menu->id,
+            'title'   => 'Tuyển dụng',
+            'url'     => '#',
+            'route'   => '',
+            'type'    => 'url'
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => null,
+                'order'      => 1,
+            ])->save();
+        }
+
+        // Liên hệ
+        $menuItem = MenuItem::firstOrNew([
+            'menu_id' => $footer_menu->id,
+            'title'   => 'Liên hệ',
+            'url'     => '#',
+            'route'   => '',
+            'type'    => 'url'
+        ]);
+        if (!$menuItem->exists) {
+            $menuItem->fill([
+                'target'     => '_self',
+                'icon_class' => '',
+                'color'      => '#333333',
+                'parent_id'  => null,
+                'order'      => 1,
             ])->save();
         }
     }

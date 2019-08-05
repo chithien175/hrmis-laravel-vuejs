@@ -83,7 +83,7 @@
                                 'sub_class' => 'submenu'
                             );
 
-                            echo menu('frontend', $options);
+                            echo menu('main-menu', $options);
                         ?>
                     </div>
                 </div>

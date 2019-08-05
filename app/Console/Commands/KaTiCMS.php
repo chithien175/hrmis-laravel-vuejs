@@ -41,6 +41,10 @@ class KaTiCMS extends Command
      */
     public function handle()
     {
+        if(!file_exists(public_path('\\media'))){
+            mkdir(public_path('\\media'), 0755, true);
+        }
+
         $this->call('migrate:fresh', [
             '--force' => 'force',
         ]);

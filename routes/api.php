@@ -46,6 +46,10 @@ Route::post('orderFieldsPage', 'API\PageController@orderFieldsPage');
 Route::post('deleteFieldPage/{id}', 'API\PageController@deleteFieldPage');
 Route::post('updateFieldsPage', 'API\PageController@updateFieldsPage');
 
+// Gallery
+Route::apiResources(['gallery' => 'API\GalleryController']);
+Route::get('findGallery', 'API\GalleryController@search');
+
 // Media
 Route::post('mediaList', 'API\MediaController@list');
 Route::post('mediaUpload', 'API\MediaController@upload');

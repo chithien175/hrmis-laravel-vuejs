@@ -100,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@if($user_current->can('manage-page'))
 							<li class="nav-item">
 								<router-link to="/admin/page" class="nav-link">
-									<i class="far fa-circle nav-icon"></i>
+									<i class="fas fa-file-alt nav-icon"></i>
 									<p>Trang</p>
 								</router-link>
 							<li>
@@ -108,13 +108,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@if($user_current->can('manage-blog') && $modules['blog'])
 						<li class="nav-item">
 							<router-link to="/admin/post" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-file-alt nav-icon"></i>
 								<p>Bài viết - Blog</p>
 							</router-link>
 						</li>
 						<li class="nav-item">
 							<router-link to="/admin/category" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-folder-open nav-icon"></i>
 								<p>Chuyên mục</p>
 							</router-link>
 						</li>
@@ -122,7 +122,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@if($user_current->can('manage-menu') && $modules['menu'])
 						<li class="nav-item">
 							<router-link to="/admin/menu" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="far fa-compass nav-icon"></i>
 								<p>Trình đơn - Menu</p>
 							</router-link>
 						</li>
@@ -144,13 +144,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<router-link to="/admin/product" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-dolly nav-icon"></i>
 								<p>Sản phẩm</p>
 							</router-link>
 						<li>
 						<li class="nav-item">
 							<router-link to="/admin/p-category" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-folder-open nav-icon"></i>
 								<p>Danh mục sản phẩm</p>
 							</router-link>
 						</li>
@@ -159,28 +159,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				@endif
 				
 				<!-- Cài đặt cơ bản -->
-				@if($user_current->can('manage-company|manage-media'))
+				@if($user_current->can('manage-company|manage-media|manage-gallery'))
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fas fa-sliders-h"></i>
 						<p>
-						Cài đặt hệ thống
+						Quản trị cơ bản
 						<i class="right fas fa-angle-left"></i>
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
 						@permission('manage-media')
 						<li class="nav-item">
-							<router-link to="/admin/mediafile" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+							<router-link to="/admin/media" class="nav-link">
+								<i class="fas fa-photo-video nav-icon"></i>
 								<p>Quản lý tập tin</p>
+							</router-link>
+						</li>
+						@endpermission
+						@permission('manage-gallery')
+						<li class="nav-item">
+							<router-link to="/admin/gallery" class="nav-link">
+								<i class="fas fa-camera nav-icon"></i>
+								<p>Bộ sưu tập ảnh</p>
 							</router-link>
 						</li>
 						@endpermission
 						@permission('manage-company')
 						<li class="nav-item">
 							<router-link to="/admin/company" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-building nav-icon"></i>
 								<p>Thông tin công ty</p>
 							</router-link>
 						</li>
@@ -203,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/admin/user" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-user nav-icon"></i>
 								<p>Quản trị người dùng</p>
 							</router-link>
 						</li>
@@ -212,7 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/admin/role" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-user-tag nav-icon"></i>
 								<p>Nhóm và phân quyền</p>
 							</router-link>
 						</li>
@@ -221,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@role('superadmin')
 						<li class="nav-item">
 							<router-link to="/admin/module" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fa fa-plug nav-icon"></i>
 								<p>Chức năng mở rộng</p>
 							</router-link>
 						</li>
@@ -230,7 +238,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						@permission('manage-logs')
 						<li class="nav-item">
 							<router-link to="/admin/logviewer" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
+								<i class="fas fa-clipboard-list nav-icon"></i>
 								<p>Nhật ký hệ thống</p>
 							</router-link>
 						</li>

@@ -38,6 +38,10 @@ export default class Gate{
         return this.user.can['manage-media'];
     }
 
+    isManageGallery(){
+        return this.user.can['manage-gallery'];
+    }
+
     isManageMenu(){
         return this.user.can['manage-menu'];
     }

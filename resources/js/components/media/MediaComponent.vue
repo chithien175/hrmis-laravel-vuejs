@@ -82,7 +82,7 @@
                                                         <div class="file-detail">
                                                             <div class="image/jpeg">
                                                                 <h4>{{ item.filename }}</h4>
-                                                                <small><span class="file_size">{{ item.size }} Bytes</span></small>
+                                                                <small><span class="file_size">{{ Math.ceil(item.size/1024) }} KB</span></small>
                                                             </div>
                                                         </div>
                                                         
@@ -101,7 +101,7 @@
                                                     <span><h4>Tên:</h4> <p>{{ itemActive.filename }}</p></span>
                                                     <span><h4>Loại:</h4> <p>{{ itemActive.aggregate_type }}/{{itemActive.extension}}</p>
                                                     </span> 
-                                                    <span v-if="itemActive.aggregate_type != 'folder'"><h4>Kích thước:</h4><p><span class="selected_file_size">{{ itemActive.size }} Bytes</span></p></span> 
+                                                    <span v-if="itemActive.aggregate_type != 'folder'"><h4>Kích thước:</h4><p><span class="selected_file_size">{{ Math.ceil(itemActive.size/1024) }} KB</span></p></span> 
                                                     <span v-if="itemActive.aggregate_type == 'image'"><h4>Đường dẫn:</h4> <p><a v-bind:href="getSrcImg(itemActive)" target="_blank">Xem tại đây</a></p></span> <span v-if="itemActive.aggregate_type != 'folder'"><h4>Ngày tạo:</h4> <p>{{ itemActive.created_at | formatDateTime }}</p></span>
                                                 </div>
                                             </div>
@@ -528,7 +528,7 @@ export default {
     -ms-flex: 4;
     flex: 4;
     position: relative;
-    min-height: 230px;
+    min-height: 300px;
     padding: 10px;
 }
 .media-wrapper .media-right{
