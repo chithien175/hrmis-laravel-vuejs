@@ -86,6 +86,10 @@
                                 </div>
                                 <!-- /.card -->
                             </div>
+                            <code class="note-developer p-3" v-if="$gate.isSuperAdmin()">
+                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!<br>
+                                $sliders = getGalleryBySlug('slider-trang-chu');
+                            </code>
                         </div>
                     </div>
                 </div>
