@@ -43,6 +43,20 @@ if (!function_exists('getFieldCompany')) {
 
 /**
  * @param
+ * $slug: string
+ * @return array
+ */
+if (!function_exists('getGalleryBySlug')) {
+    function getGalleryBySlug($slug)
+    {
+        $value = App\Gallery::display($slug);
+
+        return ($value) ? $value : false;
+    }
+}
+
+/**
+ * @param
  * null
  * @return array
  */

@@ -72,6 +72,9 @@
                                                         <button class="btn btn-sm btn-primary" @click="editModal(gallery)">
                                                             <i class="fa fa-edit fa-fw"></i> Sửa
                                                         </button>
+                                                        <button class="btn btn-sm btn-success" @click="openCustomImageModal(gallery.id)">
+                                                            <i class="fa fa-edit fa-fw"></i> Tùy chỉnh ảnh
+                                                        </button>
                                                         <button class="btn btn-sm btn-danger" @click="deleteGallery(gallery.id)">
                                                             <i class="fa fa-trash fa-fw"></i> Xóa
                                                         </button>
@@ -142,6 +145,63 @@
             </div>
         </div>
         <!-- /. Gallery Modal -->
+
+        <!-- Custom Image Modal -->
+        <div class="modal fade" id="customImageModal" tabindex="-1" role="dialog" aria-labelledby="customImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title blue" id="customImageModalLabel">Tùy chỉnh ảnh</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form @submit.prevent="createCustomImage()" @keydown="formCustomImage.onKeydown($event)">
+                                    <div class="form-group">
+                                        <input v-model="formCustomImage.title" type="text" name="title" placeholder="Tiêu đề"
+                                            class="form-control" :class="{ 'is-invalid': formCustomImage.errors.has('title') }">
+                                        <has-error :form="formCustomImage" field="title"></has-error>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" v-model="formCustomImage.description" placeholder="Mô tả" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputImage" class="control-label">Ảnh</label>
+                                        <img class="img-fluid" :src="getImagePhoto()" alt="Gallery picture">
+                                        <input type="file" id="inputImage" @change="changeImagePhoto">
+                                    </div>
+                                    <button :disabled="formCustomImage.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Thêm mới</button>
+                                </form>
+                            </div>
+                            <div class="col-md-8" v-if="isLoadingImages">
+                                <vcl-facebook class="mb-3 mr-3" :height="100" v-for="index in 3" :key="index"></vcl-facebook>
+                            </div>
+                            <div class="col-md-8 list-images-gallery" v-if="!isLoadingImages">
+                                <VueNestable v-model="galleryImages" @change="orderImages(galleryImages)">
+                                    <div slot-scope="{ item }">
+                                        <!-- Handler -->
+                                        <VueNestableHandle :item="item">
+                                        <i class="fas fa-arrows-alt blue"></i>
+                                        </VueNestableHandle>
+
+                                        <!-- Content -->
+                                        <img :src="viewImage(item.image)" class="img-fluid view-image">
+                                        <span>{{ item.title }} </span>
+                                        <button class="btn btn-sm btn-danger float-right" @click="deleteImageGallery(item.id)">
+                                            <i class="fa fa-trash fa-fw"></i> Xóa
+                                        </button>
+                                    </div>
+                                </VueNestable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. Custom Field Modal -->
     </div>
     <div v-if="!$gate.isManageGallery()">
         <not-found></not-found>
@@ -155,12 +215,17 @@
         data() {
             return {
                 isLoading: true,
+                isLoadingImages: true,
                 editmode: false,
                 galleries: {},
                 form: new Form({
                     id: '', title: '', slug: '', publish: 'publish'
                 }),
+                formCustomImage: new Form({
+                    title: '', description: '', image: 'gallery-image-default.jpg', gallery_id: '', order: ''
+                }),
                 search: '',
+                galleryImages: [],
             }
         },
         methods: {
@@ -277,6 +342,106 @@
             searchit: _.debounce( () => {
                 Fire.$emit('Searching');
             }, 500),
+            getImagesByGalleryId(id){
+                this.isLoadingImages = true;
+                axios.get('/api/getImagesByGalleryId/'+id).then(({ data }) => { 
+                    this.galleryImages = data;
+                    this.isLoadingImages = false;
+                });
+            },
+            openCustomImageModal(id) {
+                this.formCustomImage.reset();
+                this.formCustomImage.clear();
+                this.formCustomImage.gallery_id = id;
+                $('#customImageModal').modal('show');
+                this.getImagesByGalleryId(id);
+            },
+            createCustomImage() {
+                this.$Progress.start();
+                this.formCustomImage.order = this.galleryImages.length + 1;
+                this.formCustomImage.post('/api/createCustomImageGallery')
+                .then( () => {
+                    this.formCustomImage.title = '';
+                    this.formCustomImage.description = '';
+                    this.formCustomImage.image = 'gallery-image-default.jpg';
+                    this.getImagesByGalleryId(this.formCustomImage.gallery_id);
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Thêm ảnh tùy chỉnh thành công'
+                    });
+                    this.$Progress.finish();
+                })
+                .catch( () => {
+                    this.$Progress.fail();
+                }); 
+            },
+            orderImages(galleryImages){
+                this.$Progress.start();
+                axios.post('/api/orderImagesGallery', {'galleryImages': galleryImages})
+                .then( () =>{
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Sắp xếp ảnh thành công'
+                    });
+                    this.$Progress.finish();
+                })
+                .catch( () =>{
+                    this.$Progress.fail();
+                });
+            },
+            deleteImageGallery (id) {
+                Swal.fire({
+                    title: 'Bạn chắc chứ?',
+                    text: "Bạn muốn xóa ảnh này?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Có, xóa ngay!',
+                    cancelButtonText: 'Hủy'
+                    }).then((result) => {
+                        if(result.value){
+                            // Send request to the server
+                            this.$Progress.start();
+                            axios.post('../api/deleteImageGallery/'+id)
+                            .then( () => {
+                                axios.get('/api/getImagesByGalleryId/'+this.formCustomImage.gallery_id).then(({ data }) => { 
+                                    this.galleryImages = data;
+                                });
+                                Swal.fire(
+                                    'Xóa thành công!',
+                                    'Bạn đã xóa ảnh thành công',
+                                    'success'
+                                );
+                                this.$Progress.finish();
+                            })
+                            .catch( () => {
+                                Swal("Lỗi xóa ảnh!", "Vui lòng liên hệ admin xử lý.", "warning");
+                            });
+                        }
+                });
+            },
+            changeImagePhoto (e) {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                if(file['size'] < 2111775){
+                    reader.onloadend = (file) => {
+                        this.formCustomImage.image = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                }else{
+                    Toast.fire({
+                        type: 'error',
+                        title: 'Vui lòng tải ảnh dưới 2MB'
+                    });
+                }
+            },
+            getImagePhoto(){
+                return (this.formCustomImage.image.indexOf('base64') != -1) ? this.formCustomImage.image : "../images/gallery/"+this.formCustomImage.image ;
+            },
+            viewImage(image){
+                return "../images/gallery/"+image ;
+            },
         },
         computed:{
         },
@@ -308,4 +473,11 @@
 </script>
 
 <style>
+.list-images-gallery .view-image{
+    width: 70px;
+    margin-right: 10px;
+}
+.list-images-gallery .nestable-item-content{
+    height: 100%;
+}
 </style>

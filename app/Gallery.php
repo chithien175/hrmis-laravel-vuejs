@@ -14,4 +14,12 @@ class Gallery extends Model
     {
         return $this->hasMany('App\GalleryItem')->orderBy('order', 'asc');
     }
+
+    // **** FOR FRONTEND ****
+    protected function display($slug){
+        
+        $images = static::where([ 'slug' => $slug, 'publish' => 'publish' ])->first();
+        
+        return ($images) ? $images->items : false;
+    }
 }

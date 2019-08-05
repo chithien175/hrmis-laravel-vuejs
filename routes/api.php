@@ -49,6 +49,10 @@ Route::post('updateFieldsPage', 'API\PageController@updateFieldsPage');
 // Gallery
 Route::apiResources(['gallery' => 'API\GalleryController']);
 Route::get('findGallery', 'API\GalleryController@search');
+Route::post('createCustomImageGallery', 'API\GalleryController@createCustomImage');
+Route::get('getImagesByGalleryId/{id}', 'API\GalleryController@getImagesByGalleryId');
+Route::post('orderImagesGallery', 'API\GalleryController@orderImagesGallery');
+Route::post('deleteImageGallery/{id}', 'API\GalleryController@deleteImageGallery');
 
 // Media
 Route::post('mediaList', 'API\MediaController@list');

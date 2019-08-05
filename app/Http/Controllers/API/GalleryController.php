@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Gallery;
+use App\GalleryItem;
 
 class GalleryController extends Controller
 {
@@ -73,5 +74,67 @@ class GalleryController extends Controller
         }
 
         return $galleries;
+    }
+
+    public function getImagesByGalleryId($id)
+    {
+        return Gallery::findOrFail($id)->items;
+    }
+
+    public function createCustomImage(Request $request)
+    {
+        $request->validate([
+            'title'     => 'required|string|max:255',
+        ]);
+
+        $gallery = Gallery::findOrFail($request['gallery_id']);
+
+        if( $gallery ){
+            $request['image'] = ($request['image'] == '') ? 'gallery-image-default.jpg' : $request['image'];
+
+            if($request->image != 'gallery-image-default.jpg'){
+                $name = $gallery['id'] . '_' . time() . '.' . explode('/', explode(':', substr($request->image, 0, strpos($request->image, ';')))[1])[1];
+
+                \Image::make($request->image)->save(public_path('images/gallery/').$name);
+
+                $request->merge(['image' => $name]);
+            }
+
+            $image = GalleryItem::create([
+                'title'         => $request['title'],
+                'description'   => $request['description'],
+                'image'         => $request['image'],
+                'order'         => $request['order'],
+                'gallery_id'    => $gallery['id']
+            ]);
+        }
+
+        return ['message' => 'Đã thêm ảnh vào gallery'];
+    }
+
+    public function orderImagesGallery(Request $request){
+        $images = $request['galleryImages'];
+
+        foreach($images as $key => $image){
+            $item = GalleryItem::findOrFail($image['id']);
+            $item->order = $key+1;
+            $item->save(); 
+        }
+
+        return ['message' => 'Đã sắp xếp ảnh tùy chỉnh'];
+    }
+
+    public function deleteImageGallery($id)
+    {
+        $image = GalleryItem::findOrFail($id);
+
+        $photo = public_path('images/gallery/').$image->image;
+        if(file_exists($photo)){
+            @unlink($photo);
+        }
+
+        $image->delete();
+
+        return ['message' => 'Đã xóa ảnh'];
     }
 }

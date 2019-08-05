@@ -17,51 +17,38 @@
 @section('fb_des', $pape_description)
 
 @section('content')
+
+<?php
+    $sliders = getGalleryBySlug('slider-trang-chu');
+?>
 <!-- slider area start -->
 <section class="slider-area">
     <div class="slider-active2 slider-next-prev-style">
-        <div class="slider-items">
-            <img src="{{ asset('katitheme/images/slider/4.jpg') }}" alt="" class="slider">
-            <div class="slider-content text-center">
-                <div class="table">
-                    <div class="table-cell">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                    <h2>Welcome to our Martxa</h2>
-                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <ul>
-                                        <li><a href="#">Read More</a></li>
-                                        <li><a href="#">Get Started</a></li>
-                                    </ul>
+        @if($sliders)
+            @foreach($sliders as $key => $slider)
+            <div class="slider-items">
+                <img src="{{ asset('images/gallery/' . $slider->image) }}" alt="" class="slider">
+                <div class="slider-content text-center">
+                    <div class="table">
+                        <div class="table-cell">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-8 col-md-offset-2">
+                                        <h2>{{ $slider->title }}</h2>
+                                        <p>{{ $slider->description }}</p>
+                                        <ul>
+                                            <li><a href="#">Read More</a></li>
+                                            <li><a href="#">Get Started</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="slider-items">
-            <img src="{{ asset('katitheme/images/slider/3.jpg') }}" alt="" class="slider">
-            <div class="slider-content text-center">
-                <div class="table">
-                    <div class="table-cell">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-12 col-md-8 col-md-offset-2">
-                                    <h2>Hello i am Martxa</h2>
-                                    <p>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <ul>
-                                        <li><a href="#">Get Started</a></li>
-                                        <li><a href="#">Read More</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            @endforeach
+        @endif
     </div>
 </section>
 <!-- slider area end -->
