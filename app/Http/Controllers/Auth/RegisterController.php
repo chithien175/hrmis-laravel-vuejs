@@ -69,4 +69,15 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    // Ẩn form đăng ký, k cho đăngk ý
+    public function showRegistrationForm()
+    {
+        return redirect('login');
+    }
+
+    public function register()
+    {
+
+    }
 }

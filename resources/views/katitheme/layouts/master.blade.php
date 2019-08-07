@@ -18,24 +18,37 @@
         <meta property="og:description"   content="@yield('fb_des')" />
 
 		<!-- all css here -->
-		<!-- bootstrap v3.3.7 css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/bootstrap.min.css') }}">
-		<!-- animate css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/animate.css') }}">
-		<!-- owl.carousel.2.0.0-beta.2.4 css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/owl.carousel.css') }}">
-		<!-- font-awesome v4.6.3 css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/font-awesome.min.css') }}">
-		<!-- magnific-popup.css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/magnific-popup.css') }}">
-		<!-- slicknav.min.css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/slicknav.min.css') }}">
-		<!-- style css -->
-		<link rel="stylesheet" href="{{ asset('katitheme/css/styles.css') }}">
-		<!-- responsive css -->
-        <link rel="stylesheet" href="{{ asset('katitheme/css/responsive.css') }}">
-		<!-- modernizr css -->
-        <script src="{{ asset('katitheme/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+        <!-- Font awesome -->
+        <link href="{{ asset('katitheme/css/font-awesome.css') }}" rel="stylesheet">
+        <!-- Bootstrap -->
+        <link href="{{ asset('katitheme/css/bootstrap.css') }}" rel="stylesheet">   
+        <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+        <link href="{{ asset('katitheme/css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
+        <!-- Product view slider -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('katitheme/css/jquery.simpleLens.css') }}">    
+        <!-- slick slider -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('katitheme/css/slick.css') }}">
+        <!-- price picker slider -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('katitheme/css/nouislider.css') }}">
+        <!-- Theme color -->
+        <link id="switcher" href="{{ asset('katitheme/css/theme-color/default-theme.css') }}" rel="stylesheet">
+        <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+        <!-- Top Slider CSS -->
+        <link href="{{ asset('katitheme/css/sequence-theme.modern-slide-in.css') }}" rel="stylesheet" media="all">
+
+        <!-- Main style sheet -->
+        <link href="{{ asset('katitheme/css/style.css') }}" rel="stylesheet">    
+
+        <!-- Google Font -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -51,23 +64,9 @@
             </div>
         </div>
         <!-- preloder-wrap -->
-        <!-- search-area -->
-        <div class="search-area">
-            <span class="closs-btn">Close</span>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="search-form">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Search Here">
-                                <button type="button" name="button" class="btn-style">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- search-area -->
+        <!-- SCROLL TOP BUTTON -->
+            <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
 		<!-- heared area start -->
         @include('katitheme.partials.header')
 		<!-- heared area end -->
@@ -79,32 +78,26 @@
 		<!-- footer-area end  -->
 
 		<!-- all js here -->
-		<!-- jquery latest version -->
-        <script src="{{ asset('katitheme/js/vendor/jquery-1.12.4.min.js') }}"></script>
-		<!-- bootstrap js -->
-        <script src="{{ asset('katitheme/js/bootstrap.min.js') }}"></script>
-		<!-- owl.carousel.2.0.0-beta.2.4 css -->
-        <script src="{{ asset('katitheme/js/owl.carousel.min.js') }}"></script>
-		<!-- counterup.main.js -->
-        <script src="{{ asset('katitheme/js/counterup.main.js') }}"></script>
-		<!-- isotope.pkgd.min.js -->
-        <script src="{{ asset('katitheme/js/imagesloaded.pkgd.min.js') }}"></script>
-		<!-- isotope.pkgd.min.js -->
-        <script src="{{ asset('katitheme/js/isotope.pkgd.min.js') }}"></script>
-		<!-- jquery.waypoints.min.js -->
-        <script src="{{ asset('katitheme/js/jquery.waypoints.min.js') }}"></script>
-		<!-- jquery.magnific-popup.min.js -->
-        <script src="{{ asset('katitheme/js/jquery.magnific-popup.min.js') }}"></script>
-		<!-- jquery.slicknav.min.js -->
-        <script src="{{ asset('katitheme/js/jquery.slicknav.min.js') }}"></script>
-		<!-- snake.min.js -->
-        <script src="{{ asset('katitheme/js/snake.min.js') }}"></script>
-		<!-- wow js -->
-        <script src="{{ asset('katitheme/js/wow.min.js') }}"></script>
-		<!-- plugins js -->
-        <script src="{{ asset('katitheme/js/plugins.js') }}"></script>
-		<!-- main js -->
-        <script src="{{ asset('katitheme/js/scripts.js') }}"></script>
+		<!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{{ asset('katitheme/js/bootstrap.js') }}"></script>  
+        <!-- SmartMenus jQuery plugin -->
+        <script type="text/javascript" src="{{ asset('katitheme/js/jquery.smartmenus.js') }}"></script>
+        <!-- SmartMenus jQuery Bootstrap Addon -->
+        <script type="text/javascript" src="{{ asset('katitheme/js/jquery.smartmenus.bootstrap.js') }}"></script>  
+        <!-- To Slider JS -->
+        <script src="{{ asset('katitheme/js/sequence.js') }}"></script>
+        <script src="{{ asset('katitheme/js/sequence-theme.modern-slide-in.js') }}"></script>  
+        <!-- Product view slider -->
+        <script type="text/javascript" src="{{ asset('katitheme/js/jquery.simpleGallery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('katitheme/js/jquery.simpleLens.js') }}"></script>
+        <!-- slick slider -->
+        <script type="text/javascript" src="{{ asset('katitheme/js/slick.js') }}"></script>
+        <!-- Price picker slider -->
+        <script type="text/javascript" src="{{ asset('katitheme/js/nouislider.js') }}"></script>
+        <!-- Custom js -->
+        <script src="{{ asset('katitheme/js/custom.js') }}"></script> 
     </body>
 </html>
 

@@ -1,60 +1,88 @@
-<footer>
-    <div class="footer-top">
-        <div class="container">
+  <!-- footer -->  
+  <footer id="aa-footer">
+    <!-- footer bottom -->
+    <div class="aa-footer-top">
+     <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+          <div class="aa-footer-top-area">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12  col wow fadeInUp" data-wow-delay=".1s">
-                    <div class="footer-widget footer-logo">
-                        <h1>{{ getFieldCompany('company.name') }}</h1>
-                        <p>{{ getFieldCompany('company.description') }}</p>
-                        <ul>
-                            <li><i class="fa fa-phone"></i> {{ getFieldCompany('company.phone') }}</li>
-                            <li><i class="fa fa-envelope"></i> {{ getFieldCompany('company.email') }}</li>
-                        </ul>
+              <div class="col-md-3 col-sm-6">
+                <div class="aa-footer-widget">
+                  <h3>Danh mục</h3>
+                  <ul class="aa-footer-nav">
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Chia sẻ</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="aa-footer-widget">
+                  <div class="aa-footer-widget">
+                    <h3>Áo dài</h3>
+                    <ul class="aa-footer-nav">
+                      <li><a href="#">Hoạ tiết</a></li>
+                      <li><a href="#">Kiểu vải</a></li>
+                      <li><a href="#">May áo dài</a></li>
+                      <li><a href="#">Cách lấy số đo</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="aa-footer-widget">
+                  <div class="aa-footer-widget">
+                    <h3>Liên kết</h3>
+                    <ul class="aa-footer-nav">
+                      <li><a href="#">Site Map</a></li>
+                      <li><a href="#">Search</a></li>
+                      <li><a href="#">Advanced Search</a></li>
+                      <li><a href="#">Suppliers</a></li>
+                      <li><a href="#">FAQ</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="aa-footer-widget">
+                  <div class="aa-footer-widget">
+                    <h3>Liên hệ</h3>
+                    <address>
+                      <p> 1300 Phương Sài, Nha Trang</p>
+                      <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
+                      <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                    </address>
+                    <div class="aa-footer-social">
+                      <a href="#"><span class="fa fa-facebook"></span></a>
+                      <a href="#"><span class="fa fa-twitter"></span></a>
+                      <a href="#"><span class="fa fa-google-plus"></span></a>
+                      <a href="#"><span class="fa fa-youtube"></span></a>
                     </div>
+                  </div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".2s">
-                    
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".3s">
-                    <div class="footer-widget footer-menu">
-                        <h2>Footer Menu</h2>
-                        <?php 
-                            $options = array(
-                                'id' => 'navigation',
-                                'class' => '',
-                                'sub_id' => '',
-                                'sub_class' => 'submenu'
-                            );
-
-                            echo menu('footer-menu', $options);
-                        ?>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 col wow fadeInUp" data-wow-delay=".4s">
-                    <div class="footer-widget instagram-wrap">
-                        <h2>Instagram</h2>
-                        <ul>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/1.jpg') }}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/2.jpg') }}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/3.jpg') }}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/4.jpg') }}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/5.jpg') }}" alt=""></a></li>
-                            <li><a href="#"><img src="{{ asset('katitheme/images/instagram/6.jpg') }}" alt=""></a></li>
-                        </ul>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+     </div>
     </div>
-    <div class="footer-bottom text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-&copy;<script>document.write(new Date().getFullYear());</script> Designed by Katisoft - Thiết kế và phát triển bởi Katisoft <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="https://webdepnhatrang.com" target="_blank" style="color: white;">Web Đẹp Nha Trang</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
+    <!-- footer-bottom -->
+    <div class="aa-footer-bottom">
+      <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+          <div class="aa-footer-bottom-area">
+            <p>Designed by <a href="http://www.webdepnhatrang.com">KaTiSoft - Webdepnhatrang.com</a></p>
+            
+            
+          </div>
         </div>
+      </div>
+      </div>
     </div>
-</footer>
+  </footer>
+  <!-- / footer -->
