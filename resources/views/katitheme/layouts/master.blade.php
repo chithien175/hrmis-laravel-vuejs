@@ -54,16 +54,13 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <!-- preloder-wrap -->
-        <div id="cssLoader3" class="preloder-wrap">
-            <div class="loader">
-                <div class="child-common child4"></div>
-                <div class="child-common child3"></div>
-                <div class="child-common child2"></div>
-                <div class="child-common child1"></div>
+            <!-- wpf loader Two -->
+            <div id="wpf-loader-two">          
+            <div class="wpf-loader-two-inner">
+                <span>Loading</span>
             </div>
-        </div>
-        <!-- preloder-wrap -->
+            </div> 
+            <!-- / wpf loader Two -->   
         <!-- SCROLL TOP BUTTON -->
             <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
         <!-- END SCROLL TOP BUTTON -->
