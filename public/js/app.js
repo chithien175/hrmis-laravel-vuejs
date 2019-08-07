@@ -3497,6 +3497,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3754,7 +3756,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchit: _.debounce(function () {
       Fire.$emit('Searching');
-    }, 500)
+    }, 500),
+    getListPhoto: function getListPhoto(photo) {
+      return "../images/product/" + photo;
+    }
   },
   computed: {
     getProductPhoto: function getProductPhoto() {
@@ -3799,6 +3804,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -83829,19 +83838,12 @@ var render = function() {
                                     _c("td", [_vm._v(_vm._s(product.slug))]),
                                     _vm._v(" "),
                                     _c("td", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge bg-info" },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("formatDateTime")(
-                                                product.created_at
-                                              )
-                                            )
-                                          )
-                                        ]
-                                      )
+                                      _c("img", {
+                                        attrs: {
+                                          src: _vm.getListPhoto(product.photo),
+                                          width: "75"
+                                        }
+                                      })
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [
@@ -84562,7 +84564,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Đường dẫn tĩnh")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Ngày tạo")]),
+        _c("th", [_vm._v("Hình ảnh")]),
         _vm._v(" "),
         _c("th", [_vm._v("Trạng thái")]),
         _vm._v(" "),
@@ -84862,7 +84864,19 @@ var render = function() {
                               ]
                             )
                           ])
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _vm.$gate.isSuperAdmin()
+                          ? _c("code", { staticClass: "note-developer p-3" }, [
+                              _vm._v(
+                                "\r\n                                Dùng cho lập trình - vui lòng tham khảo khi sử dụng!"
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\r\n                                $sliders = getGalleryBySlug('slider-trang-chu');\r\n                            "
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     : _vm._e()
                 ])

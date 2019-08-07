@@ -129,7 +129,7 @@ class GalleryController extends Controller
         $image = GalleryItem::findOrFail($id);
 
         $photo = public_path('images/gallery/').$image->image;
-        if(file_exists($photo)){
+        if(file_exists($photo) && $photo != 'gallery-image-default.jpg'){
             @unlink($photo);
         }
 

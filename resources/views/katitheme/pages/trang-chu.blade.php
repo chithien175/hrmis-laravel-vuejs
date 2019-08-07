@@ -24,35 +24,27 @@
 <!-- Start slider -->
 <section id="aa-slider">
     <div class="aa-slider-area">
-        <div id="sequence" class="seq">
-        <div class="seq-screen">
-            <ul class="seq-canvas">
-                <!-- single slide item -->
-                <li>
-                    <div class="seq-model">
-                        <img data-seq src="{{ asset('katitheme/hinhanhaodai/banner1.jpg') }}" alt="Men slide img" />
-                    </div>
-                </li>
-                <!-- single slide item -->
-                <li>
-                    <div class="seq-model">
-                        <img data-seq src="{{ asset('katitheme/hinhanhaodai/banner2.jpg') }}" alt="Wristwatch slide img" />
-                    </div>
-                </li>
-                <!-- single slide item -->
-                <li>
-                    <div class="seq-model">
-                        <img data-seq src="{{ asset('katitheme/hinhanhaodai/banner3.png') }}" alt="Women Jeans slide img" />
-                    </div>
-                </li>                 
-            </ul>
-        </div>
-        <!-- slider navigation btn -->
-        <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
-            <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
-            <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
-        </fieldset>
-        </div>
+        @if($sliders)
+            <div id="sequence" class="seq">
+            <div class="seq-screen">
+                <ul class="seq-canvas">
+                    @foreach($sliders as $key => $slider)
+                    <!-- single slide item -->
+                    <li>
+                        <div class="seq-model">
+                            <img data-seq src="{{ asset('images/gallery/' . $slider->image) }}" alt="{{ $slider->title }}" />
+                        </div>
+                    </li>     
+                    @endforeach     
+                </ul>
+            </div>
+            <!-- slider navigation btn -->
+            <fieldset class="seq-nav" aria-controls="sequence" aria-label="Slider buttons">
+                <a type="button" class="seq-prev" aria-label="Previous"><span class="fa fa-angle-left"></span></a>
+                <a type="button" class="seq-next" aria-label="Next"><span class="fa fa-angle-right"></span></a>
+            </fieldset>
+            </div>
+        @endif
     </div>
 </section>
 <!-- / slider -->
@@ -67,8 +59,7 @@
             <div class="aa-product-inner">
             <!-- start prduct navigation -->
                 <ul>
-                <li style="padding: 30px 10px; width: 100%; margin: 0 auto; color: #f33983; font-size: 30px; text-align: center;" >VẢI ÁO DÀI MỚI NHẤT NĂM 2019</li>
-                
+                    <li style="padding: 30px 10px; width: 100%; margin: 0 auto; color: #f33983; font-size: 30px; text-align: center;" >{{ getFieldPage('home.title_session1') }}</li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">

@@ -51,7 +51,7 @@
                                             <th>ID</th>
                                             <th>Tên sản phẩm</th>
                                             <th>Đường dẫn tĩnh</th>
-                                            <th>Ngày tạo</th>
+                                            <th>Hình ảnh</th>
                                             <th>Trạng thái</th>
                                             <th>Tác vụ</th>
                                         </tr>
@@ -61,7 +61,9 @@
                                             <td>{{ product.id }}</td>
                                             <td>{{ product.name }}</td>
                                             <td>{{ product.slug }}</td>
-                                            <td><span class="badge bg-info">{{ product.created_at | formatDateTime }}</span></td>
+                                            <td>
+                                                <img :src="getListPhoto(product.photo)" width="75">
+                                            </td>
                                             <td>
                                                 <span v-if="product.publish == 'publish'" class="badge badge-success">Xuất bản</span>
                                                 <span v-else class="badge badge-danger">Bản nháp</span>
@@ -432,12 +434,14 @@ export default {
         searchit: _.debounce( () => {
             Fire.$emit('Searching');
         }, 500),
-        
+        getListPhoto(photo){
+            return "../images/product/"+photo;
+        },
     },
     computed:{
         getProductPhoto(){
             return (this.form.photo.indexOf('base64') != -1) ? this.form.photo : "../images/product/"+this.form.photo ;
-        }
+        },
     },
     created() {
         this.loadData();
