@@ -28,6 +28,8 @@
 Route::get('/', 'Frontend\PageController@getHomePage')->name('katitheme.homepage');
 Route::get('/{pageSlug}.html', 'Frontend\PageController@getOtherPage');
 
+Route::get('/danh-muc-sp/{cateSlug}.html', 'Frontend\EcommerceController@getProductsByCategory')->name('get.page-pCategory');
+
 Route::post('/contact-form', 'Frontend\ContactController@postContactForm')->name('post.contactForm');
 
 // Auth

@@ -92,7 +92,7 @@
                                         @endforeach
                                     </ul>
                                     @endif
-                                    <a class="aa-browse-btn" href="#">Xem tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
+                                    <a class="aa-browse-btn" href="{{ route('get.page-pCategory', $cate_slug_session1) }}">Xem tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                             <!-- / men product category -->     
                             </div>  
