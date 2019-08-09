@@ -19,4 +19,12 @@ class Product extends Model
     function galleries() {
         return $this->hasMany(Gallery::class);
     }
+
+    // **** FOR FRONTEND ****
+    protected function getProductByCategorySlug($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        return ($category) ? $category->products_frontend : false;
+    }
 }

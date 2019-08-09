@@ -49,7 +49,7 @@ class EcommerceSetupTables extends Migration
             $table->timestamps();
 
             $table->foreign('category_id')
-                ->references('id')->on('categories')
+                ->references('id')->on('p_categories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('product_id')
                 ->references('id')->on('products')

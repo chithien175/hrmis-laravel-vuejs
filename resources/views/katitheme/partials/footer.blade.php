@@ -7,19 +7,15 @@
         <div class="col-md-12">
           <div class="aa-footer-top-area">
             <div class="row">
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-5 col-sm-6">
                 <div class="aa-footer-widget">
-                  <h3>Danh mục</h3>
-                  <ul class="aa-footer-nav">
-                    <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Giới thiệu</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li><a href="#">Chia sẻ</a></li>
-                    <li><a href="#">Liên hệ</a></li>
-                  </ul>
+                  <h3>Vải Áo Dài - {{ getFieldCompany('company.name') }}</h3>
+                  <p class="aa-footer-nav" style="color: #888;">
+                    {{ getFieldCompany('company.description') }}
+                  </p>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-2 col-sm-6">
                 <div class="aa-footer-widget">
                   <div class="aa-footer-widget">
                     <h3>Áo dài</h3>
@@ -32,7 +28,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-6">
+              <div class="col-md-2 col-sm-6">
                 <div class="aa-footer-widget">
                   <div class="aa-footer-widget">
                     <h3>Liên kết</h3>
@@ -51,15 +47,16 @@
                   <div class="aa-footer-widget">
                     <h3>Liên hệ</h3>
                     <address>
-                      <p> 1300 Phương Sài, Nha Trang</p>
-                      <p><span class="fa fa-phone"></span>+1 212-982-4589</p>
-                      <p><span class="fa fa-envelope"></span>dailyshop@gmail.com</p>
+                      <p> {{ getFieldCompany('company.address') }}</p>
+                      <p><span class="fa fa-phone"></span>{{ getFieldCompany('company.phone') }}</p>
+                      <p><span class="fa fa-envelope"></span>{{ getFieldCompany('company.email') }}</p>
                     </address>
                     <div class="aa-footer-social">
-                      <a href="#"><span class="fa fa-facebook"></span></a>
-                      <a href="#"><span class="fa fa-twitter"></span></a>
-                      <a href="#"><span class="fa fa-google-plus"></span></a>
-                      <a href="#"><span class="fa fa-youtube"></span></a>
+                      <a href="{{ getFieldCompany('company.facebook') }}"><span class="fa fa-facebook"></span></a>
+                      <a href="{{ getFieldCompany('company.twitter') }}"><span class="fa fa-twitter"></span></a>
+                      <a href="{{ getFieldCompany('company.linkedin') }}"><span class="fa fa-linkedin"></span></a>
+                      <a href="{{ getFieldCompany('company.googleplus') }}"><span class="fa fa-google-plus"></span></a>
+                      <a href="{{ getFieldCompany('company.youtube') }}"><span class="fa fa-youtube"></span></a>
                     </div>
                   </div>
                 </div>
@@ -76,9 +73,7 @@
         <div class="row">
         <div class="col-md-12">
           <div class="aa-footer-bottom-area">
-            <p>Designed by <a href="http://www.webdepnhatrang.com">KaTiSoft - Webdepnhatrang.com</a></p>
-            
-            
+            <p>Designed by <a href="https://webdepnhatrang.com">KaTiSoft - Webdepnhatrang.com</a></p>
           </div>
         </div>
       </div>

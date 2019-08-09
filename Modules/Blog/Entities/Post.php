@@ -22,4 +22,11 @@ class Post extends Model
 
         return ($posts) ? $posts : false;
     }
+
+    protected function getPostByCategorySlug($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        return ($category) ? $category->posts_frontend : false;
+    }
 }
