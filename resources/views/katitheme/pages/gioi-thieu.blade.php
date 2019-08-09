@@ -17,45 +17,75 @@
 @section('fb_des', $pape_description)
 
 @section('content')
-<div class="breadcumb-area black-opacity" style="background: url({{ getFieldPage('about.image_banner') }}) no-repeat center center / cover;">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="breadcumb-wrap">
-                    <h2>{{ getFieldPage('about.title_banner') }}</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="breadcumb-menu">
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="{{ getFieldPage('about.image_banner') }}" alt="giới thiệu">
+    <div class="aa-catg-head-banner-area">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul>
-                        <li><a href="{{ route('katitheme.homepage') }}">Trang chủ</a></li>
-                        <li>/</li>
-                        <li>{{ $page_data['title'] }}</li>
-                    </ul>
-                </div>
+            <div class="aa-catg-head-banner-content">
+                <h2>{{ getFieldPage('about.title_banner') }}</h2>
+                <ol class="breadcrumb">
+                    <li><a href="{{ route('katitheme.homepage') }}">Trang chủ</a></li>         
+                    <li class="active">{{ $page_data['title'] }}</li>
+                </ol>
             </div>
         </div>
     </div>
-</div>
+</section>
+<!-- / catg header banner section -->
 
-<section class="about-area ptb-140">
+<section id="aa-contact">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-xs-12">
-                <div class="about-img black-opacity" style="background-image: url({{ getFieldPage('about.image_block1') }}); background-size: cover; background-position: center center; height: 495px;">
-                    <img src="{{ getFieldPage('about.image_block1') }}" alt="">
-                </div>
-            </div>
-            <div class="col-md-6 col-xs-12">
-                <div class="about-wrap">
-                    {!! getFieldPage('about.content_block1') !!}
+            <div class="col-md-12">
+                <div class="aa-contact-area">
+                    <div class="aa-contact-address">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="about-img black-opacity">
+                                    <img class="img-responsive" src="{{ getFieldPage('about.image_block1') }}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="about-wrap">
+                                    {!! getFieldPage('about.content_block1') !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endsection
+
+@section('style')
+<style>
+    .aa-contact-area .about-wrap{
+        line-height: 26px;
+    }
+    .aa-contact-area .about-wrap ul{
+        list-style: outside none none;
+        margin: 0;
+        padding: 0;
+    }
+    .aa-contact-area .about-wrap ul li{
+        line-height: 30px;
+        position: relative;
+        padding-left: 30px;
+        text-transform: capitalize;
+    }
+    .aa-contact-area .about-wrap ul li:before{
+        position: absolute;
+        top: 12px;
+        left: 10px;
+        width: 4px;
+        height: 4px;
+        background: #0c4e9a;
+        outline: 2px solid #0c4e9a;
+        outline-offset: 2px;
+        content: "";
+    }
+</style>
 @endsection

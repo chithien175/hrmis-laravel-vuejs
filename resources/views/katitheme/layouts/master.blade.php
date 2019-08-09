@@ -42,6 +42,7 @@
         <!-- Google Font -->
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         
+        @yield('style')
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -83,9 +84,6 @@
         <script type="text/javascript" src="{{ asset('katitheme/js/jquery.smartmenus.js') }}"></script>
         <!-- SmartMenus jQuery Bootstrap Addon -->
         <script type="text/javascript" src="{{ asset('katitheme/js/jquery.smartmenus.bootstrap.js') }}"></script>  
-        <!-- To Slider JS -->
-        <script src="{{ asset('katitheme/js/sequence.js') }}"></script>
-        <script src="{{ asset('katitheme/js/sequence-theme.modern-slide-in.js') }}"></script>  
         <!-- Product view slider -->
         <script type="text/javascript" src="{{ asset('katitheme/js/jquery.simpleGallery.js') }}"></script>
         <script type="text/javascript" src="{{ asset('katitheme/js/jquery.simpleLens.js') }}"></script>
@@ -95,6 +93,7 @@
         <script type="text/javascript" src="{{ asset('katitheme/js/nouislider.js') }}"></script>
         <!-- Custom js -->
         <script src="{{ asset('katitheme/js/custom.js') }}"></script> 
+        @yield('script')
     </body>
 </html>
 

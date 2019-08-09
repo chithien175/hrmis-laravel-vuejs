@@ -255,3 +255,9 @@
 </section>
 <!-- / Latest Blog -->
 @endsection
+
+@section('script')
+<!-- To Slider JS -->
+<script src="{{ asset('katitheme/js/sequence.js') }}"></script>
+<script src="{{ asset('katitheme/js/sequence-theme.modern-slide-in.js') }}"></script>  
+@endsection

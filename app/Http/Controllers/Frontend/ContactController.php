@@ -19,7 +19,9 @@ class ContactController extends Controller
             $contact['phone'] = $request->get('phone');
             $contact['subject'] = $request->get('subject');
             $contact['msg'] = $request->get('msg');
-            Mail::to('chithien175@gmail.com')->send(new ContactMail($contact));
+
+            $email_to = getFieldCompany('company.email');
+            Mail::to( $email_to )->send(new ContactMail($contact));
             return redirect()->back()->with('contact-form-success', 'Gửi tin nhắn thành công! Cảm ơn bạn đã liên hệ chúng tôi!');
         } catch (Exception $ex) {
             info($ex->getMessage());
