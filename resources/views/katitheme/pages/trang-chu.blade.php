@@ -230,7 +230,7 @@
                     @if($posts_session3)
                     <div class="row">
                         @foreach($posts_session3 as $key => $post)
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <div class="aa-latest-blog-single">
                                 <figure class="aa-blog-img">                    
                                     <a href="#"><img src="{{ asset('images/post/' . $post->photo) }}" alt="{{ $post->title }}"></a>  
@@ -239,8 +239,8 @@
                                     </figcaption>                          
                                 </figure>
                                 <div class="aa-blog-info">
-                                    <h3 class="aa-blog-title"><a href="#">{{ $post->title }}</a></h3>
-                                    <p>{{ shorten_text($post->description, 140, '...', false) }}</p> 
+                                    <h3 class="aa-blog-title"><a href="#">{{ shorten_text($post->title, 35, '...', false) }}</a></h3>
+                                    <p>{{ shorten_text($post->description, 90, '...', false) }}</p> 
                                     <a href="#" class="aa-read-mor-btn">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                             </div>

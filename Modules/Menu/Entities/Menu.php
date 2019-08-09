@@ -17,7 +17,7 @@ class Menu extends Model
     public function parent_items()
     {
         return $this->hasMany(MenuItem::class)
-            ->whereNull('parent_id');
+            ->whereNull('parent_id')->orderBy('order');
     }
 
     public static function sort_collection($idMenu)

@@ -152,11 +152,11 @@ class MenuController extends Controller
     {
         foreach ($menuItems as $index => $menuItem) {
             $item = MenuItem::findOrFail($menuItem['id']);
-            $item->order = $menuItem['order'];
+            $item->order = ($index+1);
             $item->parent_id = $parentId;
             $item->save();
 
-            if (isset($menuItem['children'])) {
+            if ($menuItem['children']) {
                 $this->orderItem($menuItem['children'], $item->id);
             }
         }

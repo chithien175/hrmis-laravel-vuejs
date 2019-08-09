@@ -16,6 +16,6 @@ class Category extends Model
     }
 
     function posts_frontend(){
-        return $this->belongsToMany(Post::class)->where('publish', 'publish')->orderBy('created_at', 'desc')->limit(3);
+        return $this->belongsToMany(Post::class)->where('publish', 'publish')->orderBy('created_at', 'desc')->limit(4);
     }
 }

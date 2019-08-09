@@ -77,7 +77,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 1,
+                'order'      => 2,
             ])->save();
         }
 
@@ -95,7 +95,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 2,
+                'order'      => 3,
             ])->save();
         }
 
@@ -129,7 +129,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => $menuItem->id,
-                'order'      => 1,
+                'order'      => 2,
             ])->save();
         }
 
@@ -147,7 +147,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 3,
+                'order'      => 4,
             ])->save();
         }
 
@@ -170,7 +170,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 1,
+                'order'      => 5,
             ])->save();
         }
         // Tuyển dụng
@@ -187,7 +187,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 1,
+                'order'      => 6,
             ])->save();
         }
 
@@ -205,7 +205,7 @@ class MenuSetupSeeder extends Seeder
                 'icon_class' => '',
                 'color'      => '#333333',
                 'parent_id'  => null,
-                'order'      => 1,
+                'order'      => 7,
             ])->save();
         }
     }

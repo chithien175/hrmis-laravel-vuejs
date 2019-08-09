@@ -194,7 +194,7 @@
                     target: '_self',
                     order: ''
                 }),
-                menu: {},
+                menu: [],
                 editmode: false,
                 isLoading: true,
             }
@@ -294,9 +294,9 @@
                 }); 
             },
             changeItem(menu){
-                // console.log(menu);
+                // console.log(menu.parent_items);
                 this.$Progress.start();
-                axios.post('/api/menu/item/sort', this.menu)
+                axios.post('/api/menu/item/sort', {parent_items: menu.parent_items})
                 .then( () =>{
                     Toast.fire({
                         type: 'success',

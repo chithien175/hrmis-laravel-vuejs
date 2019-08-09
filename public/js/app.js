@@ -5113,7 +5113,7 @@ __webpack_require__.r(__webpack_exports__);
         target: '_self',
         order: ''
       }),
-      menu: {},
+      menu: [],
       editmode: false,
       isLoading: true
     };
@@ -5217,9 +5217,11 @@ __webpack_require__.r(__webpack_exports__);
     changeItem: function changeItem(menu) {
       var _this5 = this;
 
-      // console.log(menu);
+      // console.log(menu.parent_items);
       this.$Progress.start();
-      axios.post('/api/menu/item/sort', this.menu).then(function () {
+      axios.post('/api/menu/item/sort', {
+        parent_items: menu.parent_items
+      }).then(function () {
         Toast.fire({
           type: 'success',
           title: 'Sắp xếp mục trình đơn thành công'
