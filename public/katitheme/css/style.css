@@ -3265,7 +3265,7 @@ img {
   font-size: 16px;
   height: 200px;
   padding: 10px;
-  width: 70%;
+  width: 100%;
 }
 #aa-contact .aa-contact-area .aa-contact-address .aa-contact-address-left .comments-form .form-control:focus {
   box-shadow: none;

@@ -19,3 +19,5 @@ Chủ đề: {{ $contact['subject'] }}
 <p>
 Nội dung: {{ $contact['msg'] }}
 </p>
+
+<p>Đây là thư thông báo từ hệ thống. Vui lòng không trả lời (reply) lại thư này!</p>
