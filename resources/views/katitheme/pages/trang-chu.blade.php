@@ -165,7 +165,7 @@
                                     </li>       
                                     @endforeach                    
                                 </ul>
-                                <a class="aa-browse-btn" href="#">Xem tất cả "{{ getProductCategoryName($cate) }}" <span class="fa fa-long-arrow-right"></span></a>
+                                <a class="aa-browse-btn" href="{{ route('get.page-pCategory', $cate) }}">Xem tất cả "{{ getProductCategoryName($cate) }}" <span class="fa fa-long-arrow-right"></span></a>
                                 @endif
                             </div>
                             @endforeach

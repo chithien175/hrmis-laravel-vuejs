@@ -80,58 +80,7 @@
                         @endif
                         <div class="col-md-3">
                             <aside class="aa-blog-sidebar">
-                                <div class="aa-sidebar-widget">
-                                    <h3>Vải áo dài</h3>
-                                    @php
-                                        $options = array(
-                                            'id' => '',
-                                            'class' => 'aa-catg-nav',
-                                            'sub_id' => '',
-                                            'sub_class' => ''
-                                        );
-                                        echo menu('sidebar-menu', $options);
-                                    @endphp
-                                </div>
-                                <!-- <div class="aa-sidebar-widget">
-                                    <h3>Tags</h3>
-                                    <div class="tag-cloud">
-                                        <a href="#">Fashion</a>
-                                        <a href="#">Ecommerce</a>
-                                        <a href="#">Shop</a>
-                                        <a href="#">Hand Bag</a>
-                                        <a href="#">Laptop</a>
-                                        <a href="#">Head Phone</a>
-                                        <a href="#">Pen Drive</a>
-                                    </div>
-                                </div> -->
-                                <!-- <div class="aa-sidebar-widget">
-                                    <h3>Recent Post</h3>
-                                    <div class="aa-recently-views">
-                                        <ul>
-                                        <li>
-                                            <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
-                                            <div class="aa-cartbox-info">
-                                            <h4><a href="#">Lorem ipsum dolor sit amet.</a></h4>
-                                            <p>March 26th 2016</p>
-                                            </div>                    
-                                        </li>
-                                        <li>
-                                            <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg" alt="img"></a>
-                                            <div class="aa-cartbox-info">
-                                            <h4><a href="#">Lorem ipsum dolor.</a></h4>
-                                            <p>March 26th 2016</p>
-                                            </div>                    
-                                        </li>
-                                            <li>
-                                            <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
-                                            <div class="aa-cartbox-info">
-                                            <h4><a href="#">Lorem ipsum dolor.</a></h4>
-                                            <p>March 26th 2016</p>
-                                            </div>                    
-                                        </li>                                      
-                                        </ul>
-                                    </div>                            
-                                </div> -->
+                                @include('katitheme.partials.sidebar')
                             </aside>
                         </div>
                     </div>
