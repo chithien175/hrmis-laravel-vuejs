@@ -46,10 +46,10 @@
 						@foreach($products as $key => $product)
 							<li>
 								<figure>
-									<a class="aa-product-img" href="#"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
-									<a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Chi tiết</a>
+									<a class="aa-product-img" href="{{ route('frontend.productDetail', $product->slug) }}"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
+									<a class="aa-add-card-btn"href="{{ route('frontend.productDetail', $product->slug) }}"><span class="fa fa-shopping-cart"></span>Chi tiết</a>
 									<figcaption>
-									<h4 class="aa-product-title"><a href="#">{{ $product->name }}</a></h4>
+									<h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
 									<!-- <span class="aa-product-price">$45.50</span><span class="aa-product-price"><del>$65.50</del></span> -->
 									
 									</figcaption>

@@ -7,7 +7,7 @@
 			<div class="col-md-12">
 				<div class="aa-footer-top-area">
 					<div class="row">
-						<div class="col-md-5 col-sm-6">
+						<div class="col-md-3 col-sm-6">
 							<div class="aa-footer-widget">
 								<h3>Vải Áo Dài - {{ getFieldCompany('company.name') }}</h3>
 								<p class="aa-footer-nav" style="color: #888;">
@@ -15,10 +15,10 @@
 								</p>
 							</div>
 						</div>
-						<div class="col-md-2 col-sm-6">
+						<div class="col-md-3 col-sm-6">
 							<div class="aa-footer-widget">
 								<div class="aa-footer-widget">
-									<h3>Áo dài</h3>
+									<h3>Danh mục</h3>
 									@php
 										$options = array(
 											'id' => '',
@@ -31,22 +31,21 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-2 col-sm-6">
-						
-						<div class="aa-footer-widget">
+						<div class="col-md-3 col-sm-6">
 							<div class="aa-footer-widget">
-								<h3>Trang</h3>
-								@php
-									$options = array(
-										'id' => '',
-										'class' => 'aa-footer-nav',
-										'sub_id' => '',
-										'sub_class' => ''
-									);
-									echo menu('footer-menu-2', $options);
-								@endphp
+								<div class="aa-footer-widget">
+									<h3>Trang</h3>
+									@php
+										$options = array(
+											'id' => '',
+											'class' => 'aa-footer-nav',
+											'sub_id' => '',
+											'sub_class' => ''
+										);
+										echo menu('footer-menu-2', $options);
+									@endphp
+								</div>
 							</div>
-						</div>
 						</div>
 						<div class="col-md-3 col-sm-6">
 							<div class="aa-footer-widget">

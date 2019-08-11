@@ -28,8 +28,14 @@
 Route::get('/', 'Frontend\PageController@getHomePage')->name('katitheme.homepage');
 Route::get('/{pageSlug}.html', 'Frontend\PageController@getOtherPage');
 
-Route::get('/danh-muc-sp/{cateSlug}.html', 'Frontend\EcommerceController@getProductsByCategory')->name('get.page-pCategory');
+// Danh muc san pham
+Route::get('/sp/danh-muc/{cateSlug}.html', 'Frontend\EcommerceController@getProductsByCategory')->name('frontend.productCategory');
+// Chi tiet san pham
+Route::get('/sp/{productSlug}.html', 'Frontend\EcommerceController@getProductDetail')->name('frontend.productDetail');
 
+
+
+// Lien he
 Route::post('/contact-form', 'Frontend\ContactController@postContactForm')->name('post.contactForm');
 
 // Auth

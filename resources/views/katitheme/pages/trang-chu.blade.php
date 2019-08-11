@@ -75,10 +75,10 @@
                                         @foreach($products_session1 as $key => $product)
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="#"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
-                                                <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>CHI TIẾT</a>
+                                                <a class="aa-product-img" href="{{ route('frontend.productDetail', $product->slug) }}"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
+                                                <a class="aa-add-card-btn" href="{{ route('frontend.productDetail', $product->slug) }}"><span class="fa fa-shopping-cart"></span>CHI TIẾT</a>
                                                     <figcaption>
-                                                    <h4 class="aa-product-title"><a href="#">{{ $product->name }}</a></h4>
+                                                    <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
                                                     <!-- <span class="aa-product-price">$45.50</span><span class="aa-product-price"><del>$65.50</del></span> -->
                                                 </figcaption>
                                             </figure>                        
@@ -92,7 +92,7 @@
                                         @endforeach
                                     </ul>
                                     @endif
-                                    <a class="aa-browse-btn" href="{{ route('get.page-pCategory', $cate_slug_session1) }}">Xem tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
+                                    <a class="aa-browse-btn" href="{{ route('frontend.productCategory', $cate_slug_session1) }}">Xem tất cả sản phẩm<span class="fa fa-long-arrow-right"></span></a>
                                 </div>
                             <!-- / men product category -->     
                             </div>  
@@ -149,10 +149,10 @@
                                     @foreach($products_session2 as $key => $product)
                                     <li>
                                         <figure>
-                                            <a class="aa-product-img" href="#"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
-                                            <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>CHI TIẾT</a>
+                                            <a class="aa-product-img" href="{{ route('frontend.productDetail', $product->slug) }}"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
+                                            <a class="aa-add-card-btn" href="{{ route('frontend.productDetail', $product->slug) }}"><span class="fa fa-shopping-cart"></span>CHI TIẾT</a>
                                                 <figcaption>
-                                                <h4 class="aa-product-title"><a href="#">{{ $product->name }}</a></h4>
+                                                <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
                                                 <!-- <span class="aa-product-price">$45.50</span><span class="aa-product-price"><del>$65.50</del></span> -->
                                             </figcaption>
                                         </figure>                     
@@ -165,7 +165,7 @@
                                     </li>       
                                     @endforeach                    
                                 </ul>
-                                <a class="aa-browse-btn" href="{{ route('get.page-pCategory', $cate) }}">Xem tất cả "{{ getProductCategoryName($cate) }}" <span class="fa fa-long-arrow-right"></span></a>
+                                <a class="aa-browse-btn" href="{{ route('frontend.productCategory', $cate) }}">Xem tất cả "{{ getProductCategoryName($cate) }}" <span class="fa fa-long-arrow-right"></span></a>
                                 @endif
                             </div>
                             @endforeach

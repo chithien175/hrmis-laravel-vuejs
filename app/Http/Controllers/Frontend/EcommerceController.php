@@ -28,7 +28,14 @@ class EcommerceController extends Controller
                     'products'  => $products
                 ]);
         }
+    }
 
+    public function getProductDetail($productSlug)
+    {
+        $product = Product::where(['slug' => $productSlug, 'publish' => 'publish'])->first();
 
+        return view('katitheme.pages.product-detail')->with([
+            'product'  => $product
+        ]);
     }
 }
