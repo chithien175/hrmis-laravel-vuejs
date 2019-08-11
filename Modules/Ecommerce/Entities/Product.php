@@ -21,10 +21,10 @@ class Product extends Model
     }
 
     // **** FOR FRONTEND ****
-    protected function getProductByCategorySlug($slug)
+    protected function getProductByCategorySlug($slug, $paginate)
     {
         $category = Category::where('slug', $slug)->first();
 
-        return ($category) ? $category->products_frontend : false;
+        return ($category) ? $category->products()->where('publish', 'publish')->orderBy('created_at', 'desc')->paginate($paginate) : false;
     }
 }

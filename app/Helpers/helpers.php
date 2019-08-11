@@ -89,9 +89,9 @@ if (!function_exists('getPostByCategorySlug')) {
  * @return array
  */
 if (!function_exists('getProductByCategorySlug')) {
-    function getProductByCategorySlug($slug)
+    function getProductByCategorySlug($slug, $paginate)
     {
-        $products = Modules\Ecommerce\Entities\Product::getProductByCategorySlug($slug);
+        $products = Modules\Ecommerce\Entities\Product::getProductByCategorySlug($slug, $paginate);
 
         return (Module::find('ecommerce')->get('active')) ? $products : false;
     }

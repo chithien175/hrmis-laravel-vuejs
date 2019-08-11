@@ -15,10 +15,6 @@ class Category extends Model
         return $this->belongsToMany(Product::class, 'category_product');
     }
 
-    function products_frontend(){
-        return $this->belongsToMany(Product::class, 'category_product')->where('publish', 'publish')->orderBy('created_at', 'desc')->limit(8);
-    }
-
     // **** FOR FRONTEND ****
     protected function getProductCategoryName($slug)
     {

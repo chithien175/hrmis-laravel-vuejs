@@ -51,7 +51,7 @@
 
 @php
     $cate_slug_session1 = getFieldPage('home.cate_slug_session1');
-    $products_session1 = getProductByCategorySlug($cate_slug_session1);
+    $products_session1 = getProductByCategorySlug($cate_slug_session1, 8);
 @endphp
 <!-- Products section -->
 <section id="aa-product">
@@ -144,7 +144,7 @@
                             <!-- Start men popular category -->
                             @foreach($cate_slug_session2 as $key => $cate)
                             <div class="tab-pane fade in text-center {{ ($key==0)?'active':'' }}" id="{{ $cate }}">
-                                @if($products_session2 = getProductByCategorySlug($cate))
+                                @if($products_session2 = getProductByCategorySlug($cate, 8))
                                 <ul class="aa-product-catg aa-popular-slider">
                                     @foreach($products_session2 as $key => $product)
                                     <li>
