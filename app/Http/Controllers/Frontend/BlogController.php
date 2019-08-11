@@ -9,5 +9,12 @@ use Modules\Blog\Entities\Category;
 
 class BlogController extends Controller
 {
-    
+    public function getPostDetail($postSlug)
+    {
+        $post = Post::where(['slug' => $postSlug, 'publish' => 'publish'])->first();
+
+        return view('katitheme.pages.post-detail')->with([
+            'post'  => $post
+        ]);
+    }
 }
