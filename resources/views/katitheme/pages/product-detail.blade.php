@@ -71,8 +71,8 @@
                     <p class="aa-prod-category">
                         Danh mục sản phẩm: 
                         @if($categories)
-                            @foreach($categories as $key => $cateogory)
-                            <a href="#">{{ $cateogory->name }}</a> | 
+                            @foreach($categories as $key => $category)
+                            <a href="{{ route('frontend.productCategory', $category->slug) }}">{{ $category->name }}</a> | 
                             @endforeach
                         @endif
                     </p>
@@ -204,10 +204,10 @@
                     @foreach($related_product as $key => $product)
                     <li>
                     <figure>
-                        <a class="aa-product-img" href="#"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
-                        <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Xem chi tiết</a>
+                        <a class="aa-product-img" href="{{ route('frontend.productDetail', $product->slug) }}"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
+                        <a class="aa-add-card-btn"href="{{ route('frontend.productDetail', $product->slug) }}"><span class="fa fa-shopping-cart"></span>Xem chi tiết</a>
                         <figcaption>
-                        <h4 class="aa-product-title"><a href="#">{{ $product->name }}</a></h4>
+                        <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
                         </figcaption>
                     </figure>                     
                     <!-- <div class="aa-product-hvr-content">

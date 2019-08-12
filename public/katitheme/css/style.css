@@ -4188,3 +4188,6 @@ img {
   }
 }
 
+.aa-sidebar .aa-catg-nav .active a{
+  color: #ff6666;
+}
