@@ -40,11 +40,16 @@
                         <!-- logo  -->
                         <div class="aa-logo">
                         <!-- Text based logo -->
-                        <a href="{{ route('katitheme.homepage') }}">
-                            <p>Vải Áo Dài - <strong>{{ getFieldCompany('company.name') }}</strong> <span>{{ getFieldCompany('company.slogan') }}</span></p>
-                        </a>
-                        <!-- img based logo -->
-                        <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
+                            <!-- img based logo -->
+                            <a href="{{ route('katitheme.homepage') }}">
+                                @if(getFieldCompany('company.logo'))
+                                    <img src="{{ asset('images/company/' . getFieldCompany('company.logo')) }}" alt="{{ getFieldCompany('company.name') }}" width="50" style="margin-top: -30px;"> 
+                                @endif
+                                <p style="float:none;">
+                                    <strong>{{ getFieldCompany('company.name') }}</strong> <span>{{ getFieldCompany('company.slogan') }}</span>
+                                </p>
+                            </a>
+                            
                         </div>
                         <!-- / logo  -->
                         <!-- cart box -->

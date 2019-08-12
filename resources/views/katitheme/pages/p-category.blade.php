@@ -19,7 +19,7 @@
 @section('content')
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
-	<img src="{{ asset('katitheme/img/fashion/fashion-header-bg-8.jpg') }}" alt="fashion img">
+	<img src="{{ asset('katitheme/img/product-banner-1920x300.jpg') }}" alt="fashion img">
 	<div class="aa-catg-head-banner-area">
 		<div class="container">
 			<div class="aa-catg-head-banner-content">

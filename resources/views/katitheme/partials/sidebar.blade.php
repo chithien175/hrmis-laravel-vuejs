@@ -1,5 +1,5 @@
 <div class="aa-sidebar-widget">
-    <h3>Vải áo dài Thanh Thủy</h3>
+    <h3>Vải Áo Dài Thanh Thủy</h3>
     @php
         $options = array(
             'id' => '',

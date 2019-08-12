@@ -19,7 +19,7 @@
 @section('content')  
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
-   <img src="{{ asset('katitheme/img/fashion/fashion-header-bg-8.jpg') }}" alt="{{ $product->name }}">
+   <img src="{{ asset('katitheme/img/product-banner-1920x300.jpg') }}" alt="{{ $product->name }}">
    <div class="aa-catg-head-banner-area">
      <div class="container">
       <div class="aa-catg-head-banner-content">
@@ -122,79 +122,19 @@
                 </div>
                 <div class="tab-pane fade " id="review">
                  <div class="aa-product-review-area">
-                   <h4>2 Reviews for T-Shirt</h4> 
-                   <ul class="aa-review-nav">
-                     <li>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object" src="img/testimonial-img-3.jpg" alt="girl image">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                            <div class="aa-product-rating">
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star-o"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object" src="img/testimonial-img-3.jpg" alt="girl image">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                            <div class="aa-product-rating">
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star-o"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                          </div>
-                        </div>
-                      </li>
-                   </ul>
-                   <h4>Add a review</h4>
-                   <div class="aa-your-rating">
-                     <p>Your Rating</p>
-                     <a href="#"><span class="fa fa-star-o"></span></a>
-                     <a href="#"><span class="fa fa-star-o"></span></a>
-                     <a href="#"><span class="fa fa-star-o"></span></a>
-                     <a href="#"><span class="fa fa-star-o"></span></a>
-                     <a href="#"><span class="fa fa-star-o"></span></a>
-                   </div>
-                   <!-- review form -->
-                   <form action="" class="aa-review-form">
-                      <div class="form-group">
-                        <label for="message">Your Review</label>
-                        <textarea class="form-control" rows="3" id="message"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name">
-                      </div>  
-                      <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
-                      </div>
-
-                      <button type="submit" class="btn btn-default aa-review-submit">Submit</button>
-                   </form>
+                 
                  </div>
                 </div>            
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h2>Sản phẩm giảm giá: 3 sản phẩm</h2>
+                <div class="clock" style="width: 650px; left: 20%;"></div>
+              </div>
+            </div>
+
             <!-- Related product -->
             <div class="aa-product-related-item">
               <h3>Sản phẩm cùng loại</h3>
@@ -226,4 +166,21 @@
     </div>
   </section>
   <!-- / product category -->
+@endsection
+
+@section('script')
+<script src="{{ asset('katitheme/plugins/flipclock/js/flipclock.min.js') }}"></script> 
+
+
+
+<script type="text/javascript">
+	var clock = $('.clock').FlipClock(3600 * 24 * 3, {
+		clockFace: 'DailyCounter',
+		countdown: true
+	});
+</script>
+@endsection
+
+@section('style')
+<link href="{{ asset('katitheme/plugins/flipclock/css/flipclock.css') }}" rel="stylesheet">
 @endsection

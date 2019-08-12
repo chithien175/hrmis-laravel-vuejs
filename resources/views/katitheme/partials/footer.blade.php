@@ -9,7 +9,7 @@
 					<div class="row">
 						<div class="col-md-3 col-sm-6">
 							<div class="aa-footer-widget">
-								<h3>Vải Áo Dài - {{ getFieldCompany('company.name') }}</h3>
+								<h3>{{ getFieldCompany('company.name') }}</h3>
 								<p class="aa-footer-nav" style="color: #888;">
 								{{ getFieldCompany('company.description') }}
 								</p>
