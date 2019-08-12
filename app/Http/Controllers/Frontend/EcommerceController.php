@@ -32,10 +32,25 @@ class EcommerceController extends Controller
 
     public function getProductDetail($productSlug)
     {
-        $product = Product::where(['slug' => $productSlug, 'publish' => 'publish'])->first();
+        $product = Product::where(['slug' => $productSlug, 'publish' => 'publish'])->with('galleries')->with('categories')->first();
 
-        return view('katitheme.pages.product-detail')->with([
-            'product'  => $product
-        ]);
+        if($product){
+            $page_data = [
+                'title' => $product['name'],
+                'seo_title' => $product['name'],
+                'seo_description' => $product['name'],
+                'seo_keyword' => $product['name']
+            ];
+            
+            $related_product = $product['categories'][0]->products()->where('publish', 'publish')->orderBy('created_at', 'desc')->get();
+
+            return view('katitheme.pages.product-detail')->with([
+                'product'  => $product,
+                'related_product' => $related_product,
+                'categories'=> $product['categories'],
+                'galleries'=>  $product['galleries'],
+                'page_data'=> $page_data
+            ]);
+        }
     }
 }

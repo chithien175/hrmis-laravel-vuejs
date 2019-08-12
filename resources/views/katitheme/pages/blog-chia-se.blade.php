@@ -52,18 +52,18 @@
                                     <div class="col-md-4 col-sm-4">
                                         <article class="aa-latest-blog-single">
                                             <figure class="aa-blog-img">                    
-                                                <a href="#"><img alt="{{ $post->title }}" src="{{ asset('images/post/' . $post->photo) }}"></a>  
+                                                <a href="{{ route('frontend.postDetail', $post->slug) }}"><img alt="{{ $post->title }}" src="{{ asset('images/post/' . $post->photo) }}"></a>  
                                                 <figcaption class="aa-blog-img-caption">
                                                 <!-- <span href="#"><i class="fa fa-eye"></i>5K</span>
                                                 <a href="#"><i class="fa fa-thumbs-o-up"></i>426</a>
                                                 <a href="#"><i class="fa fa-comment-o"></i>20</a> -->
-                                                <span href="#"><i class="fa fa-clock-o"></i>{{ $post->created_at->format('d/m/Y h:m') }}</span>
+                                                <span><i class="fa fa-clock-o"></i>{{ $post->created_at->format('d/m/Y h:m') }}</span>
                                                 </figcaption>                          
                                             </figure>
                                             <div class="aa-blog-info">
-                                                <h3 class="aa-blog-title"><a href="#">{{ shorten_text($post->title, 35, '...', false) }}</a></h3>
+                                                <h3 class="aa-blog-title"><a href="{{ route('frontend.postDetail', $post->slug) }}">{{ shorten_text($post->title, 35, '...', false) }}</a></h3>
                                                 <p>{{ shorten_text($post->description, 90, '...', false) }}</p> 
-                                                <a class="aa-read-mor-btn" href="#">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
+                                                <a class="aa-read-mor-btn" href="{{ route('frontend.postDetail', $post->slug) }}">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
                                             </div>
                                         </article>
                                     </div>        
