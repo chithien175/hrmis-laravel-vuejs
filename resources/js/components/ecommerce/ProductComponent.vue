@@ -519,7 +519,7 @@ export default {
         border-radius: 0.3rem;
     }
     #productModal .cate-list{
-        height: 80px;
+        height: 200px;
         overflow-y: scroll;
         overflow-x: hidden;
     }

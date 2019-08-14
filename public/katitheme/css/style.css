@@ -1116,9 +1116,9 @@ img {
   position: relative;
   overflow: hidden;
 }
-.aa-product-catg li:hover figure .aa-product-img {
+/* .aa-product-catg li:hover figure .aa-product-img {
   background-color: rgba(0, 0, 0, 0.5);
-}
+} */
 .aa-product-catg li:hover figure .aa-add-card-btn {
   -moz-transform: scale(1);
   -o-transform: scale(1);

@@ -1,17 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th8 11, 2019 lúc 06:30 PM
--- Phiên bản máy phục vụ: 5.7.25
--- Phiên bản PHP: 7.1.26
+-- Thời gian đã tạo: Th8 12, 2019 lúc 09:03 AM
+-- Phiên bản máy phục vụ: 5.7.19
+-- Phiên bản PHP: 7.1.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Cơ sở dữ liệu: `db_hrmis`
+-- Cơ sở dữ liệu: `db_katicms`
 --
 
 -- --------------------------------------------------------
@@ -84,7 +92,7 @@ CREATE TABLE `category_product` (
 
 INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `updated_at`) VALUES
 (1, 10, '2019-08-09 03:00:46', '2019-08-09 03:00:46'),
-(1, 12, '2019-08-09 03:00:42', '2019-08-09 03:00:42'),
+(1, 12, '2019-08-12 08:44:50', '2019-08-12 08:44:50'),
 (1, 13, '2019-08-09 03:00:38', '2019-08-09 03:00:38'),
 (1, 14, '2019-08-09 03:00:32', '2019-08-09 03:00:32'),
 (1, 15, '2019-08-09 03:00:25', '2019-08-09 03:00:25'),
@@ -94,7 +102,7 @@ INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `upda
 (1, 19, '2019-08-09 02:22:30', '2019-08-09 02:22:30'),
 (1, 20, '2019-08-09 02:22:25', '2019-08-09 02:22:25'),
 (2, 10, '2019-08-09 03:00:46', '2019-08-09 03:00:46'),
-(2, 12, '2019-08-09 03:00:42', '2019-08-09 03:00:42'),
+(2, 12, '2019-08-12 08:44:50', '2019-08-12 08:44:50'),
 (2, 13, '2019-08-09 03:00:38', '2019-08-09 03:00:38'),
 (2, 14, '2019-08-09 03:00:32', '2019-08-09 03:00:32'),
 (2, 15, '2019-08-09 03:00:25', '2019-08-09 03:00:25'),
@@ -104,7 +112,7 @@ INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `upda
 (2, 19, '2019-08-09 02:22:30', '2019-08-09 02:22:30'),
 (2, 20, '2019-08-09 02:22:25', '2019-08-09 02:22:25'),
 (3, 10, '2019-08-09 03:00:46', '2019-08-09 03:00:46'),
-(3, 12, '2019-08-09 03:00:42', '2019-08-09 03:00:42'),
+(3, 12, '2019-08-12 08:44:50', '2019-08-12 08:44:50'),
 (3, 13, '2019-08-09 03:00:38', '2019-08-09 03:00:38'),
 (3, 14, '2019-08-09 03:00:32', '2019-08-09 03:00:32'),
 (3, 15, '2019-08-09 03:00:25', '2019-08-09 03:00:25'),
@@ -114,7 +122,7 @@ INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `upda
 (3, 19, '2019-08-09 02:22:30', '2019-08-09 02:22:30'),
 (3, 20, '2019-08-09 02:22:25', '2019-08-09 02:22:25'),
 (4, 10, '2019-08-09 03:00:46', '2019-08-09 03:00:46'),
-(4, 12, '2019-08-09 03:00:42', '2019-08-09 03:00:42'),
+(4, 12, '2019-08-12 08:44:50', '2019-08-12 08:44:50'),
 (4, 13, '2019-08-09 03:00:38', '2019-08-09 03:00:38'),
 (4, 14, '2019-08-09 03:00:32', '2019-08-09 03:00:32'),
 (4, 15, '2019-08-09 03:00:25', '2019-08-09 03:00:25'),
@@ -256,57 +264,57 @@ CREATE TABLE `menu_items` (
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `type`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `route`, `parameters`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Trang chủ', 'route', '', '_self', NULL, '#333333', NULL, 1, 'katitheme.homepage', NULL, '2019-08-05 08:22:33', '2019-08-09 09:29:20'),
-(2, 1, 'Giới thiệu', 'url', 'http://katicms.local/gioi-thieu.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-05 08:22:33', '2019-08-09 09:29:31'),
-(3, 1, 'Blog chia sẻ', 'url', 'http://katicms.local/blog-chia-se.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:06:58'),
-(6, 1, 'Liên hệ', 'url', 'http://katicms.local/lien-he.html', '_self', NULL, '#333333', NULL, 8, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:06:58'),
-(7, 2, 'Vải áo dài', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:10:29'),
-(8, 2, 'Vải áo dài cách tân nam', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:10:53'),
-(9, 2, 'Vải áo dài cách tân nữ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:11:10'),
-(10, 2, 'Vải váy, áo, đầm thời trang', 'url', 'http://katicms.local/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:40:21', '2019-08-11 11:11:31'),
-(11, 3, 'Giới thiệu', 'url', 'http://katicms.local/gioi-thieu.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-09 07:40:46', '2019-08-11 11:12:30'),
-(12, 3, 'Vải áo dài thanh thủy', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-09 07:40:55', '2019-08-11 11:12:50'),
-(13, 3, 'Blog chia sẻ', 'url', 'http://katicms.local/blog-chia-se.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:41:04', '2019-08-11 11:13:09'),
-(14, 3, 'Liên hệ', 'url', 'http://katicms.local/lien-he.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:41:12', '2019-08-11 11:13:18'),
-(15, 4, 'Vải áo dài', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-09 07:45:12', '2019-08-11 11:15:26'),
-(16, 4, 'Vải áo dài cặp đôi', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-09 07:45:17', '2019-08-11 11:15:52'),
-(17, 4, 'Vải áo dài đắp nhung', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:45:25', '2019-08-11 11:16:22'),
-(18, 4, 'Vải áo dài gấm', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:45:35', '2019-08-11 11:16:38'),
-(19, 1, 'Vải áo dài', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-11 10:59:01', '2019-08-11 10:59:05'),
-(20, 1, 'Vải áo dài cặp đôi', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', 19, 1, NULL, NULL, '2019-08-11 10:59:41', '2019-08-11 10:59:44'),
-(21, 1, 'Vải áo dài đắp nhung', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', 19, 2, NULL, NULL, '2019-08-11 11:00:22', '2019-08-11 11:00:26'),
-(22, 1, 'Vải áo dài gấm', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', 19, 3, NULL, NULL, '2019-08-11 11:00:54', '2019-08-11 11:00:57'),
-(23, 1, 'Vải áo dài mẹ và bé', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', 19, 4, NULL, NULL, '2019-08-11 11:01:14', '2019-08-11 11:01:19'),
-(24, 1, 'Vải áo dài thêu', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', 19, 5, NULL, NULL, '2019-08-11 11:01:36', '2019-08-11 11:01:55'),
-(25, 1, 'Vải áo dài vẽ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', 19, 6, NULL, NULL, '2019-08-11 11:01:52', '2019-08-11 11:01:57'),
-(26, 1, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', 19, 7, NULL, NULL, '2019-08-11 11:02:20', '2019-08-11 11:02:23'),
-(27, 1, 'Vải áo dài đính đá, kết cườm', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', 19, 8, NULL, NULL, '2019-08-11 11:02:50', '2019-08-11 11:03:57'),
-(28, 1, 'Vải áo dài lụa', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', 19, 9, NULL, NULL, '2019-08-11 11:03:07', '2019-08-11 11:04:00'),
-(29, 1, 'Vải áo dài Thái Tuấn', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', 19, 10, NULL, NULL, '2019-08-11 11:03:25', '2019-08-11 11:04:02'),
-(30, 1, 'Vải áo dài trơn', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', 19, 11, NULL, NULL, '2019-08-11 11:03:37', '2019-08-11 11:04:04'),
-(31, 1, 'Vải quần áo dài', 'url', 'http://katicms.local/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', 19, 12, NULL, NULL, '2019-08-11 11:03:52', '2019-08-11 11:04:05'),
-(32, 1, 'Vải áo dài cách tân nam', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-11 11:04:30', '2019-08-11 11:04:56'),
-(33, 1, 'Vải áo dài cách tân nữ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 5, NULL, NULL, '2019-08-11 11:04:48', '2019-08-11 11:04:57'),
-(34, 1, 'Vải áo dài cách tân hoa 3D', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', 33, 1, NULL, NULL, '2019-08-11 11:05:22', '2019-08-11 11:06:44'),
-(35, 1, 'Vải áo dài cách tân in', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', 33, 2, NULL, NULL, '2019-08-11 11:05:38', '2019-08-11 11:06:50'),
-(36, 1, 'Vải áo dài cách tân họa tiết', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', 33, 3, NULL, NULL, '2019-08-11 11:05:57', '2019-08-11 11:06:53'),
-(37, 1, 'Vải áo dài cách tân vẽ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', 33, 4, NULL, NULL, '2019-08-11 11:06:12', '2019-08-11 11:06:56'),
-(38, 1, 'Vải váy, áo, đầm thời trang', 'url', 'http://katicms.local/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:06:38', '2019-08-11 11:06:58'),
-(39, 4, 'Vải áo dài mẹ và bé', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', NULL, 5, NULL, NULL, '2019-08-11 11:16:54', '2019-08-11 11:16:54'),
-(40, 4, 'Vải áo dài thêu', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:17:12', '2019-08-11 11:17:12'),
-(41, 4, 'Vải áo dài vẽ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:25', '2019-08-11 11:17:25'),
-(42, 4, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:42', '2019-08-11 11:17:42'),
-(43, 4, 'Vải áo dài đính đá, kết cườm', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', NULL, 8, NULL, NULL, '2019-08-11 11:18:03', '2019-08-11 11:18:03'),
-(44, 4, 'Vải áo dài lụa', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:15', '2019-08-11 11:18:15'),
-(45, 4, 'Vải áo dài Thái Tuấn', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:29', '2019-08-11 11:18:29'),
-(46, 4, 'Vải áo dài trơn', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', NULL, 11, NULL, NULL, '2019-08-11 11:18:41', '2019-08-11 11:18:41'),
-(47, 4, 'Vải quần áo dài', 'url', 'http://katicms.local/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', NULL, 12, NULL, NULL, '2019-08-11 11:18:55', '2019-08-11 11:18:55'),
-(48, 4, 'Vải áo dài cách tân nam', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 13, NULL, NULL, '2019-08-11 11:19:09', '2019-08-11 11:19:09'),
-(49, 4, 'Vải áo dài cách tân nữ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 14, NULL, NULL, '2019-08-11 11:19:26', '2019-08-11 11:19:26'),
-(50, 4, 'Vải áo dài cách tân hoa 3D', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', NULL, 15, NULL, NULL, '2019-08-11 11:19:45', '2019-08-11 11:19:45'),
-(51, 4, 'Vải áo dài cách tân in', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:02', '2019-08-11 11:20:02'),
-(52, 4, 'Vải áo dài cách tân họa tiết', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:18', '2019-08-11 11:20:18'),
-(53, 4, 'Vải áo dài cách tân vẽ', 'url', 'http://katicms.local/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', NULL, 18, NULL, NULL, '2019-08-11 11:20:36', '2019-08-11 11:20:36'),
-(54, 4, 'Vải váy, áo, đầm thời trang', 'url', 'http://katicms.local/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 20, NULL, NULL, '2019-08-11 11:21:29', '2019-08-11 11:21:29');
+(2, 1, 'Giới thiệu', 'url', 'http://vaiaodaithanhthuy.com/gioi-thieu.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-05 08:22:33', '2019-08-09 09:29:31'),
+(3, 1, 'Blog chia sẻ', 'url', 'http://vaiaodaithanhthuy.com/blog-chia-se.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:06:58'),
+(6, 1, 'Liên hệ', 'url', 'http://vaiaodaithanhthuy.com/lien-he.html', '_self', NULL, '#333333', NULL, 8, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:06:58'),
+(7, 2, 'Vải áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:10:29'),
+(8, 2, 'Vải áo dài cách tân nam', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:10:53'),
+(9, 2, 'Vải áo dài cách tân nữ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-05 08:22:33', '2019-08-11 11:11:10'),
+(10, 2, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:40:21', '2019-08-11 11:11:31'),
+(11, 3, 'Giới thiệu', 'url', 'http://vaiaodaithanhthuy.com/gioi-thieu.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-09 07:40:46', '2019-08-11 11:12:30'),
+(12, 3, 'Vải áo dài thanh thủy', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-09 07:40:55', '2019-08-11 11:12:50'),
+(13, 3, 'Blog chia sẻ', 'url', 'http://vaiaodaithanhthuy.com/blog-chia-se.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:41:04', '2019-08-11 11:13:09'),
+(14, 3, 'Liên hệ', 'url', 'http://vaiaodaithanhthuy.com/lien-he.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:41:12', '2019-08-11 11:13:18'),
+(15, 4, 'Vải áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-09 07:45:12', '2019-08-11 11:15:26'),
+(16, 4, 'Vải áo dài cặp đôi', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-09 07:45:17', '2019-08-11 11:15:52'),
+(17, 4, 'Vải áo dài đắp nhung', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:45:25', '2019-08-11 11:16:22'),
+(18, 4, 'Vải áo dài gấm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:45:35', '2019-08-11 11:16:38'),
+(19, 1, 'Vải áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-11 10:59:01', '2019-08-11 10:59:05'),
+(20, 1, 'Vải áo dài cặp đôi', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', 19, 1, NULL, NULL, '2019-08-11 10:59:41', '2019-08-11 10:59:44'),
+(21, 1, 'Vải áo dài đắp nhung', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', 19, 2, NULL, NULL, '2019-08-11 11:00:22', '2019-08-11 11:00:26'),
+(22, 1, 'Vải áo dài gấm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', 19, 3, NULL, NULL, '2019-08-11 11:00:54', '2019-08-11 11:00:57'),
+(23, 1, 'Vải áo dài mẹ và bé', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', 19, 4, NULL, NULL, '2019-08-11 11:01:14', '2019-08-11 11:01:19'),
+(24, 1, 'Vải áo dài thêu', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', 19, 5, NULL, NULL, '2019-08-11 11:01:36', '2019-08-11 11:01:55'),
+(25, 1, 'Vải áo dài vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', 19, 6, NULL, NULL, '2019-08-11 11:01:52', '2019-08-11 11:01:57'),
+(26, 1, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', 19, 7, NULL, NULL, '2019-08-11 11:02:20', '2019-08-11 11:02:23'),
+(27, 1, 'Vải áo dài đính đá, kết cườm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', 19, 8, NULL, NULL, '2019-08-11 11:02:50', '2019-08-11 11:03:57'),
+(28, 1, 'Vải áo dài lụa', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', 19, 9, NULL, NULL, '2019-08-11 11:03:07', '2019-08-11 11:04:00'),
+(29, 1, 'Vải áo dài Thái Tuấn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', 19, 10, NULL, NULL, '2019-08-11 11:03:25', '2019-08-11 11:04:02'),
+(30, 1, 'Vải áo dài trơn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', 19, 11, NULL, NULL, '2019-08-11 11:03:37', '2019-08-11 11:04:04'),
+(31, 1, 'Vải quần áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', 19, 12, NULL, NULL, '2019-08-11 11:03:52', '2019-08-11 11:04:05'),
+(32, 1, 'Vải áo dài cách tân nam', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-11 11:04:30', '2019-08-11 11:04:56'),
+(33, 1, 'Vải áo dài cách tân nữ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 5, NULL, NULL, '2019-08-11 11:04:48', '2019-08-11 11:04:57'),
+(34, 1, 'Vải áo dài cách tân hoa 3D', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', 33, 1, NULL, NULL, '2019-08-11 11:05:22', '2019-08-11 11:06:44'),
+(35, 1, 'Vải áo dài cách tân in', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', 33, 2, NULL, NULL, '2019-08-11 11:05:38', '2019-08-11 11:06:50'),
+(36, 1, 'Vải áo dài cách tân họa tiết', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', 33, 3, NULL, NULL, '2019-08-11 11:05:57', '2019-08-11 11:06:53'),
+(37, 1, 'Vải áo dài cách tân vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', 33, 4, NULL, NULL, '2019-08-11 11:06:12', '2019-08-11 11:06:56'),
+(38, 1, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:06:38', '2019-08-11 11:06:58'),
+(39, 4, 'Vải áo dài mẹ và bé', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', NULL, 5, NULL, NULL, '2019-08-11 11:16:54', '2019-08-11 11:16:54'),
+(40, 4, 'Vải áo dài thêu', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:17:12', '2019-08-11 11:17:12'),
+(41, 4, 'Vải áo dài vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:25', '2019-08-11 11:17:25'),
+(42, 4, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:42', '2019-08-11 11:17:42'),
+(43, 4, 'Vải áo dài đính đá, kết cườm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', NULL, 8, NULL, NULL, '2019-08-11 11:18:03', '2019-08-11 11:18:03'),
+(44, 4, 'Vải áo dài lụa', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:15', '2019-08-11 11:18:15'),
+(45, 4, 'Vải áo dài Thái Tuấn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:29', '2019-08-11 11:18:29'),
+(46, 4, 'Vải áo dài trơn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', NULL, 11, NULL, NULL, '2019-08-11 11:18:41', '2019-08-11 11:18:41'),
+(47, 4, 'Vải quần áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', NULL, 12, NULL, NULL, '2019-08-11 11:18:55', '2019-08-11 11:18:55'),
+(48, 4, 'Vải áo dài cách tân nam', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 13, NULL, NULL, '2019-08-11 11:19:09', '2019-08-11 11:19:09'),
+(49, 4, 'Vải áo dài cách tân nữ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 14, NULL, NULL, '2019-08-11 11:19:26', '2019-08-11 11:19:26'),
+(50, 4, 'Vải áo dài cách tân hoa 3D', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', NULL, 15, NULL, NULL, '2019-08-11 11:19:45', '2019-08-11 11:19:45'),
+(51, 4, 'Vải áo dài cách tân in', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:02', '2019-08-11 11:20:02'),
+(52, 4, 'Vải áo dài cách tân họa tiết', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:18', '2019-08-11 11:20:18'),
+(53, 4, 'Vải áo dài cách tân vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', NULL, 18, NULL, NULL, '2019-08-11 11:20:36', '2019-08-11 11:20:36'),
+(54, 4, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 20, NULL, NULL, '2019-08-11 11:21:29', '2019-08-11 11:21:29');
 
 -- --------------------------------------------------------
 
@@ -655,7 +663,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `slug`, `code`, `photo`, `description`, `body`, `publish`, `price`, `counter`, `user_id`, `created_at`, `updated_at`) VALUES
 (10, 'Áo dài dữ liệu mẫu 10', 'ao-dai-du-lieu-mau-10', 'AD DLM 10', '1565150804.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:34', '2019-08-07 04:06:44'),
-(12, 'Áo dài dữ liệu mẫu 12', 'ao-dai-du-lieu-mau-12', 'AD DLM 12', '1565150786.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:35', '2019-08-07 04:06:26'),
+(12, 'Áo dài dữ liệu mẫu 12', 'ao-dai-du-lieu-mau-12', 'AD DLM 12', '1565150786.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:35', '2019-08-12 08:44:36'),
 (13, 'Áo dài dữ liệu mẫu 13', 'ao-dai-du-lieu-mau-13', 'AD DLM 13', '1565150779.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:35', '2019-08-07 04:06:19'),
 (14, 'Áo dài dữ liệu mẫu 14', 'ao-dai-du-lieu-mau-14', 'AD DLM 14', '1565150770.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p><br></p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:35', '2019-08-07 04:06:10'),
 (15, 'Áo dài dữ liệu mẫu 15', 'ao-dai-du-lieu-mau-15', 'AD DLM 15', '1565150316.png', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 'Liên hệ', 0, 1, '2019-08-05 08:22:35', '2019-08-07 03:58:36'),
@@ -719,6 +727,14 @@ CREATE TABLE `p_galleries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `p_galleries`
+--
+
+INSERT INTO `p_galleries` (`id`, `name`, `product_id`, `created_at`, `updated_at`) VALUES
+(3, '0_1565599202.jpeg', 12, '2019-08-12 08:40:03', '2019-08-12 08:40:03'),
+(4, '1_1565599203.jpeg', 12, '2019-08-12 08:40:03', '2019-08-12 08:40:03');
 
 -- --------------------------------------------------------
 
@@ -790,7 +806,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `bio`, `photo`, `last_login_at`, `last_login_ip`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Superadmin', 'superadmin@katicms.com', NULL, '$2y$10$7CO0DleEjlzbp4/6n7wzYuxeJUm.bfw9YuvgKhGDzRH38I3GHDTTq', 'active', NULL, 'profile.png', '2019-08-11 10:49:26', '::1', NULL, '2019-08-05 08:22:29', '2019-08-11 10:49:26'),
+(1, 'Superadmin', 'superadmin@katicms.com', NULL, '$2y$10$7CO0DleEjlzbp4/6n7wzYuxeJUm.bfw9YuvgKhGDzRH38I3GHDTTq', 'active', NULL, 'profile.png', '2019-08-12 08:34:04', '127.0.0.1', NULL, '2019-08-05 08:22:29', '2019-08-12 08:34:04'),
 (2, 'Admin', 'admin@katicms.com', NULL, '$2y$10$gqNqzoqUXJld6fPYai7BYugcvwPo09MIj/FbF8..DGf/WyqIC3dUe', 'active', NULL, 'profile.png', NULL, NULL, NULL, '2019-08-05 08:22:30', '2019-08-05 08:22:30');
 
 --
@@ -1098,7 +1114,7 @@ ALTER TABLE `p_categories`
 -- AUTO_INCREMENT cho bảng `p_galleries`
 --
 ALTER TABLE `p_galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -1196,3 +1212,8 @@ ALTER TABLE `p_galleries`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
