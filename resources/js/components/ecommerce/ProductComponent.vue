@@ -161,9 +161,14 @@
                                         <has-error :form="form" field="publish"></has-error>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputPrice" class="control-label">Giá hiển thị</label>
+                                        <label for="inputPrice" class="control-label">Giá gốc</label>
                                         <input v-model="form.price" type="text" name="price"
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('price') }">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPriceSale" class="control-label">Giá giảm</label>
+                                        <input v-model="form.price_sale" type="text" name="price_sale"
+                                            class="form-control" :class="{ 'is-invalid': form.errors.has('price_sale') }">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCategory" class="control-label">Chuyên mục</label>
@@ -216,7 +221,7 @@ export default {
             products: {},
             categories: {},
             form: new Form({
-                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', user_id: '', checked_categories: [], galleries: [], del_galleries: [],
+                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', price_sale: '', user_id: '', checked_categories: [], galleries: [], del_galleries: [],
             }),
             search: '',
             isLoading: true,

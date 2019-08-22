@@ -3506,6 +3506,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3538,6 +3543,7 @@ __webpack_require__.r(__webpack_exports__);
         publish: 'publish',
         counter: 0,
         price: '',
+        price_sale: '',
         user_id: '',
         checked_categories: [],
         galleries: [],
@@ -4259,7 +4265,7 @@ __webpack_require__.r(__webpack_exports__);
       var file = e.target.files[0];
       var reader = new FileReader();
 
-      if (file['size'] < 2111775) {
+      if (file['size'] < 5000000) {
         reader.onloadend = function (file) {
           _this9.formCustomImage.image = reader.result;
         };
@@ -4268,7 +4274,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         Toast.fire({
           type: 'error',
-          title: 'Vui lòng tải ảnh dưới 2MB'
+          title: 'Vui lòng tải ảnh dưới 5MB'
         });
       }
     },
@@ -84455,7 +84461,7 @@ var render = function() {
                                     staticClass: "control-label",
                                     attrs: { for: "inputPrice" }
                                   },
-                                  [_vm._v("Giá hiển thị")]
+                                  [_vm._v("Giá gốc")]
                                 ),
                                 _vm._v(" "),
                                 _c("input", {
@@ -84481,6 +84487,48 @@ var render = function() {
                                       _vm.$set(
                                         _vm.form,
                                         "price",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
+                                    attrs: { for: "inputPriceSale" }
+                                  },
+                                  [_vm._v("Giá giảm")]
+                                ),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.price_sale,
+                                      expression: "form.price_sale"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "price_sale"
+                                    )
+                                  },
+                                  attrs: { type: "text", name: "price_sale" },
+                                  domProps: { value: _vm.form.price_sale },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "price_sale",
                                         $event.target.value
                                       )
                                     }

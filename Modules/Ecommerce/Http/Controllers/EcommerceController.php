@@ -52,6 +52,7 @@ class EcommerceController extends Controller
             'publish'       => $request['publish'],
             'counter'       => $request['counter'],
             'price'         => $request['price'],
+            'price_sale'         => $request['price_sale'],
             'user_id'       => Auth::user()->id
         ]);
 

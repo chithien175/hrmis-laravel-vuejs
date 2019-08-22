@@ -428,7 +428,7 @@
             changeImagePhoto (e) {
                 let file = e.target.files[0];
                 let reader = new FileReader();
-                if(file['size'] < 2111775){
+                if(file['size'] < 5000000){
                     reader.onloadend = (file) => {
                         this.formCustomImage.image = reader.result;
                     }
@@ -436,7 +436,7 @@
                 }else{
                     Toast.fire({
                         type: 'error',
-                        title: 'Vui lòng tải ảnh dưới 2MB'
+                        title: 'Vui lòng tải ảnh dưới 5MB'
                     });
                 }
             },

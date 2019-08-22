@@ -24,6 +24,7 @@ class EcommerceSetupTables extends Migration
             $table->longText('body')->nullable();
             $table->string('publish');
             $table->string('price')->nullable();
+            $table->string('price_sale')->nullable();
             $table->integer('counter')->default(0);
 
             $table->unsignedBigInteger('user_id');
