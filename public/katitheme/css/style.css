@@ -1344,7 +1344,7 @@ img {
 
 .scrollToTop {
 
-  bottom: 60px;
+  bottom: 15px;
 
   color: #fff;
 
@@ -2035,8 +2035,26 @@ img {
   width: 100%;
 
 }
+#aa-product-a .aa-product-area {
+
+  display: inline;
+
+  float: left;
+
+  width: 100%;
+
+}
 
 #aa-product .aa-product-area .aa-product-inner {
+
+  display: inline;
+
+  float: left;
+
+  width: 100%;
+
+}
+#aa-product-a .aa-product-area .aa-product-inner {
 
   display: inline;
 
@@ -2051,8 +2069,20 @@ img {
   float: left;
 
 }
+#aa-product-a .aa-product-area .aa-product-inner .aa-product-catg {
+
+  float: left;
+
+}
 
 #aa-product .aa-product-area .aa-product-inner #men {
+
+  text-align: center;
+
+  padding-bottom: 35px;
+
+}
+#aa-product-a .aa-product-area .aa-product-inner #men {
 
   text-align: center;
 
@@ -2067,8 +2097,22 @@ img {
   padding-bottom: 35px;
 
 }
+#aa-product-a .aa-product-area .aa-product-inner #electronics {
+
+  text-align: center;
+
+  padding-bottom: 35px;
+
+}
 
 #aa-product .aa-product-area .aa-product-inner #women {
+
+  text-align: center;
+
+  padding-bottom: 35px;
+
+}
+#aa-product-a .aa-product-area .aa-product-inner #women {
 
   text-align: center;
 
@@ -2220,7 +2264,7 @@ img {
 
   float: left;
 
-  height: 380px;
+  height: 100%;
 
   text-align: center;
 
@@ -7259,6 +7303,11 @@ img {
     padding: 0 15px;
 
   }
+  #aa-product-a .aa-product-area {
+
+    padding: 0 15px;
+
+  }
 
 
 
@@ -7551,9 +7600,11 @@ img {
   }
 
 }
+#aa-product-a .aa-product-catg li{
+  height: 100%;
+}
 
 @media (max-width: 480px) {
-
   #aa-slider .aa-slider-area .seq-title {
 
     left: 2%;
@@ -7665,6 +7716,11 @@ img {
 
 
   #aa-product .aa-product-area {
+
+    margin-top: 20px;
+
+  }
+  #aa-product-a .aa-product-area {
 
     margin-top: 20px;
 

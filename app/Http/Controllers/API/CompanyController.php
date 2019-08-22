@@ -71,6 +71,7 @@ class CompanyController extends Controller
             'company.favicon'               => $request['favicon'],
             // Tab 3
             'company.facebook'              => $request['facebook'],
+            'company.zalo'                  => $request['zalo'],
             'company.linkedin'              => $request['linkedin'],
             'company.twitter'               => $request['twitter'],
             'company.googleplus'            => $request['googleplus'],

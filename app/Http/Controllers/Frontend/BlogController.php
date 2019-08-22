@@ -14,6 +14,11 @@ class BlogController extends Controller
         $post = Post::where(['slug' => $postSlug, 'publish' => 'publish'])->first();
 
         if($post){
+            $post_previous = Post::where('id', '<', $post->id)->orderBy('id','desc')->first();
+            $post_next = Post::where('id', '>', $post->id)->orderBy('id')->first();
+
+            $post_recent = Post::orderBy('id', 'desc')->limit(5)->get();
+
             $page_data = [
                 'title' => $post['title'],
                 'seo_title' => $post['title'],
@@ -23,6 +28,9 @@ class BlogController extends Controller
 
             return view('katitheme.pages.post-detail')->with([
                 'post'  => $post,
+                'post_previous' => $post_previous,
+                'post_next' => $post_next,
+                'post_recent' => $post_recent,
                 'page_data' => $page_data
             ]);
         }

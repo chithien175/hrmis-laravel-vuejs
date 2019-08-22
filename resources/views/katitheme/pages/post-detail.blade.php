@@ -55,31 +55,22 @@
                       </div>
                     </div>
                     {!! $post->body !!}
-                    <div class="blog-single-bottom">
-                      <div class="row">
-                        
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                          <div class="blog-single-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                    
                   </article>
                   <!-- blog navigation -->
                   <div class="aa-blog-navigation">
-                    <a class="aa-blog-prev" href="#"><span class="fa fa-arrow-left"></span>Bài trước</a>
-                    <a class="aa-blog-next" href="#">Bài tiếp<span class="fa fa-arrow-right"></span></a>
+                    @if($post_previous)
+                    <a class="aa-blog-prev" href="{{ route('frontend.postDetail', $post_previous->slug) }}"><span class="fa fa-arrow-left"></span>Bài trước</a>
+                    @endif
+                    @if($post_next)
+                    <a class="aa-blog-next" href="{{ route('frontend.postDetail', $post_next->slug) }}">Bài tiếp<span class="fa fa-arrow-right"></span></a>
+                    @endif
                   </div>
                   <!-- Blog Comment threats -->
                   <div class="aa-blog-comment-threat">
-                    <h3>Comments (4)</h3>
+                    <h3>Bình luận</h3>
                     <div class="comments">
+                      <div class="fb-comments" data-href="{{ $page_url }}" data-numposts="5" data-width="100%"></div>
                     </div>
                   </div>
                 </div>
@@ -101,31 +92,21 @@
                     @endphp
                   </div>
                   <div class="aa-sidebar-widget">
-                    <h3>Bài viết liên quan</h3>
+                    <h3>Bài viết mới nhất</h3>
                     <div class="aa-recently-views">
+                      @if($post_recent)
                       <ul>
+                        @foreach($post_recent as $key => $post)
                         <li>
-                          <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
+                          <a class="aa-cartbox-img" href="{{ route('frontend.postDetail', $post->slug) }}"><img src="{{ asset('images/post/' . $post->photo) }}" alt="{{ $post->title }}"></a>
                           <div class="aa-cartbox-info">
-                            <h4><a href="#">Lorem ipsum dolor sit amet.</a></h4>
-                            <p>March 26th 2016</p>
+                            <h4><a href="{{ route('frontend.postDetail', $post->slug) }}">{{ $post->title }}</a></h4>
+                            <p>{{ $post->created_at->format('d/m/Y') }}</p>
                           </div>                    
-                        </li>
-                        <li>
-                          <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg" alt="img"></a>
-                          <div class="aa-cartbox-info">
-                            <h4><a href="#">Lorem ipsum dolor.</a></h4>
-                            <p>March 26th 2016</p>
-                          </div>                    
-                        </li>
-                         <li>
-                          <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
-                          <div class="aa-cartbox-info">
-                            <h4><a href="#">Lorem ipsum dolor.</a></h4>
-                            <p>March 26th 2016</p>
-                          </div>                    
-                        </li>                                      
+                        </li>   
+                        @endforeach      
                       </ul>
+                      @endif
                     </div>                            
                   </div>
                 </aside>

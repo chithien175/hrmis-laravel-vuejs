@@ -148,6 +148,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label for="inputZalo" class="col-sm-12 control-label">Zalo <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.zalo')</code></label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="inputZalo" placeholder="Số điện thoại Zalo" v-model="form.zalo">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="inputTwitter" class="col-sm-12 control-label">Twitter <code  v-if="$gate.isSuperAdmin()" class="note-developer">getFieldCompany('company.twitter')</code></label>
                                                 <div class="col-sm-12">
                                                     <input type="text" class="form-control" id="inputTwitter" placeholder="Đường dẫn liên kết Twitter" v-model="form.twitter">
@@ -222,6 +228,7 @@
                     favicon: '',
                     // Tab 3
                     facebook: '',
+                    zalo: '',
                     twitter: '',
                     linkedin: '',
                     googleplus: '',

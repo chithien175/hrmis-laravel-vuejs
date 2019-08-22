@@ -39,6 +39,124 @@
         <!-- Main style sheet -->
         <link href="{{ asset('katitheme/css/style.css') }}" rel="stylesheet">    
 
+        <!-- Tool Social -->
+        <link href="{{ asset('katitheme/plugins/animate/css/animate.css') }}" rel="stylesheet">    
+        <style>
+            .social-button{
+            display: inline-grid;
+                position: fixed;
+                bottom: 15px;
+                left: 20px;
+                min-width: 45px;
+                text-align: center;
+                z-index: 99999;
+            }
+            .social-button-content{
+            display: inline-grid;   
+            }
+            .social-button a {padding:8px 0;cursor: pointer;position: relative;}
+            .social-button i{
+            width: 40px;
+                height: 40px;
+                background: #ff6666;
+                color: #fff;
+                border-radius: 100%;
+                font-size: 20px;
+                text-align: center;
+                line-height: 1.9;
+                position: relative;
+                z-index: 999;
+            }
+            .social-button span{
+            display: none;
+            }
+            .alo-circle {
+                animation-iteration-count: infinite;
+                animation-duration: 1s;
+                animation-fill-mode: both;
+                animation-name: zoomIn;
+                width: 50px;
+                height: 50px;
+                top: 3px;
+                right: -3px;
+                position: absolute;
+                background-color: transparent;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+                border: 2px solid rgba(30, 30, 30, 0.4);
+                opacity: .1;
+                border-color: #0089B9;
+                opacity: .5;
+            }
+            .alo-circle-fill {
+            animation-iteration-count: infinite;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-name: pulse;
+                width: 60px;
+                height: 60px;
+                top: -2px;
+                right: -8px;
+                position: absolute;
+                -webkit-transition: all 0.2s ease-in-out;
+                -moz-transition: all 0.2s ease-in-out;
+                -ms-transition: all 0.2s ease-in-out;
+                -o-transition: all 0.2s ease-in-out;
+                transition: all 0.2s ease-in-out;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+                border: 2px solid transparent;
+                background-color: rgba(0, 175, 242, 0.5);
+                opacity: .75;
+            }
+            .call-icon:hover > span, .mes:hover > span, .sms:hover > span, .zalo:hover > span{display: block}
+            .social-button a span {
+                border-radius: 2px;
+                text-align: center;
+                background: rgb(103, 182, 52);
+                padding: 9px;
+                display: none;
+                width: 180px;
+                margin-left: 10px;
+                position: absolute;
+                color: #ffffff;
+                z-index: 999;
+                top: 9px;
+                left: 40px;
+                transition: all 0.2s ease-in-out 0s;
+                -moz-animation: headerAnimation 0.7s 1;
+                -webkit-animation: headerAnimation 0.7s 1;
+                -o-animation: headerAnimation 0.7s 1;
+                animation: headerAnimation 0.7s 1;
+            }
+            @-webkit-keyframes "headerAnimation" {
+                0% { margin-top: -70px; }
+                100% { margin-top: 0; }
+            }
+            @keyframes "headerAnimation" {
+                0% { margin-top: -70px; }
+                100% { margin-top: 0; }
+            }
+            .social-button a span:before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent rgb(103, 182, 52) transparent transparent;
+            position: absolute;
+            left: -10px;
+            top: 10px;
+            }
+            /* Zalo Chat Widget */
+            .zalo-chat-widget{
+                bottom: 70px !important;
+                right: 10px !important;
+            }
+        </style>
+
         <!-- Google Font -->
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         
@@ -52,13 +170,17 @@
         <![endif]-->
     </head>
     <body>
+        <!-- FB SDK -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=1052172988324559"></script>
+
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
             <!-- wpf loader Two -->
             <div id="wpf-loader-two">          
             <div class="wpf-loader-two-inner">
-                <span>Loading</span>
+                <span>Tải trang...</span>
             </div>
             </div> 
             <!-- / wpf loader Two -->   
@@ -74,6 +196,10 @@
         <!-- footer-area start  -->
         @include('katitheme.partials.footer')
 		<!-- footer-area end  -->
+
+        <!-- tool social start -->
+        @include('katitheme.partials.tool-social')
+        <!-- tool social end -->
 
 		<!-- all js here -->
 		<!-- jQuery library -->
@@ -93,6 +219,20 @@
         <script type="text/javascript" src="{{ asset('katitheme/js/nouislider.js') }}"></script>
         <!-- Custom js -->
         <script src="{{ asset('katitheme/js/custom.js') }}"></script> 
+
+        <!-- Tool Social -->
+        <script>
+            $(document).ready(function(){
+                $('.user-support').click(function(event) {
+                $('.social-button-content').slideToggle();
+                });
+            });
+        </script>
+
+        <!-- Zalo Chat Widget -->
+        <!-- <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="350" data-height="420"></div> -->
+        <!-- <script src="https://sp.zalo.me/plugins/sdk.js"></script> -->
+
         @yield('script')
     </body>
 </html>

@@ -10,11 +10,11 @@
                         <div class="aa-header-top-left">
                         
                         <div class="cellphone hidden-xs">
-                            <p><span class="fa fa-envelope"></span><a href="mailto:test@gmail.com">{{ getFieldCompany('company.email') }}</a> </p>
+                            <p><span class="fa fa-envelope"></span><a href="mailto:{{ getFieldCompany('company.email') }}">{{ getFieldCompany('company.email') }}</a> </p>
                         </div>
                         <!-- start cellphone -->
                         <div class="cellphone hidden-xs">
-                            <p><span class="fa fa-phone"></span><a href="tel:00-62-658-658">{{ getFieldCompany('company.phone') }}</a></p>
+                            <p><span class="fa fa-phone"></span><a href="tel:{{ getFieldCompany('company.phone') }}">{{ getFieldCompany('company.phone') }}</a></p>
                         </div>
                         <!-- / cellphone -->
                         </div>

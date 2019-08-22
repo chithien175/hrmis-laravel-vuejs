@@ -2735,6 +2735,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {// console.log('Component mounted.')
   },
@@ -2757,6 +2763,7 @@ __webpack_require__.r(__webpack_exports__);
         favicon: '',
         // Tab 3
         facebook: '',
+        zalo: '',
         twitter: '',
         linkedin: '',
         googleplus: '',
@@ -82575,6 +82582,65 @@ var render = function() {
                                               _vm.$set(
                                                 _vm.form,
                                                 "facebook",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "col-sm-12 control-label",
+                                          attrs: { for: "inputZalo" }
+                                        },
+                                        [
+                                          _vm._v("Zalo "),
+                                          _vm.$gate.isSuperAdmin()
+                                            ? _c(
+                                                "code",
+                                                {
+                                                  staticClass: "note-developer"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "getFieldCompany('company.zalo')"
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-sm-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.zalo,
+                                              expression: "form.zalo"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "text",
+                                            id: "inputZalo",
+                                            placeholder: "Số điện thoại Zalo"
+                                          },
+                                          domProps: { value: _vm.form.zalo },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "zalo",
                                                 $event.target.value
                                               )
                                             }
