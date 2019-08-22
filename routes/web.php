@@ -12,17 +12,6 @@
 */
 
 // Frontend
-// Trang Chủ
-// Route::get('/', 'Frontend\PageController@home')->name('katitheme.pages.home');
-
-// Giới Thiệu
-// Route::get('/gioi-thieu.html','Frontend\PageController@about')->name('katitheme.pages.about');
-
-// Tin tức
-// Route::get('/tin-tuc.html','Frontend\PageController@news')->name('katitheme.pages.news');
-
-// Liên hệ
-// Route::get('/lien-he.html','Frontend\PageController@contact')->name('katitheme.pages.contact');
 
 // Trang chủ
 Route::get('/', 'Frontend\PageController@getHomePage')->name('katitheme.homepage');
@@ -38,7 +27,7 @@ Route::get('/sp/{productSlug}.html', 'Frontend\EcommerceController@getProductDet
 
 // Chi tiet tim kiem
 // Route::get('/tim-kiem/ket-qua.html', 'Frontend\SearchController@searchResult')->name('frontend.searchResult');
-Route::post('/frontend-search', 'Frontend\SearchController@postSearch')->name('frontend.postSearch');
+Route::get('/tim-kiem', 'Frontend\SearchController@search')->name('frontend.search');
 
 
 // Lien he

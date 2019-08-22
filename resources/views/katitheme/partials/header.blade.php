@@ -56,8 +56,8 @@
                         
                         <!-- search box -->
                         <div class="aa-search-box">
-                            <form action="">
-                                <input type="text" name="" id="" placeholder="Từ khoá tìm kiếm ... ">
+                            <form action="{{ route('frontend.search') }}" method="get">
+                                <input type="text" name="q" id="" placeholder="Từ khoá tìm kiếm ... ">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>
