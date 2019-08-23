@@ -111,7 +111,7 @@
                     <form class="comments-form" action="{{ route('post.contactForm') }}" method="post">
 
                         @csrf()
-
+                        
                         <div class="row">
 
                             <div class="col-md-6">
@@ -174,7 +174,7 @@
 
                         </div>
 
-                        
+                        <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_V2_SITE_KEY', '') }}"></div>
 
                         <button class="aa-secondary-btn">Gửi</button>
 
@@ -227,4 +227,8 @@
 
  </section>
 
+@endsection
+
+@section('script')
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection
