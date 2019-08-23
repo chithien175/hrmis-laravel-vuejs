@@ -51,6 +51,8 @@
 									<a class="aa-add-card-btn"href="{{ route('frontend.productDetail', $product->slug) }}"><span class="fa fa-shopping-cart"></span>Chi tiết</a>
 									<figcaption>
 									<h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
+									<span class="aa-product-price"><del>{{ $product->price }}</del></span>
+									<span class="aa-product-price">{{ $product->price_sale }}</span>
 									</figcaption>
 								</figure>                         
 							</li>              

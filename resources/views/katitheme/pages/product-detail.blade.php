@@ -174,7 +174,7 @@
 
                     <div class="aa-prod-view-bottom">
 
-                      <a class="aa-add-to-cart-btn" href="javascript:void(0)">{{ $product->price }}</a>
+                      <a class="aa-add-to-cart-btn" href="javascript:void(0)"><span style="text-decoration: line-through;">{{ $product->price }}</span> {{ $product->price_sale }}</a>
 
                     </div>
 
@@ -226,7 +226,7 @@
 
               <div class="col-md-12 text-center">
 
-                <h2>Sản phẩm giảm giá: 3 sản phẩm</h2>
+                <h2>Mua ngay để được khuyến mãi giảm giá</h2>
 
                 <div class="clock"></div>
 
@@ -261,7 +261,9 @@
                         <figcaption>
 
                         <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
-
+                        <span class="aa-product-price"><del>{{ $product->price }}</del></span> 
+                        <span class="aa-product-price">{{ $product->price_sale }}</span>
+                        
                         </figcaption>
 
                     </figure>                
@@ -319,7 +321,7 @@
 <link href="{{ asset('katitheme/plugins/flipclock/css/flipclock.css') }}" rel="stylesheet">
 <style>
   .flip-clock-wrapper{
-    width: 650px; left: 330px !important;
+    width: 650px; left: 330px;
   }
 </style>
 @endsection

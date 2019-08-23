@@ -3680,7 +3680,7 @@ img {
 
 #aa-product-category .aa-sidebar .aa-sidebar-widget h3 {
 
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 
 }
 
@@ -5578,7 +5578,7 @@ img {
 
   margin-top: 5px;
 
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 
 }
 
@@ -7466,6 +7466,17 @@ img {
 }
 
 @media (max-width: 640px) {
+  .seq{
+    height: 210px !important;
+  }
+  .seq .seq-model img{
+    margin-top: 30px !important;
+  }
+  .flip-clock-wrapper {
+    zoom: 0.75;
+    -moz-transform: scale(0.75);
+    left: 6% !important;
+}
 
   #aa-header .aa-header-bottom .aa-header-bottom-area .aa-search-box {
 
@@ -8442,11 +8453,25 @@ img {
 
 }
 
-
-
 .aa-sidebar .aa-catg-nav .active a{
 
   color: #ff6666;
 
 }
 
+.aa-sidebar-widget .aa-catg-nav-child{
+  padding-left: 0px;
+}
+
+.aa-sidebar-widget .aa-catg-nav li{
+  background-image: url('/katitheme/img/hoa-thach-thao.png');
+  background-repeat: no-repeat;
+  background-position: 0px 6px;
+  background-size: 15px;
+  padding-left: 20px;
+}
+
+.seq .seq-model img{
+  width: 100% !important;
+  height: auto !important;
+}

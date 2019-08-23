@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th8 22, 2019 lúc 08:02 AM
+-- Thời gian đã tạo: Th8 23, 2019 lúc 08:41 AM
 -- Phiên bản máy phục vụ: 10.2.26-MariaDB-cll-lve
 -- Phiên bản PHP: 7.2.7
 
@@ -62,16 +62,10 @@ CREATE TABLE `category_post` (
 --
 
 INSERT INTO `category_post` (`category_id`, `post_id`, `created_at`, `updated_at`) VALUES
-(1, 11, '2019-08-09 07:20:30', '2019-08-09 07:20:30'),
-(1, 12, '2019-08-09 07:20:37', '2019-08-09 07:20:37'),
-(1, 13, '2019-08-09 07:20:43', '2019-08-09 07:20:43'),
-(1, 14, '2019-08-09 07:20:50', '2019-08-09 07:20:50'),
-(1, 15, '2019-08-09 07:20:56', '2019-08-09 07:20:56'),
-(1, 16, '2019-08-09 07:20:13', '2019-08-09 07:20:13'),
-(1, 17, '2019-08-09 07:20:05', '2019-08-09 07:20:05'),
-(1, 18, '2019-08-09 07:21:16', '2019-08-09 07:21:16'),
-(1, 19, '2019-08-09 07:19:37', '2019-08-09 07:19:37'),
-(1, 20, '2019-08-09 07:19:20', '2019-08-09 07:19:20');
+(1, 13, '2019-08-22 08:05:13', '2019-08-22 08:05:13'),
+(1, 14, '2019-08-22 08:01:10', '2019-08-22 08:01:10'),
+(1, 15, '2019-08-22 07:59:08', '2019-08-22 07:59:08'),
+(1, 21, '2019-08-22 08:55:16', '2019-08-22 08:55:16');
 
 -- --------------------------------------------------------
 
@@ -114,9 +108,38 @@ INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `upda
 (1, 43, '2019-08-21 09:24:02', '2019-08-21 09:24:02'),
 (1, 44, '2019-08-21 09:23:54', '2019-08-21 09:23:54'),
 (1, 45, '2019-08-21 08:57:47', '2019-08-21 08:57:47'),
-(1, 46, '2019-08-21 08:37:49', '2019-08-21 08:37:49'),
-(12, 46, '2019-08-21 08:37:50', '2019-08-21 08:37:50'),
-(13, 46, '2019-08-21 08:37:50', '2019-08-21 08:37:50'),
+(1, 46, '2019-08-22 09:55:15', '2019-08-22 09:55:15'),
+(1, 47, '2019-08-22 09:48:06', '2019-08-22 09:48:06'),
+(1, 48, '2019-08-22 09:49:05', '2019-08-22 09:49:05'),
+(1, 49, '2019-08-22 09:49:31', '2019-08-22 09:49:31'),
+(1, 50, '2019-08-22 09:50:03', '2019-08-22 09:50:03'),
+(1, 51, '2019-08-22 09:50:37', '2019-08-22 09:50:37'),
+(1, 52, '2019-08-22 09:51:14', '2019-08-22 09:51:14'),
+(1, 53, '2019-08-22 09:51:49', '2019-08-22 09:51:49'),
+(1, 54, '2019-08-22 09:52:25', '2019-08-22 09:52:25'),
+(1, 55, '2019-08-22 09:52:59', '2019-08-22 09:52:59'),
+(1, 56, '2019-08-22 09:53:30', '2019-08-22 09:53:30'),
+(1, 57, '2019-08-22 09:54:01', '2019-08-22 09:54:01'),
+(1, 58, '2019-08-22 09:54:35', '2019-08-22 09:54:35'),
+(1, 59, '2019-08-22 09:55:03', '2019-08-22 09:55:03'),
+(3, 60, '2019-08-23 00:51:24', '2019-08-23 00:51:24'),
+(3, 61, '2019-08-23 00:51:51', '2019-08-23 00:51:51'),
+(3, 62, '2019-08-23 01:04:19', '2019-08-23 01:04:19'),
+(3, 63, '2019-08-23 01:04:47', '2019-08-23 01:04:47'),
+(12, 47, '2019-08-22 09:48:06', '2019-08-22 09:48:06'),
+(12, 48, '2019-08-22 09:49:05', '2019-08-22 09:49:05'),
+(12, 49, '2019-08-22 09:49:31', '2019-08-22 09:49:31'),
+(12, 50, '2019-08-22 09:50:03', '2019-08-22 09:50:03'),
+(12, 51, '2019-08-22 09:50:37', '2019-08-22 09:50:37'),
+(12, 52, '2019-08-22 09:51:14', '2019-08-22 09:51:14'),
+(12, 53, '2019-08-22 09:51:49', '2019-08-22 09:51:49'),
+(12, 54, '2019-08-22 09:52:25', '2019-08-22 09:52:25'),
+(12, 55, '2019-08-22 09:52:59', '2019-08-22 09:52:59'),
+(12, 56, '2019-08-22 09:53:30', '2019-08-22 09:53:30'),
+(12, 57, '2019-08-22 09:54:01', '2019-08-22 09:54:01'),
+(12, 58, '2019-08-22 09:54:35', '2019-08-22 09:54:35'),
+(12, 59, '2019-08-22 09:55:03', '2019-08-22 09:55:03'),
+(13, 46, '2019-08-22 09:55:15', '2019-08-22 09:55:15'),
 (14, 23, '2019-08-17 12:15:39', '2019-08-17 12:15:39'),
 (14, 24, '2019-08-17 12:16:52', '2019-08-17 12:16:52'),
 (14, 25, '2019-08-17 12:18:20', '2019-08-17 12:18:20'),
@@ -140,7 +163,11 @@ INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `upda
 (14, 43, '2019-08-21 09:24:02', '2019-08-21 09:24:02'),
 (14, 44, '2019-08-21 09:23:54', '2019-08-21 09:23:54'),
 (14, 45, '2019-08-21 08:57:47', '2019-08-21 08:57:47'),
-(14, 46, '2019-08-21 08:37:50', '2019-08-21 08:37:50');
+(14, 46, '2019-08-22 09:55:15', '2019-08-22 09:55:15'),
+(19, 60, '2019-08-23 00:51:24', '2019-08-23 00:51:24'),
+(19, 61, '2019-08-23 00:51:51', '2019-08-23 00:51:51'),
+(19, 62, '2019-08-23 01:04:19', '2019-08-23 01:04:19'),
+(19, 63, '2019-08-23 01:04:47', '2019-08-23 01:04:47');
 
 -- --------------------------------------------------------
 
@@ -186,8 +213,9 @@ CREATE TABLE `gallery_items` (
 --
 
 INSERT INTO `gallery_items` (`id`, `title`, `description`, `image`, `order`, `gallery_id`, `created_at`, `updated_at`) VALUES
-(11, 'Vải áo dài Thanh Thuỷ', NULL, '2_1566378149.jpeg', 1, 2, '2019-08-21 09:02:30', '2019-08-21 09:02:30'),
-(12, 'Vải áo dài Thanh Thuỷ', NULL, '2_1566378155.jpeg', 2, 2, '2019-08-21 09:02:35', '2019-08-21 09:02:35');
+(25, 'Vải áo dài Thanh Thủy', NULL, '2_1566465016.jpeg', 2, 2, '2019-08-22 09:10:16', '2019-08-22 09:10:16'),
+(26, 'Vải áo dài Thanh Thủy', NULL, '2_1566465029.jpeg', 2, 2, '2019-08-22 09:10:29', '2019-08-22 09:10:29'),
+(27, 'Vải áo dài Thanh Thủy', NULL, '2_1566465034.jpeg', 3, 2, '2019-08-22 09:10:34', '2019-08-22 09:10:34');
 
 -- --------------------------------------------------------
 
@@ -236,7 +264,25 @@ INSERT INTO `media` (`id`, `disk`, `directory`, `filename`, `extension`, `mime_t
 (23, 'public', 'media/product/2019_8', '5d57f4d5ae23a', 'png', 'image/png', 'image', 3135579, '2019-08-17 12:36:39', '2019-08-17 12:36:39'),
 (24, 'public', 'media/product/2019_8', '5d57f507577f8', 'png', 'image/png', 'image', 3576350, '2019-08-17 12:37:29', '2019-08-17 12:37:29'),
 (25, 'public', 'media/product/2019_8', '5d57f52cc489a', 'png', 'image/png', 'image', 3236387, '2019-08-17 12:38:06', '2019-08-17 12:38:06'),
-(26, 'public', 'media/product/2019_8', '5d57f55915bf5', 'png', 'image/png', 'image', 2385438, '2019-08-17 12:38:50', '2019-08-17 12:38:50');
+(26, 'public', 'media/product/2019_8', '5d57f55915bf5', 'png', 'image/png', 'image', 2385438, '2019-08-17 12:38:50', '2019-08-17 12:38:50'),
+(27, 'public', 'media/product/2019_8', '5d5e64c0db637', 'png', 'image/png', 'image', 2550901, '2019-08-22 09:47:46', '2019-08-22 09:47:46'),
+(28, 'public', 'media/product/2019_8', '5d5e650636e88', 'png', 'image/png', 'image', 2686988, '2019-08-22 09:48:55', '2019-08-22 09:48:55'),
+(29, 'public', 'media/product/2019_8', '5d5e65262b245', 'png', 'image/png', 'image', 3151726, '2019-08-22 09:49:27', '2019-08-22 09:49:27'),
+(30, 'public', 'media/product/2019_8', '5d5e654698d7e', 'png', 'image/png', 'image', 2579903, '2019-08-22 09:49:59', '2019-08-22 09:49:59'),
+(31, 'public', 'media/product/2019_8', '5d5e656829d8c', 'png', 'image/png', 'image', 2328814, '2019-08-22 09:50:34', '2019-08-22 09:50:34'),
+(32, 'public', 'media/product/2019_8', '5d5e65850b01b', 'png', 'image/png', 'image', 250145, '2019-08-22 09:51:01', '2019-08-22 09:51:01'),
+(33, 'public', 'media/product/2019_8', '5d5e658b742b3', 'png', 'image/png', 'image', 2270227, '2019-08-22 09:51:09', '2019-08-22 09:51:09'),
+(34, 'public', 'media/product/2019_8', '5d5e65b07a9a7', 'png', 'image/png', 'image', 3021092, '2019-08-22 09:51:46', '2019-08-22 09:51:46'),
+(35, 'public', 'media/product/2019_8', '5d5e65d3e6636', 'png', 'image/png', 'image', 3327975, '2019-08-22 09:52:22', '2019-08-22 09:52:22'),
+(36, 'public', 'media/product/2019_8', '5d5e65f5ac41b', 'png', 'image/png', 'image', 3354918, '2019-08-22 09:52:55', '2019-08-22 09:52:55'),
+(37, 'public', 'media/product/2019_8', '5d5e6614c6363', 'png', 'image/png', 'image', 3368852, '2019-08-22 09:53:26', '2019-08-22 09:53:26'),
+(38, 'public', 'media/product/2019_8', '5d5e6634d596b', 'png', 'image/png', 'image', 3372020, '2019-08-22 09:53:58', '2019-08-22 09:53:58'),
+(39, 'public', 'media/product/2019_8', '5d5e665755c8b', 'png', 'image/png', 'image', 3386473, '2019-08-22 09:54:33', '2019-08-22 09:54:33'),
+(40, 'public', 'media/product/2019_8', '5d5e6671798a6', 'png', 'image/png', 'image', 3306772, '2019-08-22 09:54:59', '2019-08-22 09:54:59'),
+(41, 'public', 'media/product/2019_8', '5d5f3887b2597', 'png', 'image/png', 'image', 2688105, '2019-08-23 00:51:21', '2019-08-23 00:51:21'),
+(42, 'public', 'media/product/2019_8', '5d5f38a3c242f', 'png', 'image/png', 'image', 3398842, '2019-08-23 00:51:49', '2019-08-23 00:51:49'),
+(43, 'public', 'media/product/2019_8', '5d5f3b8dd1407', 'png', 'image/png', 'image', 2359107, '2019-08-23 01:04:15', '2019-08-23 01:04:15'),
+(44, 'public', 'media/product/2019_8', '5d5f3baa9892b', 'png', 'image/png', 'image', 3062622, '2019-08-23 01:04:44', '2019-08-23 01:04:44');
 
 -- --------------------------------------------------------
 
@@ -316,9 +362,9 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `type`, `url`, `target`, `ic
 (13, 3, 'Blog chia sẻ', 'url', 'http://vaiaodaithanhthuy.com/blog-chia-se.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:41:04', '2019-08-11 11:13:09'),
 (14, 3, 'Liên hệ', 'url', 'http://vaiaodaithanhthuy.com/lien-he.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:41:12', '2019-08-11 11:13:18'),
 (15, 4, 'Vải áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 1, NULL, NULL, '2019-08-09 07:45:12', '2019-08-11 11:15:26'),
-(16, 4, 'Vải áo dài cặp đôi', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-09 07:45:17', '2019-08-11 11:15:52'),
-(17, 4, 'Vải áo dài đắp nhung', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-09 07:45:25', '2019-08-11 11:16:22'),
-(18, 4, 'Vải áo dài gấm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-09 07:45:35', '2019-08-11 11:16:38'),
+(16, 4, 'Vải áo dài cặp đôi', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', 15, 1, NULL, NULL, '2019-08-09 07:45:17', '2019-08-22 07:21:53'),
+(17, 4, 'Vải áo dài đắp nhung', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', 15, 2, NULL, NULL, '2019-08-09 07:45:25', '2019-08-22 07:21:55'),
+(18, 4, 'Vải áo dài gấm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-gam.html', '_self', NULL, '#333333', 15, 3, NULL, NULL, '2019-08-09 07:45:35', '2019-08-22 07:21:57'),
 (19, 1, 'Vải áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-11 10:59:01', '2019-08-11 10:59:05'),
 (20, 1, 'Vải áo dài cặp đôi', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cap-doi.html', '_self', NULL, '#333333', 19, 1, NULL, NULL, '2019-08-11 10:59:41', '2019-08-11 10:59:44'),
 (21, 1, 'Vải áo dài đắp nhung', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dap-nhung.html', '_self', NULL, '#333333', 19, 2, NULL, NULL, '2019-08-11 11:00:22', '2019-08-11 11:00:26'),
@@ -339,22 +385,22 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `type`, `url`, `target`, `ic
 (36, 1, 'Vải áo dài cách tân họa tiết', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', 33, 3, NULL, NULL, '2019-08-11 11:05:57', '2019-08-11 11:06:53'),
 (37, 1, 'Vải áo dài cách tân vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', 33, 4, NULL, NULL, '2019-08-11 11:06:12', '2019-08-11 11:06:56'),
 (38, 1, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:06:38', '2019-08-11 11:06:58'),
-(39, 4, 'Vải áo dài mẹ và bé', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', NULL, 5, NULL, NULL, '2019-08-11 11:16:54', '2019-08-11 11:16:54'),
-(40, 4, 'Vải áo dài thêu', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', NULL, 6, NULL, NULL, '2019-08-11 11:17:12', '2019-08-11 11:17:12'),
-(41, 4, 'Vải áo dài vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:25', '2019-08-11 11:17:25'),
-(42, 4, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', NULL, 7, NULL, NULL, '2019-08-11 11:17:42', '2019-08-11 11:17:42'),
-(43, 4, 'Vải áo dài đính đá, kết cườm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', NULL, 8, NULL, NULL, '2019-08-11 11:18:03', '2019-08-11 11:18:03'),
-(44, 4, 'Vải áo dài lụa', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:15', '2019-08-21 08:31:19'),
-(45, 4, 'Vải áo dài Thái Tuấn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', NULL, 10, NULL, NULL, '2019-08-11 11:18:29', '2019-08-11 11:18:29'),
-(46, 4, 'Vải áo dài trơn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', NULL, 11, NULL, NULL, '2019-08-11 11:18:41', '2019-08-11 11:18:41'),
-(47, 4, 'Vải quần áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', NULL, 12, NULL, NULL, '2019-08-11 11:18:55', '2019-08-11 11:18:55'),
-(48, 4, 'Vải áo dài cách tân nam', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 13, NULL, NULL, '2019-08-11 11:19:09', '2019-08-11 11:19:09'),
-(49, 4, 'Vải áo dài cách tân nữ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 14, NULL, NULL, '2019-08-11 11:19:26', '2019-08-11 11:19:26'),
-(50, 4, 'Vải áo dài cách tân hoa 3D', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', NULL, 15, NULL, NULL, '2019-08-11 11:19:45', '2019-08-11 11:19:45'),
-(51, 4, 'Vải áo dài cách tân in', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:02', '2019-08-11 11:20:02'),
-(52, 4, 'Vải áo dài cách tân họa tiết', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', NULL, 17, NULL, NULL, '2019-08-11 11:20:18', '2019-08-11 11:20:18'),
-(53, 4, 'Vải áo dài cách tân vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', NULL, 18, NULL, NULL, '2019-08-11 11:20:36', '2019-08-11 11:20:36'),
-(54, 4, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 20, NULL, NULL, '2019-08-11 11:21:29', '2019-08-11 11:21:29');
+(39, 4, 'Vải áo dài mẹ và bé', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-me-va-be.html', '_self', NULL, '#333333', 15, 4, NULL, NULL, '2019-08-11 11:16:54', '2019-08-22 07:21:59'),
+(40, 4, 'Vải áo dài thêu', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-theu.html', '_self', NULL, '#333333', 15, 5, NULL, NULL, '2019-08-11 11:17:12', '2019-08-22 07:22:00'),
+(41, 4, 'Vải áo dài vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-ve.html', '_self', NULL, '#333333', 15, 6, NULL, NULL, '2019-08-11 11:17:25', '2019-08-22 07:22:02'),
+(42, 4, 'Vải áo dài cưới hỏi, dạ hội', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cuoi-hoi-da-hoi.html', '_self', NULL, '#333333', 15, 7, NULL, NULL, '2019-08-11 11:17:42', '2019-08-22 07:22:16'),
+(43, 4, 'Vải áo dài đính đá, kết cườm', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-dinh-da-ket-cuom.html', '_self', NULL, '#333333', 15, 8, NULL, NULL, '2019-08-11 11:18:03', '2019-08-22 07:22:17'),
+(44, 4, 'Vải áo dài lụa', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-lua.html', '_self', NULL, '#333333', 15, 9, NULL, NULL, '2019-08-11 11:18:15', '2019-08-22 07:22:18'),
+(45, 4, 'Vải áo dài Thái Tuấn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-thai-tuan.html', '_self', NULL, '#333333', 15, 10, NULL, NULL, '2019-08-11 11:18:29', '2019-08-22 07:22:20'),
+(46, 4, 'Vải áo dài trơn', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-tron.html', '_self', NULL, '#333333', 15, 11, NULL, NULL, '2019-08-11 11:18:41', '2019-08-22 07:22:23'),
+(47, 4, 'Vải quần áo dài', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-quan-ao-dai.html', '_self', NULL, '#333333', 15, 12, NULL, NULL, '2019-08-11 11:18:55', '2019-08-22 07:23:40'),
+(48, 4, 'Vải áo dài cách tân nam', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nam.html', '_self', NULL, '#333333', NULL, 2, NULL, NULL, '2019-08-11 11:19:09', '2019-08-22 07:23:40'),
+(49, 4, 'Vải áo dài cách tân nữ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-nu.html', '_self', NULL, '#333333', NULL, 3, NULL, NULL, '2019-08-11 11:19:26', '2019-08-22 07:23:41'),
+(50, 4, 'Vải áo dài cách tân hoa 3D', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-3d.html', '_self', NULL, '#333333', 49, 1, NULL, NULL, '2019-08-11 11:19:45', '2019-08-22 07:23:41'),
+(51, 4, 'Vải áo dài cách tân in', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-in.html', '_self', NULL, '#333333', 49, 2, NULL, NULL, '2019-08-11 11:20:02', '2019-08-22 07:23:51'),
+(52, 4, 'Vải áo dài cách tân họa tiết', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-hoa-tiet.html', '_self', NULL, '#333333', 49, 3, NULL, NULL, '2019-08-11 11:20:18', '2019-08-22 07:23:51'),
+(53, 4, 'Vải áo dài cách tân vẽ', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-ao-dai-cach-tan-ve.html', '_self', NULL, '#333333', 49, 4, NULL, NULL, '2019-08-11 11:20:36', '2019-08-22 07:23:51'),
+(54, 4, 'Vải váy, áo, đầm thời trang', 'url', 'http://vaiaodaithanhthuy.com/sp/danh-muc/vai-vay-ao-dam-thoi-trang.html', '_self', NULL, '#333333', NULL, 4, NULL, NULL, '2019-08-11 11:21:29', '2019-08-22 07:23:45');
 
 -- --------------------------------------------------------
 
@@ -537,18 +583,16 @@ INSERT INTO `page_custom_fields` (`id`, `key`, `display_name`, `value`, `type`, 
 (13, 'home.cate_slug_session2', 'Slug danh mục sản phẩm - Phần 2 (Ngăn cách nhau bằng dấu phẩy \",\")', 'vai-ao-dai,vai-ao-dai-cach-tan-nam,vai-ao-dai-cach-tan-nu,vai-vay-ao-dam-thoi-trang', 'text', 8, 1, '2019-08-09 02:31:37', '2019-08-21 07:45:43'),
 (15, 'home.link_banner1', 'Liên kết - Banner 1', 'https://google.com.vn', 'text', 6, 1, '2019-08-09 03:08:45', '2019-08-21 07:45:47'),
 (16, 'home.image_banner1', 'Hình ảnh - Banner 1', 'field16_1565667950.png', 'image', 5, 1, '2019-08-09 03:09:49', '2019-08-21 07:45:47'),
-(17, 'home.title1_banner2', 'Tiêu đề 1 - Banner 2', 'MIỄN PHÍ VẬN CHUYỂN', 'text', 9, 1, '2019-08-09 03:18:05', '2019-08-21 07:45:43'),
+(17, 'home.title1_banner2', 'Tiêu đề 1 - Banner 2', 'CHÍNH SÁCH VẬN CHUYỂN', 'text', 9, 1, '2019-08-09 03:18:05', '2019-08-22 07:56:23'),
 (18, 'home.title2_banner2', 'Tiêu đề 2 - Banner 2', 'TRẢ HÀNG TRONG 30 NGÀY ĐẦU', 'text', 11, 1, '2019-08-09 03:18:24', '2019-08-21 07:45:43'),
 (19, 'home.title3_banner2', 'Tiêu đề 3 - Banner 2', 'HỖ TRỢ 24/7', 'text', 13, 1, '2019-08-09 03:18:34', '2019-08-21 07:45:43'),
-(20, 'home.des1_banner2', 'Mô tả 1 - Banner 2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.', 'text_area', 10, 1, '2019-08-09 03:19:01', '2019-08-21 07:45:43'),
-(21, 'home.des2_banner2', 'Mô tả 2 - Banner 2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.', 'text_area', 12, 1, '2019-08-09 03:19:13', '2019-08-21 07:45:43'),
-(22, 'home.des3_banner2', 'Mô tả 3 - Banner 2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, nobis.', 'text_area', 14, 1, '2019-08-09 03:19:23', '2019-08-21 07:45:43'),
+(20, 'home.des1_banner2', 'Mô tả 1 - Banner 2', 'Miễn phí vận chuyển nội thành Nha Trang. Ngoài tỉnh liên hệ.', 'text_area', 10, 1, '2019-08-09 03:19:01', '2019-08-22 07:57:43'),
+(21, 'home.des2_banner2', 'Mô tả 2 - Banner 2', 'Trả đổi sản phẩm nếu bạn không hài lòng với sản phẩm của Shop.', 'text_area', 12, 1, '2019-08-09 03:19:13', '2019-08-22 07:58:08'),
+(22, 'home.des3_banner2', 'Mô tả 3 - Banner 2', 'Luôn luôn sẵn sàng hỗ trợ khách hàng mọi lúc mọi nơi.', 'text_area', 14, 1, '2019-08-09 03:19:23', '2019-08-22 07:58:08'),
 (23, 'home.title_session3', 'Tiêu đề - Phần 3', 'NHỮNG BÀI KINH NGHIỆM HAY', 'text', 15, 1, '2019-08-09 03:30:54', '2019-08-21 07:45:43'),
 (24, 'home.cate_slug_session3', 'Slug chuyên mục bài viết - Phần 3', 'goc-chia-se', 'text', 16, 1, '2019-08-09 03:41:58', '2019-08-21 07:45:43'),
-(25, 'contact.title_session1', 'Tiêu đề - Phần 1', 'Chúng tôi sẵn sàng hỗ trợ bạn ..', 'text', 3, 4, '2019-08-09 04:30:49', '2019-08-09 04:31:54'),
-(26, 'contact.des_session1', 'Mô tả - Phần 1', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione ducimus harum iusto nobis voluptate ipsum blanditiis illo illum dolore totam omnis atque eius deserunt quaerat, mollitia nihil quam tempora beatae?', 'text_area', 4, 4, '2019-08-09 04:31:17', '2019-08-09 07:00:14'),
-(27, 'home.title_session1a', 'Tiêu đề - Phần 1A (Ngăn cách nhau bằng dấu phẩy \",\")', 'Vải áo dài lụa,Vải áo dài cưới,Áo dài đính đá kết cườm,Áo dài cưới hỏi dạ hội', 'text', 3, 1, '2019-08-21 07:44:04', '2019-08-21 08:29:02'),
-(28, 'home.cate_slug_session1a', 'Slug danh mục sản phẩm - Phần 1A (Ngăn cách nhau bằng dấu phẩy \",\")', 'vai-ao-dai-lua,vai-ao-dai-cuoi-hoi-da-hoi,vai-ao-dai-dinh-da-ket-cuom,vai-ao-dai-cuoi-hoi-da-hoi', 'text', 4, 1, '2019-08-21 07:45:39', '2019-08-21 08:07:15');
+(27, 'home.title_session1a', 'Tiêu đề - Phần 1A (Ngăn cách nhau bằng dấu phẩy \",\")', 'Vải áo dài lụa,Áo dài cách tân in,Áo dài đính đá kết cườm,Áo dài cưới hỏi dạ hội', 'text', 3, 1, '2019-08-21 07:44:04', '2019-08-23 01:06:17'),
+(28, 'home.cate_slug_session1a', 'Slug danh mục sản phẩm - Phần 1A (Ngăn cách nhau bằng dấu phẩy \",\")', 'vai-ao-dai-lua,vai-ao-dai-cach-tan-in,vai-ao-dai-dinh-da-ket-cuom,vai-ao-dai-cuoi-hoi-da-hoi', 'text', 4, 1, '2019-08-21 07:45:39', '2019-08-23 01:06:17');
 
 -- --------------------------------------------------------
 
@@ -666,16 +710,10 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `title`, `slug`, `photo`, `description`, `body`, `publish`, `counter`, `user_id`, `seo_title`, `seo_description`, `seo_keyword`, `created_at`, `updated_at`) VALUES
-(11, 'Bài viết dữ liệu mẫu 11', 'bai-viet-du-lieu-mau-11', '1565335230.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p><br></p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:30'),
-(12, 'Bài viết dữ liệu mẫu 12', 'bai-viet-du-lieu-mau-12', '1565335237.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:37'),
-(13, 'Bài viết dữ liệu mẫu 13', 'bai-viet-du-lieu-mau-13', '1565335243.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:43'),
-(14, 'Bài viết dữ liệu mẫu 14', 'bai-viet-du-lieu-mau-14', '1565335250.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:50'),
-(15, 'Bài viết dữ liệu mẫu 15', 'bai-viet-du-lieu-mau-15', '1565335256.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:56'),
-(16, 'Bài viết dữ liệu mẫu 16', 'bai-viet-du-lieu-mau-16', '1565335213.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:13'),
-(17, 'Bài viết dữ liệu mẫu 17', 'bai-viet-du-lieu-mau-17', '1565335204.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p><br></p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:20:05'),
-(18, 'Bài viết dữ liệu mẫu 18', 'bai-viet-du-lieu-mau-18', '1565335276.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:21:16'),
-(19, 'Bài viết dữ liệu mẫu 19', 'bai-viet-du-lieu-mau-19', '1565335177.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p><br></p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:19:37'),
-(20, 'Bài viết dữ liệu mẫu 20', 'bai-viet-du-lieu-mau-20', '1565335160.jpeg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.', '<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p><p><br></p><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit temporibus delectus consectetur impedit facere ut ipsum ipsa, laborum accusantium recusandae illum eum voluptatem dolorum veritatis magnam libero amet.</p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-09 07:19:20');
+(13, 'Vải áo dài cho người mập chọn thế nào?', 'vai-ao-dai-cho-nguoi-map-chon-the-nao?', '1566461113.jpeg', 'Do đặc trưng của áo dài là ôm sát người nên những người mập thường rất khó khăn trong việc chọn lựa vải áo dài cho mình. Nếu chọn vải không khéo sẽ làm lộ các khuyết điểm lớn như: ngấn mỡ bụng, bắp tay to, cổ ngắn...', '<p>Do đặc trưng của áo dài là ôm sát người nên những người mập thường rất khó khăn trong việc chọn lựa vải áo dài cho mình. Nếu chọn vải không khéo sẽ làm lộ các khuyết điểm lớn như: ngấn mỡ bụng, bắp tay to, cổ ngắn...Vậy&nbsp;vải áo dài cho người mập&nbsp;nên chọn thế nào? Làm sao để che lấp đi được những khuyết điểm khi&nbsp;người mập mặc áo dài? Các chị em nên chú ý những điểm sau đây:</p><p>1. Chất liệu vải áo dài:&nbsp;</p><p>- Tuyệt đối không chọn vải có độ bóng, độ bóng chỉ làm những khuyết điểm trên cơ thể càng nổi bật thêm.</p><p class=\"ql-align-center\"><img src=\"http://www.vaiaodaire.com/images/article/ao-dai-cho-nguoi-map/vai-co-do-bong.jpg\" height=\"498\" width=\"455\"></p><p class=\"ql-align-center\">Vải áo dài cho người mập&nbsp;không nên có độ bóng</p><p>- Không chọn vải có độ thun quá ôm sát người, sẽ làm lộ những chỗ có ngấn trên cơ thể đặc biệt là bụng và eo.</p><p>- Nên chọn vải áo dài có độ co dãn vừa phải, độ rủ cao (<a href=\"http://www.vaiaodaire.com/vai-ao-dai/lua-tam-thai-4\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Lụa Tằm Thái</a>&nbsp;hoặc&nbsp;<a href=\"http://www.vaiaodaire.com/vai-ao-dai/lua-thai-tuan-7\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Thái Tuấn</a>).</p><p>- Đặc biệt nên chọn loại vải áo dài thấm hút mồ hôi tốt (<a href=\"http://www.vaiaodaire.com/vai-ao-dai/lua-thai-tuan-7\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Lụa Thái Tuấn</a>) vì người tròn thường dễ bị ra mồ hôi.</p><p>2. Màu vải áo dài:</p><p>- Không nên chọn vải có tông màu sáng vì khi ánh sáng chiếu vào thì những chỗ thừa ra trên cơ thể sẽ bị đổ bóng râm lên chỗ khác, khuyết điểm càng lộ rõ hơn.</p><p>- Nên chọn vải áo dài có màu đậm như: Đỏ đậm, Tím than, xanh dương đậm...</p><p class=\"ql-align-center\"><img src=\"http://www.vaiaodaire.com/images/article/ao-dai-cho-nguoi-map/mau-vai-phu-hop.jpg\" height=\"750\" width=\"500\"></p><p class=\"ql-align-center\">Người mập nên chọn vải áo dài có màu đậm.</p><p>&nbsp;</p><p>3. Họa tiết trên vải áo dài:</p><p>- Tuyệt đổi không chọn vải có họa tiết sọc ngang, sẽ trông người thêm mập và lùn.</p><p class=\"ql-align-center\"><img src=\"http://www.vaiaodaire.com/images/article/ao-dai-cho-nguoi-map/hoa-tiet-soc.jpg\" height=\"537\" width=\"349\"></p><p class=\"ql-align-center\">Họa tiết sọc ngang làm người mập thêm</p><p><br></p><p>- Không nên chọn họa tiết lớn như: Bông hoa lớn trước ngực, họa tiết tròn lớn, hiệu ứng ánh sáng chói ngay phần ngực.</p><p>- Nên chọn vải áo dài có họa tiết hoa dây trên dưới hoặc hoa dây từ trên thẳng xuống dưới, dây kèm theo những bông hoa nhỏ trông mềm mại và uyển chuyển hơn.</p><p>4. Cách may áo dài:</p><p>- Không nên may áo cổ thuyền nếu cổ ngắn và hơi đầy đặn. Chọn may cổ cao sẽ che bớt đi được khuyết điểm này.</p><p>- Không nên may áo tay lỡ hoặc tay ngắn nếu bắp tay to. Chọn may áo tay dài cũng che bớt được khuyết điểm này.</p><p class=\"ql-align-center\"><img src=\"http://www.vaiaodaire.com/images/article/ao-dai-cho-nguoi-map/co-thuyen-vs-co-tron.jpg\" height=\"187\" width=\"480\"></p><p class=\"ql-align-center\">Áo dài cổ thuyền và cổ tròn truyền thống</p><p class=\"ql-align-center\"><br></p><p>Trên đây là một chút kinh nghiệm Loan rút ra được từ bản thân và các bạn đồng nghiệp khác. Loan là giáo viên nên chiếc áo dài thường gắn bó với Loan gần như hằng ngày. Chúc các chị em có thân hình không được thon thả lắm nhưng vẫn tự tin trong tà áo dài thướt tha của mình.</p><p>Nguồn: <a href=\"http://www.vaiaodaire.com/ao-dai-dep/vai-ao-dai-cho-nguoi-map-chon-the-nao-19\" target=\"_blank\">http://www.vaiaodaire.com/ao-dai-dep/vai-ao-dai-cho-nguoi-map-chon-the-nao-19</a></p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-05 08:22:32', '2019-08-22 08:05:13'),
+(14, 'Vải may áo dài đẹp được chọn lựa như thế nào', 'vai-may-ao-dai-dep-duoc-chon-lua-nhu-the-nao', '1566460870.jpeg', 'Vải may áo dài đẹp được chọn lựa như thế nào? Cách chọn chất liệu vải ra sao? Màu sắc vải như thế nào gọi là phù hợp với làn da của mình? Dáng người ảnh hưởng thế nào để việc mặc áo dài đẹp hay xấu...Đây là các câu hỏi phổ biến của các chị em phụ nữ khi đi chọn vải may áo dài cho mình.', '<p><a href=\"http://www.vaiaodaire.com/\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Vải may áo dài đẹp</a>&nbsp;được chọn lựa như thế nào? Cách chọn chất liệu vải ra sao? Màu sắc vải như thế nào gọi là phù hợp với làn da của mình? Dáng người ảnh hưởng thế nào để việc mặc&nbsp;<a href=\"http://www.vaiaodaire.com/\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">áo dài đẹp</a>&nbsp;hay xấu...Đây là các câu hỏi phổ biến của các chị em phụ nữ khi đi chọn vải may áo dài cho mình. Sau đây Loan xin được phân tính từng yếu tố để các chị em có thêm chút kinh nghiệm chọn lựa&nbsp;<a href=\"http://www.vaiaodaire.com/\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">vải áo dài đẹp</a>&nbsp;và phù hợp cho mình.</p><p><img src=\"http://www.vaiaodaire.com/images/article/cach-chon-vai-ao-dai-dep.jpg\" height=\"412\" width=\"600\"></p><p>1. Chọn chất liệu vải</p><p>Có nhiều chất liệu&nbsp;vải&nbsp;may áo dài, tuy nhiên để tạo độ bay, thông thường người ta thường chọn các chất liệu nhẹ và có độ co giãn thích hợp như Lụa và mốt nhất trong những năm gần đây là&nbsp;<a href=\"http://www.vaiaodaire.com/vai-ao-dai/lua-han-quoc-1\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Lụa Hàn Quốc</a>&nbsp;và&nbsp;<a href=\"http://www.vaiaodaire.com/vai-ao-dai/lua-tam-thai-4\" target=\"_blank\" style=\"color: rgb(45, 127, 238);\">Lụa Tằm Thái</a>.</p><p>Chú ý:&nbsp;Để chọn được&nbsp;vải may áo dài đẹp, không nên chọn những chất liệu quá mỏng khiến đồ lót của bạn bị hằn lên hay nổi rõ hoa văn của đồ lót, tạo sự phản cảm. Nên chọn nội y mềm, ôm sát bầu ngực và màu sắc đơn giản, tốt nhất là màu sáng, trơn để tránh nổi rõ trên áo dài.</p><p>2. Chọn màu sắc vải</p><p>Tùy theo mục đích của người mặc mà chọn lựa màu sắc của&nbsp;vải may áo dài&nbsp;cho thích hợp. Nếu áo dài được mặc vào những sự kiện lớn, có thể diện các màu sắc nổi bật như Cam, Hồng, Đỏ...Bên cạnh đó có thể đính đá, kết cườm, thêu, vẽ trang trí cho thêm phần rực rỡ, nổi bật.</p><p>Đặc biệt lưu ý là màu vải áo dài phải phù hợp với màu da của bạn, nếu bạn có làn da sáng thì bạn mặc sao cũng được, nhưng ngược lại, nếu bạn có làn da hơi sẫm màu thì nên chọn vải có màu không quá sáng cũng không quá tối.</p><p>3. Dáng người</p><p>Bạn có dáng người&nbsp;cao gầy&nbsp;dễ chọn vải áo dài và dễ mặc&nbsp;áo dài đẹp&nbsp;vì tạo được độ thanh nhã, dịu dàng. Tuy nhiên nên tránh màu tối và đừng quên chọn nội y giúp khuôn ngực đầy đặn hơn, tăng đường cong cho cơ thể.</p><p>Bạn có dáng người&nbsp;tròn trịa&nbsp;không nên chọn các chất liệu bóng mà nên chọn vải áo dài với màu sắc tối như Tím, Đỏ đậm...và nhiều họa tiết nhỏ. Họa tiết nên là dạng kéo dài theo chiều dọc để tạo cảm giác dáng người cao hơn. Bạn gái có dáng người tròn cũng nên lựa chọn áo dài cổ thuyền để che bớt khuyết điểm cổ thấp và áo tay dài che bắp tay.</p><p>Bạn có dáng người&nbsp;cơ bản, trung bình rất dễ chọn áo dài, vì vậy có thể lựa chọn hầu hết các kiểu vải, tuy nhiên vẫn luôn phải chú ý đến độ phù hợp với lứa tuổi cũng như áo dài mặc trong dịp gì (dự đám cưới, tham gia hội nghị, ban ngày hay buổi tối...).</p><p>Nếu&nbsp;thỏa mãn được 3 điều trên, thì chắc chắn là bạn đã sở hữu được một chiếc&nbsp;vải áo dài tuyệt đẹp&nbsp;và phù hợp với cơ thể của mình. Chúc các bạn luôn luôn trẻ đẹp và xinh xắn cùng những chiếc&nbsp;áo dài duyên dáng.</p>', 'publish', 0, 1, 'Vải may áo dài đẹp được chọn lựa như thế nào', 'Vải may áo dài đẹp được chọn lựa như thế nào', NULL, '2019-08-05 08:22:32', '2019-08-22 08:01:10'),
+(15, 'Chọn áo dài đi chùa đẹp và phù hợp', 'chon-ao-dai-di-chua-dep-va-phu-hop', '1566459826.jpeg', 'Ngày nay, việc chọn áo dài đi tới các dịp lễ hội luôn là ưu tiên hàng đầu của phái nữ, không chỉ bởi nét cuốn hút mê hồn của tà áo dài Việt, mà khi khoác lên mình chiếc áo dài yêu thương bạn gái còn khoác lên mình nét thanh lịch, duyên dáng và trang nhã, góp phần làm cho nơi có sự hiện diện của bạn trở nên trang trọng hơn.', '<p class=\"ql-align-justify\">Ngày nay, việc chọn áo dài đi tới các dịp lễ hội luôn là ưu tiên hàng đầu của phái nữ, không chỉ bởi nét cuốn hút mê hồn của tà áo dài Việt, mà khi khoác lên mình chiếc áo dài yêu thương bạn gái còn khoác lên mình nét thanh lịch, duyên dáng và trang nhã, góp phần làm cho nơi có sự hiện diện của bạn trở nên trang trọng hơn.</p><p class=\"ql-align-justify\">Khi tới chùa thăm viếng, cầu bình an các chị em ngày nay ai cũng muốn chọn cho mình những tà áo dài xinh xắn nhưng nhã nhặn để phù hợp hơn với nơi trang nghiêm.</p><p class=\"ql-align-center\"><img src=\"http://vaiaodaimymy.com/wp-content/uploads/2019/02/chon-vai-ao-dai-di-chua.jpg\" alt=\"Cách chọn vải áo dài đi chùa\" height=\"466\" width=\"700\"></p><p class=\"ql-align-justify\"><em>Cách chọn vải áo dài đi Chùa</em></p><p class=\"ql-align-justify\">Vậy phải chọn áo dài đi chùa sao cho đẹp và phù hợp.&nbsp;<strong>Áo Dài My My</strong>&nbsp;xin gửi tới các ban một vài gợi ý nhỏ, giúp cho sự lựa chọn của các bạn dễ dàng hơn nhé.</p><p class=\"ql-align-justify\"><strong>Vải áo dài đi chùa</strong>&nbsp;trước hết cần kín đáo và trang nhã, cần chọn loại vải đủ dày và màu sác không quá sặc sỡ, thiết kế áo dài cần kín đáo tránh may cổ áo quá rộng, xẻ tà quá cao, cũng không nên chọn may quân áo dài cạp quá trễ. về phần hoa văn,&nbsp;<strong>áo dài đi chùa</strong>&nbsp;thường chọn áo dài trơn,&nbsp;<a href=\"http://vaiaodaimymy.com/vai-ao-dai/hoa-sen/\" target=\"_blank\" style=\"color: rgb(51, 72, 98);\"><strong>áo dài hoa sen</strong></a>, hoặc những loài hoa đơn sơ mộc mạc.&nbsp;<strong>Áo dài màu lam</strong>&nbsp;cũng là một trong những màu được phái nữ chọn lựa nhiều nhất khi may trang phục áo dài đi chùa.</p><p class=\"ql-align-right\">Nguồn: vaiaodaimymy.com</p>', 'publish', 0, 1, 'chon-ao-dai-di-chua-dep-va-phu-hop', 'chọn áo dài', 'áo dài, đi chùa', '2019-08-05 08:22:32', '2019-08-22 07:59:08'),
+(21, 'Kinh nghiệm chọn áo dài đồng phục', 'kinh-nghiem-chon-ao-dai-dong-phuc', '1566461228.jpeg', 'Chào các anh chị, sau nhiều lần tư vấn và thiết kế áo dài đồng phục cho trường học, tổ chức, cơ quan, Loan rút ra được khá nhiều kinh nghiệm và hôm nay Loan xin được chia sẻ các kinh nghiệm khi chọn áo dài đồng phục.', '<p>Chào các anh chị, sau nhiều lần tư vấn và thiết kế áo dài đồng phục cho trường học, tổ chức, cơ quan, Loan rút ra được khá nhiều kinh nghiệm và hôm nay Loan xin được chia sẻ các kinh nghiệm khi chọn áo dài đồng phục.</p><p>Áo dài đồng phục được dùng cho tập thể vừa và lớn, do đó phải đáp ứng được tối thiểu 80% yêu cầu của tập thể như:&nbsp;Vải mặc phải thoải mái, màu phải phù hợp, họa tiết phải chọn lựa thế nào để khi mặc lên tạo nên sự đồng nhất của tập thể...Sau đây Loan sẽ phân tích từng yếu tố một để anh chị dễ dàng hơn cho việc chọn lựa đồng phục cho tập thể cơ quan của mình.</p><p><br></p><p>1. Về chất liệu vải:</p><p>Áo dài đồng phục chỉ nên chọn loại vải có độ co dãn từ trung bình trở lên, phù hợp nhất hiện nay là&nbsp;Lụa Hàn Quốc, lụa Garnet&nbsp;và&nbsp;Lụa Thái Tuấn. Ba loại vải này có ưu điểm rất là lớn đó là sự co dãn và độ mềm mịn của vải, vải Thái Tuấn có độ mềm và mịn vượt trội. Do đó nếu có kinh phí tốt, nên chọn vải Thái Tuấn làm đồng phục cho tập thể, còn không thì chọn Lụa Hàn với kinh phí mềm hơn hoặc Lụa Garnet với kinh phí vừa phải.</p><p><br></p><p>2. Về màu vải</p><p>Nếu cơ quan, tập thể của bạn đã có màu đặc trưng rồi thì Shop Loan sẽ thiết kế theo tông màu của cơ quan bạn, còn nếu cơ quan, tập thể bạn không có tông màu đặc trưng, thì nên chọn vải có tông màu hơi nhạt để tạo điểm nhấn cho họa tiết trên vải, khi mặc lên sẽ tạo sự&nbsp;đồng nhất, đều đặn, làm toát lên sự đoàn kết chặt chẽ của tập thể. Ưu điểm của tông màu nhạt là phù hợp với các chị em có tạng người từ tròn - trung bình - ốm</p><p><br></p><p>3. Về họa tiết trên vải</p><p>Đây là phần không kém quan trọng tạo nên sự đồng nhất của tập thể,&nbsp;Không nên chọn họa tiết quá cầu kỳ, phức tạp, vì khi nhiều người mặc đứng gần lại với nhau nhìn sẽ rất là rối mắt. Không chọn họa tiết hoa trên hoa dưới vì sẽ rất khó may, người thấp sẽ bị cắt mất hoa. Nên chọn Họa tiết hoa nhẹ nhấn ở trên vai, hoặc ngang hông, hoặc chỉ có hoa trên hay hoa dưới. Ưu điểm của loại hoa tiết đơn giản này là mọi người cao - thấp - mập - ốm đều may được.</p><p>Tại sao nên chọn mua áo dài đồng phục tại shop Loan:</p><p>- Có nhiều kinh nghiệm trong việc chọn lựa mẫu mã và chất vải tùy túi tiền của khách hàng</p><p>- Nhìn ra được ưu và khuyết điểm từng mẫu khi lên áo dài cho tập thể</p><p>- Thay đổi thiết kế, màu sắc phù hợp với cơ quan tổ chức</p><p>- Quan trọng nhất là uy tín hàng đầu trong lĩnh vực kinh doanh áo dài online &amp; offline.</p><p>Nguồn: <a href=\"http://www.vaiaodaire.com/chia-se-kinh-nghiem/kinh-nghiem-chon-ao-dai-dong-phuc-21\" target=\"_blank\">http://www.vaiaodaire.com/chia-se-kinh-nghiem/kinh-nghiem-chon-ao-dai-dong-phuc-21</a></p>', 'publish', 0, 1, NULL, NULL, NULL, '2019-08-22 08:07:08', '2019-08-22 08:55:16');
 
 -- --------------------------------------------------------
 
@@ -693,6 +731,7 @@ CREATE TABLE `products` (
   `body` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `publish` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_sale` varchar(254) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `counter` int(11) NOT NULL DEFAULT 0,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -703,31 +742,48 @@ CREATE TABLE `products` (
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `slug`, `code`, `photo`, `description`, `body`, `publish`, `price`, `counter`, `user_id`, `created_at`, `updated_at`) VALUES
-(23, 'MS-TT20', 'ms-tt20', 'MS-TT20', '1566044139.png', 'MS-TT20', '<p><img src=\"/media/product/2019_8/5d57efae347e0.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:15:39', '2019-08-17 12:15:39'),
-(24, 'MS-TT21', 'ms-tt21', 'MS-TT21', '1566044212.png', 'MS-TT21', '<p><img src=\"/media/product/2019_8/5d57f02d43111.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:16:52', '2019-08-17 12:16:52'),
-(25, 'MS-TT22', 'ms-tt22', 'MS-TT22', '1566044300.png', 'MS-TT22', '<p><img src=\"/media/product/2019_8/5d57f0647cf8a.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:18:20', '2019-08-17 12:18:20'),
-(26, 'MS-TT23', 'ms-tt23', 'MS-TT23', '1566044344.png', 'MS-TT23', '<p><img src=\"/media/product/2019_8/5d57f0b19bce2.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:19:04', '2019-08-17 12:19:04'),
-(27, 'MS-TT24', 'ms-tt24', 'MS-TT24', '1566044466.png', 'MS-TT24', '<p><img src=\"/media/product/2019_8/5d57f12b81133.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:21:06', '2019-08-17 12:21:06'),
-(28, 'MS-TT25', 'ms-tt25', 'MS-TT25', '1566044503.png', 'MS-TT25', '<p><img src=\"/media/product/2019_8/5d57f1537a666.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:21:43', '2019-08-17 12:21:43'),
-(29, 'MS-TT26', 'ms-tt26', 'MS-TT26', '1566044556.png', 'MS-TT26', '<p><img src=\"/media/product/2019_8/5d57f186ab548.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:22:36', '2019-08-17 12:22:36'),
-(30, 'MS-TT27', 'ms-tt27', 'MS-TT27', '1566044607.png', 'MS-TT27', '<p><img src=\"/media/product/2019_8/5d57f1b84e7f1.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:23:27', '2019-08-17 12:23:27'),
-(31, 'MS-TT28', 'ms-tt28', 'MS-TT28', '1566044697.png', 'MS-TT28', '<p><img src=\"/media/product/2019_8/5d57f213d7187.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:24:57', '2019-08-17 12:24:57'),
-(32, 'MS-TT29', 'ms-tt29', 'MS-TT29', '1566044734.png', 'MS-TT29', '<p><img src=\"/media/product/2019_8/5d57f2398a10d.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:25:34', '2019-08-17 12:25:34'),
-(33, 'MS-TT30', 'ms-tt30', 'MS-TT30', '1566044789.png', 'MS-TT30', '<p><img src=\"/media/product/2019_8/5d57f26f6bdbe.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:26:29', '2019-08-17 12:26:29'),
-(34, 'MS-TT31', 'ms-tt31', 'MS-TT31', '1566044830.png', 'MS-TT31', '<p><img src=\"/media/product/2019_8/5d57f29a206b4.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:27:10', '2019-08-17 12:27:10'),
-(35, 'MS-TT32', 'ms-tt32', 'MS-TT32', '1566044957.png', 'MS-TT32', '<p><img src=\"/media/product/2019_8/5d57f3190782e.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:29:17', '2019-08-17 12:29:17'),
-(36, 'MS-TT33', 'ms-tt33', 'MS-TT33', '1566045003.png', 'MS-TT33', '<p><img src=\"/media/product/2019_8/5d57f340b1e1c.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:30:03', '2019-08-17 12:30:03'),
-(37, 'MS-TT34', 'ms-tt34', 'MS-TT34', '1566045051.png', 'MS-TT34', '<p><img src=\"/media/product/2019_8/5d57f36f5b094.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:30:51', '2019-08-21 09:26:54'),
-(38, 'MS-TT35', 'ms-tt35', 'MS-TT35', '1566045115.png', 'MS-TT35', '<p><img src=\"/media/product/2019_8/5d57f3b3b56e1.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:31:55', '2019-08-17 12:31:55'),
-(39, 'MS-TT36', 'ms-tt36', 'MS-TT36', '1566045164.png', 'MS-TT36', '<p><img src=\"/media/product/2019_8/5d57f3e5ec497.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:32:44', '2019-08-17 12:32:44'),
-(40, 'MS-TT37', 'ms-tt37', 'MS-TT37', '1566045217.png', 'MS-TT37', '<p><img src=\"/media/product/2019_8/5d57f41856571.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:33:37', '2019-08-21 09:24:11'),
-(41, 'MS-TT38', 'ms-tt38', 'MS-TT38', '1566045258.png', 'MS-TT38', '<p><img src=\"/media/product/2019_8/5d57f4421a8f0.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:34:18', '2019-08-17 12:34:18'),
-(42, 'MS-TT39', 'ms-tt39', 'MS-TT39', '1566045359.png', 'MS-TT39', '<p><img src=\"/media/product/2019_8/5d57f46fa3301.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:35:59', '2019-08-17 12:35:59'),
-(43, 'MS-TT40', 'ms-tt40', 'MS-TT40', '1566045405.png', 'MS-TT40', '<p><img src=\"/media/product/2019_8/5d57f4d5ae23a.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:36:45', '2019-08-21 09:24:02'),
-(44, 'MS-TT41', 'ms-tt41', 'MS-TT41', '1566045452.png', 'MS-TT41', '<p><img src=\"/media/product/2019_8/5d57f507577f8.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:37:32', '2019-08-21 09:23:54'),
-(45, 'MS-TT42', 'ms-tt42', 'MS-TT42', '1566045491.png', 'MS-TT42', '<p><img src=\"/media/product/2019_8/5d57f52cc489a.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:38:11', '2019-08-21 08:57:47'),
-(46, 'MS-TT43', 'ms-tt43', 'MS-TT43', '1566045535.png', 'MS-TT43', '<p><img src=\"/media/product/2019_8/5d57f55915bf5.png\"></p>', 'publish', '300k/bộ', 0, 1, '2019-08-17 12:38:55', '2019-08-21 07:52:07');
+INSERT INTO `products` (`id`, `name`, `slug`, `code`, `photo`, `description`, `body`, `publish`, `price`, `price_sale`, `counter`, `user_id`, `created_at`, `updated_at`) VALUES
+(23, 'MS-TT20', 'ms-tt20', 'MS-TT20', '1566044139.png', 'MS-TT20', '<p><img src=\"/media/product/2019_8/5d57efae347e0.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:15:39', '2019-08-17 12:15:39'),
+(24, 'MS-TT21', 'ms-tt21', 'MS-TT21', '1566044212.png', 'MS-TT21', '<p><img src=\"/media/product/2019_8/5d57f02d43111.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:16:52', '2019-08-17 12:16:52'),
+(25, 'MS-TT22', 'ms-tt22', 'MS-TT22', '1566044300.png', 'MS-TT22', '<p><img src=\"/media/product/2019_8/5d57f0647cf8a.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:18:20', '2019-08-17 12:18:20'),
+(26, 'MS-TT23', 'ms-tt23', 'MS-TT23', '1566044344.png', 'MS-TT23', '<p><img src=\"/media/product/2019_8/5d57f0b19bce2.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:19:04', '2019-08-17 12:19:04'),
+(27, 'MS-TT24', 'ms-tt24', 'MS-TT24', '1566044466.png', 'MS-TT24', '<p><img src=\"/media/product/2019_8/5d57f12b81133.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:21:06', '2019-08-17 12:21:06'),
+(28, 'MS-TT25', 'ms-tt25', 'MS-TT25', '1566044503.png', 'MS-TT25', '<p><img src=\"/media/product/2019_8/5d57f1537a666.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:21:43', '2019-08-17 12:21:43'),
+(29, 'MS-TT26', 'ms-tt26', 'MS-TT26', '1566044556.png', 'MS-TT26', '<p><img src=\"/media/product/2019_8/5d57f186ab548.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:22:36', '2019-08-17 12:22:36'),
+(30, 'MS-TT27', 'ms-tt27', 'MS-TT27', '1566044607.png', 'MS-TT27', '<p><img src=\"/media/product/2019_8/5d57f1b84e7f1.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:23:27', '2019-08-17 12:23:27'),
+(31, 'MS-TT28', 'ms-tt28', 'MS-TT28', '1566044697.png', 'MS-TT28', '<p><img src=\"/media/product/2019_8/5d57f213d7187.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:24:57', '2019-08-17 12:24:57'),
+(32, 'MS-TT29', 'ms-tt29', 'MS-TT29', '1566044734.png', 'MS-TT29', '<p><img src=\"/media/product/2019_8/5d57f2398a10d.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:25:34', '2019-08-17 12:25:34'),
+(33, 'MS-TT30', 'ms-tt30', 'MS-TT30', '1566044789.png', 'MS-TT30', '<p><img src=\"/media/product/2019_8/5d57f26f6bdbe.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:26:29', '2019-08-17 12:26:29'),
+(34, 'MS-TT31', 'ms-tt31', 'MS-TT31', '1566044830.png', 'MS-TT31', '<p><img src=\"/media/product/2019_8/5d57f29a206b4.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:27:10', '2019-08-17 12:27:10'),
+(35, 'MS-TT32', 'ms-tt32', 'MS-TT32', '1566044957.png', 'MS-TT32', '<p><img src=\"/media/product/2019_8/5d57f3190782e.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:29:17', '2019-08-17 12:29:17'),
+(36, 'MS-TT33', 'ms-tt33', 'MS-TT33', '1566045003.png', 'MS-TT33', '<p><img src=\"/media/product/2019_8/5d57f340b1e1c.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:30:03', '2019-08-17 12:30:03'),
+(37, 'MS-TT34', 'ms-tt34', 'MS-TT34', '1566045051.png', 'MS-TT34', '<p><img src=\"/media/product/2019_8/5d57f36f5b094.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:30:51', '2019-08-21 09:26:54'),
+(38, 'MS-TT35', 'ms-tt35', 'MS-TT35', '1566045115.png', 'MS-TT35', '<p><img src=\"/media/product/2019_8/5d57f3b3b56e1.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:31:55', '2019-08-17 12:31:55'),
+(39, 'MS-TT36', 'ms-tt36', 'MS-TT36', '1566045164.png', 'MS-TT36', '<p><img src=\"/media/product/2019_8/5d57f3e5ec497.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:32:44', '2019-08-17 12:32:44'),
+(40, 'MS-TT37', 'ms-tt37', 'MS-TT37', '1566045217.png', 'MS-TT37', '<p><img src=\"/media/product/2019_8/5d57f41856571.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:33:37', '2019-08-21 09:24:11'),
+(41, 'MS-TT38', 'ms-tt38', 'MS-TT38', '1566045258.png', 'MS-TT38', '<p><img src=\"/media/product/2019_8/5d57f4421a8f0.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:34:18', '2019-08-17 12:34:18'),
+(42, 'MS-TT39', 'ms-tt39', 'MS-TT39', '1566045359.png', 'MS-TT39', '<p><img src=\"/media/product/2019_8/5d57f46fa3301.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:35:59', '2019-08-17 12:35:59'),
+(43, 'MS-TT40', 'ms-tt40', 'MS-TT40', '1566045405.png', 'MS-TT40', '<p><img src=\"/media/product/2019_8/5d57f4d5ae23a.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:36:45', '2019-08-21 09:24:02'),
+(44, 'MS-TT41', 'ms-tt41', 'MS-TT41', '1566045452.png', 'MS-TT41', '<p><img src=\"/media/product/2019_8/5d57f507577f8.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:37:32', '2019-08-21 09:23:54'),
+(45, 'MS-TT42', 'ms-tt42', 'MS-TT42', '1566045491.png', 'MS-TT42', '<p><img src=\"/media/product/2019_8/5d57f52cc489a.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:38:11', '2019-08-21 08:57:47'),
+(46, 'MS-TT43', 'ms-tt43', 'MS-TT43', '1566045535.png', 'MS-TT43', '<p><img src=\"/media/product/2019_8/5d57f55915bf5.png\"></p>', 'publish', '350k/bộ', '300k/bộ', 0, 1, '2019-08-17 12:38:55', '2019-08-22 08:37:38'),
+(47, 'MS-TT44', 'ms-tt44', 'MS-TT44', '1566467286.png', 'MS-TT44', '<p><img src=\"/media/product/2019_8/5d5e64c0db637.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:48:06', '2019-08-22 09:48:06'),
+(48, 'MS-TT45', 'ms-tt45', 'MS-TT45', '1566467345.png', 'MS-TT45', '<p><img src=\"/media/product/2019_8/5d5e650636e88.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:49:05', '2019-08-22 09:49:05'),
+(49, 'MS-TT46', 'ms-tt46', 'MS-TT46', '1566467371.png', 'MS-TT46', '<p><img src=\"/media/product/2019_8/5d5e65262b245.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:49:31', '2019-08-22 09:49:31'),
+(50, 'MS-TT47', 'ms-tt47', 'MS-TT47', '1566467402.png', 'MS-TT47', '<p><img src=\"/media/product/2019_8/5d5e654698d7e.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:50:03', '2019-08-22 09:50:03'),
+(51, 'MS-TT48', 'ms-tt48', 'MS-TT48', '1566467437.png', 'MS-TT48', '<p><img src=\"/media/product/2019_8/5d5e656829d8c.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:50:37', '2019-08-22 09:50:37'),
+(52, 'MS-TT49', 'ms-tt49', 'MS-TT49', '1566467474.png', 'MS-TT49', '<p><img src=\"/media/product/2019_8/5d5e658b742b3.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:51:14', '2019-08-22 09:51:14'),
+(53, 'MS-TT50', 'ms-tt50', 'MS-TT50', '1566467509.png', 'MS-TT50', '<p><img src=\"/media/product/2019_8/5d5e65b07a9a7.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:51:49', '2019-08-22 09:51:49'),
+(54, 'MS-TT51', 'ms-tt51', 'MS-TT51', '1566467545.png', 'MS-TT51', '<p><img src=\"/media/product/2019_8/5d5e65d3e6636.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:52:25', '2019-08-22 09:52:25'),
+(55, 'MS-TT52', 'ms-tt52', 'MS-TT52', '1566467579.png', 'MS-TT52', '<p><img src=\"/media/product/2019_8/5d5e65f5ac41b.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:52:59', '2019-08-22 09:52:59'),
+(56, 'MS-TT53', 'ms-tt53', 'MS-TT53', '1566467610.png', 'MS-TT53', '<p><img src=\"/media/product/2019_8/5d5e6614c6363.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:53:30', '2019-08-22 09:53:30'),
+(57, 'MS-TT54', 'ms-tt54', 'MS-TT54', '1566467641.png', 'MS-TT54', '<p><img src=\"/media/product/2019_8/5d5e6634d596b.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:54:01', '2019-08-22 09:54:01'),
+(58, 'MS-TT55', 'ms-tt55', 'MS-TT55', '1566467675.png', 'MS-TT55', '<p><img src=\"/media/product/2019_8/5d5e665755c8b.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:54:35', '2019-08-22 09:54:35'),
+(59, 'MS-TT56', 'ms-tt56', 'MS-TT56', '1566467702.png', 'MS-TT56', '<p><img src=\"/media/product/2019_8/5d5e6671798a6.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-22 09:55:02', '2019-08-22 09:55:02'),
+(60, 'MS-TT64', 'ms-tt64', 'MS-TT64', '1566521483.png', 'MS-TT64', '<p><img src=\"/media/product/2019_8/5d5f3887b2597.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-23 00:51:24', '2019-08-23 00:51:24'),
+(61, 'MS-TT65', 'ms-tt65', 'MS-TT65', '1566521511.png', 'MS-TT65', '<p><img src=\"/media/product/2019_8/5d5f38a3c242f.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-23 00:51:51', '2019-08-23 00:51:51'),
+(62, 'MS-TT66', 'ms-tt66', 'MS-TT66', '1566522259.png', 'MS-TT66', '<p><img src=\"/media/product/2019_8/5d5f3b8dd1407.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-23 01:04:19', '2019-08-23 01:04:19'),
+(63, 'MS-TT67', 'ms-tt67', 'MS-TT67', '1566522286.png', 'MS-TT67', '<p><img src=\"/media/product/2019_8/5d5f3baa9892b.png\"></p>', 'publish', NULL, 'Liên hệ', 0, 1, '2019-08-23 01:04:47', '2019-08-23 01:04:47');
 
 -- --------------------------------------------------------
 
@@ -854,7 +910,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `status`, `bio`, `photo`, `last_login_at`, `last_login_ip`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Superadmin', 'superadmin@katicms.com', NULL, '$2y$10$7CO0DleEjlzbp4/6n7wzYuxeJUm.bfw9YuvgKhGDzRH38I3GHDTTq', 'active', NULL, 'profile.png', '2019-08-21 07:35:42', '14.250.255.233', 'HnxBlxCblIhihqFKZ9QyQpG1TcPiJtAYNBvEYEtA74ndH7K1QAatYuX4SWql', '2019-08-05 08:22:29', '2019-08-21 07:35:42'),
+(1, 'Superadmin', 'superadmin@katicms.com', NULL, '$2y$10$7CO0DleEjlzbp4/6n7wzYuxeJUm.bfw9YuvgKhGDzRH38I3GHDTTq', 'active', NULL, 'profile.png', '2019-08-23 00:48:00', '14.250.255.233', 'HnxBlxCblIhihqFKZ9QyQpG1TcPiJtAYNBvEYEtA74ndH7K1QAatYuX4SWql', '2019-08-05 08:22:29', '2019-08-23 00:48:00'),
 (2, 'Admin', 'admin@katicms.com', NULL, '$2y$10$gqNqzoqUXJld6fPYai7BYugcvwPo09MIj/FbF8..DGf/WyqIC3dUe', 'active', NULL, 'profile.png', NULL, NULL, NULL, '2019-08-05 08:22:30', '2019-08-05 08:22:30');
 
 --
@@ -1084,13 +1140,13 @@ ALTER TABLE `galleries`
 -- AUTO_INCREMENT cho bảng `gallery_items`
 --
 ALTER TABLE `gallery_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT cho bảng `menus`
@@ -1144,13 +1200,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT cho bảng `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT cho bảng `p_categories`

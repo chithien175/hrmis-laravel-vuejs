@@ -159,7 +159,9 @@
                                                     <figcaption>
 
                                                     <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
-
+                                                    <span class="aa-product-price"><del>{{ $product->price }}</del></span>
+                                                    <span class="aa-product-price">{{ $product->price_sale }}</span>
+                                                    
                                                 </figcaption>
 
                                             </figure>                        
@@ -235,14 +237,16 @@
                                             @if($products_session1a = getProductByCategorySlug($cate, 1))
                                                 @foreach($products_session1a as $key2 => $product)
                                                 <li>
-                                                    <h4 style="padding: 5px 10px;width: 100%;margin: 0 auto;color: #f33983;font-size: 18px;text-align: center;">{{ $title_session1a[$key] }}</h4>
+                                                    <h4 style="padding: 15px 0px;width: 100%;margin: 0 auto;color: white;font-size: 18px;text-align: center;text-transform: uppercase;background-color: coral;font-family: none;">{{ $title_session1a[$key] }}</h4>
                                                     <figure>
                                                         <a class="aa-product-img" href="{{ route('frontend.productDetail', $product->slug) }}"><img src="{{ asset('images/product/' . $product->photo) }}" alt="{{ $product->name }}"></a>
 
                                                         <figcaption>
 
                                                             <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
-
+                                                            <span class="aa-product-price"><del>{{ $product->price }}</del></span>
+                                                            <span class="aa-product-price">{{ $product->price_sale }}</span>
+                                                            
                                                         </figcaption>
                                                         <a class="aa-browse-btn" href="{{ route('frontend.productCategory', $cate) }}">Xem tất cả<span class="fa fa-long-arrow-right"></span></a>   
                                                     </figure>   
@@ -374,7 +378,9 @@
                                                 <figcaption>
 
                                                 <h4 class="aa-product-title"><a href="{{ route('frontend.productDetail', $product->slug) }}">{{ $product->name }}</a></h4>
-
+                                                <span class="aa-product-price"><del>{{ $product->price }}</del></span>
+                                                <span class="aa-product-price">{{ $product->price_sale }}</span>
+                                                
                                             </figcaption>
 
                                         </figure>                     
@@ -533,9 +539,9 @@
 
                                 <div class="aa-blog-info">
 
-                                    <h3 class="aa-blog-title"><a href="{{ route('frontend.postDetail', $post->slug) }}">{{ shorten_text($post->title, 35, '...', false) }}</a></h3>
+                                    <h3 class="aa-blog-title"><a href="{{ route('frontend.postDetail', $post->slug) }}">{{ shorten_text($post->title, 37, '...', true) }}</a></h3>
 
-                                    <p>{{ shorten_text($post->description, 90, '...', false) }}</p> 
+                                    <p>{{ shorten_text($post->description, 90, '...', true) }}</p> 
 
                                     <a href="{{ route('frontend.postDetail', $post->slug) }}" class="aa-read-mor-btn">Xem thêm <span class="fa fa-long-arrow-right"></span></a>
 
