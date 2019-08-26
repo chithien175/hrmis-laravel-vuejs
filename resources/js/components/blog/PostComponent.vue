@@ -148,7 +148,7 @@
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
                                         <img class="img-fluid post-photo" :src="getPostPhoto" alt="Post picture">
-                                        <input class="form-control" type="file" accept="image/*" id="inputPhoto" @change="changePhoto">
+                                        <input class="form-control" type="file" ref="postPhotoFileInput" accept="image/*" id="inputPhoto" @change="changePhoto">
                                     </div>
                                     <hr>
                                     <div class="form-group">
@@ -218,6 +218,7 @@ export default {
             this.form.reset();
             this.form.clear();
             this.form.fill(post);
+            this.$refs.postPhotoFileInput.value = '';
 
             this.form.checked_categories = [];
                 
@@ -243,6 +244,7 @@ export default {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
+            this.$refs.postPhotoFileInput.value = '';
 
             for(let i=0; i<this.categories.length; i++){
                 this.form.checked_categories.push({

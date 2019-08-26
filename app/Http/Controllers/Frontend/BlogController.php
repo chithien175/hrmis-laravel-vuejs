@@ -21,9 +21,9 @@ class BlogController extends Controller
 
             $page_data = [
                 'title' => $post['title'],
-                'seo_title' => $post['title'],
-                'seo_description' => $post['title'],
-                'seo_keyword' => $post['title']
+                'seo_title' => $post['seo_title'],
+                'seo_description' => $post['seo_description'],
+                'seo_keyword' => $post['seo_keyword']
             ];
 
             return view('katitheme.pages.post-detail')->with([

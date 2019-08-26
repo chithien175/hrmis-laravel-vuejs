@@ -2326,6 +2326,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.form.clear();
       this.form.fill(post);
+      this.$refs.postPhotoFileInput.value = '';
       this.form.checked_categories = [];
 
       for (var i = 0; i < this.categories.length; i++) {
@@ -2351,6 +2352,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = false;
       this.form.reset();
       this.form.clear();
+      this.$refs.postPhotoFileInput.value = '';
 
       for (var i = 0; i < this.categories.length; i++) {
         this.form.checked_categories.push({
@@ -3511,6 +3513,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -3544,6 +3551,7 @@ __webpack_require__.r(__webpack_exports__);
         counter: 0,
         price: '',
         price_sale: '',
+        colors: '',
         user_id: '',
         checked_categories: [],
         galleries: [],
@@ -3571,6 +3579,8 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.form.clear();
       this.form.fill(product);
+      this.$refs.productPhotoFileInput.value = '';
+      this.$refs.galleriesPhotoFileInput.value = '';
       this.form.checked_categories = [];
 
       for (var i = 0; i < this.categories.length; i++) {
@@ -3579,12 +3589,14 @@ __webpack_require__.r(__webpack_exports__);
           this.form.checked_categories.push({
             id: this.categories[i].id,
             name: this.categories[i].name,
+            parent_id: this.categories[i].parent_id,
             checked: true
           });
         } else {
           this.form.checked_categories.push({
             id: this.categories[i].id,
             name: this.categories[i].name,
+            parent_id: this.categories[i].parent_id,
             checked: false
           });
         }
@@ -3605,11 +3617,14 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = false;
       this.form.reset();
       this.form.clear();
+      this.$refs.productPhotoFileInput.value = '';
+      this.$refs.galleriesPhotoFileInput.value = '';
 
       for (var i = 0; i < this.categories.length; i++) {
         this.form.checked_categories.push({
           id: this.categories[i].id,
           name: this.categories[i].name,
+          parent_id: this.categories[i].parent_id,
           checked: false
         });
       }
@@ -3772,6 +3787,9 @@ __webpack_require__.r(__webpack_exports__);
     }, 500),
     getListPhoto: function getListPhoto(photo) {
       return "../images/product/" + photo;
+    },
+    addChildClass: function addChildClass($category) {
+      return $category.parent_id == 0 ? '' : 'child';
     }
   },
   computed: {
@@ -4185,6 +4203,7 @@ __webpack_require__.r(__webpack_exports__);
     openCustomImageModal: function openCustomImageModal(id) {
       this.formCustomImage.reset();
       this.formCustomImage.clear();
+      this.$refs.photoFileInput.value = '';
       this.formCustomImage.gallery_id = id;
       $('#customImageModal').modal('show');
       this.getImagesByGalleryId(id);
@@ -4197,6 +4216,7 @@ __webpack_require__.r(__webpack_exports__);
       this.formCustomImage.post('/api/createCustomImageGallery').then(function () {
         _this6.formCustomImage.title = '';
         _this6.formCustomImage.description = '';
+        _this6.$refs.photoFileInput.value = '';
         _this6.formCustomImage.image = 'gallery-image-default.jpg';
 
         _this6.getImagesByGalleryId(_this6.formCustomImage.gallery_id);
@@ -6053,6 +6073,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.form.clear();
       this.form.fill(page);
+      this.$refs.pagePhotoFileInput.value = '';
       this.getFieldsByPageId(page.id);
       $('#pageModal').modal('show');
     },
@@ -6060,6 +6081,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editmode = false;
       this.form.reset();
       this.form.clear();
+      this.$refs.pagePhotoFileInput.value = '';
       $('#pageModal').modal('show');
     },
     createPage: function createPage() {
@@ -13678,7 +13700,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.gallery-wrap{\n    width: 100%;\n    padding: 10px;\n    min-height: 100px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n.gallery-wrap .gallery-list{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n}\n.gallery-wrap .gallery-item{\n    width: 20%;\n    min-height: 100px;\n    -webkit-box-flex: 0;\n    position: relative;\n}\n.gallery-wrap .gallery-item .overlay{\n    width: 100%;\n    height: 100%;\n    background-color: #333333;\n    opacity: 0.7;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n    display: none;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn{\n    color: #e3342f;\n    position: relative;\n    font-size: 50px;\n    top: 30px;\n    left: 33%;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn:hover{\n    cursor: pointer;\n}\n.gallery-wrap .gallery-item:hover .overlay{\n    display: block;\n}\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 200px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.gallery-wrap{\n    width: 100%;\n    padding: 10px;\n    min-height: 100px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    -webkit-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n}\n.gallery-wrap .gallery-list{\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n}\n.gallery-wrap .gallery-item{\n    width: 20%;\n    min-height: 100px;\n    -webkit-box-flex: 0;\n    position: relative;\n}\n.gallery-wrap .gallery-item .overlay{\n    width: 100%;\n    height: 100%;\n    background-color: #333333;\n    opacity: 0.7;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n    display: none;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn{\n    color: #e3342f;\n    position: relative;\n    font-size: 50px;\n    top: 30px;\n    left: 33%;\n}\n.gallery-wrap .gallery-item .overlay .remove-btn:hover{\n    cursor: pointer;\n}\n.gallery-wrap .gallery-item:hover .overlay{\n    display: block;\n}\n.product-photo{\n    width: 100%;\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 0.3rem;\n}\n#productModal .cate-list{\n    height: 200px;\n    overflow-y: scroll;\n    overflow-x: hidden;\n}\n#productModal .cate-list .p-default{\n    padding: 0px;\n    margin: 0px;\n}\n#productModal .cate-list .child{\n    margin-left: 20px;\n}\n", ""]);
 
 // exports
 
@@ -81430,6 +81452,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("input", {
+                                  ref: "postPhotoFileInput",
                                   staticClass: "form-control",
                                   attrs: {
                                     type: "file",
@@ -84363,6 +84386,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("input", {
+                                  ref: "galleriesPhotoFileInput",
                                   attrs: {
                                     id: "inputGalleries",
                                     type: "file",
@@ -84541,9 +84565,52 @@ var render = function() {
                                   "label",
                                   {
                                     staticClass: "control-label",
+                                    attrs: { for: "inputColors" }
+                                  },
+                                  [_vm._v("Mã màu")]
+                                ),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.colors,
+                                      expression: "form.colors"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { rows: "3" },
+                                  domProps: { value: _vm.form.colors },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "colors",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("small", [
+                                  _vm._v(
+                                    'Mã màu ngăn cách nhau bằng dấu (phẩy) ","'
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "control-label",
                                     attrs: { for: "inputCategory" }
                                   },
-                                  [_vm._v("Chuyên mục")]
+                                  [_vm._v("Danh mục")]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -84557,7 +84624,8 @@ var render = function() {
                                       {
                                         key: category.id,
                                         staticClass:
-                                          "p-default p-curve p-thick col-12 m-0 p-0",
+                                          "p-default p-curve p-thick col-12",
+                                        class: _vm.addChildClass(category),
                                         attrs: {
                                           type: "checkbox",
                                           color: "primary-o"
@@ -84596,6 +84664,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("input", {
+                                  ref: "productPhotoFileInput",
                                   staticClass: "form-control",
                                   attrs: {
                                     type: "file",
@@ -85430,6 +85499,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("input", {
+                                  ref: "photoFileInput",
                                   attrs: { type: "file", id: "inputImage" },
                                   on: { change: _vm.changeImagePhoto }
                                 })
@@ -89362,6 +89432,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("input", {
+                                  ref: "pagePhotoFileInput",
                                   staticClass: "form-control",
                                   attrs: { type: "file", id: "inputPhoto" },
                                   on: { change: _vm.changePhoto }

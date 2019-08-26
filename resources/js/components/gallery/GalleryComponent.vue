@@ -175,7 +175,7 @@
                                     <div class="form-group">
                                         <label for="inputImage" class="control-label">Ảnh</label>
                                         <img class="img-fluid" :src="getImagePhoto()" alt="Gallery picture">
-                                        <input type="file" id="inputImage" @change="changeImagePhoto">
+                                        <input type="file" id="inputImage" ref="photoFileInput" @change="changeImagePhoto">
                                     </div>
                                     <button :disabled="formCustomImage.busy" type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check-circle"></i> Thêm mới</button>
                                 </form>
@@ -356,6 +356,7 @@
             openCustomImageModal(id) {
                 this.formCustomImage.reset();
                 this.formCustomImage.clear();
+                this.$refs.photoFileInput.value = '';
                 this.formCustomImage.gallery_id = id;
                 $('#customImageModal').modal('show');
                 this.getImagesByGalleryId(id);
@@ -367,6 +368,7 @@
                 .then( () => {
                     this.formCustomImage.title = '';
                     this.formCustomImage.description = '';
+                    this.$refs.photoFileInput.value = '';
                     this.formCustomImage.image = 'gallery-image-default.jpg';
                     this.getImagesByGalleryId(this.formCustomImage.gallery_id);
                     Toast.fire({

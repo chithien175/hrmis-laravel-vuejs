@@ -9,7 +9,7 @@ use Modules\Ecommerce\Entities\Gallery;
 class Product extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'code' , 'photo', 'description', 'body', 'publish', 'price', 'price_sale', 'counter', 'user_id'
+        'name', 'slug', 'code' , 'photo', 'description', 'body', 'publish', 'price', 'price_sale', 'colors', 'counter', 'user_id'
     ];
 
     function categories() {

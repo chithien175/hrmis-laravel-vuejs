@@ -162,7 +162,7 @@
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
                                         <img class="img-fluid page-photo" :src="getPagePhoto" alt="Page picture">
-                                        <input class="form-control" type="file" id="inputPhoto" @change="changePhoto">
+                                        <input class="form-control" type="file" ref="pagePhotoFileInput" id="inputPhoto" @change="changePhoto">
                                     </div>
                                     <hr>
                                     <div class="form-group">
@@ -293,6 +293,7 @@
                 this.form.reset();
                 this.form.clear();
                 this.form.fill(page);
+                this.$refs.pagePhotoFileInput.value = '';
                 this.getFieldsByPageId(page.id);
                 $('#pageModal').modal('show');
             },
@@ -300,6 +301,7 @@
                 this.editmode = false;
                 this.form.reset();
                 this.form.clear();
+                this.$refs.pagePhotoFileInput.value = '';
 
                 $('#pageModal').modal('show');
             },

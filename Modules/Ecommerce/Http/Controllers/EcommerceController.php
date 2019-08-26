@@ -52,7 +52,8 @@ class EcommerceController extends Controller
             'publish'       => $request['publish'],
             'counter'       => $request['counter'],
             'price'         => $request['price'],
-            'price_sale'         => $request['price_sale'],
+            'price_sale'    => $request['price_sale'],
+            'colors'        => $request['colors'],
             'user_id'       => Auth::user()->id
         ]);
 
@@ -183,7 +184,8 @@ class EcommerceController extends Controller
     // CATEGORY
     public function cateIndex()
     {
-        return Category::get();
+        return Category::all();
+        // return Category::sort_collection();
     }
 
     public function cateStore(Request $request)
@@ -245,7 +247,26 @@ class EcommerceController extends Controller
 
     public function cateList()
     {
-        return Category::all();
+        $categories = Category::all();
+
+        $new_categories = [];
+
+        $this->recursive($categories, 0, $new_categories);
+
+        return $new_categories;
+    }
+
+    protected function recursive($categories, $parent_id = 0, &$resultArr)
+    {
+        if(count($categories) > 0){
+            foreach($categories as $key => $value){
+                if($value['parent_id'] == $parent_id){
+                    $resultArr[] = $value;
+                    unset($categories[$key]);
+                    $this->recursive($categories, $value['id'], $resultArr);
+                }
+            }
+        }
     }
 
     public function galleryStore(Request $request){

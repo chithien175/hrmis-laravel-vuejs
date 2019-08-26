@@ -156,21 +156,18 @@
 
                     <p>{{ $product->description }}</p>
 
+                    @php
+                      $colors = (!empty($product->colors)) ? explode(",", $product->colors) : '';
+                    @endphp
+                    @if(!empty($colors))
                     <h4>Mã màu</h4>
 
                     <div class="aa-color-tag">
-
-                      <a href="#" class="aa-color-green"></a>
-
-                      <a href="#" class="aa-color-yellow"></a>
-
-                      <a href="#" class="aa-color-pink"></a>                      
-
-                      <a href="#" class="aa-color-black"></a>
-
-                      <a href="#" class="aa-color-white"></a>                      
-
+                      @foreach($colors as $key => $color)
+                      <a href="javascript:void(0);" style="background-color:{{ $color }};"></a>
+                      @endforeach     
                     </div>
+                    @endif
 
                     <div class="aa-prod-view-bottom">
 

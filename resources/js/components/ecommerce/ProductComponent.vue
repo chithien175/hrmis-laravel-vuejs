@@ -148,7 +148,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input id="inputGalleries" type="file" multiple accept="image/*" @change="changeGallery">
+                                        <input id="inputGalleries" type="file" ref="galleriesPhotoFileInput" multiple accept="image/*" @change="changeGallery">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -171,15 +171,20 @@
                                             class="form-control" :class="{ 'is-invalid': form.errors.has('price_sale') }">
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputCategory" class="control-label">Chuyên mục</label>
+                                        <label for="inputColors" class="control-label">Mã màu</label>
+                                        <textarea class="form-control" v-model="form.colors" rows="3"></textarea>
+                                        <small>Mã màu ngăn cách nhau bằng dấu (phẩy) ","</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputCategory" class="control-label">Danh mục</label>
                                         <div class="cate-list form-control">
-                                            <p-check v-for="category in form.checked_categories" :key="category.id" class="p-default p-curve p-thick col-12 m-0 p-0" type="checkbox" color="primary-o" v-model="category.checked">{{ category.name }}</p-check>
+                                            <p-check v-for="category in form.checked_categories" :key="category.id" class="p-default p-curve p-thick col-12" :class="addChildClass(category)" type="checkbox" color="primary-o" v-model="category.checked">{{ category.name }}</p-check>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPhoto" class="control-label">Ảnh đại diện</label>
                                         <img class="img-fluid product-photo" :src="getProductPhoto" alt="Product picture">
-                                        <input class="form-control" type="file" accept="image/*" id="inputPhoto" @change="changePhoto">
+                                        <input class="form-control" type="file" ref="productPhotoFileInput" accept="image/*" id="inputPhoto" @change="changePhoto">
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +226,7 @@ export default {
             products: {},
             categories: {},
             form: new Form({
-                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', price_sale: '', user_id: '', checked_categories: [], galleries: [], del_galleries: [],
+                id: '', name: '', slug: '', code: '', photo: 'product-image-default.jpg', description: '', body: '', publish: 'publish', counter: 0, price: '', price_sale: '', colors: '', user_id: '', checked_categories: [], galleries: [], del_galleries: [],
             }),
             search: '',
             isLoading: true,
@@ -241,6 +246,8 @@ export default {
             this.form.reset();
             this.form.clear();
             this.form.fill(product);
+            this.$refs.productPhotoFileInput.value = '';
+            this.$refs.galleriesPhotoFileInput.value = '';
 
             this.form.checked_categories = [];
             for(let i=0; i<this.categories.length; i++){
@@ -249,12 +256,14 @@ export default {
                     this.form.checked_categories.push({
                         id: this.categories[i].id,
                         name: this.categories[i].name,
+                        parent_id: this.categories[i].parent_id,
                         checked: true
                     });
                 }else{
                     this.form.checked_categories.push({
                         id: this.categories[i].id,
                         name: this.categories[i].name,
+                        parent_id: this.categories[i].parent_id,
                         checked: false
                     });
                 }
@@ -276,11 +285,14 @@ export default {
             this.editmode = false;
             this.form.reset();
             this.form.clear();
+            this.$refs.productPhotoFileInput.value = '';
+            this.$refs.galleriesPhotoFileInput.value = '';
 
             for(let i=0; i<this.categories.length; i++){
                 this.form.checked_categories.push({
                     id: this.categories[i].id,
                     name: this.categories[i].name,
+                    parent_id: this.categories[i].parent_id,
                     checked: false
                 });
             }
@@ -442,6 +454,9 @@ export default {
         getListPhoto(photo){
             return "../images/product/"+photo;
         },
+        addChildClass($category){
+            return ($category.parent_id == 0) ? '' : 'child';
+        },
     },
     computed:{
         getProductPhoto(){
@@ -527,5 +542,12 @@ export default {
         height: 200px;
         overflow-y: scroll;
         overflow-x: hidden;
+    }
+    #productModal .cate-list .p-default{
+        padding: 0px;
+        margin: 0px;
+    }
+    #productModal .cate-list .child{
+        margin-left: 20px;
     }
 </style>
