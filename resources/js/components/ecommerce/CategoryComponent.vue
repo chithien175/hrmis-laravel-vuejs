@@ -45,7 +45,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
+                                <table class="table table-hover p-cate-table">
                                     <thead>
                                         <tr class="blue font-weight-bold">
                                             <th>ID</th>
@@ -58,7 +58,7 @@
                                     <tbody>
                                         <tr v-for="category in categories" :key="category.id">
                                             <td>{{ category.id }}</td>
-                                            <td>{{ category.name }}</td>
+                                            <td>{{ showName(category) }}</td>
                                             <td>{{ category.slug }}</td>
                                             <td><span class="badge bg-info">{{ category.created_at | formatDateTime }}</span></td>
                                             <td>
@@ -281,7 +281,10 @@ export default {
                     }); 
                 }
             }
-        }
+        },
+        showName($category){
+            return ($category.parent_id == 0) ? $category.name : '-- '+$category.name;
+        },
     },
     computed:{
         

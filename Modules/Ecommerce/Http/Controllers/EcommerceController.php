@@ -184,8 +184,13 @@ class EcommerceController extends Controller
     // CATEGORY
     public function cateIndex()
     {
-        return Category::all();
-        // return Category::sort_collection();
+        $categories = Category::all();
+
+        $new_categories = [];
+
+        $this->recursive($categories, 0, $new_categories);
+
+        return $new_categories;
     }
 
     public function cateStore(Request $request)

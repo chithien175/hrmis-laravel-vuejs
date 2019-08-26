@@ -3268,6 +3268,9 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       }
+    },
+    showName: function showName($category) {
+      return $category.parent_id == 0 ? $category.name : '-- ' + $category.name;
     }
   },
   computed: {},
@@ -83335,91 +83338,99 @@ var render = function() {
                           "div",
                           { staticClass: "card-body table-responsive p-0" },
                           [
-                            _c("table", { staticClass: "table table-hover" }, [
-                              _vm._m(1),
-                              _vm._v(" "),
-                              _c(
-                                "tbody",
-                                _vm._l(_vm.categories, function(category) {
-                                  return _c("tr", { key: category.id }, [
-                                    _c("td", [_vm._v(_vm._s(category.id))]),
-                                    _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(category.name))]),
-                                    _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(category.slug))]),
-                                    _vm._v(" "),
-                                    _c("td", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge bg-info" },
-                                        [
-                                          _vm._v(
-                                            _vm._s(
-                                              _vm._f("formatDateTime")(
-                                                category.created_at
+                            _c(
+                              "table",
+                              { staticClass: "table table-hover p-cate-table" },
+                              [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  _vm._l(_vm.categories, function(category) {
+                                    return _c("tr", { key: category.id }, [
+                                      _c("td", [_vm._v(_vm._s(category.id))]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(_vm.showName(category)))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v(_vm._s(category.slug))]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _c(
+                                          "span",
+                                          { staticClass: "badge bg-info" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm._f("formatDateTime")(
+                                                  category.created_at
+                                                )
                                               )
                                             )
-                                          )
-                                        ]
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-sm btn-primary",
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.editModal(category)
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "fa fa-edit fa-fw"
-                                          }),
-                                          _vm._v(
-                                            " Sửa\r\n                                                "
-                                          )
-                                        ]
-                                      ),
+                                          ]
+                                        )
+                                      ]),
                                       _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value: category.id != 1,
-                                              expression: "category.id != 1"
+                                      _c("td", [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-primary",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.editModal(category)
+                                              }
                                             }
-                                          ],
-                                          staticClass: "btn btn-sm btn-danger",
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.deleteCategory(
-                                                category.id
-                                              )
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-edit fa-fw"
+                                            }),
+                                            _vm._v(
+                                              " Sửa\r\n                                                "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value: category.id != 1,
+                                                expression: "category.id != 1"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "btn btn-sm btn-danger",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.deleteCategory(
+                                                  category.id
+                                                )
+                                              }
                                             }
-                                          }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "fa fa-trash fa-fw"
-                                          }),
-                                          _vm._v(
-                                            " Xóa\r\n                                                "
-                                          )
-                                        ]
-                                      )
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-trash fa-fw"
+                                            }),
+                                            _vm._v(
+                                              " Xóa\r\n                                                "
+                                            )
+                                          ]
+                                        )
+                                      ])
                                     ])
-                                  ])
-                                }),
-                                0
-                              )
-                            ])
+                                  }),
+                                  0
+                                )
+                              ]
+                            )
                           ]
                         )
                       ])
