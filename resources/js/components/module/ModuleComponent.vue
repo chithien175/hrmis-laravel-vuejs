@@ -101,6 +101,30 @@
                                 </div>
                             </div>
                             <!-- ./ END Ecommerce Module -->
+
+                            <!-- Booking Module -->
+                            <div class="col-md-4">
+                                <div class="card card-widget widget-user widget-module">
+                                    <div class="widget-user-header text-white"
+                                        style="height:80px;"
+                                        v-bind:class="[{ 'active': modules.booking }]"
+                                    >
+                                        <p-input class="p-switch p-fill" type="checkbox" color="success" v-model="modules.booking" @change="toggleModule('booking', 'Khách sạn, căn hộ', modules.booking)"></p-input>
+                                    </div>
+                                    <div class="widget-user-image" style="top:25px;">
+                                        <img class="img-circle" v-bind:src="'../images/module/' + images.booking" alt="Ecommerce Module">
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h5 class="description-header">Khách sạn, căn hộ</h5>
+                                                <h6 class="description-text">Quản lý khách sạn, căn hộ</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ./ END Booking Module -->
                         </div>
                     </div>
                 </div>
@@ -125,6 +149,7 @@
                     blog: 'blog.png',
                     menu: 'menu.png',
                     ecommerce: 'ecommerce.png',
+                    booking: 'booking.jpg',
                 },
                 form: new Form({
                     slug: '', name: '', status: ''

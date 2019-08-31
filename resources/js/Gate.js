@@ -50,6 +50,10 @@ export default class Gate{
         return this.user.can['manage-ecommerce'];
     }
 
+    isManageBooking(){
+        return this.user.can['manage-booking'];
+    }
+
     // Module
     isBlogModule(){
         return this.modules.blog === 1;
@@ -59,5 +63,8 @@ export default class Gate{
     }
     isEcommerceModule(){
         return this.modules.ecommerce === 1;
+    }
+    isBookingModule(){
+        return this.modules.booking === 1;
     }
 }

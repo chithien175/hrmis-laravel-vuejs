@@ -66,6 +66,7 @@ class EcommerceSetupSeeder extends Seeder
                 'publish'       => 'publish',
                 'counter'       => 0,
                 'price'         => 'Liên hệ',
+                'price_sale'    => 'Liên hệ',
                 'user_id'       => 1,
                 'created_at'    => Carbon::now()
             ]);

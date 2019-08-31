@@ -1,5 +1,10 @@
-- Tạo Module
-- Tạo permission
-- Tạo Gate.js
-
-- Home banner: 1920x700
+*** Các bước tạo module:
+- Tạo module bằng lệnh "php artisan module:make Blog"
+- Tạo permission trong config/laratrust_seeder
+- Thêm module trong resources/views/layouts/master.blabe.php
+- Tạo resources/js/Gate.js
+- Tạo seed bằng lệnh "php artisan katicms:setup"
+- Thêm module mới trong resources/js/components/module/ModuleComponent.vue
+- Tạo component cho module mới
+- Thêm menu vào sidebar resources/views/layouts/master.blabe.php
+- Tạo migrate bằng lệnh "php artisan module:make-migration create_posts_table Blog"

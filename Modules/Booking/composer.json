@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/booking",
+    "description": "",
+    "authors": [
+        {
+            "name": "Thien Pham",
+            "email": "chithien175@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Booking\\Providers\\BookingServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Booking\\": ""
+        }
+    }
+}

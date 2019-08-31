@@ -11,7 +11,8 @@ return [
             'logs'          => 'm',
             'media'         => 'm',
             'gallery'       => 'm',
-            'ecommerce'     => 'm'
+            'ecommerce'     => 'm',
+            'booking'       => 'm'
         ],
         'admin'             => [
             'dashboard'     => 'm',
@@ -21,7 +22,8 @@ return [
             'company'       => 'm',
             'media'         => 'm',
             'gallery'       => 'm',
-            'ecommerce'     => 'm'
+            'ecommerce'     => 'm',
+            'booking'       => 'm'
         ]
     ],
     'permission_structure'  => [],

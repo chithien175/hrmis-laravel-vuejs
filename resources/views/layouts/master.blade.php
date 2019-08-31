@@ -22,9 +22,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @php
 	$user_current = App\User::with('roles')->findOrFail(auth()->user()->id);
 	$modules = [
-		'blog' => Module::find('blog')->get('active'),
-		'menu' => Module::find('menu')->get('active'),
+		'blog' 		=> Module::find('blog')->get('active'),
+		'menu' 		=> Module::find('menu')->get('active'),
 		'ecommerce' => Module::find('ecommerce')->get('active'),
+		'booking' 	=> Module::find('booking')->get('active'),
 	];
 @endphp
 	@if($user_current->status == 'active')
@@ -157,6 +158,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</ul>
 				</li>
 				@endif
+
+				<!-- Khách sạn - Căn hộ -->
+				@if($user_current->can('manage-booking') && $modules['booking'])
+				<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-hotel"></i>
+						<p>
+						Đặt phòng khách sạn
+						<i class="right fas fa-angle-left"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<router-link to="/admin/room" class="nav-link">
+								<i class="fas fa-bed nav-icon"></i>
+								<p>Khách sạn - Căn hộ</p>
+							</router-link>
+						<li>
+					</ul>
+				</li>
+				@endif
 				
 				<!-- Cài đặt cơ bản -->
 				@if($user_current->can('manage-company|manage-media|manage-gallery'))
@@ -263,7 +285,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
 		<!-- To the right -->
 		<div class="float-right d-none d-sm-inline">
-			Hệ thống quản trị nội dung (bản thử nghiệm).
+			Hệ thống quản trị nội dung.
 		</div>
 		<!-- Default to the left -->
 		&copy; 2019 Bản quyền thuộc <strong>KaTiSoft</strong>.

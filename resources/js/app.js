@@ -32,6 +32,7 @@ const routes = [
     { path: '/admin/module', component: require('./components/module/ModuleComponent.vue').default },
     { path: '/admin/product', component: require('./components/ecommerce/ProductComponent.vue').default },
     { path: '/admin/p-category', component: require('./components/ecommerce/CategoryComponent.vue').default },
+    { path: '/admin/room', component: require('./components/booking/RoomComponent.vue').default },
     { path: '/admin/*', component: require('./components/NotFoundComponent.vue').default },
 ];
 
