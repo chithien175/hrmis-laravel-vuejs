@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-md-6">
-                        <h5 class="m-0 blue"><i class="fas fa-tachometer-alt"></i> Example</h5>
+                        <h5 class="m-0 blue"><i class="fas fa-tachometer-alt"></i> Phòng - Căn hộ</h5>
                     </div><!-- /.col -->
                     <div class="col-md-6">
                         <ol class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><router-link to="/admin/dashboard"> Bảng điều khiển</router-link></li>
-                            <li class="breadcrumb-item active">Example</li>
+                            <li class="breadcrumb-item active">Phòng - Căn hộ</li>
                         </ol>
                     </div>
                 </div><!-- /.row -->

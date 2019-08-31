@@ -22,7 +22,7 @@ class KaTiCMS extends Command
      */
     protected $description = 'This command runs all system and sub-system migrations';
 
-    protected $modules = ['Blog', 'Menu', 'Ecommerce'];
+    protected $modules = ['Blog', 'Menu', 'Ecommerce', 'Booking'];
 
     /**
      * Create a new command instance.

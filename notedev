@@ -8,3 +8,4 @@
 - Tạo component cho module mới
 - Thêm menu vào sidebar resources/views/layouts/master.blabe.php
 - Tạo migrate bằng lệnh "php artisan module:make-migration create_posts_table Blog"
+- Tạo seed bằng lệnh "php artisan module:make-migration seed_fake_blog_posts Post Blog"

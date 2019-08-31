@@ -15,7 +15,18 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('photo')->default('room-image-default.png');
+            $table->text('description')->nullable();
+            $table->string('publish');
+            $table->string('price')->nullable();
+            $table->integer('counter')->default(0);
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
