@@ -81839,7 +81839,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("li", { staticClass: "breadcrumb-item active" }, [
-                      _vm._v("Example")
+                      _vm._v("Phòng - Căn hộ")
                     ])
                   ])
                 ])
@@ -81893,7 +81893,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-6" }, [
       _c("h5", { staticClass: "m-0 blue" }, [
         _c("i", { staticClass: "fas fa-tachometer-alt" }),
-        _vm._v(" Example")
+        _vm._v(" Phòng - Căn hộ")
       ])
     ])
   }
